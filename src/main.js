@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, ANTI-SPAM & REAL EMAIL DISPATCH ENGINE
+   RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, ANTI-SPAM & EMAIL DISPATCH ENGINE
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -58,7 +58,7 @@ function checkRateLimit() {
     const tenMinutesAgo = now - (10 * 60 * 1000);
     
     const recentSubmissions = history.filter(ts => ts > tenMinutesAgo);
-    if (recentSubmissions.length >= 3) {
+    if (recentSubmissions.length >= 5) {
         return false; // Exceeded rate limit
     }
     recentSubmissions.push(now);
@@ -96,39 +96,40 @@ function openSuccessModal(orderData) {
 }
 
 /* --------------------------------------------------------------------------
-   3. REAL EMAIL DISPATCH ENGINE TO assist@ritym.com
+   3. HIGH-RELIABILITY EMAIL DISPATCH ENGINE TO assist@ritym.com
    -------------------------------------------------------------------------- */
 function sendRealEmailToAssist(payload) {
-    // Uses FormSubmit AJAX endpoint to dispatch emails straight to assist@ritym.com
-    const endpoint = "https://formsubmit.co/ajax/assist@ritym.com";
+    const formUrl = "https://formsubmit.co/ajax/assist@ritym.com";
 
-    fetch(endpoint, {
-        method: "POST",
-        headers: { 
-            "Content-Type": "application/json",
-            "Accept": "application/json"
+    const params = new URLSearchParams();
+    params.append('name', payload.clientName);
+    params.append('email', payload.clientEmail);
+    params.append('message', payload.details);
+    params.append('_subject', `[${payload.trackId}] ${payload.type} from ${payload.clientName}`);
+    params.append('_replyto', payload.clientEmail);
+    params.append('_captcha', 'false');
+    params.append('Tracking ID', payload.trackId);
+    if (payload.platforms) params.append('Target Platforms', payload.platforms);
+    if (payload.features) params.append('Required Features', payload.features);
+    if (payload.timelineBudget) params.append('Timeline & Scope', payload.timelineBudget);
+
+    fetch(formUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
         },
-        body: JSON.stringify({
-            _subject: `New Request [${payload.trackId}] from ${payload.clientName}`,
-            _replyto: payload.clientEmail,
-            _template: "table",
-            "Tracking ID": payload.trackId,
-            "Client Name": payload.clientName,
-            "Client Email": payload.clientEmail,
-            "Type": payload.type,
-            "Details / Message": payload.details,
-            "Platforms": payload.platforms || "N/A",
-            "Features": payload.features || "N/A",
-            "Timeline & Scope": payload.timelineBudget || "N/A",
-            "Timestamp": new Date().toLocaleString()
-        })
+        body: params.toString()
     })
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
-        console.log('[RITYM Email Engine] Email dispatched successfully to assist@ritym.com', data);
+        console.log('[RITYM Email Dispatch Status]', data);
+        if (data.message && data.message.includes('Activation')) {
+            showToast('📩 FormSubmit activation link dispatched to assist@ritym.com. Please click to activate!', 'warn');
+        }
     })
-    .catch(error => {
-        console.warn('[RITYM Email Engine] Email dispatch warning (fallback active):', error);
+    .catch(err => {
+        console.warn('[RITYM Email Dispatch Warning]', err);
     });
 }
 
@@ -215,7 +216,7 @@ function initAppWizard() {
         }
 
         if (!checkRateLimit()) {
-            showToast('⚠️ Rate limit exceeded (Max 3 submissions per 10 minutes). Please wait.', 'warn');
+            showToast('⚠️ Submission rate limit reached. Please wait a few minutes.', 'warn');
             logSilentTelemetry('[SPAM BLOCKED] Rate limit exceeded on App Wizard.');
             return;
         }
@@ -261,7 +262,7 @@ function initAppWizard() {
         updateTrackerUI(trackId);
         openSuccessModal(orderData);
 
-        showToast(`✓ Project Request ${trackId} dispatched to assist@ritym.com!`, 'success');
+        showToast(`✓ Project Request ${trackId} sent to assist@ritym.com!`, 'success');
         logSilentTelemetry(`[REAL EMAIL DISPATCH] Order ${trackId} from ${name} (${email}) sent to assist@ritym.com`);
 
         form.reset();
@@ -493,7 +494,7 @@ function initDirectContactForm() {
         }
 
         if (!checkRateLimit()) {
-            showToast('⚠️ Rate limit exceeded (Max 3 submissions per 10 minutes). Please wait.', 'warn');
+            showToast('⚠️ Submission rate limit reached. Please wait a few minutes.', 'warn');
             logSilentTelemetry('[SPAM BLOCKED] Rate limit exceeded on Contact Form.');
             return;
         }
