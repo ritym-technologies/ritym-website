@@ -220,7 +220,7 @@
                     </div>
                 </div>
 
-                <form id="app-configurator-form">
+                <form id="app-configurator-form" action="https://formspree.io/f/assist@ritym.com" method="POST">
                     <!-- STEP 1: Platform Selection -->
                     <div class="wizard-step-panel active" id="wizard-step-1">
                         <h3 class="w-panel-title">Select Target Platform(s)</h3>
@@ -445,10 +445,10 @@
                             </div>
                         </div>
 
-                        <!-- Anti-Spam Bot Defense & OTP Notice -->
+                        <!-- Anti-Spam Bot Defense Notice -->
                         <div class="bot-shield-notice">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                            <span>Protected by <strong>RITYM Bot Defense v2.4</strong> (Invisible Honeypots + Email OTP Verification)</span>
+                            <span>Protected by <strong>RITYM Bot Shield v2.4</strong> (Rate Limiting + Spam Filtering)</span>
                         </div>
 
                         <!-- Invisible Spam Bot Honeypot Field -->
@@ -457,7 +457,7 @@
                         <div class="wizard-actions">
                             <button type="button" class="btn btn-secondary btn-prev-step" data-prev="3">&larr; Back</button>
                             <button type="submit" class="btn btn-primary btn-lg" id="btn-submit-wizard">
-                                Verify Email & Submit Request
+                                Submit Project Request
                             </button>
                         </div>
                     </div>
@@ -638,16 +638,16 @@
                             <textarea id="c-message" rows="4" placeholder="Brief details about your app requirements..." required></textarea>
                         </div>
 
-                        <!-- Anti-Spam Bot Defense & OTP Notice -->
+                        <!-- Anti-Spam Bot Defense Notice -->
                         <div class="bot-shield-notice">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                            <span>Protected by <strong>RITYM Bot Defense v2.4</strong> (Rate Limit + Email OTP)</span>
+                            <span>Protected by <strong>RITYM Bot Shield v2.4</strong> (Rate Limit + Encrypted Dispatch)</span>
                         </div>
 
                         <!-- Spam Bot Honeypot -->
                         <input type="text" name="contact_hp" id="c-hp" style="display:none" tabindex="-1" autocomplete="off">
 
-                        <button type="submit" class="btn btn-primary btn-block btn-lg">Verify Email & Send Message</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">Send Inquiry Message</button>
                     </form>
                 </div>
             </div>
@@ -670,39 +670,42 @@
         </div>
     </footer>
 
-    <!-- INTERACTIVE EMAIL OTP VERIFICATION & BOT DEFENSE MODAL -->
-    <div class="otp-modal-overlay" id="otp-modal">
+    <!-- CLEAN PRODUCTION REQUEST SUBMITTED SUCCESS MODAL -->
+    <div class="otp-modal-overlay" id="request-success-modal">
         <div class="card otp-modal-card">
             <div class="otp-header">
-                <div class="otp-shield-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+                <div class="otp-shield-icon green-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                 </div>
-                <h3>Security Check — Verify Email OTP</h3>
-                <button type="button" class="otp-close-btn" id="otp-close-btn">&times;</button>
+                <h3>Request Dispatched Successfully!</h3>
+                <button type="button" class="otp-close-btn" id="success-close-btn">&times;</button>
             </div>
             
             <p class="otp-subtitle">
-                To prevent automated spam, we sent a 6-digit One-Time Password (OTP) code to <strong id="otp-target-email" class="text-orange">user@company.com</strong>.
+                Thank you! Your project inquiry has been dispatched to <strong class="text-orange">assist@ritym.com</strong>.
             </p>
 
-            <div class="otp-sim-banner">
-                <span class="otp-badge">LIVE DEMO SECURITY CODE</span>
-                <div class="otp-code-display" id="otp-sim-code">------</div>
-                <span class="otp-hint">Code automatically dispatched to target mailbox.</span>
-            </div>
-
-            <div class="otp-input-group">
-                <input type="text" class="otp-digit" maxlength="1" autofocus>
-                <input type="text" class="otp-digit" maxlength="1">
-                <input type="text" class="otp-digit" maxlength="1">
-                <input type="text" class="otp-digit" maxlength="1">
-                <input type="text" class="otp-digit" maxlength="1">
-                <input type="text" class="otp-digit" maxlength="1">
+            <div class="submission-summary-box">
+                <div class="s-row">
+                    <span>Tracking ID:</span>
+                    <strong class="text-orange" id="succ-tracking-id">RITYM-94820</strong>
+                </div>
+                <div class="s-row">
+                    <span>Status:</span>
+                    <span class="status-badge green">STAGE 1: OPEN (Request Received)</span>
+                </div>
+                <div class="s-row">
+                    <span>Target Email:</span>
+                    <strong id="succ-client-email">user@company.com</strong>
+                </div>
+                <div class="s-row">
+                    <span>Payment Milestone Terms:</span>
+                    <span style="font-size:0.82rem; color:#64748b;">25% Deposit on Approval | 50% Core Demo | 25% Handover</span>
+                </div>
             </div>
 
             <div class="otp-footer">
-                <div class="otp-timer">OTP Expires in: <strong id="otp-countdown">03:00</strong></div>
-                <button type="button" class="btn btn-primary btn-block btn-lg" id="btn-verify-otp">Verify OTP & Submit</button>
+                <button type="button" class="btn btn-primary btn-block btn-lg" id="btn-success-done">Done & View Tracker</button>
             </div>
         </div>
     </div>
