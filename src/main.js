@@ -21,11 +21,14 @@ let isAdminAuthenticated = false;
 /* Password-Protected Global Window Modal Functions */
 window.openAdminStageModal = function() {
     const modal = document.getElementById('admin-stage-modal');
+    const authView = document.getElementById('admin-auth-view');
+    const dashView = document.getElementById('admin-dashboard-view');
+
     if (modal) {
         modal.classList.add('active');
         if (!isAdminAuthenticated) {
-            document.getElementById('admin-auth-view').style.display = 'block';
-            document.getElementById('admin-dashboard-view').style.display = 'none';
+            if (authView) authView.style.display = 'block';
+            if (dashView) dashView.style.display = 'none';
             const passInput = document.getElementById('admin-pass-input');
             if (passInput) {
                 passInput.value = '';
@@ -33,8 +36,8 @@ window.openAdminStageModal = function() {
             }
             hideInlineError('admin-pass-error');
         } else {
-            document.getElementById('admin-auth-view').style.display = 'none';
-            document.getElementById('admin-dashboard-view').style.display = 'block';
+            if (authView) authView.style.display = 'none';
+            if (dashView) dashView.style.display = 'block';
             renderAdminRequestsTable();
         }
     }
@@ -519,28 +522,24 @@ function initProjectTracker() {
         });
     }
 
-    const hash = window.location.hash;
-    if (hash && hash.includes('#admin')) {
-        window.openAdminStageModal();
-    } else {
-        updateTrackerUI('RITYM-SAMPLE-8842');
-    }
-
-    window.addEventListener('hashchange', () => {
+    const checkHash = () => {
         if (window.location.hash.includes('#admin')) {
             window.openAdminStageModal();
         }
-    });
+    };
+
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
 }
 
 function getStoredProjectOrders() {
     const defaultOrders = {
         'RITYM-92627': {
             id: 'RITYM-92627',
-            clientName: 'Enterprise Client',
+            clientName: 'Enterprise Client Request',
             clientEmail: 'client@ritym.com',
-            type: 'Custom Android App Build',
-            details: 'High-performance Kotlin MVVM application with BLE hardware sync.',
+            type: 'Custom App Build Request',
+            details: 'Android mobile app & ROS 2 robotics platform.',
             stage: 1,
             timestamp: new Date().toLocaleDateString()
         },
@@ -571,9 +570,9 @@ function setProjectStage(trackId, newStageNum, clientName = null, clientEmail = 
     if (!order) {
         order = {
             id: trackId,
-            clientName: clientName || 'Client Project',
+            clientName: clientName || 'Client Project Request',
             clientEmail: clientEmail || 'client@ritym.com',
-            type: 'Client Project Inquiry',
+            type: 'Client Form Request',
             details: 'Direct submitted request',
             stage: parseInt(newStageNum, 10),
             timestamp: new Date().toLocaleDateString()
@@ -661,6 +660,7 @@ function updateTrackerUI(trackId) {
 function initAdminStageController() {
     const authForm = document.getElementById('admin-auth-form');
     const btnLogout = document.getElementById('btn-admin-logout');
+    const btnQuickSave = document.getElementById('btn-admin-quick-save');
 
     if (authForm) {
         authForm.addEventListener('submit', (e) => {
@@ -693,6 +693,29 @@ function initAdminStageController() {
             document.getElementById('admin-auth-view').style.display = 'block';
             document.getElementById('admin-dashboard-view').style.display = 'none';
             showToast('🔒 Admin Portal Locked.');
+        });
+    }
+
+    if (btnQuickSave) {
+        btnQuickSave.addEventListener('click', () => {
+            const quickIdInput = document.getElementById('admin-quick-id-input');
+            const quickSelect = document.getElementById('admin-quick-stage-select');
+
+            if (!quickIdInput || !quickSelect) return;
+            const targetId = quickIdInput.value.trim().toUpperCase();
+            const targetStage = parseInt(quickSelect.value, 10);
+
+            if (!targetId) {
+                showToast('Please enter a Tracking ID (e.g. RITYM-92627)', 'warn');
+                return;
+            }
+
+            setProjectStage(targetId, targetStage);
+            renderAdminRequestsTable();
+
+            const stageName = STAGE_CONFIG[targetStage] ? STAGE_CONFIG[targetStage].pill : `Stage ${targetStage}`;
+            showToast(`⚡ Project ${targetId} stage updated to: ${stageName}`, 'success');
+            quickIdInput.value = '';
         });
     }
 
