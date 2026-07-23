@@ -445,10 +445,14 @@
                             </div>
                         </div>
 
-                        <!-- Interactive Security CAPTCHA Challenge -->
-                        <div class="form-group captcha-box" style="margin-top: 16px;">
-                            <label for="w-captcha-input">🛡️ Security Check: <span id="w-captcha-question" class="text-orange font-mono">What is 7 + 4?</span></label>
-                            <input type="number" id="w-captcha-input" placeholder="Enter answer" required>
+                        <!-- Enterprise Distorted Visual Canvas CAPTCHA -->
+                        <div class="form-group visual-captcha-card" style="margin-top: 18px;">
+                            <label>🛡️ Security Verification (Enter exact 5-character code below)</label>
+                            <div class="captcha-canvas-row">
+                                <canvas id="wizard-captcha-canvas" width="160" height="50"></canvas>
+                                <button type="button" class="btn btn-xs btn-outline" id="btn-refresh-w-captcha" title="Refresh CAPTCHA Code">🔄 New Code</button>
+                            </div>
+                            <input type="text" id="w-captcha-code-input" placeholder="Type the 5 characters shown" maxlength="5" autocomplete="off" required>
                         </div>
 
                         <!-- Invisible Spam Bot Honeypot Field -->
@@ -638,10 +642,14 @@
                             <textarea id="c-message" rows="4" placeholder="Brief details about your app requirements..." required></textarea>
                         </div>
 
-                        <!-- Interactive Security CAPTCHA Challenge -->
-                        <div class="form-group captcha-box">
-                            <label for="c-captcha-input">🛡️ Security Check: <span id="c-captcha-question" class="text-orange font-mono">What is 6 + 3?</span></label>
-                            <input type="number" id="c-captcha-input" placeholder="Enter answer" required>
+                        <!-- Enterprise Distorted Visual Canvas CAPTCHA -->
+                        <div class="form-group visual-captcha-card">
+                            <label>🛡️ Security Verification (Enter exact 5-character code below)</label>
+                            <div class="captcha-canvas-row">
+                                <canvas id="contact-captcha-canvas" width="160" height="50"></canvas>
+                                <button type="button" class="btn btn-xs btn-outline" id="btn-refresh-c-captcha" title="Refresh CAPTCHA Code">🔄 New Code</button>
+                            </div>
+                            <input type="text" id="c-captcha-code-input" placeholder="Type the 5 characters shown" maxlength="5" autocomplete="off" required>
                         </div>
 
                         <!-- Spam Bot Honeypot -->
@@ -665,7 +673,7 @@
                 <p class="tagline-footer">RIGHT TIME | SMART SOLUTIONS | LASTING IMPACT</p>
             </div>
             <div class="footer-right">
-                <span class="sys-status"><span class="status-dot green"></span> Security CAPTCHA Active (25 Submissions / 10 Min)</span>
+                <span class="sys-status"><span class="status-dot green"></span> Visual Security CAPTCHA Active (Strict Validation)</span>
             </div>
         </div>
     </footer>
