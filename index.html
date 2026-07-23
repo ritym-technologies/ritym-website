@@ -455,6 +455,9 @@
                             <input type="text" id="w-captcha-code-input" placeholder="Type the 5 characters shown" maxlength="5" autocomplete="off" required>
                         </div>
 
+                        <!-- PROMINENT INLINE RED ERROR MESSAGE CONTAINER FOR WIZARD -->
+                        <div class="inline-error-banner" id="w-captcha-error" style="display:none;"></div>
+
                         <!-- Invisible Spam Bot Honeypot Field -->
                         <input type="text" name="website_hp" id="w-hp" style="display:none" tabindex="-1" autocomplete="off">
 
@@ -652,6 +655,9 @@
                             <input type="text" id="c-captcha-code-input" placeholder="Type the 5 characters shown" maxlength="5" autocomplete="off" required>
                         </div>
 
+                        <!-- PROMINENT INLINE RED ERROR MESSAGE CONTAINER FOR CONTACT FORM -->
+                        <div class="inline-error-banner" id="c-captcha-error" style="display:none;"></div>
+
                         <!-- Spam Bot Honeypot -->
                         <input type="text" name="contact_hp" id="c-hp" style="display:none" tabindex="-1" autocomplete="off">
 
@@ -673,7 +679,7 @@
                 <p class="tagline-footer">RIGHT TIME | SMART SOLUTIONS | LASTING IMPACT</p>
             </div>
             <div class="footer-right">
-                <span class="sys-status"><span class="status-dot green"></span> Visual Security CAPTCHA Active (Strict Validation)</span>
+                <span class="sys-status"><span class="status-dot green"></span> Security CAPTCHA Active (5 Submissions / 10 Min)</span>
             </div>
         </div>
     </footer>
