@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, ANTI-SPAM OTP & BOT DEFENSE ENGINE
+   RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, ANTI-SPAM & REQUEST ENGINE
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initProjectTracker();
     initSilentVisitorAnalytics();
     initDirectContactForm();
-    initOtpVerificationModal();
+    initSuccessModal();
 });
 
 /* --------------------------------------------------------------------------
@@ -50,12 +50,8 @@ function initEmailObfuscation() {
 }
 
 /* --------------------------------------------------------------------------
-   2. ANTI-SPAM BOT DEFENSE & EMAIL OTP VERIFICATION SYSTEM
+   2. ANTI-SPAM RATE LIMITING & BOT DEFENSE SYSTEM
    -------------------------------------------------------------------------- */
-let activePendingSubmission = null;
-let currentGeneratedOtp = null;
-let otpTimerInterval = null;
-
 function checkRateLimit() {
     const history = JSON.parse(localStorage.getItem('ritym_submission_history') || '[]');
     const now = Date.now();
@@ -70,133 +66,33 @@ function checkRateLimit() {
     return true;
 }
 
-function initOtpVerificationModal() {
-    const modal = document.getElementById('otp-modal');
-    const closeBtn = document.getElementById('otp-close-btn');
-    const verifyBtn = document.getElementById('btn-verify-otp');
-    const digitInputs = document.querySelectorAll('.otp-digit');
+function initSuccessModal() {
+    const modal = document.getElementById('request-success-modal');
+    const closeBtn = document.getElementById('success-close-btn');
+    const doneBtn = document.getElementById('btn-success-done');
 
-    if (!modal) return;
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeOtpModal);
+    if (closeBtn && modal) {
+        closeBtn.addEventListener('click', () => modal.classList.remove('active'));
     }
 
-    // Auto-advance cursor across 6 digit inputs
-    digitInputs.forEach((input, idx) => {
-        input.addEventListener('input', (e) => {
-            if (e.target.value.length === 1 && idx < digitInputs.length - 1) {
-                digitInputs[idx + 1].focus();
-            }
-        });
-
-        input.addEventListener('keydown', (e) => {
-            if (e.key === 'Backspace' && !e.target.value && idx > 0) {
-                digitInputs[idx - 1].focus();
-            }
-        });
-    });
-
-    if (verifyBtn) {
-        verifyBtn.addEventListener('click', () => {
-            let enteredCode = '';
-            digitInputs.forEach(inp => enteredCode += inp.value);
-
-            if (enteredCode.length !== 6) {
-                showToast('Please enter the full 6-digit OTP code.', 'warn');
-                return;
-            }
-
-            if (enteredCode === currentGeneratedOtp) {
-                showToast('✓ Email OTP Verified Successfully!', 'success');
-                closeOtpModal();
-                executeFinalSubmission(activePendingSubmission);
-            } else {
-                showToast('❌ Incorrect OTP code. Please check and try again.', 'error');
-            }
+    if (doneBtn && modal) {
+        doneBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            const trackerSec = document.getElementById('tracker');
+            if (trackerSec) trackerSec.scrollIntoView({ behavior: 'smooth' });
         });
     }
 }
 
-function openOtpModal(email, submissionData) {
-    if (!checkRateLimit()) {
-        showToast('⚠️ Rate limit exceeded (Max 3 submissions per 10 minutes). Please wait.', 'warn');
-        logSilentTelemetry(`[SPAM BLOCKED] Rate limit exceeded for email: ${email}`);
-        return;
-    }
+function openSuccessModal(orderData) {
+    const modal = document.getElementById('request-success-modal');
+    const trackIdEl = document.getElementById('succ-tracking-id');
+    const emailEl = document.getElementById('succ-client-email');
 
-    activePendingSubmission = submissionData;
-    currentGeneratedOtp = String(Math.floor(100000 + Math.random() * 900000));
-
-    const modal = document.getElementById('otp-modal');
-    const targetEmail = document.getElementById('otp-target-email');
-    const simCodeDisplay = document.getElementById('otp-sim-code');
-    const digitInputs = document.querySelectorAll('.otp-digit');
-
-    if (targetEmail) targetEmail.textContent = email;
-    if (simCodeDisplay) simCodeDisplay.textContent = currentGeneratedOtp;
-
-    // Reset digit inputs
-    digitInputs.forEach(inp => inp.value = '');
-    if (digitInputs[0]) setTimeout(() => digitInputs[0].focus(), 300);
-
-    // Start 3-minute countdown
-    startOtpTimer(180);
+    if (trackIdEl) trackIdEl.textContent = orderData.id;
+    if (emailEl) emailEl.textContent = orderData.clientEmail;
 
     if (modal) modal.classList.add('active');
-
-    showToast(`Security OTP sent to ${email} (Code: ${currentGeneratedOtp})`);
-    logSilentTelemetry(`[BOT DEFENSE] OTP ${currentGeneratedOtp} issued for ${email}`);
-}
-
-function closeOtpModal() {
-    const modal = document.getElementById('otp-modal');
-    if (modal) modal.classList.remove('active');
-    if (otpTimerInterval) clearInterval(otpTimerInterval);
-}
-
-function startOtpTimer(durationSeconds) {
-    if (otpTimerInterval) clearInterval(otpTimerInterval);
-    let timer = durationSeconds;
-    const display = document.getElementById('otp-countdown');
-
-    otpTimerInterval = setInterval(() => {
-        const minutes = parseInt(timer / 60, 10);
-        const seconds = parseInt(timer % 60, 10);
-
-        const mStr = minutes < 10 ? "0" + minutes : minutes;
-        const sStr = seconds < 10 ? "0" + seconds : seconds;
-
-        if (display) display.textContent = `${mStr}:${sStr}`;
-
-        if (--timer < 0) {
-            clearInterval(otpTimerInterval);
-            if (display) display.textContent = "00:00 (EXPIRED)";
-            currentGeneratedOtp = null;
-            showToast('OTP Code expired. Please resubmit form to generate a new code.', 'warn');
-        }
-    }, 1000);
-}
-
-function executeFinalSubmission(submission) {
-    if (!submission) return;
-
-    if (submission.type === 'WIZARD_ORDER') {
-        saveProjectOrder(submission.data);
-        showToast(`Request ${submission.data.id} confirmed! Invoice dispatched to ${submission.data.clientEmail}.`, 'success');
-        logSilentTelemetry(`[CONFIRMED ORDER ${submission.data.id}] From ${submission.data.clientName} (${submission.data.clientEmail}) - OTP Verified.`);
-
-        if (submission.form) submission.form.reset();
-        updateTrackerUI(submission.data.id);
-        
-        const trackerSec = document.getElementById('tracker');
-        if (trackerSec) trackerSec.scrollIntoView({ behavior: 'smooth' });
-
-    } else if (submission.type === 'DIRECT_MESSAGE') {
-        showToast(`Message verified & dispatched to assist@ritym.com. Thank you ${submission.data.name}!`);
-        logSilentTelemetry(`[CONFIRMED MESSAGE] From ${submission.data.name} (${submission.data.email}) - OTP Verified.`);
-        if (submission.form) submission.form.reset();
-    }
 }
 
 /* --------------------------------------------------------------------------
@@ -281,6 +177,12 @@ function initAppWizard() {
             return;
         }
 
+        if (!checkRateLimit()) {
+            showToast('⚠️ Rate limit exceeded (Max 3 submissions per 10 minutes). Please wait.', 'warn');
+            logSilentTelemetry('[SPAM BLOCKED] Rate limit exceeded on App Wizard.');
+            return;
+        }
+
         const name = document.getElementById('w-name').value.trim();
         const email = document.getElementById('w-email').value.trim();
 
@@ -300,12 +202,16 @@ function initAppWizard() {
             timestamp: new Date().toLocaleDateString()
         };
 
-        // Trigger OTP verification modal before submitting
-        openOtpModal(email, {
-            type: 'WIZARD_ORDER',
-            data: orderData,
-            form: form
-        });
+        // Save order and update UI
+        saveProjectOrder(orderData);
+        updateTrackerUI(trackId);
+        openSuccessModal(orderData);
+
+        showToast(`Request ${trackId} confirmed! Dispatched to assist@ritym.com.`, 'success');
+        logSilentTelemetry(`[CONFIRMED ORDER ${trackId}] From ${name} (${email})`);
+
+        form.reset();
+        goToStep(1);
     });
 }
 
@@ -516,7 +422,7 @@ function toggleHiddenAnalyticsModal() {
 }
 
 /* --------------------------------------------------------------------------
-   6. DIRECT CONTACT FORM WITH HONEYPOT & OTP DEFENSE
+   6. DIRECT CONTACT FORM WITH HONEYPOT & RATE LIMIT DEFENSE
    -------------------------------------------------------------------------- */
 function initDirectContactForm() {
     const form = document.getElementById('direct-contact-form');
@@ -532,6 +438,12 @@ function initDirectContactForm() {
             return;
         }
 
+        if (!checkRateLimit()) {
+            showToast('⚠️ Rate limit exceeded (Max 3 submissions per 10 minutes). Please wait.', 'warn');
+            logSilentTelemetry('[SPAM BLOCKED] Rate limit exceeded on Contact Form.');
+            return;
+        }
+
         const name = document.getElementById('c-name').value.trim();
         const email = document.getElementById('c-email').value.trim();
 
@@ -540,11 +452,23 @@ function initDirectContactForm() {
             return;
         }
 
-        openOtpModal(email, {
-            type: 'DIRECT_MESSAGE',
-            data: { name, email },
-            form: form
-        });
+        const trackId = `RITYM-${Math.floor(10000 + Math.random() * 90000)}`;
+        const orderData = {
+            id: trackId,
+            clientName: name,
+            clientEmail: email,
+            stage: 1,
+            timestamp: new Date().toLocaleDateString()
+        };
+
+        saveProjectOrder(orderData);
+        updateTrackerUI(trackId);
+        openSuccessModal(orderData);
+
+        showToast(`Message verified & dispatched to assist@ritym.com. Thank you ${name}!`, 'success');
+        logSilentTelemetry(`[CONFIRMED MESSAGE] From ${name} (${email})`);
+
+        form.reset();
     });
 }
 
