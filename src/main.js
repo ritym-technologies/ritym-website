@@ -1,6 +1,6 @@
 /* ==========================================================================
    RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, ENTERPRISE VISUAL CANVAS CAPTCHA,
-   EMAIL DISPATCH & PASSWORD-PROTECTED INTERNAL ADMIN STAGE ADVANCER ENGINE
+   EMAIL DISPATCH & PASSWORD-PROTECTED INTERNAL ADMIN MANAGEMENT PORTAL
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,18 +16,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* Master Internal Admin Security Key */
 const MASTER_ADMIN_KEY = "RiTym2212!";
+let isAdminAuthenticated = false;
 
 /* Password-Protected Global Window Modal Functions */
 window.openAdminStageModal = function() {
     const modal = document.getElementById('admin-stage-modal');
     if (modal) {
         modal.classList.add('active');
-        const passInput = document.getElementById('admin-pass-input');
-        if (passInput) {
-            passInput.value = '';
-            passInput.focus();
+        if (!isAdminAuthenticated) {
+            document.getElementById('admin-auth-view').style.display = 'block';
+            document.getElementById('admin-dashboard-view').style.display = 'none';
+            const passInput = document.getElementById('admin-pass-input');
+            if (passInput) {
+                passInput.value = '';
+                passInput.focus();
+            }
+            hideInlineError('admin-pass-error');
+        } else {
+            document.getElementById('admin-auth-view').style.display = 'none';
+            document.getElementById('admin-dashboard-view').style.display = 'block';
+            renderAdminRequestsTable();
         }
-        hideInlineError('admin-pass-error');
     }
 };
 
@@ -407,6 +416,10 @@ function initAppWizard() {
             clientName: name,
             clientEmail: email,
             stage: 1,
+            type: "Custom App Configurator",
+            details: notes || "No additional concept notes provided.",
+            platforms: selectedPlatforms,
+            features: selectedFeatures,
             timestamp: new Date().toLocaleDateString()
         };
 
@@ -436,7 +449,7 @@ function initAppWizard() {
 }
 
 /* --------------------------------------------------------------------------
-   6. 7-STAGE PROJECT LIFECYCLE TRACKER ENGINE
+   6. 7-STAGE PROJECT LIFECYCLE TRACKER ENGINE (WITH STAGE 8 & STAGE 9 SUPPORT)
    -------------------------------------------------------------------------- */
 const STAGE_CONFIG = {
     1: {
@@ -480,6 +493,18 @@ const STAGE_CONFIG = {
         pill: "Stage 7: BUILD_RELEASE (Completed)",
         pct: "100%",
         desc: "Final App Bundle (.aab) compiled, Play Store submission completed, and codebase delivered. 25% final balance invoice settled."
+    },
+    8: {
+        title: "Action Required: Waiting for Additional Client Information",
+        pill: "⚠️ WAITING_ON_CLIENT (Info Needed)",
+        pct: "Paused",
+        desc: "Our engineering team requires additional details regarding your project requirements before proceeding. Please check your inbox or reply to assist@ritym.com."
+    },
+    9: {
+        title: "Project Status: Request Declined / Closed",
+        pill: "❌ REJECTED (Scope Declined)",
+        pct: "Closed",
+        desc: "This project request could not be accepted due to scope constraints or technical feasibility. Please contact assist@ritym.com for further inquiries."
     }
 };
 
@@ -494,7 +519,6 @@ function initProjectTracker() {
         });
     }
 
-    // Secret URL Hash Trigger e.g. https://ritym.com/#admin
     const hash = window.location.hash;
     if (hash && hash.includes('#admin')) {
         window.openAdminStageModal();
@@ -509,20 +533,48 @@ function initProjectTracker() {
     });
 }
 
+function getStoredProjectOrders() {
+    const defaultOrders = {
+        'RITYM-92627': {
+            id: 'RITYM-92627',
+            clientName: 'Enterprise Client',
+            clientEmail: 'client@ritym.com',
+            type: 'Custom Android App Build',
+            details: 'High-performance Kotlin MVVM application with BLE hardware sync.',
+            stage: 1,
+            timestamp: new Date().toLocaleDateString()
+        },
+        'RITYM-SAMPLE-8842': {
+            id: 'RITYM-SAMPLE-8842',
+            clientName: 'Demo Client Request',
+            clientEmail: 'demo@company.com',
+            type: 'Smartphone & POS Kiosk',
+            details: 'Real-time telemetry and POS integration.',
+            stage: 4,
+            timestamp: new Date().toLocaleDateString()
+        }
+    };
+
+    const saved = JSON.parse(localStorage.getItem('ritym_project_orders') || '{}');
+    return Object.assign({}, defaultOrders, saved);
+}
+
 function saveProjectOrder(order) {
-    const orders = JSON.parse(localStorage.getItem('ritym_project_orders') || '{}');
+    const orders = getStoredProjectOrders();
     orders[order.id] = order;
     localStorage.setItem('ritym_project_orders', JSON.stringify(orders));
 }
 
 function setProjectStage(trackId, newStageNum, clientName = null, clientEmail = null) {
-    const orders = JSON.parse(localStorage.getItem('ritym_project_orders') || '{}');
+    const orders = getStoredProjectOrders();
     let order = orders[trackId];
     if (!order) {
         order = {
             id: trackId,
             clientName: clientName || 'Client Project',
             clientEmail: clientEmail || 'client@ritym.com',
+            type: 'Client Project Inquiry',
+            details: 'Direct submitted request',
             stage: parseInt(newStageNum, 10),
             timestamp: new Date().toLocaleDateString()
         };
@@ -537,24 +589,14 @@ function setProjectStage(trackId, newStageNum, clientName = null, clientEmail = 
 }
 
 function updateTrackerUI(trackId) {
-    const orders = JSON.parse(localStorage.getItem('ritym_project_orders') || '{}');
+    const orders = getStoredProjectOrders();
     
-    let order = orders[trackId];
-    if (!order && trackId === 'RITYM-SAMPLE-8842') {
-        order = {
-            id: 'RITYM-SAMPLE-8842',
-            clientName: 'Demo Client Request',
-            clientEmail: 'client@company.com',
-            stage: 4
-        };
-    } else if (!order) {
-        order = {
-            id: trackId,
-            clientName: 'Client Project Inquiry',
-            clientEmail: 'client@ritym.com',
-            stage: 1
-        };
-    }
+    let order = orders[trackId] || {
+        id: trackId,
+        clientName: 'Client Project Inquiry',
+        clientEmail: 'client@ritym.com',
+        stage: 1
+    };
 
     const stageNum = order.stage || 1;
     const stageData = STAGE_CONFIG[stageNum] || STAGE_CONFIG[1];
@@ -568,36 +610,91 @@ function updateTrackerUI(trackId) {
 
     if (tOrderId) tOrderId.textContent = order.id;
     if (tClientName) tClientName.textContent = `${order.clientName} (${order.clientEmail})`;
-    if (tCurrentStatus) tCurrentStatus.innerHTML = `<span class="status-dot"></span> ${stageData.pill}`;
+    
+    if (tCurrentStatus) {
+        tCurrentStatus.className = 't-status-pill';
+        if (stageNum === 8) {
+            tCurrentStatus.classList.add('status-waiting');
+        } else if (stageNum === 9) {
+            tCurrentStatus.classList.add('status-rejected');
+        } else {
+            tCurrentStatus.classList.add('status-in-dev');
+        }
+        tCurrentStatus.innerHTML = `<span class="status-dot"></span> ${stageData.pill}`;
+    }
+
     if (tStageHeading) tStageHeading.textContent = stageData.title;
     if (tProgressPct) tProgressPct.textContent = `Progress: ${stageData.pct}`;
     if (tStageDesc) tStageDesc.textContent = stageData.desc;
 
+    // Handle pipeline nodes for custom exception stages (8 & 9)
     document.querySelectorAll('.pipe-step').forEach(step => {
         const stepNum = parseInt(step.getAttribute('data-stage'), 10);
         step.classList.remove('completed', 'active');
-        if (stepNum < stageNum) {
-            step.classList.add('completed');
-        } else if (stepNum === stageNum) {
-            step.classList.add('active');
+
+        if (stageNum === 8 || stageNum === 9) {
+            if (stepNum === 1) step.classList.add('active');
+        } else {
+            if (stepNum < stageNum) {
+                step.classList.add('completed');
+            } else if (stepNum === stageNum) {
+                step.classList.add('active');
+            }
         }
     });
 
     document.querySelectorAll('.pipe-line').forEach((line, idx) => {
         line.classList.remove('completed', 'active');
-        if (idx + 1 < stageNum) {
-            line.classList.add('completed');
-        } else if (idx + 1 === stageNum) {
-            line.classList.add('active');
+        if (stageNum !== 8 && stageNum !== 9) {
+            if (idx + 1 < stageNum) {
+                line.classList.add('completed');
+            } else if (idx + 1 === stageNum) {
+                line.classList.add('active');
+            }
         }
     });
 }
 
 /* --------------------------------------------------------------------------
-   7. PASSWORD-PROTECTED INTERNAL ADMIN STAGE CONTROLLER (Master Key: RiTym2212!)
+   7. PASSWORD-PROTECTED INTERNAL ADMIN MANAGEMENT DASHBOARD
    -------------------------------------------------------------------------- */
 function initAdminStageController() {
-    const form = document.getElementById('admin-stage-form');
+    const authForm = document.getElementById('admin-auth-form');
+    const btnLogout = document.getElementById('btn-admin-logout');
+
+    if (authForm) {
+        authForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            hideInlineError('admin-pass-error');
+
+            const enteredPass = document.getElementById('admin-pass-input').value.trim();
+
+            if (enteredPass !== MASTER_ADMIN_KEY) {
+                showInlineError('admin-pass-error', '🔒 Access Denied! Invalid Master Admin Password.');
+                showToast('🔒 Access Denied! Invalid Master Admin Password.', 'error');
+                logSilentTelemetry(`[SECURITY WARNING] Failed Admin authentication attempt with key: ${enteredPass}`);
+                document.getElementById('admin-pass-input').value = '';
+                document.getElementById('admin-pass-input').focus();
+                return;
+            }
+
+            isAdminAuthenticated = true;
+            document.getElementById('admin-auth-view').style.display = 'none';
+            document.getElementById('admin-dashboard-view').style.display = 'block';
+            renderAdminRequestsTable();
+            showToast('🔒 Authenticated! Admin Management Portal Unlocked.', 'success');
+            logSilentTelemetry('[ADMIN DASHBOARD AUTH UNLOCKED] Master key verified.');
+        });
+    }
+
+    if (btnLogout) {
+        btnLogout.addEventListener('click', () => {
+            isAdminAuthenticated = false;
+            document.getElementById('admin-auth-view').style.display = 'block';
+            document.getElementById('admin-dashboard-view').style.display = 'none';
+            showToast('🔒 Admin Portal Locked.');
+        });
+    }
 
     // Secret Internal Shortcut: Ctrl + Alt + Shift + R
     window.addEventListener('keydown', (e) => {
@@ -606,56 +703,74 @@ function initAdminStageController() {
             window.openAdminStageModal();
         }
     });
+}
 
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            hideInlineError('admin-pass-error');
+function renderAdminRequestsTable() {
+    const tbody = document.getElementById('admin-requests-tbody');
+    const countBadge = document.getElementById('admin-request-count-badge');
+    if (!tbody) return;
 
-            const enteredPass = document.getElementById('admin-pass-input').value.trim();
-            const trackId = document.getElementById('admin-input-track-id').value.trim().toUpperCase();
-            const stageNum = parseInt(document.getElementById('admin-select-stage').value, 10);
+    const orders = getStoredProjectOrders();
+    const keys = Object.keys(orders);
 
-            // STRICT MASTER PASSWORD AUTHENTICATION CHECK
-            if (enteredPass !== MASTER_ADMIN_KEY) {
-                showInlineError('admin-pass-error', '🔒 Access Denied! Invalid Master Admin Password.');
-                showToast('🔒 Access Denied! Invalid Master Admin Password.', 'error');
-                logSilentTelemetry(`[SECURITY WARNING] Failed Admin authentication attempt with key: ${enteredPass}`);
-                document.getElementById('admin-pass-input').value = '';
-                document.getElementById('admin-pass-input').focus();
-                return; // STRICTLY BLOCK
-            }
+    if (countBadge) countBadge.textContent = `Total Received Requests: ${keys.length}`;
 
-            if (!trackId) {
-                showInlineError('admin-pass-error', 'Please enter a Tracking ID (e.g. RITYM-92627)');
-                return;
-            }
-
-            const updatedOrder = setProjectStage(trackId, stageNum);
-            showToast(`🔒 Authenticated! Project ${trackId} advanced to Stage ${stageNum}!`, 'success');
-            logSilentTelemetry(`[ADMIN AUTH SUCCESS] Project ${trackId} set to Stage ${stageNum} (${STAGE_CONFIG[stageNum].title})`);
-
-            window.closeAdminStageModal();
-
-            const trackerInput = document.getElementById('track-id-input');
-            if (trackerInput) trackerInput.value = trackId;
-            const trackerSec = document.getElementById('tracker');
-            if (trackerSec) trackerSec.scrollIntoView({ behavior: 'smooth' });
-        });
+    if (keys.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:24px; color:var(--text-muted);">No submitted client requests found yet.</td></tr>`;
+        return;
     }
 
-    // Password-Protected API for developer console
-    window.RITYM = window.RITYM || {};
-    window.RITYM.setStage = (trackId, stageNumber, masterKey) => {
-        if (masterKey !== MASTER_ADMIN_KEY) {
-            console.error('[RITYM SECURITY] Access Denied. Valid masterKey required as 3rd parameter: RITYM.setStage("ID", stage, "RiTym2212!")');
-            return 'Access Denied: Invalid Master Key';
-        }
-        const order = setProjectStage(trackId, stageNumber);
-        console.log(`[RITYM ADMIN AUTH] Project ${trackId} advanced to Stage ${stageNumber}:`, order);
-        showToast(`⚡ Project ${trackId} set to Stage ${stageNumber}!`, 'success');
-        return order;
-    };
+    tbody.innerHTML = keys.map(id => {
+        const item = orders[id];
+        const currentStage = item.stage || 1;
+
+        return `
+            <tr>
+                <td><strong class="text-orange font-mono">${item.id}</strong><br><span style="font-size:0.75rem; color:var(--text-dim);">${item.timestamp || 'Recent'}</span></td>
+                <td><strong>${escapeHtml(item.clientName || 'Client')}</strong><br><span style="font-size:0.78rem; color:var(--text-muted);">${escapeHtml(item.clientEmail || 'No Email')}</span></td>
+                <td><span style="font-size:0.82rem; font-weight:600;">${escapeHtml(item.type || 'Inquiry')}</span><br><span style="font-size:0.75rem; color:var(--text-dim);">${escapeHtml((item.details || '').substring(0, 45))}...</span></td>
+                <td>
+                    <span class="badge-stage badge-stage-${currentStage}">
+                        ${STAGE_CONFIG[currentStage] ? STAGE_CONFIG[currentStage].pill : `Stage ${currentStage}`}
+                    </span>
+                </td>
+                <td>
+                    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                        <select class="admin-stage-select" id="select-stage-${item.id}">
+                            <option value="1" ${currentStage === 1 ? 'selected' : ''}>1: REQUEST_RECEIVED</option>
+                            <option value="2" ${currentStage === 2 ? 'selected' : ''}>2: IN_REVIEW</option>
+                            <option value="3" ${currentStage === 3 ? 'selected' : ''}>3: ASSIGNED</option>
+                            <option value="4" ${currentStage === 4 ? 'selected' : ''}>4: IN_DEVELOPMENT</option>
+                            <option value="5" ${currentStage === 5 ? 'selected' : ''}>5: QA & TESTING</option>
+                            <option value="6" ${currentStage === 6 ? 'selected' : ''}>6: DOCUMENTATION</option>
+                            <option value="7" ${currentStage === 7 ? 'selected' : ''}>7: BUILD_RELEASE</option>
+                            <option value="8" ${currentStage === 8 ? 'selected' : ''}>⚠️ WAITING ON CLIENT (Need Info)</option>
+                            <option value="9" ${currentStage === 9 ? 'selected' : ''}>❌ REJECTED (Declined)</option>
+                        </select>
+                        <button type="button" class="btn btn-xs btn-primary" onclick="adminSaveRequestStage('${item.id}')">💾 Save</button>
+                        <a href="mailto:${item.clientEmail}?subject=[RITYM Update] Request ${item.id}" class="btn btn-xs btn-outline" title="Email Client">✉️ Reply</a>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+window.adminSaveRequestStage = function(trackId) {
+    const selectEl = document.getElementById(`select-stage-${trackId}`);
+    if (!selectEl) return;
+    const newStage = parseInt(selectEl.value, 10);
+
+    setProjectStage(trackId, newStage);
+    renderAdminRequestsTable();
+
+    const stageName = STAGE_CONFIG[newStage] ? STAGE_CONFIG[newStage].pill : `Stage ${newStage}`;
+    showToast(`⚡ Project ${trackId} status updated to: ${stageName}`, 'success');
+    logSilentTelemetry(`[ADMIN STAGE SAVED] ${trackId} updated to Stage ${newStage}`);
+};
+
+function escapeHtml(str) {
+    return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 /* --------------------------------------------------------------------------
@@ -778,6 +893,8 @@ function initDirectContactForm() {
             id: trackId,
             clientName: name,
             clientEmail: email,
+            type: "Direct Contact Inquiry",
+            details: message,
             stage: 1,
             timestamp: new Date().toLocaleDateString()
         };
