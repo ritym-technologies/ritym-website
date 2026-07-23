@@ -47,6 +47,12 @@
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
 html {
     scroll-behavior: smooth;
     font-size: 16px;
@@ -57,7 +63,6 @@ body.light-theme {
     color: var(--text-main);
     font-family: var(--font-sans);
     line-height: 1.6;
-    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -123,7 +128,7 @@ p {
     cursor: pointer;
     text-decoration: none;
     transition: var(--transition);
-    min-height: 44px; /* Touch friendly for Android & iOS */
+    min-height: 44px;
 }
 
 .btn-primary {
@@ -199,9 +204,9 @@ p {
 }
 
 .official-logo-img {
-    height: 70px;
+    height: 65px;
     width: auto;
-    max-width: 360px;
+    max-width: 320px;
     display: block;
     object-fit: contain;
     transition: var(--transition);
@@ -209,9 +214,9 @@ p {
 }
 
 .official-logo-img-footer {
-    height: 75px;
+    height: 70px;
     width: auto;
-    max-width: 340px;
+    max-width: 320px;
     display: block;
     object-fit: contain;
     margin-bottom: 14px;
@@ -255,7 +260,7 @@ p {
 
 /* Tagline Sub-Header Banner */
 .tagline-bar {
-    margin-top: 86px;
+    margin-top: 81px;
     background: #04060a;
     color: #ffffff;
     padding: 10px 0;
@@ -273,7 +278,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 16px;
     flex-wrap: wrap;
 }
 
@@ -311,25 +316,7 @@ p {
     font-weight: 700;
 }
 
-/* Anti-Spam Bot Defense Notice Banner */
-.bot-shield-notice {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
-    padding: 10px 14px;
-    border-radius: var(--radius-sm);
-    font-size: 0.82rem;
-    color: #166534;
-    margin-top: 14px;
-}
-
-.bot-shield-notice strong {
-    color: #166534;
-}
-
-/* HERO SECTION WITH RESPONSIVE FLUID TYPOGRAPHY */
+/* HERO SECTION WITH FLUID TYPOGRAPHY & ZERO OVERFLOW */
 .hero {
     padding: 85px 0 90px 0;
     background: radial-gradient(circle at 90% 15%, rgba(255, 107, 0, 0.08) 0%, transparent 65%),
@@ -392,16 +379,16 @@ p {
 }
 
 .hero-title-pro {
-    font-size: clamp(2.2rem, 5vw, 3.9rem); /* Smooth scaling on Mobile/Tablet */
-    letter-spacing: -1.2px;
+    font-size: clamp(1.75rem, 5.5vw, 3.8rem);
+    letter-spacing: -1px;
     margin-bottom: 22px;
-    line-height: 1.15;
+    line-height: 1.18;
     max-width: 1200px;
-    word-break: break-word;
+    word-wrap: break-word;
 }
 
 .hero-subtitle-pro {
-    font-size: clamp(1.05rem, 2.5vw, 1.28rem);
+    font-size: clamp(1.0rem, 2.5vw, 1.28rem);
     margin-bottom: 36px;
     max-width: 1100px;
     line-height: 1.65;
@@ -485,7 +472,7 @@ p {
 
 /* Sections */
 .section {
-    padding: 85px 0;
+    padding: 80px 0;
 }
 
 .section-container {
@@ -496,7 +483,7 @@ p {
 
 .section-header {
     max-width: 680px;
-    margin-bottom: 50px;
+    margin-bottom: 48px;
 }
 
 .text-center { text-align: center; margin-left: auto; margin-right: auto; }
@@ -512,7 +499,7 @@ p {
 .tag-primary { color: var(--primary-orange); }
 
 .section-title {
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     margin-bottom: 16px;
 }
 
@@ -774,6 +761,7 @@ p {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    width: 100%;
 }
 
 .form-group label {
@@ -789,9 +777,11 @@ p {
     padding: 14px 18px;
     color: var(--text-main);
     font-family: var(--font-sans);
-    font-size: 0.98rem;
+    font-size: 16px; /* Prevents iOS Safari from auto-zooming on input focus! */
     outline: none;
     transition: var(--transition);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
@@ -813,7 +803,8 @@ p {
     font-size: 0.92rem;
     padding-bottom: 12px;
     border-bottom: 1px solid #e2e8f0;
-
+    flex-wrap: wrap;
+    gap: 6px;
 }
 
 .r-label { color: var(--text-muted); }
@@ -835,7 +826,7 @@ p {
 .tracker-search-bar input {
     flex-grow: 1;
     padding: 14px 20px;
-    font-size: 0.98rem;
+    font-size: 16px;
     border: 1px solid #cbd5e1;
     border-radius: var(--radius-sm);
     font-family: var(--font-mono);
@@ -1095,7 +1086,7 @@ p {
     backdrop-filter: blur(10px);
     z-index: 2500;
     display: flex; align-items: center; justify-content: center;
-    padding: 20px;
+    padding: 16px;
     opacity: 0; pointer-events: none;
     transition: var(--transition);
 }
@@ -1108,7 +1099,7 @@ p {
     background: #ffffff;
     border: 1px solid #cbd5e1;
     border-radius: var(--radius-md);
-    padding: 28px;
+    padding: 24px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
@@ -1196,7 +1187,7 @@ p {
     backdrop-filter: blur(8px);
     z-index: 2000;
     display: flex; align-items: center; justify-content: center;
-    padding: 20px;
+    padding: 16px;
     opacity: 0; pointer-events: none;
     transition: var(--transition);
 }
@@ -1208,7 +1199,7 @@ p {
 .analytics-log-box { background: #0f172a; padding: 18px; border-radius: 10px; font-family: var(--font-mono); font-size: 0.82rem; color: var(--primary-orange); height: 380px; overflow-y: auto; white-space: pre-wrap; }
 
 /* Toasts */
-.toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; max-width: calc(100vw - 48px); }
+.toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; max-width: calc(100vw - 32px); }
 .toast { background: #0f172a; border: 1px solid var(--primary-orange); color: #ffffff; padding: 12px 20px; border-radius: 10px; font-size: 0.9rem; box-shadow: var(--shadow-lg); word-break: break-word; }
 
 /* ==========================================================================
@@ -1221,7 +1212,7 @@ p {
         grid-template-columns: repeat(2, 1fr);
     }
     .hero-title-pro {
-        font-size: 3.2rem;
+        font-size: 3.0rem;
     }
 }
 
@@ -1232,17 +1223,17 @@ p {
     }
     
     .official-logo-img {
-        height: 50px;
-        max-width: 260px;
+        height: 48px;
+        max-width: 220px;
     }
     
     .official-logo-img-footer {
-        height: 56px;
-        max-width: 260px;
+        height: 52px;
+        max-width: 220px;
     }
 
     .nav-links {
-        display: none; /* Hide dense text links on phone, keep main action button */
+        display: none;
     }
 
     .email-chip {
@@ -1251,14 +1242,14 @@ p {
     }
 
     .tagline-bar {
-        margin-top: 66px;
-        font-size: 0.74rem;
+        margin-top: 64px;
+        font-size: 0.72rem;
         padding: 8px 0;
         letter-spacing: 1px;
     }
 
     .hero {
-        padding: 44px 0 60px 0;
+        padding: 36px 0 54px 0;
     }
 
     .hero-container.hero-pro-class {
@@ -1268,22 +1259,23 @@ p {
     .hero-top-row {
         flex-direction: column;
         align-items: flex-start;
+        gap: 8px;
     }
 
     .hero-title-pro {
-        font-size: 2.2rem;
-        line-height: 1.18;
-        letter-spacing: -0.8px;
+        font-size: 2.0rem;
+        line-height: 1.2;
+        letter-spacing: -0.5px;
     }
 
     .hero-subtitle-pro {
-        font-size: 1.05rem;
-        margin-bottom: 28px;
+        font-size: 1.0rem;
+        margin-bottom: 24px;
     }
 
     .pro-capability-bar {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 10px;
     }
 
     .cap-pill {
@@ -1294,6 +1286,7 @@ p {
     .hero-actions-pro {
         flex-direction: column;
         width: 100%;
+        gap: 12px;
     }
 
     .hero-actions-pro .btn {
@@ -1303,9 +1296,9 @@ p {
     .trust-metrics-pro {
         flex-direction: column;
         align-items: flex-start;
-        gap: 16px;
+        gap: 14px;
         width: 100%;
-        padding: 20px;
+        padding: 18px;
         border-radius: 14px;
     }
 
@@ -1356,8 +1349,8 @@ p {
 
     .contact-wrapper {
         grid-template-columns: 1fr;
-        padding: 24px 18px;
-        gap: 32px;
+        padding: 24px 16px;
+        gap: 28px;
     }
 
     .footer-container {
@@ -1370,24 +1363,20 @@ p {
 /* Small Smartphone Breakpoint (<= 480px) */
 @media (max-width: 480px) {
     .official-logo-img {
-        height: 42px;
-        max-width: 210px;
-    }
-    
-    .nav-actions {
-        gap: 8px;
-    }
-
-    .email-chip span:not(.copy-badge) {
-        display: none; /* Hide full email string on tiny screens, show icon + copy */
+        height: 40px;
+        max-width: 190px;
     }
 
     .hero-title-pro {
-        font-size: 1.95rem;
+        font-size: 1.8rem;
     }
 
     .s-row {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .email-chip span:not(.copy-badge) {
+        display: none;
     }
 }
