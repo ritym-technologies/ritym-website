@@ -1,10 +1,10 @@
 /* ==========================================================================
-   RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, CAPTCHA & EMAIL DISPATCH ENGINE
+   RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, ENTERPRISE VISUAL CANVAS CAPTCHA & EMAIL DISPATCH ENGINE
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
     initEmailObfuscation();
-    initCaptchaSystem();
+    initVisualCanvasCaptcha();
     initAppWizard();
     initProjectTracker();
     initSilentVisitorAnalytics();
@@ -51,48 +51,123 @@ function initEmailObfuscation() {
 }
 
 /* --------------------------------------------------------------------------
-   2. INCREASED RATE LIMITER (25 SUBMISSIONS / 10 MINS) & CAPTCHA ENGINE
+   2. ENTERPRISE DISTORTED VISUAL CANVAS CAPTCHA ENGINE
    -------------------------------------------------------------------------- */
-let contactCaptchaAnswer = null;
-let wizardCaptchaAnswer = null;
+let contactCanvasCaptchaCode = "";
+let wizardCanvasCaptchaCode = "";
 
+function generateCaptchaCode(length = 5) {
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // Omit ambiguous characters (0, O, 1, I)
+    let code = "";
+    for (let i = 0; i < length; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+}
+
+function renderCaptchaOnCanvas(canvasId, code) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    // Background gradient
+    const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    grad.addColorStop(0, '#0f172a');
+    grad.addColorStop(1, '#1e293b');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Random background noise lines
+    for (let i = 0; i < 5; i++) {
+        ctx.strokeStyle = `rgba(255, 107, 0, ${0.2 + Math.random() * 0.3})`;
+        ctx.lineWidth = 1 + Math.random() * 2;
+        ctx.beginPath();
+        ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+        ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+        ctx.stroke();
+    }
+
+    // Random background noise dots
+    for (let i = 0; i < 30; i++) {
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.4})`;
+        ctx.beginPath();
+        ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 2, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    // Render distorted characters
+    ctx.font = 'bold 24px "JetBrains Mono", monospace';
+    ctx.textBaseline = 'middle';
+
+    const charSpacing = canvas.width / (code.length + 1);
+
+    for (let i = 0; i < code.length; i++) {
+        const char = code.charAt(i);
+        ctx.save();
+
+        const x = charSpacing * (i + 1);
+        const y = canvas.height / 2 + (Math.random() * 6 - 3);
+        const angle = (Math.random() * 0.4 - 0.2); // Random rotation between -0.2 and 0.2 rad
+
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+
+        // Alternating vibrant colors
+        ctx.fillStyle = (i % 2 === 0) ? '#ff6b00' : '#38bdf8';
+        ctx.shadowColor = 'rgba(0,0,0,0.5)';
+        ctx.shadowBlur = 4;
+        ctx.fillText(char, -8, 0);
+
+        ctx.restore();
+    }
+}
+
+function initVisualCanvasCaptcha() {
+    refreshContactCaptcha();
+    refreshWizardCaptcha();
+
+    const btnRefreshC = document.getElementById('btn-refresh-c-captcha');
+    if (btnRefreshC) {
+        btnRefreshC.addEventListener('click', (e) => {
+            e.preventDefault();
+            refreshContactCaptcha();
+        });
+    }
+
+    const btnRefreshW = document.getElementById('btn-refresh-w-captcha');
+    if (btnRefreshW) {
+        btnRefreshW.addEventListener('click', (e) => {
+            e.preventDefault();
+            refreshWizardCaptcha();
+        });
+    }
+}
+
+function refreshContactCaptcha() {
+    contactCanvasCaptchaCode = generateCaptchaCode(5);
+    renderCaptchaOnCanvas('contact-captcha-canvas', contactCanvasCaptchaCode);
+}
+
+function refreshWizardCaptcha() {
+    wizardCanvasCaptchaCode = generateCaptchaCode(5);
+    renderCaptchaOnCanvas('wizard-captcha-canvas', wizardCanvasCaptchaCode);
+}
+
+/* --------------------------------------------------------------------------
+   3. ANTI-SPAM RATE LIMITING SYSTEM
+   -------------------------------------------------------------------------- */
 function checkRateLimit() {
     const history = JSON.parse(localStorage.getItem('ritym_submission_history') || '[]');
     const now = Date.now();
     const tenMinutesAgo = now - (10 * 60 * 1000);
     
     const recentSubmissions = history.filter(ts => ts > tenMinutesAgo);
-    if (recentSubmissions.length >= 25) { // Increased capacity to 25 per 10 mins with CAPTCHA protection!
+    if (recentSubmissions.length >= 25) {
         return false;
     }
     recentSubmissions.push(now);
     localStorage.setItem('ritym_submission_history', JSON.stringify(recentSubmissions));
     return true;
-}
-
-function generateMathCaptcha() {
-    const num1 = Math.floor(Math.random() * 10) + 2;
-    const num2 = Math.floor(Math.random() * 9) + 1;
-    return {
-        question: `What is ${num1} + ${num2}?`,
-        answer: num1 + num2
-    };
-}
-
-function initCaptchaSystem() {
-    refreshCaptcha();
-}
-
-function refreshCaptcha() {
-    const cObj = generateMathCaptcha();
-    contactCaptchaAnswer = cObj.answer;
-    const cEl = document.getElementById('c-captcha-question');
-    if (cEl) cEl.textContent = cObj.question;
-
-    const wObj = generateMathCaptcha();
-    wizardCaptchaAnswer = wObj.answer;
-    const wEl = document.getElementById('w-captcha-question');
-    if (wEl) wEl.textContent = wObj.question;
 }
 
 function initSuccessModal() {
@@ -125,7 +200,7 @@ function openSuccessModal(orderData) {
 }
 
 /* --------------------------------------------------------------------------
-   3. HIGH-RELIABILITY EMAIL DISPATCH ENGINE TO assist@ritym.com
+   4. HIGH-RELIABILITY EMAIL DISPATCH ENGINE TO assist@ritym.com
    -------------------------------------------------------------------------- */
 function sendRealEmailToAssist(payload) {
     const formUrl = "https://formsubmit.co/ajax/assist@ritym.com";
@@ -163,7 +238,7 @@ function sendRealEmailToAssist(payload) {
 }
 
 /* --------------------------------------------------------------------------
-   4. INTERACTIVE CUSTOM APP REQUEST CONFIGURATOR WIZARD
+   5. INTERACTIVE CUSTOM APP REQUEST CONFIGURATOR WIZARD
    -------------------------------------------------------------------------- */
 function initAppWizard() {
     const form = document.getElementById('app-configurator-form');
@@ -244,14 +319,14 @@ function initAppWizard() {
             return;
         }
 
-        // Validate CAPTCHA
-        const userCaptcha = parseInt(document.getElementById('w-captcha-input').value, 10);
-        if (isNaN(userCaptcha) || userCaptcha !== wizardCaptchaAnswer) {
-            showToast('❌ Security CAPTCHA answer is incorrect. Please try again.', 'error');
-            refreshCaptcha();
-            document.getElementById('w-captcha-input').value = '';
-            document.getElementById('w-captcha-input').focus();
-            return;
+        // STRICT VISUAL CANVAS CAPTCHA VALIDATION
+        const userInput = document.getElementById('w-captcha-code-input').value.trim().toUpperCase();
+        if (!userInput || userInput !== wizardCanvasCaptchaCode) {
+            showToast('❌ Security Verification Failed! Incorrect 5-character code.', 'error');
+            refreshWizardCaptcha();
+            document.getElementById('w-captcha-code-input').value = '';
+            document.getElementById('w-captcha-code-input').focus();
+            return; // STRICTLY BLOCK SUBMISSION & RETURN
         }
 
         if (!checkRateLimit()) {
@@ -305,13 +380,13 @@ function initAppWizard() {
         logSilentTelemetry(`[REAL EMAIL DISPATCH] Order ${trackId} from ${name} (${email}) sent to assist@ritym.com`);
 
         form.reset();
-        refreshCaptcha();
+        refreshWizardCaptcha();
         goToStep(1);
     });
 }
 
 /* --------------------------------------------------------------------------
-   5. 7-STAGE PROJECT LIFECYCLE TRACKER ENGINE
+   6. 7-STAGE PROJECT LIFECYCLE TRACKER ENGINE
    -------------------------------------------------------------------------- */
 const STAGE_CONFIG = {
     1: {
@@ -438,7 +513,7 @@ function updateTrackerUI(trackId) {
 }
 
 /* --------------------------------------------------------------------------
-   6. SILENT VISITOR ANALYTICS & BOT TELEMETRY ENGINE
+   7. SILENT VISITOR ANALYTICS & BOT TELEMETRY ENGINE
    -------------------------------------------------------------------------- */
 function initSilentVisitorAnalytics() {
     const visitorData = {
@@ -517,7 +592,7 @@ function toggleHiddenAnalyticsModal() {
 }
 
 /* --------------------------------------------------------------------------
-   7. DIRECT CONTACT FORM WITH CAPTCHA VALIDATION & REAL EMAIL DISPATCH
+   8. DIRECT CONTACT FORM WITH STRICT VISUAL CANVAS CAPTCHA & EMAIL DISPATCH
    -------------------------------------------------------------------------- */
 function initDirectContactForm() {
     const form = document.getElementById('direct-contact-form');
@@ -533,14 +608,14 @@ function initDirectContactForm() {
             return;
         }
 
-        // Validate CAPTCHA
-        const userCaptcha = parseInt(document.getElementById('c-captcha-input').value, 10);
-        if (isNaN(userCaptcha) || userCaptcha !== contactCaptchaAnswer) {
-            showToast('❌ Security CAPTCHA answer is incorrect. Please try again.', 'error');
-            refreshCaptcha();
-            document.getElementById('c-captcha-input').value = '';
-            document.getElementById('c-captcha-input').focus();
-            return;
+        // STRICT VISUAL CANVAS CAPTCHA VALIDATION
+        const userInput = document.getElementById('c-captcha-code-input').value.trim().toUpperCase();
+        if (!userInput || userInput !== contactCanvasCaptchaCode) {
+            showToast('❌ Security Verification Failed! Incorrect 5-character code.', 'error');
+            refreshContactCaptcha();
+            document.getElementById('c-captcha-code-input').value = '';
+            document.getElementById('c-captcha-code-input').focus();
+            return; // STRICTLY BLOCK SUBMISSION & RETURN
         }
 
         if (!checkRateLimit()) {
@@ -584,7 +659,7 @@ function initDirectContactForm() {
         logSilentTelemetry(`[REAL EMAIL DISPATCH] Contact message ${trackId} from ${name} (${email}) sent to assist@ritym.com`);
 
         form.reset();
-        refreshCaptcha();
+        refreshContactCaptcha();
     });
 }
 
@@ -604,6 +679,11 @@ function showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.textContent = message;
+
+    if (type === 'error') {
+        toast.style.borderColor = '#ef4444';
+        toast.style.background = '#450a0a';
+    }
 
     container.appendChild(toast);
 
