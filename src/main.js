@@ -68,9 +68,18 @@ function generateCaptchaCode(length = 5) {
 function renderCaptchaOnCanvas(canvasId, code) {
     const canvas = document.getElementById(canvasId);
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
 
-    // Background gradient
+    // Ensure canvas dimensions
+    if (canvas.width === 0) canvas.width = 160;
+    if (canvas.height === 0) canvas.height = 50;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Clear previous drawing
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Dark high-contrast background gradient
     const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
     grad.addColorStop(0, '#0f172a');
     grad.addColorStop(1, '#1e293b');
@@ -78,9 +87,9 @@ function renderCaptchaOnCanvas(canvasId, code) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Random background noise lines
-    for (let i = 0; i < 5; i++) {
-        ctx.strokeStyle = `rgba(255, 107, 0, ${0.2 + Math.random() * 0.3})`;
-        ctx.lineWidth = 1 + Math.random() * 2;
+    for (let i = 0; i < 6; i++) {
+        ctx.strokeStyle = (i % 2 === 0) ? 'rgba(255, 107, 0, 0.4)' : 'rgba(56, 189, 248, 0.4)';
+        ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
         ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
@@ -88,15 +97,15 @@ function renderCaptchaOnCanvas(canvasId, code) {
     }
 
     // Random background noise dots
-    for (let i = 0; i < 30; i++) {
-        ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.4})`;
+    for (let i = 0; i < 35; i++) {
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.2 + Math.random() * 0.3})`;
         ctx.beginPath();
-        ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 2, 0, Math.PI * 2);
+        ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 1.5, 0, Math.PI * 2);
         ctx.fill();
     }
 
-    // Render distorted characters
-    ctx.font = 'bold 24px "JetBrains Mono", monospace';
+    // Standard reliable system font to guarantee instant rendering
+    ctx.font = 'bold 23px "Outfit", Arial, sans-serif';
     ctx.textBaseline = 'middle';
 
     const charSpacing = canvas.width / (code.length + 1);
@@ -106,17 +115,17 @@ function renderCaptchaOnCanvas(canvasId, code) {
         ctx.save();
 
         const x = charSpacing * (i + 1);
-        const y = canvas.height / 2 + (Math.random() * 6 - 3);
-        const angle = (Math.random() * 0.4 - 0.2); // Random rotation between -0.2 and 0.2 rad
+        const y = canvas.height / 2 + (Math.random() * 4 - 2);
+        const angle = (Math.random() * 0.3 - 0.15); // Subtle rotation
 
         ctx.translate(x, y);
         ctx.rotate(angle);
 
-        // Alternating vibrant colors
+        // High contrast colors
         ctx.fillStyle = (i % 2 === 0) ? '#ff6b00' : '#38bdf8';
-        ctx.shadowColor = 'rgba(0,0,0,0.5)';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
         ctx.shadowBlur = 4;
-        ctx.fillText(char, -8, 0);
+        ctx.fillText(char, -7, 0);
 
         ctx.restore();
     }
@@ -131,6 +140,7 @@ function initVisualCanvasCaptcha() {
         btnRefreshC.addEventListener('click', (e) => {
             e.preventDefault();
             refreshContactCaptcha();
+            showToast('🔄 New security code generated.');
         });
     }
 
@@ -139,6 +149,7 @@ function initVisualCanvasCaptcha() {
         btnRefreshW.addEventListener('click', (e) => {
             e.preventDefault();
             refreshWizardCaptcha();
+            showToast('🔄 New security code generated.');
         });
     }
 }
@@ -267,6 +278,7 @@ function initAppWizard() {
 
         if (currentStep === 4) {
             updateWizardReviewSummary();
+            setTimeout(() => refreshWizardCaptcha(), 60); // Ensure canvas draws AFTER step 4 becomes visible!
         }
     }
 
