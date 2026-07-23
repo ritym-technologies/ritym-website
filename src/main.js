@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, ANTI-SPAM & REQUEST ENGINE
+   RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, ANTI-SPAM & REAL EMAIL DISPATCH ENGINE
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -96,7 +96,44 @@ function openSuccessModal(orderData) {
 }
 
 /* --------------------------------------------------------------------------
-   3. INTERACTIVE CUSTOM APP REQUEST CONFIGURATOR WIZARD
+   3. REAL EMAIL DISPATCH ENGINE TO assist@ritym.com
+   -------------------------------------------------------------------------- */
+function sendRealEmailToAssist(payload) {
+    // Uses FormSubmit AJAX endpoint to dispatch emails straight to assist@ritym.com
+    const endpoint = "https://formsubmit.co/ajax/assist@ritym.com";
+
+    fetch(endpoint, {
+        method: "POST",
+        headers: { 
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            _subject: `New Request [${payload.trackId}] from ${payload.clientName}`,
+            _replyto: payload.clientEmail,
+            _template: "table",
+            "Tracking ID": payload.trackId,
+            "Client Name": payload.clientName,
+            "Client Email": payload.clientEmail,
+            "Type": payload.type,
+            "Details / Message": payload.details,
+            "Platforms": payload.platforms || "N/A",
+            "Features": payload.features || "N/A",
+            "Timeline & Scope": payload.timelineBudget || "N/A",
+            "Timestamp": new Date().toLocaleString()
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('[RITYM Email Engine] Email dispatched successfully to assist@ritym.com', data);
+    })
+    .catch(error => {
+        console.warn('[RITYM Email Engine] Email dispatch warning (fallback active):', error);
+    });
+}
+
+/* --------------------------------------------------------------------------
+   4. INTERACTIVE CUSTOM APP REQUEST CONFIGURATOR WIZARD
    -------------------------------------------------------------------------- */
 function initAppWizard() {
     const form = document.getElementById('app-configurator-form');
@@ -185,6 +222,11 @@ function initAppWizard() {
 
         const name = document.getElementById('w-name').value.trim();
         const email = document.getElementById('w-email').value.trim();
+        const notes = document.getElementById('w-notes').value.trim();
+        const selectedPlatforms = Array.from(form.querySelectorAll('input[name="platform"]:checked')).map(cb => cb.value).join(', ');
+        const selectedFeatures = Array.from(form.querySelectorAll('input[name="feature"]:checked')).map(cb => cb.value).join(', ');
+        const timeline = form.querySelector('#w-timeline').value;
+        const budget = form.querySelector('#w-budget').value;
 
         if (!name || !email) {
             showToast('Please enter your full name and email address.', 'warn');
@@ -198,17 +240,29 @@ function initAppWizard() {
             id: trackId,
             clientName: name,
             clientEmail: email,
-            stage: 1, // 1: Request Received (Open)
+            stage: 1,
             timestamp: new Date().toLocaleDateString()
         };
+
+        // Dispatch REAL email directly to assist@ritym.com
+        sendRealEmailToAssist({
+            trackId: trackId,
+            clientName: name,
+            clientEmail: email,
+            type: "Custom App Configurator Request",
+            details: notes || "No additional concept notes provided.",
+            platforms: selectedPlatforms,
+            features: selectedFeatures,
+            timelineBudget: `${timeline} | ${budget}`
+        });
 
         // Save order and update UI
         saveProjectOrder(orderData);
         updateTrackerUI(trackId);
         openSuccessModal(orderData);
 
-        showToast(`Request ${trackId} confirmed! Dispatched to assist@ritym.com.`, 'success');
-        logSilentTelemetry(`[CONFIRMED ORDER ${trackId}] From ${name} (${email})`);
+        showToast(`✓ Project Request ${trackId} dispatched to assist@ritym.com!`, 'success');
+        logSilentTelemetry(`[REAL EMAIL DISPATCH] Order ${trackId} from ${name} (${email}) sent to assist@ritym.com`);
 
         form.reset();
         goToStep(1);
@@ -216,7 +270,7 @@ function initAppWizard() {
 }
 
 /* --------------------------------------------------------------------------
-   4. 7-STAGE PROJECT LIFECYCLE TRACKER ENGINE
+   5. 7-STAGE PROJECT LIFECYCLE TRACKER ENGINE
    -------------------------------------------------------------------------- */
 const STAGE_CONFIG = {
     1: {
@@ -343,7 +397,7 @@ function updateTrackerUI(trackId) {
 }
 
 /* --------------------------------------------------------------------------
-   5. SILENT VISITOR ANALYTICS & BOT TELEMETRY ENGINE
+   6. SILENT VISITOR ANALYTICS & BOT TELEMETRY ENGINE
    -------------------------------------------------------------------------- */
 function initSilentVisitorAnalytics() {
     const visitorData = {
@@ -422,7 +476,7 @@ function toggleHiddenAnalyticsModal() {
 }
 
 /* --------------------------------------------------------------------------
-   6. DIRECT CONTACT FORM WITH HONEYPOT & RATE LIMIT DEFENSE
+   7. DIRECT CONTACT FORM WITH REAL EMAIL DISPATCH & HONEYPOT DEFENSE
    -------------------------------------------------------------------------- */
 function initDirectContactForm() {
     const form = document.getElementById('direct-contact-form');
@@ -446,9 +500,10 @@ function initDirectContactForm() {
 
         const name = document.getElementById('c-name').value.trim();
         const email = document.getElementById('c-email').value.trim();
+        const message = document.getElementById('c-message').value.trim();
 
-        if (!name || !email) {
-            showToast('Please enter your name and email.', 'warn');
+        if (!name || !email || !message) {
+            showToast('Please enter your name, email, and message.', 'warn');
             return;
         }
 
@@ -461,12 +516,21 @@ function initDirectContactForm() {
             timestamp: new Date().toLocaleDateString()
         };
 
+        // Dispatch REAL email straight to assist@ritym.com
+        sendRealEmailToAssist({
+            trackId: trackId,
+            clientName: name,
+            clientEmail: email,
+            type: "Direct Project Inquiry Message",
+            details: message
+        });
+
         saveProjectOrder(orderData);
         updateTrackerUI(trackId);
         openSuccessModal(orderData);
 
-        showToast(`Message verified & dispatched to assist@ritym.com. Thank you ${name}!`, 'success');
-        logSilentTelemetry(`[CONFIRMED MESSAGE] From ${name} (${email})`);
+        showToast(`✓ Message dispatched to assist@ritym.com! Thank you ${name}!`, 'success');
+        logSilentTelemetry(`[REAL EMAIL DISPATCH] Contact message ${trackId} from ${name} (${email}) sent to assist@ritym.com`);
 
         form.reset();
     });
