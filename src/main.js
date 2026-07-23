@@ -1,9 +1,10 @@
 /* ==========================================================================
-   RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, ANTI-SPAM & EMAIL DISPATCH ENGINE
+   RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, CAPTCHA & EMAIL DISPATCH ENGINE
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
     initEmailObfuscation();
+    initCaptchaSystem();
     initAppWizard();
     initProjectTracker();
     initSilentVisitorAnalytics();
@@ -50,20 +51,48 @@ function initEmailObfuscation() {
 }
 
 /* --------------------------------------------------------------------------
-   2. ANTI-SPAM RATE LIMITING & BOT DEFENSE SYSTEM
+   2. INCREASED RATE LIMITER (25 SUBMISSIONS / 10 MINS) & CAPTCHA ENGINE
    -------------------------------------------------------------------------- */
+let contactCaptchaAnswer = null;
+let wizardCaptchaAnswer = null;
+
 function checkRateLimit() {
     const history = JSON.parse(localStorage.getItem('ritym_submission_history') || '[]');
     const now = Date.now();
     const tenMinutesAgo = now - (10 * 60 * 1000);
     
     const recentSubmissions = history.filter(ts => ts > tenMinutesAgo);
-    if (recentSubmissions.length >= 5) {
-        return false; // Exceeded rate limit
+    if (recentSubmissions.length >= 25) { // Increased capacity to 25 per 10 mins with CAPTCHA protection!
+        return false;
     }
     recentSubmissions.push(now);
     localStorage.setItem('ritym_submission_history', JSON.stringify(recentSubmissions));
     return true;
+}
+
+function generateMathCaptcha() {
+    const num1 = Math.floor(Math.random() * 10) + 2;
+    const num2 = Math.floor(Math.random() * 9) + 1;
+    return {
+        question: `What is ${num1} + ${num2}?`,
+        answer: num1 + num2
+    };
+}
+
+function initCaptchaSystem() {
+    refreshCaptcha();
+}
+
+function refreshCaptcha() {
+    const cObj = generateMathCaptcha();
+    contactCaptchaAnswer = cObj.answer;
+    const cEl = document.getElementById('c-captcha-question');
+    if (cEl) cEl.textContent = cObj.question;
+
+    const wObj = generateMathCaptcha();
+    wizardCaptchaAnswer = wObj.answer;
+    const wEl = document.getElementById('w-captcha-question');
+    if (wEl) wEl.textContent = wObj.question;
 }
 
 function initSuccessModal() {
@@ -215,8 +244,18 @@ function initAppWizard() {
             return;
         }
 
+        // Validate CAPTCHA
+        const userCaptcha = parseInt(document.getElementById('w-captcha-input').value, 10);
+        if (isNaN(userCaptcha) || userCaptcha !== wizardCaptchaAnswer) {
+            showToast('❌ Security CAPTCHA answer is incorrect. Please try again.', 'error');
+            refreshCaptcha();
+            document.getElementById('w-captcha-input').value = '';
+            document.getElementById('w-captcha-input').focus();
+            return;
+        }
+
         if (!checkRateLimit()) {
-            showToast('⚠️ Submission rate limit reached. Please wait a few minutes.', 'warn');
+            showToast('⚠️ Rate limit reached (Max 25 requests per 10 minutes). Please wait.', 'warn');
             logSilentTelemetry('[SPAM BLOCKED] Rate limit exceeded on App Wizard.');
             return;
         }
@@ -266,6 +305,7 @@ function initAppWizard() {
         logSilentTelemetry(`[REAL EMAIL DISPATCH] Order ${trackId} from ${name} (${email}) sent to assist@ritym.com`);
 
         form.reset();
+        refreshCaptcha();
         goToStep(1);
     });
 }
@@ -477,7 +517,7 @@ function toggleHiddenAnalyticsModal() {
 }
 
 /* --------------------------------------------------------------------------
-   7. DIRECT CONTACT FORM WITH REAL EMAIL DISPATCH & HONEYPOT DEFENSE
+   7. DIRECT CONTACT FORM WITH CAPTCHA VALIDATION & REAL EMAIL DISPATCH
    -------------------------------------------------------------------------- */
 function initDirectContactForm() {
     const form = document.getElementById('direct-contact-form');
@@ -493,8 +533,18 @@ function initDirectContactForm() {
             return;
         }
 
+        // Validate CAPTCHA
+        const userCaptcha = parseInt(document.getElementById('c-captcha-input').value, 10);
+        if (isNaN(userCaptcha) || userCaptcha !== contactCaptchaAnswer) {
+            showToast('❌ Security CAPTCHA answer is incorrect. Please try again.', 'error');
+            refreshCaptcha();
+            document.getElementById('c-captcha-input').value = '';
+            document.getElementById('c-captcha-input').focus();
+            return;
+        }
+
         if (!checkRateLimit()) {
-            showToast('⚠️ Submission rate limit reached. Please wait a few minutes.', 'warn');
+            showToast('⚠️ Rate limit reached (Max 25 requests per 10 minutes). Please wait.', 'warn');
             logSilentTelemetry('[SPAM BLOCKED] Rate limit exceeded on Contact Form.');
             return;
         }
@@ -534,6 +584,7 @@ function initDirectContactForm() {
         logSilentTelemetry(`[REAL EMAIL DISPATCH] Contact message ${trackId} from ${name} (${email}) sent to assist@ritym.com`);
 
         form.reset();
+        refreshCaptcha();
     });
 }
 
