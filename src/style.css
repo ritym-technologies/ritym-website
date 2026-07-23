@@ -391,13 +391,13 @@ p {
     letter-spacing: -1.6px;
     margin-bottom: 22px;
     line-height: 1.12;
-    max-width: 1200px; /* Extends text right across where the image used to sit */
+    max-width: 1200px;
 }
 
 .hero-subtitle-pro {
     font-size: 1.28rem;
     margin-bottom: 36px;
-    max-width: 1100px; /* Extends subtitle text full-width to the right */
+    max-width: 1100px;
     line-height: 1.7;
     color: var(--text-muted);
 }
@@ -1062,7 +1062,7 @@ p {
 .status-dot { width: 8px; height: 8px; border-radius: 50%; }
 .status-dot.green { background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
 
-/* INTERACTIVE EMAIL OTP VERIFICATION & BOT DEFENSE MODAL STYLES */
+/* CLEAN PRODUCTION REQUEST SUBMITTED SUCCESS MODAL STYLES */
 .otp-modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
@@ -1078,7 +1078,7 @@ p {
 .otp-modal-overlay.active { opacity: 1; pointer-events: auto; }
 
 .otp-modal-card {
-    max-width: 520px;
+    max-width: 540px;
     width: 100%;
     background: #ffffff;
     border: 1px solid #cbd5e1;
@@ -1110,6 +1110,10 @@ p {
     display: flex; align-items: center; justify-content: center;
 }
 
+.otp-shield-icon.green-icon {
+    background: #d1fae5;
+}
+
 .otp-close-btn {
     background: none; border: none;
     font-size: 1.8rem; color: var(--text-dim);
@@ -1117,78 +1121,44 @@ p {
 }
 
 .otp-subtitle {
-    font-size: 0.92rem;
+    font-size: 0.94rem;
     color: var(--text-muted);
 }
 
-.otp-sim-banner {
-    background: #0f172a;
-    color: #ffffff;
+.submission-summary-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
     border-radius: var(--radius-sm);
-    padding: 16px;
-    text-align: center;
-    border: 1px solid var(--primary-orange);
-}
-
-.otp-badge {
-    font-size: 0.68rem;
-    font-family: var(--font-mono);
-    color: var(--primary-orange);
-    letter-spacing: 1.5px;
-    font-weight: 700;
-    display: block;
-    margin-bottom: 4px;
-}
-
-.otp-code-display {
-    font-family: var(--font-mono);
-    font-size: 2.2rem;
-    font-weight: 800;
-    letter-spacing: 8px;
-    color: #ffffff;
-    margin: 4px 0;
-}
-
-.otp-hint {
-    font-size: 0.75rem;
-    color: #94a3b8;
-}
-
-.otp-input-group {
+    padding: 20px;
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 8px 0;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.otp-digit {
-    width: 48px;
-    height: 56px;
-    text-align: center;
-    font-family: var(--font-mono);
-    font-size: 1.6rem;
+.s-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.s-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.status-badge {
+    font-size: 0.76rem;
     font-weight: 700;
-    border: 2px solid #cbd5e1;
-    border-radius: 8px;
-    outline: none;
-    transition: var(--transition);
+    padding: 4px 10px;
+    border-radius: 6px;
 }
 
-.otp-digit:focus {
-    border-color: var(--primary-orange);
-    box-shadow: 0 0 12px rgba(255, 107, 0, 0.25);
-}
-
-.otp-timer {
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    text-align: center;
-    margin-bottom: 8px;
-}
-
-.otp-timer strong {
-    color: var(--primary-orange);
-    font-family: var(--font-mono);
+.status-badge.green {
+    background: #d1fae5;
+    color: #047857;
 }
 
 /* Hidden Visitor Analytics Telemetry Modal */
@@ -1230,5 +1200,4 @@ p {
     .official-logo-img { height: 56px; }
     .official-logo-img-footer { height: 60px; }
     .tagline-bar { margin-top: 76px; }
-    .otp-digit { width: 40px; height: 48px; font-size: 1.3rem; }
 }
