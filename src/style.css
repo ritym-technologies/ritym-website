@@ -921,12 +921,25 @@ p {
     color: var(--primary-orange);
 }
 
+.t-status-pill.status-waiting {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.t-status-pill.status-rejected {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
 .t-status-pill .status-dot {
     width: 7px;
     height: 7px;
     border-radius: 50%;
     background: var(--primary-orange);
 }
+
+.t-status-pill.status-waiting .status-dot { background: #b45309; }
+.t-status-pill.status-rejected .status-dot { background: #dc2626; }
 
 /* TOUCH-FRIENDLY HORIZONTAL PIPELINE SCROLLER FOR MOBILE & TABLETS */
 .lifecycle-pipeline {
@@ -1222,6 +1235,72 @@ p {
     background: #d1fae5;
     color: #047857;
 }
+
+/* INTERNAL ADMIN DASHBOARD TABLE & MANAGEMENT PANEL STYLES */
+.admin-dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #cbd5e1;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.admin-requests-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.admin-requests-table th {
+    background: #0f172a;
+    color: #ffffff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.admin-requests-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+}
+
+.admin-requests-table tr:hover {
+    background: #f8fafc;
+}
+
+.admin-stage-select {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+}
+
+.badge-stage {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.badge-stage-1 { background: #ffedd5; color: var(--primary-orange); }
+.badge-stage-2 { background: #e0e7ff; color: var(--primary-indigo); }
+.badge-stage-3 { background: #cff4fc; color: var(--accent-cyan); }
+.badge-stage-4 { background: #dbeafe; color: var(--primary-blue); }
+.badge-stage-5 { background: #fef3c7; color: #b45309; }
+.badge-stage-6 { background: #f3e8ff; color: #7e22ce; }
+.badge-stage-7 { background: #d1fae5; color: #047857; }
+.badge-stage-8 { background: #fef3c7; color: #b45309; border: 1px solid #f59e0b; }
+.badge-stage-9 { background: #fee2e2; color: #dc2626; border: 1px solid #ef4444; }
 
 /* Hidden Visitor Analytics Telemetry Modal */
 .hidden-analytics-modal {
