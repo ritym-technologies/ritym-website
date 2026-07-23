@@ -487,8 +487,6 @@
                 <div class="tracker-search-bar">
                     <input type="text" id="track-id-input" placeholder="Enter Tracking ID (e.g. RITYM-94820)" value="RITYM-SAMPLE-8842">
                     <button class="btn btn-primary" id="btn-lookup-status">Track Status</button>
-                    <!-- DIRECT INLINE ONCLICK ADMIN CONTROL BUTTON -->
-                    <button type="button" class="btn btn-secondary" id="btn-open-admin-panel" onclick="openAdminStageModal()" title="Manage Project Stages (Ctrl + Shift + M)">⚙️ Admin Stage Control</button>
                 </div>
             </div>
 
@@ -681,39 +679,44 @@
                 <p class="tagline-footer">RIGHT TIME | SMART SOLUTIONS | LASTING IMPACT</p>
             </div>
             <div class="footer-right">
-                <span class="sys-status" id="footer-admin-trigger" onclick="openAdminStageModal()" style="cursor:pointer;" title="Click to open Admin Stage Control Console">
-                    <span class="status-dot green"></span> Security CAPTCHA Active (5 Submissions / 10 Min) ⚙️
+                <span class="sys-status">
+                    <span class="status-dot green"></span> Security CAPTCHA Active (5 Submissions / 10 Min)
                 </span>
             </div>
         </div>
     </footer>
 
-    <!-- RITYM ADMIN PROJECT STAGE ADVANCER MODAL PANEL -->
+    <!-- PASSWORD-PROTECTED INTERNAL RITYM ADMIN STAGE CONTROL MODAL -->
     <div class="otp-modal-overlay" id="admin-stage-modal">
         <div class="card otp-modal-card" style="max-width: 580px;">
             <div class="otp-header">
                 <div class="otp-shield-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2.5"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                 </div>
-                <h3>RITYM Admin Stage Control</h3>
-                <button type="button" class="otp-close-btn" id="admin-modal-close-btn" onclick="closeAdminStageModal()">&times;</button>
+                <h3>🔒 Internal Admin Stage Control</h3>
+                <button type="button" class="otp-close-btn" onclick="closeAdminStageModal()">&times;</button>
             </div>
             
             <p class="otp-subtitle">
-                Advance any client project tracking ID (e.g. <strong class="text-orange">RITYM-92627</strong>) through the 7 engineering lifecycle stages.
+                Restricted Internal Management Portal for RITYM Technologies Engineering Team.
             </p>
 
             <form id="admin-stage-form" style="display:flex; flex-direction:column; gap:14px;">
                 <div class="form-group">
-                    <label>Project Tracking ID</label>
-                    <input type="text" id="admin-input-track-id" placeholder="e.g. RITYM-92627" required autocomplete="off" value="RITYM-92627">
+                    <label>🔑 Enter Master Admin Security Password</label>
+                    <input type="password" id="admin-pass-input" placeholder="Enter Admin Master Key" required autocomplete="current-password">
+                </div>
+
+                <div class="form-group">
+                    <label>Target Project Tracking ID</label>
+                    <input type="text" id="admin-input-track-id" placeholder="e.g. RITYM-92627" required autocomplete="off">
                 </div>
 
                 <div class="form-group">
                     <label>Set Target Engineering Stage</label>
                     <select id="admin-select-stage" style="padding:12px; font-weight:600;">
                         <option value="1">Stage 1: REQUEST_RECEIVED (15% - Open)</option>
-                        <option value="2" selected>Stage 2: IN_REVIEW (30% - Architect Review)</option>
+                        <option value="2">Stage 2: IN_REVIEW (30% - Architect Review)</option>
                         <option value="3">Stage 3: ASSIGNED (45% - Team Allocated)</option>
                         <option value="4">Stage 4: IN_DEVELOPMENT (65% - Active Build)</option>
                         <option value="5">Stage 5: VALIDATION (80% - QA & Testing)</option>
@@ -722,20 +725,12 @@
                     </select>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group flex-1">
-                        <label>Client Name (Optional)</label>
-                        <input type="text" id="admin-input-client-name" placeholder="Client Name">
-                    </div>
-                    <div class="form-group flex-1">
-                        <label>Client Email (Optional)</label>
-                        <input type="email" id="admin-input-client-email" placeholder="client@ritym.com">
-                    </div>
-                </div>
+                <!-- PROMINENT INLINE ERROR BANNER FOR ADMIN LOGIN -->
+                <div class="inline-error-banner" id="admin-pass-error" style="display:none;"></div>
 
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; flex-wrap:wrap; gap:10px;">
-                    <button type="button" class="btn btn-secondary" id="btn-admin-view-all">📋 View All Requests</button>
-                    <button type="submit" class="btn btn-primary btn-lg">⚡ Update & Advance Stage</button>
+                <div style="display:flex; justify-content:flex-end; align-items:center; margin-top:10px; gap:10px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeAdminStageModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-lg">🔒 Authenticate & Update Stage</button>
                 </div>
             </form>
         </div>
