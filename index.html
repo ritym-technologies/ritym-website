@@ -697,23 +697,23 @@
                 <button type="button" class="otp-close-btn" onclick="closeAdminStageModal()">&times;</button>
             </div>
 
-            <!-- STEP 1: PASSWORD LOGIN SCREEN -->
+            <!-- STEP 1: PURE MASTER PASSWORD LOGIN SCREEN -->
             <div id="admin-auth-view">
                 <p class="otp-subtitle" style="margin-bottom: 16px;">
-                    Restricted Internal Management Portal for RITYM Technologies Engineering Team. Please authenticate using Master Key (<strong>RiTym2212!</strong>).
+                    Enter Master Admin Password to unlock all client project requests & stage controls.
                 </p>
 
                 <form id="admin-auth-form" style="display:flex; flex-direction:column; gap:14px;">
                     <div class="form-group">
-                        <label>🔑 Enter Master Admin Security Password</label>
-                        <input type="password" id="admin-pass-input" placeholder="Enter Admin Master Key" required autocomplete="current-password">
+                        <label>🔑 Master Admin Security Key</label>
+                        <input type="password" id="admin-pass-input" placeholder="Enter Admin Master Key (RiTym2212!)" required autocomplete="current-password">
                     </div>
 
                     <div class="inline-error-banner" id="admin-pass-error" style="display:none;"></div>
 
                     <div style="display:flex; justify-content:flex-end; align-items:center; margin-top:6px; gap:10px;">
                         <button type="button" class="btn btn-secondary" onclick="closeAdminStageModal()">Cancel</button>
-                        <button type="submit" class="btn btn-primary btn-lg">🔒 Authenticate & Unlock Dashboard</button>
+                        <button type="submit" class="btn btn-primary btn-lg">Unlock Portal & View All Projects ➔</button>
                     </div>
                 </form>
             </div>
