@@ -93,6 +93,7 @@ p {
 .text-orange { color: var(--primary-orange); }
 .text-green { color: var(--accent-green); }
 .text-gold { color: var(--accent-gold); }
+.font-mono { font-family: var(--font-mono); }
 
 .bg-surface {
     background-color: var(--bg-surface);
@@ -764,6 +765,13 @@ p {
     width: 100%;
 }
 
+.form-group.captcha-box {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    padding: 16px 20px;
+    border-radius: var(--radius-sm);
+}
+
 .form-group label {
     font-size: 0.9rem;
     color: var(--text-muted);
@@ -777,7 +785,7 @@ p {
     padding: 14px 18px;
     color: var(--text-main);
     font-family: var(--font-sans);
-    font-size: 16px; /* Prevents iOS Safari from auto-zooming on input focus! */
+    font-size: 16px;
     outline: none;
     transition: var(--transition);
     width: 100%;
@@ -1202,181 +1210,15 @@ p {
 .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; max-width: calc(100vw - 32px); }
 .toast { background: #0f172a; border: 1px solid var(--primary-orange); color: #ffffff; padding: 12px 20px; border-radius: 10px; font-size: 0.9rem; box-shadow: var(--shadow-lg); word-break: break-word; }
 
-/* ==========================================================================
-   MOBILE & TABLET RESPONSIVE BREAKPOINTS (ANDROID & IOS AUDIT)
-   ========================================================================== */
-
-/* Tablet Breakpoint (<= 1024px) */
-@media (max-width: 1024px) {
-    .pro-capability-bar {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .hero-title-pro {
-        font-size: 3.0rem;
-    }
+/* Mobile Responsive Adjustments */
+@media (max-width: 992px) {
+    .pro-capability-bar { grid-template-columns: repeat(2, 1fr); }
+    .hero-title-pro { font-size: 2.8rem; }
+    .contact-wrapper { grid-template-columns: 1fr; padding: 24px 16px; }
 }
 
-/* Mobile & Small Tablet Breakpoint (<= 768px) */
-@media (max-width: 768px) {
-    .nav-container {
-        padding: 0 16px;
-    }
-    
-    .official-logo-img {
-        height: 48px;
-        max-width: 220px;
-    }
-    
-    .official-logo-img-footer {
-        height: 52px;
-        max-width: 220px;
-    }
-
-    .nav-links {
-        display: none;
-    }
-
-    .email-chip {
-        font-size: 0.75rem;
-        padding: 5px 10px;
-    }
-
-    .tagline-bar {
-        margin-top: 64px;
-        font-size: 0.72rem;
-        padding: 8px 0;
-        letter-spacing: 1px;
-    }
-
-    .hero {
-        padding: 36px 0 54px 0;
-    }
-
-    .hero-container.hero-pro-class {
-        padding: 0 16px;
-    }
-
-    .hero-top-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-
-    .hero-title-pro {
-        font-size: 2.0rem;
-        line-height: 1.2;
-        letter-spacing: -0.5px;
-    }
-
-    .hero-subtitle-pro {
-        font-size: 1.0rem;
-        margin-bottom: 24px;
-    }
-
-    .pro-capability-bar {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .cap-pill {
-        padding: 12px 14px;
-        font-size: 0.85rem;
-    }
-
-    .hero-actions-pro {
-        flex-direction: column;
-        width: 100%;
-        gap: 12px;
-    }
-
-    .hero-actions-pro .btn {
-        width: 100%;
-    }
-
-    .trust-metrics-pro {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 14px;
-        width: 100%;
-        padding: 18px;
-        border-radius: 14px;
-    }
-
-    .t-divider {
-        width: 100%;
-        height: 1px;
-    }
-
-    .grid-2, .grid-3, .option-grid, .p-milestone-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .wizard-card {
-        padding: 20px 16px;
-    }
-
-    .wizard-steps-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-
-    .step-connector {
-        display: none;
-    }
-
-    .form-row {
-        flex-direction: column;
-        gap: 14px;
-    }
-
-    .wizard-actions {
-        flex-direction: column-reverse;
-        gap: 12px;
-    }
-
-    .wizard-actions .btn {
-        width: 100%;
-    }
-
-    .tracker-search-bar {
-        flex-direction: column;
-    }
-
-    .tracker-search-bar .btn {
-        width: 100%;
-    }
-
-    .contact-wrapper {
-        grid-template-columns: 1fr;
-        padding: 24px 16px;
-        gap: 28px;
-    }
-
-    .footer-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-    }
-}
-
-/* Small Smartphone Breakpoint (<= 480px) */
-@media (max-width: 480px) {
-    .official-logo-img {
-        height: 40px;
-        max-width: 190px;
-    }
-
-    .hero-title-pro {
-        font-size: 1.8rem;
-    }
-
-    .s-row {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .email-chip span:not(.copy-badge) {
-        display: none;
-    }
+@media (max-width: 600px) {
+    .pro-capability-bar { grid-template-columns: 1fr; }
+    .hero-title-pro { font-size: 1.95rem; }
+    .nav-links { display: none; }
 }
