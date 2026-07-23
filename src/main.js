@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* Master Internal Admin Security Key */
-const MASTER_ADMIN_KEY = "RITYM2026!";
+const MASTER_ADMIN_KEY = "RiTym2212!";
 
 /* Password-Protected Global Window Modal Functions */
 window.openAdminStageModal = function() {
@@ -494,12 +494,19 @@ function initProjectTracker() {
         });
     }
 
+    // Secret URL Hash Trigger e.g. https://ritym.com/#admin
     const hash = window.location.hash;
     if (hash && hash.includes('#admin')) {
         window.openAdminStageModal();
     } else {
         updateTrackerUI('RITYM-SAMPLE-8842');
     }
+
+    window.addEventListener('hashchange', () => {
+        if (window.location.hash.includes('#admin')) {
+            window.openAdminStageModal();
+        }
+    });
 }
 
 function saveProjectOrder(order) {
@@ -587,7 +594,7 @@ function updateTrackerUI(trackId) {
 }
 
 /* --------------------------------------------------------------------------
-   7. PASSWORD-PROTECTED INTERNAL ADMIN STAGE CONTROLLER (Ctrl + Alt + Shift + R)
+   7. PASSWORD-PROTECTED INTERNAL ADMIN STAGE CONTROLLER (Master Key: RiTym2212!)
    -------------------------------------------------------------------------- */
 function initAdminStageController() {
     const form = document.getElementById('admin-stage-form');
@@ -641,7 +648,7 @@ function initAdminStageController() {
     window.RITYM = window.RITYM || {};
     window.RITYM.setStage = (trackId, stageNumber, masterKey) => {
         if (masterKey !== MASTER_ADMIN_KEY) {
-            console.error('[RITYM SECURITY] Access Denied. Valid masterKey required as 3rd parameter: RITYM.setStage("ID", stage, "RITYM2026!")');
+            console.error('[RITYM SECURITY] Access Denied. Valid masterKey required as 3rd parameter: RITYM.setStage("ID", stage, "RiTym2212!")');
             return 'Access Denied: Invalid Master Key';
         }
         const order = setProjectStage(trackId, stageNumber);
