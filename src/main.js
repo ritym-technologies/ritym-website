@@ -1,6 +1,6 @@
 /* ==========================================================================
    RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, ENTERPRISE VISUAL CANVAS CAPTCHA,
-   EMAIL DISPATCH & ADMIN PROJECT STAGE ADVANCER ENGINE
+   EMAIL DISPATCH & PASSWORD-PROTECTED INTERNAL ADMIN STAGE ADVANCER ENGINE
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,13 +14,20 @@ document.addEventListener('DOMContentLoaded', () => {
     initAdminStageController();
 });
 
-/* Global Window Modal Functions for 100% Reliable Onclick Triggers */
+/* Master Internal Admin Security Key */
+const MASTER_ADMIN_KEY = "RITYM2026!";
+
+/* Password-Protected Global Window Modal Functions */
 window.openAdminStageModal = function() {
     const modal = document.getElementById('admin-stage-modal');
     if (modal) {
         modal.classList.add('active');
-        const inputId = document.getElementById('admin-input-track-id');
-        if (inputId && !inputId.value) inputId.value = 'RITYM-92627';
+        const passInput = document.getElementById('admin-pass-input');
+        if (passInput) {
+            passInput.value = '';
+            passInput.focus();
+        }
+        hideInlineError('admin-pass-error');
     }
 };
 
@@ -488,17 +495,8 @@ function initProjectTracker() {
     }
 
     const hash = window.location.hash;
-    if (hash && hash.includes('id=')) {
-        const urlParams = new URLSearchParams(hash.substring(hash.indexOf('?')));
-        const paramId = urlParams.get('id');
-        const paramStage = parseInt(urlParams.get('stage'), 10);
-        if (paramId) {
-            if (paramStage && paramStage >= 1 && paramStage <= 7) {
-                setProjectStage(paramId, paramStage);
-            } else {
-                updateTrackerUI(paramId);
-            }
-        }
+    if (hash && hash.includes('#admin')) {
+        window.openAdminStageModal();
     } else {
         updateTrackerUI('RITYM-SAMPLE-8842');
     }
@@ -516,7 +514,7 @@ function setProjectStage(trackId, newStageNum, clientName = null, clientEmail = 
     if (!order) {
         order = {
             id: trackId,
-            clientName: clientName || 'Client Request',
+            clientName: clientName || 'Client Project',
             clientEmail: clientEmail || 'client@ritym.com',
             stage: parseInt(newStageNum, 10),
             timestamp: new Date().toLocaleDateString()
@@ -589,48 +587,46 @@ function updateTrackerUI(trackId) {
 }
 
 /* --------------------------------------------------------------------------
-   7. ADMIN PROJECT STAGE ADVANCER CONTROLLER (Ctrl + Shift + M)
+   7. PASSWORD-PROTECTED INTERNAL ADMIN STAGE CONTROLLER (Ctrl + Alt + Shift + R)
    -------------------------------------------------------------------------- */
 function initAdminStageController() {
     const form = document.getElementById('admin-stage-form');
-    const btnViewAll = document.getElementById('btn-admin-view-all');
 
+    // Secret Internal Shortcut: Ctrl + Alt + Shift + R
     window.addEventListener('keydown', (e) => {
-        if (e.ctrlKey && e.shiftKey && (e.key === 'M' || e.key === 'm')) {
+        if (e.ctrlKey && e.altKey && e.shiftKey && (e.key === 'R' || e.key === 'r')) {
             e.preventDefault();
             window.openAdminStageModal();
         }
     });
 
-    if (btnViewAll) {
-        btnViewAll.addEventListener('click', () => {
-            const orders = JSON.parse(localStorage.getItem('ritym_project_orders') || '{}');
-            const keys = Object.keys(orders);
-            if (keys.length === 0) {
-                showToast('No client requests found in local storage yet.', 'warn');
-            } else {
-                console.table(orders);
-                alert(`Existing Local Requests:\n` + keys.map(k => `${k}: Stage ${orders[k].stage} (${orders[k].clientName})`).join('\n'));
-            }
-        });
-    }
-
     if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+            hideInlineError('admin-pass-error');
+
+            const enteredPass = document.getElementById('admin-pass-input').value.trim();
             const trackId = document.getElementById('admin-input-track-id').value.trim().toUpperCase();
             const stageNum = parseInt(document.getElementById('admin-select-stage').value, 10);
-            const clientName = document.getElementById('admin-input-client-name').value.trim();
-            const clientEmail = document.getElementById('admin-input-client-email').value.trim();
+
+            // STRICT MASTER PASSWORD AUTHENTICATION CHECK
+            if (enteredPass !== MASTER_ADMIN_KEY) {
+                showInlineError('admin-pass-error', '🔒 Access Denied! Invalid Master Admin Password.');
+                showToast('🔒 Access Denied! Invalid Master Admin Password.', 'error');
+                logSilentTelemetry(`[SECURITY WARNING] Failed Admin authentication attempt with key: ${enteredPass}`);
+                document.getElementById('admin-pass-input').value = '';
+                document.getElementById('admin-pass-input').focus();
+                return; // STRICTLY BLOCK
+            }
 
             if (!trackId) {
-                showToast('Please enter a Tracking ID (e.g. RITYM-92627)', 'warn');
+                showInlineError('admin-pass-error', 'Please enter a Tracking ID (e.g. RITYM-92627)');
                 return;
             }
 
-            const updatedOrder = setProjectStage(trackId, stageNum, clientName, clientEmail);
-            showToast(`⚡ Project ${trackId} advanced to Stage ${stageNum}!`, 'success');
-            logSilentTelemetry(`[ADMIN STAGE UPDATE] ${trackId} set to Stage ${stageNum} (${STAGE_CONFIG[stageNum].title})`);
+            const updatedOrder = setProjectStage(trackId, stageNum);
+            showToast(`🔒 Authenticated! Project ${trackId} advanced to Stage ${stageNum}!`, 'success');
+            logSilentTelemetry(`[ADMIN AUTH SUCCESS] Project ${trackId} set to Stage ${stageNum} (${STAGE_CONFIG[stageNum].title})`);
 
             window.closeAdminStageModal();
 
@@ -641,17 +637,17 @@ function initAdminStageController() {
         });
     }
 
+    // Password-Protected API for developer console
     window.RITYM = window.RITYM || {};
-    window.RITYM.setStage = (trackId, stageNumber, clientName = null, clientEmail = null) => {
-        const order = setProjectStage(trackId, stageNumber, clientName, clientEmail);
-        console.log(`[RITYM ADMIN] Project ${trackId} advanced to Stage ${stageNumber}:`, order);
+    window.RITYM.setStage = (trackId, stageNumber, masterKey) => {
+        if (masterKey !== MASTER_ADMIN_KEY) {
+            console.error('[RITYM SECURITY] Access Denied. Valid masterKey required as 3rd parameter: RITYM.setStage("ID", stage, "RITYM2026!")');
+            return 'Access Denied: Invalid Master Key';
+        }
+        const order = setProjectStage(trackId, stageNumber);
+        console.log(`[RITYM ADMIN AUTH] Project ${trackId} advanced to Stage ${stageNumber}:`, order);
         showToast(`⚡ Project ${trackId} set to Stage ${stageNumber}!`, 'success');
         return order;
-    };
-    window.RITYM.getProjects = () => {
-        const orders = JSON.parse(localStorage.getItem('ritym_project_orders') || '{}');
-        console.table(orders);
-        return orders;
     };
 }
 
