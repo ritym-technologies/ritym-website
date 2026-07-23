@@ -445,6 +445,12 @@
                             </div>
                         </div>
 
+                        <!-- Interactive Security CAPTCHA Challenge -->
+                        <div class="form-group captcha-box" style="margin-top: 16px;">
+                            <label for="w-captcha-input">🛡️ Security Check: <span id="w-captcha-question" class="text-orange font-mono">What is 7 + 4?</span></label>
+                            <input type="number" id="w-captcha-input" placeholder="Enter answer" required>
+                        </div>
+
                         <!-- Invisible Spam Bot Honeypot Field -->
                         <input type="text" name="website_hp" id="w-hp" style="display:none" tabindex="-1" autocomplete="off">
 
@@ -632,6 +638,12 @@
                             <textarea id="c-message" rows="4" placeholder="Brief details about your app requirements..." required></textarea>
                         </div>
 
+                        <!-- Interactive Security CAPTCHA Challenge -->
+                        <div class="form-group captcha-box">
+                            <label for="c-captcha-input">🛡️ Security Check: <span id="c-captcha-question" class="text-orange font-mono">What is 6 + 3?</span></label>
+                            <input type="number" id="c-captcha-input" placeholder="Enter answer" required>
+                        </div>
+
                         <!-- Spam Bot Honeypot -->
                         <input type="text" name="contact_hp" id="c-hp" style="display:none" tabindex="-1" autocomplete="off">
 
@@ -653,7 +665,7 @@
                 <p class="tagline-footer">RIGHT TIME | SMART SOLUTIONS | LASTING IMPACT</p>
             </div>
             <div class="footer-right">
-                <span class="sys-status"><span class="status-dot green"></span> Enterprise Security Shield Active</span>
+                <span class="sys-status"><span class="status-dot green"></span> Security CAPTCHA Active (25 Submissions / 10 Min)</span>
             </div>
         </div>
     </footer>
