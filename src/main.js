@@ -1,5 +1,6 @@
 /* ==========================================================================
-   RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, ENTERPRISE VISUAL CANVAS CAPTCHA & EMAIL DISPATCH ENGINE
+   RITYM TECHNOLOGIES — CLIENT LOGIC, WIZARD, ENTERPRISE VISUAL CANVAS CAPTCHA,
+   EMAIL DISPATCH & ADMIN PROJECT STAGE ADVANCER ENGINE
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSilentVisitorAnalytics();
     initDirectContactForm();
     initSuccessModal();
+    initAdminStageController();
 });
 
 /* --------------------------------------------------------------------------
@@ -57,7 +59,7 @@ let contactCanvasCaptchaCode = "";
 let wizardCanvasCaptchaCode = "";
 
 function generateCaptchaCode(length = 5) {
-    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // Omit ambiguous characters (0, O, 1, I)
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
     let code = "";
     for (let i = 0; i < length; i++) {
         code += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -336,7 +338,6 @@ function initAppWizard() {
         e.preventDefault();
         hideInlineError('w-captcha-error');
 
-        // Check Honeypot for automated spam bots
         const hp = document.getElementById('w-hp').value;
         if (hp) {
             console.warn('[RITYM Security] Automated bot attempt blocked via honeypot.');
@@ -344,7 +345,6 @@ function initAppWizard() {
             return;
         }
 
-        // STRICT VISUAL CANVAS CAPTCHA VALIDATION WITH CLEAR RED INLINE BANNER
         const userInput = document.getElementById('w-captcha-code-input').value.trim().toUpperCase();
         if (!userInput || userInput !== wizardCanvasCaptchaCode) {
             showInlineError('w-captcha-error', '❌ Security Verification Failed! Incorrect 5-character CAPTCHA code. Please type the exact 5 characters shown on the dark box.');
@@ -352,7 +352,7 @@ function initAppWizard() {
             refreshWizardCaptcha();
             document.getElementById('w-captcha-code-input').value = '';
             document.getElementById('w-captcha-code-input').focus();
-            return; // STRICTLY BLOCK SUBMISSION & RETURN
+            return;
         }
 
         if (!checkRateLimit()) {
@@ -376,7 +376,6 @@ function initAppWizard() {
             return;
         }
 
-        // Generate tracking ID
         const trackId = `RITYM-${Math.floor(10000 + Math.random() * 90000)}`;
 
         const orderData = {
@@ -387,7 +386,6 @@ function initAppWizard() {
             timestamp: new Date().toLocaleDateString()
         };
 
-        // Dispatch REAL email directly to assist@ritym.com
         sendRealEmailToAssist({
             trackId: trackId,
             clientName: name,
@@ -399,7 +397,6 @@ function initAppWizard() {
             timelineBudget: `${timeline} | ${budget}`
         });
 
-        // Save order and update UI
         saveProjectOrder(orderData);
         updateTrackerUI(trackId);
         openSuccessModal(orderData);
@@ -473,13 +470,49 @@ function initProjectTracker() {
         });
     }
 
-    updateTrackerUI('RITYM-SAMPLE-8842');
+    // Check URL hash parameters e.g. #tracker?id=RITYM-92627&stage=3
+    const hash = window.location.hash;
+    if (hash && hash.includes('id=')) {
+        const urlParams = new URLSearchParams(hash.substring(hash.indexOf('?')));
+        const paramId = urlParams.get('id');
+        const paramStage = parseInt(urlParams.get('stage'), 10);
+        if (paramId) {
+            if (paramStage && paramStage >= 1 && paramStage <= 7) {
+                setProjectStage(paramId, paramStage);
+            } else {
+                updateTrackerUI(paramId);
+            }
+        }
+    } else {
+        updateTrackerUI('RITYM-SAMPLE-8842');
+    }
 }
 
 function saveProjectOrder(order) {
     const orders = JSON.parse(localStorage.getItem('ritym_project_orders') || '{}');
     orders[order.id] = order;
     localStorage.setItem('ritym_project_orders', JSON.stringify(orders));
+}
+
+function setProjectStage(trackId, newStageNum, clientName = null, clientEmail = null) {
+    const orders = JSON.parse(localStorage.getItem('ritym_project_orders') || '{}');
+    let order = orders[trackId];
+    if (!order) {
+        order = {
+            id: trackId,
+            clientName: clientName || 'Client Request',
+            clientEmail: clientEmail || 'client@ritym.com',
+            stage: parseInt(newStageNum, 10),
+            timestamp: new Date().toLocaleDateString()
+        };
+    } else {
+        order.stage = parseInt(newStageNum, 10);
+        if (clientName) order.clientName = clientName;
+        if (clientEmail) order.clientEmail = clientEmail;
+    }
+    saveProjectOrder(order);
+    updateTrackerUI(trackId);
+    return order;
 }
 
 function updateTrackerUI(trackId) {
@@ -496,7 +529,7 @@ function updateTrackerUI(trackId) {
     } else if (!order) {
         order = {
             id: trackId,
-            clientName: 'Active Client Request',
+            clientName: 'Client Project Inquiry',
             clientEmail: 'client@ritym.com',
             stage: 1
         };
@@ -540,7 +573,88 @@ function updateTrackerUI(trackId) {
 }
 
 /* --------------------------------------------------------------------------
-   7. SILENT VISITOR ANALYTICS & BOT TELEMETRY ENGINE
+   7. ADMIN PROJECT STAGE ADVANCER CONTROLLER (Ctrl + Shift + M)
+   -------------------------------------------------------------------------- */
+function initAdminStageController() {
+    const modal = document.getElementById('admin-stage-modal');
+    const btnOpen = document.getElementById('btn-open-admin-panel');
+    const footerTrigger = document.getElementById('footer-admin-trigger');
+    const closeBtn = document.getElementById('admin-modal-close-btn');
+    const form = document.getElementById('admin-stage-form');
+    const btnViewAll = document.getElementById('btn-admin-view-all');
+
+    function toggleModal() {
+        if (modal) modal.classList.toggle('active');
+    }
+
+    if (btnOpen) btnOpen.addEventListener('click', toggleModal);
+    if (footerTrigger) footerTrigger.addEventListener('click', toggleModal);
+    if (closeBtn) closeBtn.addEventListener('click', toggleModal);
+
+    window.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.shiftKey && (e.key === 'M' || e.key === 'm')) {
+            e.preventDefault();
+            toggleModal();
+        }
+    });
+
+    if (btnViewAll) {
+        btnViewAll.addEventListener('click', () => {
+            const orders = JSON.parse(localStorage.getItem('ritym_project_orders') || '{}');
+            const keys = Object.keys(orders);
+            if (keys.length === 0) {
+                showToast('No client requests found in local storage yet.', 'warn');
+            } else {
+                console.table(orders);
+                alert(`Existing Local Requests:\n` + keys.map(k => `${k}: Stage ${orders[k].stage} (${orders[k].clientName})`).join('\n'));
+            }
+        });
+    }
+
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const trackId = document.getElementById('admin-input-track-id').value.trim().toUpperCase();
+            const stageNum = parseInt(document.getElementById('admin-select-stage').value, 10);
+            const clientName = document.getElementById('admin-input-client-name').value.trim();
+            const clientEmail = document.getElementById('admin-input-client-email').value.trim();
+
+            if (!trackId) {
+                showToast('Please enter a Tracking ID (e.g. RITYM-92627)', 'warn');
+                return;
+            }
+
+            const updatedOrder = setProjectStage(trackId, stageNum, clientName, clientEmail);
+            showToast(`⚡ Project ${trackId} advanced to Stage ${stageNum}!`, 'success');
+            logSilentTelemetry(`[ADMIN STAGE UPDATE] ${trackId} set to Stage ${stageNum} (${STAGE_CONFIG[stageNum].title})`);
+
+            toggleModal();
+
+            // Scroll to tracker section and show result
+            const trackerInput = document.getElementById('track-id-input');
+            if (trackerInput) trackerInput.value = trackId;
+            const trackerSec = document.getElementById('tracker');
+            if (trackerSec) trackerSec.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    // Expose Global RITYM API in browser console for admin power users!
+    window.RITYM = window.RITYM || {};
+    window.RITYM.setStage = (trackId, stageNumber, clientName = null, clientEmail = null) => {
+        const order = setProjectStage(trackId, stageNumber, clientName, clientEmail);
+        console.log(`[RITYM ADMIN] Project ${trackId} advanced to Stage ${stageNumber}:`, order);
+        showToast(`⚡ Project ${trackId} set to Stage ${stageNumber}!`, 'success');
+        return order;
+    };
+    window.RITYM.getProjects = () => {
+        const orders = JSON.parse(localStorage.getItem('ritym_project_orders') || '{}');
+        console.table(orders);
+        return orders;
+    };
+}
+
+/* --------------------------------------------------------------------------
+   8. SILENT VISITOR ANALYTICS & BOT TELEMETRY ENGINE
    -------------------------------------------------------------------------- */
 function initSilentVisitorAnalytics() {
     const visitorData = {
@@ -579,15 +693,6 @@ function initSilentVisitorAnalytics() {
     if (closeBtn) {
         closeBtn.addEventListener('click', toggleHiddenAnalyticsModal);
     }
-
-    window.RITYM = {
-        getAnalytics: () => {
-            const logs = JSON.parse(localStorage.getItem('ritym_visitor_logs') || '[]');
-            console.table(logs);
-            return logs;
-        },
-        openAnalyticsModal: toggleHiddenAnalyticsModal
-    };
 }
 
 function saveVisitorLog(data) {
@@ -619,7 +724,7 @@ function toggleHiddenAnalyticsModal() {
 }
 
 /* --------------------------------------------------------------------------
-   8. DIRECT CONTACT FORM WITH STRICT VISUAL CANVAS CAPTCHA & EMAIL DISPATCH
+   9. DIRECT CONTACT FORM WITH STRICT VISUAL CANVAS CAPTCHA & EMAIL DISPATCH
    -------------------------------------------------------------------------- */
 function initDirectContactForm() {
     const form = document.getElementById('direct-contact-form');
@@ -636,7 +741,6 @@ function initDirectContactForm() {
             return;
         }
 
-        // STRICT VISUAL CANVAS CAPTCHA VALIDATION WITH CLEAR RED INLINE BANNER
         const userInput = document.getElementById('c-captcha-code-input').value.trim().toUpperCase();
         if (!userInput || userInput !== contactCanvasCaptchaCode) {
             showInlineError('c-captcha-error', '❌ Security Verification Failed! Incorrect 5-character CAPTCHA code. Please type the exact 5 characters shown on the dark box.');
@@ -644,7 +748,7 @@ function initDirectContactForm() {
             refreshContactCaptcha();
             document.getElementById('c-captcha-code-input').value = '';
             document.getElementById('c-captcha-code-input').focus();
-            return; // STRICTLY BLOCK SUBMISSION & RETURN
+            return;
         }
 
         if (!checkRateLimit()) {
@@ -673,7 +777,6 @@ function initDirectContactForm() {
             timestamp: new Date().toLocaleDateString()
         };
 
-        // Dispatch REAL email straight to assist@ritym.com
         sendRealEmailToAssist({
             trackId: trackId,
             clientName: name,
