@@ -14,6 +14,23 @@ document.addEventListener('DOMContentLoaded', () => {
     initAdminStageController();
 });
 
+/* Global Window Modal Functions for 100% Reliable Onclick Triggers */
+window.openAdminStageModal = function() {
+    const modal = document.getElementById('admin-stage-modal');
+    if (modal) {
+        modal.classList.add('active');
+        const inputId = document.getElementById('admin-input-track-id');
+        if (inputId && !inputId.value) inputId.value = 'RITYM-92627';
+    }
+};
+
+window.closeAdminStageModal = function() {
+    const modal = document.getElementById('admin-stage-modal');
+    if (modal) {
+        modal.classList.remove('active');
+    }
+};
+
 /* --------------------------------------------------------------------------
    1. ANTI-SPAM EMAIL OBFUSCATION (assist@ritym.com)
    -------------------------------------------------------------------------- */
@@ -470,7 +487,6 @@ function initProjectTracker() {
         });
     }
 
-    // Check URL hash parameters e.g. #tracker?id=RITYM-92627&stage=3
     const hash = window.location.hash;
     if (hash && hash.includes('id=')) {
         const urlParams = new URLSearchParams(hash.substring(hash.indexOf('?')));
@@ -576,25 +592,13 @@ function updateTrackerUI(trackId) {
    7. ADMIN PROJECT STAGE ADVANCER CONTROLLER (Ctrl + Shift + M)
    -------------------------------------------------------------------------- */
 function initAdminStageController() {
-    const modal = document.getElementById('admin-stage-modal');
-    const btnOpen = document.getElementById('btn-open-admin-panel');
-    const footerTrigger = document.getElementById('footer-admin-trigger');
-    const closeBtn = document.getElementById('admin-modal-close-btn');
     const form = document.getElementById('admin-stage-form');
     const btnViewAll = document.getElementById('btn-admin-view-all');
-
-    function toggleModal() {
-        if (modal) modal.classList.toggle('active');
-    }
-
-    if (btnOpen) btnOpen.addEventListener('click', toggleModal);
-    if (footerTrigger) footerTrigger.addEventListener('click', toggleModal);
-    if (closeBtn) closeBtn.addEventListener('click', toggleModal);
 
     window.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.shiftKey && (e.key === 'M' || e.key === 'm')) {
             e.preventDefault();
-            toggleModal();
+            window.openAdminStageModal();
         }
     });
 
@@ -628,9 +632,8 @@ function initAdminStageController() {
             showToast(`⚡ Project ${trackId} advanced to Stage ${stageNum}!`, 'success');
             logSilentTelemetry(`[ADMIN STAGE UPDATE] ${trackId} set to Stage ${stageNum} (${STAGE_CONFIG[stageNum].title})`);
 
-            toggleModal();
+            window.closeAdminStageModal();
 
-            // Scroll to tracker section and show result
             const trackerInput = document.getElementById('track-id-input');
             if (trackerInput) trackerInput.value = trackId;
             const trackerSec = document.getElementById('tracker');
@@ -638,7 +641,6 @@ function initAdminStageController() {
         });
     }
 
-    // Expose Global RITYM API in browser console for admin power users!
     window.RITYM = window.RITYM || {};
     window.RITYM.setStage = (trackId, stageNumber, clientName = null, clientEmail = null) => {
         const order = setProjectStage(trackId, stageNumber, clientName, clientEmail);
