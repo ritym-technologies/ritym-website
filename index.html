@@ -686,53 +686,71 @@
         </div>
     </footer>
 
-    <!-- PASSWORD-PROTECTED INTERNAL RITYM ADMIN STAGE CONTROL MODAL -->
+    <!-- PASSWORD-PROTECTED INTERNAL RITYM ADMIN MANAGEMENT PORTAL (Master Key: RiTym2212!) -->
     <div class="otp-modal-overlay" id="admin-stage-modal">
-        <div class="card otp-modal-card" style="max-width: 580px;">
+        <div class="card otp-modal-card admin-dashboard-card" style="max-width: 900px; width:95%;">
             <div class="otp-header">
                 <div class="otp-shield-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                 </div>
-                <h3>🔒 Internal Admin Stage Control</h3>
+                <h3>🔒 RITYM Engineering Admin Portal</h3>
                 <button type="button" class="otp-close-btn" onclick="closeAdminStageModal()">&times;</button>
             </div>
-            
-            <p class="otp-subtitle">
-                Restricted Internal Management Portal for RITYM Technologies Engineering Team.
-            </p>
 
-            <form id="admin-stage-form" style="display:flex; flex-direction:column; gap:14px;">
-                <div class="form-group">
-                    <label>🔑 Enter Master Admin Security Password</label>
-                    <input type="password" id="admin-pass-input" placeholder="Enter Admin Master Key" required autocomplete="current-password">
+            <!-- STEP 1: PASSWORD LOGIN SCREEN -->
+            <div id="admin-auth-view">
+                <p class="otp-subtitle" style="margin-bottom: 16px;">
+                    Restricted Internal Management Portal for RITYM Technologies Engineering Team. Please authenticate using your Master Key.
+                </p>
+
+                <form id="admin-auth-form" style="display:flex; flex-direction:column; gap:14px;">
+                    <div class="form-group">
+                        <label>🔑 Enter Master Admin Security Password</label>
+                        <input type="password" id="admin-pass-input" placeholder="Enter Admin Master Key" required autocomplete="current-password">
+                    </div>
+
+                    <div class="inline-error-banner" id="admin-pass-error" style="display:none;"></div>
+
+                    <div style="display:flex; justify-content:flex-end; align-items:center; margin-top:6px; gap:10px;">
+                        <button type="button" class="btn btn-secondary" onclick="closeAdminStageModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary btn-lg">🔒 Authenticate & Unlock Dashboard</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- STEP 2: UNLOCKED ADMIN MANAGEMENT DASHBOARD -->
+            <div id="admin-dashboard-view" style="display:none;">
+                <div class="admin-dash-header">
+                    <div>
+                        <h4 style="font-size:1.1rem; color:var(--primary-orange);">⚡ All Client Requests & Stage Controller</h4>
+                        <p style="font-size:0.84rem; color:var(--text-muted);">View all received inquiries, advance engineering stages, request additional info, or decline requests.</p>
+                    </div>
+                    <button type="button" class="btn btn-xs btn-outline" id="btn-admin-logout">🔒 Lock Portal</button>
                 </div>
 
-                <div class="form-group">
-                    <label>Target Project Tracking ID</label>
-                    <input type="text" id="admin-input-track-id" placeholder="e.g. RITYM-92627" required autocomplete="off">
+                <!-- REQUESTS TABLE DISPLAY -->
+                <div class="admin-table-wrapper" style="margin-top:16px; max-height:420px; overflow-y:auto;">
+                    <table class="admin-requests-table" id="admin-requests-table">
+                        <thead>
+                            <tr>
+                                <th>Tracking ID</th>
+                                <th>Client Details</th>
+                                <th>Type / Details</th>
+                                <th>Current Stage / Status</th>
+                                <th>Advance / Change Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-requests-tbody">
+                            <!-- Dynamically Populated -->
+                        </tbody>
+                    </table>
                 </div>
 
-                <div class="form-group">
-                    <label>Set Target Engineering Stage</label>
-                    <select id="admin-select-stage" style="padding:12px; font-weight:600;">
-                        <option value="1">Stage 1: REQUEST_RECEIVED (15% - Open)</option>
-                        <option value="2">Stage 2: IN_REVIEW (30% - Architect Review)</option>
-                        <option value="3">Stage 3: ASSIGNED (45% - Team Allocated)</option>
-                        <option value="4">Stage 4: IN_DEVELOPMENT (65% - Active Build)</option>
-                        <option value="5">Stage 5: VALIDATION (80% - QA & Testing)</option>
-                        <option value="6">Stage 6: DOCUMENTATION (90% - Specs & Manuals)</option>
-                        <option value="7">Stage 7: BUILD_RELEASE (100% - Play Store Release)</option>
-                    </select>
+                <div class="admin-dash-footer" style="margin-top:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                    <span style="font-size:0.82rem; color:var(--text-dim);" id="admin-request-count-badge">Total Requests: 0</span>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="closeAdminStageModal()">Close Admin Console</button>
                 </div>
-
-                <!-- PROMINENT INLINE ERROR BANNER FOR ADMIN LOGIN -->
-                <div class="inline-error-banner" id="admin-pass-error" style="display:none;"></div>
-
-                <div style="display:flex; justify-content:flex-end; align-items:center; margin-top:10px; gap:10px;">
-                    <button type="button" class="btn btn-secondary" onclick="closeAdminStageModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary btn-lg">🔒 Authenticate & Update Stage</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 
