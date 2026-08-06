@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - EULA - RITYM Technologies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body class="light-theme">
+
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo">
+                <img src="assets/ritym_logo.png" alt="RITYM Technologies Logo" class="official-logo-img">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="downloads.html" class="nav-link">Downloads</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="docs.html" class="nav-link">Documentation</a>
+                <a href="portal.html" class="nav-link">Portal</a>
+                <a href="support.html" class="nav-link">Support</a>
+            </nav>
+            <div class="nav-actions">
+                <button id="theme-toggle-btn" class="theme-toggle-btn">🌓</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="subpage-hero">
+        <div class="section-container">
+            <h1 class="subpage-title">Terms & Conditions</h1>
+            <p class="subpage-subtitle">End User License Agreement (EULA)</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-container" style="max-width: 800px; text-align: left;">
+            <p style="margin-bottom: 20px;">
+                Please read this End User License Agreement ("Agreement") carefully before downloading, installing, or using the EXOS GPS software client.
+            </p>
+
+            <h2>1. License Grant</h2>
+            <p style="margin: 10px 0 20px 0; color: var(--text-muted);">
+                RITYM Technologies grants you a limited, non-exclusive, non-transferable license to use the EXOS GPS software on a single computer or device per activated Lifetime License.
+            </p>
+
+            <h2>2. Restrictions</h2>
+            <p style="margin: 10px 0 20px 0; color: var(--text-muted);">
+                You may not reverse-engineer, decompile, modify, or redistribute the binary assets of EXOS GPS without direct prior written consent from RITYM Technologies.
+            </p>
+
+            <h2>3. Disclaimer of Warranty</h2>
+            <p style="margin: 10px 0 20px 0; color: var(--text-muted); font-style: italic;">
+                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL RITYM TECHNOLOGIES BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY.
+            </p>
+
+            <h2>4. Limitation of Liability</h2>
+            <p style="margin: 10px 0 20px 0; color: var(--text-muted);">
+                In no event shall RITYM Technologies or its suppliers be liable for any consequential, incidental, direct, indirect, special, punitive, or other damages whatsoever arising out of or in any way related to the use of or inability to use the software.
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer" id="footer-injected"></footer>
+    <script src="src/main.js"></script>
+    <script>
+        fetch('index.html')
+            .then(res => res.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                document.getElementById('footer-injected').innerHTML = doc.querySelector('footer.footer').innerHTML;
+                initThemeToggler();
+            });
+    </script>
+</body>
+</html>

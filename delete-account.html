@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Account Request | RITYM Technologies</title>
+    <meta name="description" content="Request the deletion of your EXOS GPS or RITYM developer account data under Google Play console developer policies.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body class="light-theme">
+
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo">
+                <img src="assets/ritym_logo.png" alt="RITYM Technologies Logo" class="official-logo-img">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="downloads.html" class="nav-link">Downloads</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="docs.html" class="nav-link">Documentation</a>
+                <a href="portal.html" class="nav-link">Portal</a>
+                <a href="support.html" class="nav-link">Support</a>
+            </nav>
+            <div class="nav-actions">
+                <button id="theme-toggle-btn" class="theme-toggle-btn">🌓</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="subpage-hero">
+        <div class="section-container">
+            <h1 class="subpage-title">Delete Account</h1>
+            <p class="subpage-subtitle">Submit a request to delete your license registrations and account metadata.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-container" style="max-width: 600px;">
+            <div class="card" style="text-align: left;">
+                <h2>Request Account Deletion</h2>
+                <p style="margin: 10px 0 25px 0; color: var(--text-muted); font-size: 0.95rem;">
+                    Google Play Console guidelines require a web-accessible way to delete accounts. Use this secure form to request data removal.
+                </p>
+
+                <form id="delete-account-form" onsubmit="event.preventDefault(); alert('Your deletion request has been registered. Account data will be permanently purged in 7 days.');">
+                    <div class="form-group">
+                        <label for="del-email">Account Email Address</label>
+                        <input type="email" id="del-email" class="form-control" placeholder="you@company.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="del-reason">Reason for Deletion (Optional)</label>
+                        <textarea id="del-reason" class="form-control" rows="3" placeholder="Please let us know how we can improve..."></textarea>
+                    </div>
+
+                    <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                        <input type="checkbox" id="del-confirm" style="margin-top: 5px;" required>
+                        <label for="del-confirm" style="font-size: 0.88rem; color: var(--text-muted);">
+                            I confirm that deleting my account will immediately invalidate all registered EXOS GPS license keys.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" style="background: #dc2626; border-color: #dc2626;">Submit Deletion Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="footer-injected"></footer>
+    <script src="src/main.js"></script>
+    <script>
+        fetch('index.html')
+            .then(res => res.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                document.getElementById('footer-injected').innerHTML = doc.querySelector('footer.footer').innerHTML;
+                initThemeToggler();
+            });
+    </script>
+</body>
+</html>

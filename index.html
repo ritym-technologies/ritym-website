@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Android App Development Company | RITYM Technologies</title>
+    <meta name="description" content="RITYM Technologies is a custom Android app development company. We build high-performance mobile applications, IoT hardware software, Wear OS solutions, and cloud backends.">
+    <meta name="keywords" content="Android App Development Company, Custom Android App Developer, IoT App Development, Wear OS App Development, BLE Mobile App Development, Enterprise Android Software">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body class="light-theme">
+
+    <!-- Header Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo" id="brand-logo">
+                <img src="assets/ritym_logo.png" alt="RITYM Technologies Logo" class="official-logo-img">
+            </a>
+
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="downloads.html" class="nav-link">Downloads</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="docs.html" class="nav-link">Documentation</a>
+                <a href="portal.html" class="nav-link">Portal</a>
+                <a href="support.html" class="nav-link">Support</a>
+                <a href="#configurator" class="nav-link">App Estimator</a>
+                <a href="#tracker" class="nav-link">Project Tracker</a>
+            </nav>
+
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 12px;">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Dark Mode">🌓</button>
+                <a href="downloads.html" class="btn btn-sm btn-primary">Download EXOS</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tagline Sub-Header Banner -->
+    <div class="tagline-bar">
+        <div class="tagline-container">
+            <span class="t-segment">RIGHT TIME</span>
+            <span class="t-bullet">|</span>
+            <span class="t-segment">SMART SOLUTIONS</span>
+            <span class="t-bullet">|</span>
+            <span class="t-segment">LASTING IMPACT</span>
+        </div>
+    </div>
+
+    <!-- Main Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-container hero-pro-class">
+            <div class="hero-content hero-content-pro">
+                <div class="hero-top-row">
+                    <div class="agency-badge">
+                        FLAGSHIP PRODUCT: EXOS GPS
+                    </div>
+                    <div class="pro-status-chip">
+                        <span class="status-dot green"></span>
+                        <span>Latest Release: v2.4.0 (Stable)</span>
+                    </div>
+                </div>
+
+                <h1 class="hero-title hero-title-pro">
+                    Professional <span class="gradient-text-orange">GPS Routing</span> & <span class="gradient-text-blue">NMEA Telemetry</span> Software
+                </h1>
+
+                <p class="hero-subtitle hero-subtitle-pro">
+                    EXOS GPS bridges GNSS receivers to Windows, Android, and Embedded Systems. Stream location data seamlessly across USB, Bluetooth, BLE, and Local Wi-Fi networks with enterprise-grade reliability.
+                </p>
+
+                <!-- Value-Driven Capability Badges Bar -->
+                <div class="pro-capability-bar">
+                    <div class="cap-pill">
+                        <span class="c-icon font-mono text-orange">📡</span>
+                        <span><strong>Universal Bridges</strong> (USB, Bluetooth Classic, BLE, WiFi & TCP/UDP)</span>
+                    </div>
+                    <div class="cap-pill">
+                        <span class="c-icon font-mono text-orange">💻</span>
+                        <span><strong>Cross-Platform</strong> (Windows Client, Android App & Embedded Systems)</span>
+                    </div>
+                    <div class="cap-pill">
+                        <span class="c-icon font-mono text-orange">📊</span>
+                        <span><strong>NMEA Monitor & GPX</strong> (Real-time telemetry feeds and high-accuracy logs)</span>
+                    </div>
+                    <div class="cap-pill">
+                        <span class="c-icon font-mono text-orange">⚙️</span>
+                        <span><strong>Mock Location API</strong> (Simulate high-fidelity paths with custom replay speeds)</span>
+                    </div>
+                </div>
+
+                <div class="hero-actions hero-actions-pro">
+                    <a href="downloads.html" class="btn btn-lg btn-primary">
+                        Download 7-Day Free Trial
+                    </a>
+                    <a href="products.html" class="btn btn-lg btn-secondary">
+                        Explore Features
+                    </a>
+                </div>
+
+                <!-- Trust Metrics Bar -->
+                <div class="trust-metrics trust-metrics-pro">
+                    <div class="t-metric">
+                        <strong>10k+</strong>
+                        <span>Active Licenses</span>
+                    </div>
+                    <div class="t-divider"></div>
+                    <div class="t-metric">
+                        <strong>100%</strong>
+                        <span>Google Play Integrity verified</span>
+                    </div>
+                    <div class="t-divider"></div>
+                    <div class="t-metric">
+                        <strong>&lt; 10ms</strong>
+                        <span>Local forwarding latency</span>
+                    </div>
+                    <div class="t-divider"></div>
+                    <div class="t-metric">
+                        <strong>24/7</strong>
+                        <span>Developer Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Served Bar -->
+    <div class="industries-bar bg-surface">
+        <div class="section-container">
+            <div class="ind-wrapper">
+                <span class="ind-title">INDUSTRIES SERVED:</span>
+                <div class="ind-tags">
+                    <span class="ind-pill">Healthcare & Medical</span>
+                    <span class="ind-pill">Logistics & Fleet Management</span>
+                    <span class="ind-pill">Retail & POS Kiosks</span>
+                    <span class="ind-pill">Smart Hardware & IoT</span>
+                    <span class="ind-pill">Industrial Automation</span>
+                    <span class="ind-pill">Wear OS & Wearables</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer-Problem Driven Services Overview -->
+    <section class="section" id="services">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <div class="section-tag">CORE SERVICES</div>
+                <h2 class="section-title">End-to-End Android & Cloud Engineering</h2>
+                <p class="section-subtitle">Whether you need a flagship mobile product, an enterprise fleet utility, or hardware firmware integration, we engineer reliable solutions tailored to your operational needs.</p>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="card service-card">
+                    <div class="s-icon icon-orange">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                    </div>
+                    <h3>Custom Android App Development</h3>
+                    <p>Native Kotlin mobile applications engineered for high performance, smooth 60fps UI, and offline-first data sync.</p>
+                    <ul class="s-list">
+                        <li>Smartphones, Tablets & POS Kiosk Displays</li>
+                        <li>Google Play Store Publishing & Policy Compliance</li>
+                        <li>High-Performance MVVM Kotlin Codebase</li>
+                    </ul>
+                </div>
+
+                <div class="card service-card">
+                    <div class="s-icon icon-indigo">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+                    </div>
+                    <h3>Cloud Backends & Secure APIs</h3>
+                    <p>Scalable cloud infrastructure, RESTful & WebSocket real-time APIs, payment integration, and encrypted storage.</p>
+                    <ul class="s-list">
+                        <li>Stripe, Google Pay & In-App Subscriptions</li>
+                        <li>AWS & Firebase Cloud Infrastructure</li>
+                        <li>TLS 1.3 In Transit & AES-256 At Rest Security</li>
+                    </ul>
+                </div>
+
+                <div class="card service-card">
+                    <div class="s-icon icon-cyan">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                    </div>
+                    <h3>IoT & Smart Hardware Connectivity</h3>
+                    <p>Connect mobile devices directly to smart equipment, Bluetooth Low Energy (BLE) sensors, embedded Linux, and IoT microcontrollers.</p>
+                    <ul class="s-list">
+                        <li>BLE 5.2 & Local Wi-Fi Mesh Protocols</li>
+                        <li>Sensor Telemetry & Industrial Automation</li>
+                        <li>On-Device Machine Learning (TensorFlow Lite)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose RITYM Section (Trust & Reassurance Signals) -->
+    <section class="section bg-surface" id="why-us">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <div class="section-tag">WHY FOUNDERS CHOOSE US</div>
+                <h2 class="section-title">Engineering Excellence with Guaranteed Transparency</h2>
+                <p class="section-subtitle">We remove agency risk through clear milestone terms, fixed pricing, and full client intellectual property ownership.</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card why-card">
+                    <div class="w-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <div>
+                        <h3>Pre-Submission App Store Policy Audits</h3>
+                        <p>Every application we engineer undergoes rigorous Google Play policy audits prior to release to ensure full compliance with developer guidelines, privacy standards, and store requirements.</p>
+                    </div>
+                </div>
+
+                <div class="card why-card">
+                    <div class="w-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                    </div>
+                    <div>
+                        <h3>Transparent 25% / 50% / 25% Milestone Payments</h3>
+                        <p>Never pay upfront for unverified code. Payments are linked directly to approved deliverables: 25% on project approval, 50% on core build demo, and 25% upon final handover.</p>
+                    </div>
+                </div>
+
+                <div class="card why-card">
+                    <div class="w-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg>
+                    </div>
+                    <div>
+                        <h3>Full Source Code & IP Ownership</h3>
+                        <p>You retain 100% exclusive ownership of all source code, repository branches, and design assets upon project completion. No ongoing licensing lock-ins.</p>
+                    </div>
+                </div>
+
+                <div class="card why-card">
+                    <div class="w-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div>
+                        <h3>30-Day Post-Launch Warranty & Support</h3>
+                        <p>Every codebase is backed by automated testing, static code analysis, and multi-device validation, ensuring high stability during production release and 30 days of included post-launch warranty support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Development Process Section -->
+    <section class="section" id="process">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <div class="section-tag">OUR METHODOLOGY</div>
+                <h2 class="section-title">A Proven 4-Step Path from Concept to Launch</h2>
+                <p class="section-subtitle">Our structured engineering workflow keeps projects on schedule, within budget, and aligned with your core business milestones.</p>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-step-card">
+                    <div class="p-step-num">01</div>
+                    <h4>Scope & Strategy Call</h4>
+                    <p>We review your business objectives, target platforms, and feature requirements to deliver a fixed-scope technical proposal within 24 hours.</p>
+                </div>
+
+                <div class="process-step-card">
+                    <div class="p-step-num">02</div>
+                    <h4>Architecture & UX Design</h4>
+                    <p>Our engineers define high-performance system architecture and intuitive UI wireframes optimized for modern Android design standards.</p>
+                </div>
+
+                <div class="process-step-card">
+                    <div class="p-step-num">03</div>
+                    <h4>Agile Sprints & Demos</h4>
+                    <p>We build in iterative 2-week sprints, providing playable APK/TestFlight builds so you can test features on real hardware early.</p>
+                </div>
+
+                <div class="process-step-card">
+                    <div class="p-step-num">04</div>
+                    <h4>QA, Store Launch & Handover</h4>
+                    <p>Rigorous security audit, Google Play Store publishing, complete source code handover, and 30 days of warranty support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Testimonials & Social Proof Section -->
+    <section class="section bg-surface" id="testimonials">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <div class="section-tag">VERIFIED CLIENT FEEDBACK</div>
+                <h2 class="section-title">Trusted by Executives and Product Leaders</h2>
+                <p class="section-subtitle">Read how our engineering team helped companies build reliable products and achieve their business targets.</p>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="card testimonial-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p class="t-quote">"RITYM delivered our industrial telemetry mobile app on schedule. Their 25/50/25 milestone structure provided complete financial clarity, and the app passed Play Store review on the first submission."</p>
+                    <div class="t-author">
+                        <strong>Marcus Vance</strong>
+                        <span>VP of Product Operations, FleetLogix Inc.</span>
+                        <small class="t-verified">Verified client via Clutch</small>
+                    </div>
+                </div>
+
+                <div class="card testimonial-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p class="t-quote">"Integrating Bluetooth Low Energy hardware with Android can be tricky, but RITYM's architecture ensured zero telemetry drops and seamless data syncing for our medical sensors."</p>
+                    <div class="t-author">
+                        <strong>Dr. Elena Rostova</strong>
+                        <span>Chief Technology Officer, HealthSync Technologies</span>
+                        <small class="t-verified">Verified client via LinkedIn</small>
+                    </div>
+                </div>
+
+                <div class="card testimonial-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p class="t-quote">"Professional communication, clean Kotlin codebase, and full IP handover upon release. RITYM is our go-to engineering partner for custom mobile utilities."</p>
+                    <div class="t-author">
+                        <strong>David Miller</strong>
+                        <span>Director of Technology, RetailPOS Systems</span>
+                        <small class="t-verified">Verified client via Clutch</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive App Configurator Wizard -->
+    <section class="section wizard-section" id="configurator">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <div class="section-tag tag-primary">PROJECT ESTIMATOR</div>
+                <h2 class="section-title">Configure Your Custom App Requirement</h2>
+                <p class="section-subtitle">Select your target platform, key capabilities, and timeline to receive a preliminary project estimate and consultation within 24 hours.</p>
+            </div>
+
+            <!-- Wizard Container Card -->
+            <div class="card wizard-card">
+                <!-- Step Progress Bar -->
+                <div class="wizard-steps-header">
+                    <div class="w-step active" data-step-nav="1">
+                        <div class="step-num">1</div>
+                        <div class="step-label">Target Platform</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="w-step" data-step-nav="2">
+                        <div class="step-num">2</div>
+                        <div class="step-label">App Features</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="w-step" data-step-nav="3">
+                        <div class="step-num">3</div>
+                        <div class="step-label">Scope & Terms</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="w-step" data-step-nav="4">
+                        <div class="step-num">4</div>
+                        <div class="step-label">Submit Request</div>
+                    </div>
+                </div>
+
+                <form id="app-configurator-form">
+                    <!-- STEP 1: Platform Selection -->
+                    <div class="wizard-step-panel active" id="wizard-step-1">
+                        <h3 class="w-panel-title">Select Target Platform(s)</h3>
+                        <p class="w-panel-subtitle">Where will your software run?</p>
+
+                        <div class="option-grid">
+                            <label class="option-card">
+                                <input type="checkbox" name="platform" value="Android Phone App" checked>
+                                <div class="option-content">
+                                    <span class="option-icon font-mono">📱</span>
+                                    <h4>Android Smartphone</h4>
+                                    <p>Native Android mobile application.</p>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="checkbox" name="platform" value="Android Tablet / POS">
+                                <div class="option-content">
+                                    <span class="option-icon font-mono">📟</span>
+                                    <h4>Tablet & POS Display</h4>
+                                    <p>Optimized for tablets, kiosks & retail POS.</p>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="checkbox" name="platform" value="Wear OS Smartwatch">
+                                <div class="option-content">
+                                    <span class="option-icon font-mono">⌚</span>
+                                    <h4>Wear OS Smartwatch</h4>
+                                    <p>Wearable application & quick alerts.</p>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="checkbox" name="platform" value="Cross-Platform (Windows & Android)">
+                                <div class="option-content">
+                                    <span class="option-icon font-mono">💻</span>
+                                    <h4>Windows + Android Suite</h4>
+                                    <p>Single system running across desktop & mobile.</p>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="checkbox" name="platform" value="Hardware & IoT Connectivity">
+                                <div class="option-content">
+                                    <span class="option-icon font-mono">⚡</span>
+                                    <h4>Hardware / IoT Link</h4>
+                                    <p>Connects via Bluetooth/Wi-Fi to smart hardware.</p>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="wizard-actions">
+                            <div></div>
+                            <button type="button" class="btn btn-primary btn-next-step" data-next="2">Continue to Features &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Feature Requirements -->
+                    <div class="wizard-step-panel" id="wizard-step-2">
+                        <h3 class="w-panel-title">Choose Required Capabilities</h3>
+                        <p class="w-panel-subtitle">Select the core capabilities your application requires.</p>
+
+                        <div class="option-grid">
+                            <label class="option-card">
+                                <input type="checkbox" name="feature" value="Real-Time Hardware Sync (BLE/Wi-Fi)" checked>
+                                <div class="option-content">
+                                    <span class="option-icon font-mono">📡</span>
+                                    <h4>Hardware / BLE Sync</h4>
+                                    <p>Bluetooth Low Energy or sensor stream sync.</p>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="checkbox" name="feature" value="On-Device ML & Barcode Scanning">
+                                <div class="option-content">
+                                    <span class="option-icon font-mono">🧠</span>
+                                    <h4>Computer Vision & ML</h4>
+                                    <p>Camera vision, barcode scanning & analytics.</p>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="checkbox" name="feature" value="In-App Payments & Gateways">
+                                <div class="option-content">
+                                    <span class="option-icon font-mono">💳</span>
+                                    <h4>Payments & Billing</h4>
+                                    <p>Stripe, Google Pay or subscription billing.</p>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="checkbox" name="feature" value="Google Play Store Publishing & Setup">
+                                <div class="option-content">
+                                    <span class="option-icon font-mono">🚀</span>
+                                    <h4>Play Store Setup</h4>
+                                    <p>App compilation, policy compliance & store launch.</p>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="checkbox" name="feature" value="User Accounts & Cloud Sync">
+                                <div class="option-content">
+                                    <span class="option-icon font-mono">🔒</span>
+                                    <h4>User Auth & Cloud DB</h4>
+                                    <p>OAuth2 authentication & encrypted cloud storage.</p>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="checkbox" name="feature" value="Custom UI/UX & Dark Theme">
+                                <div class="option-content">
+                                    <span class="option-icon font-mono">✨</span>
+                                    <h4>Custom UI/UX Design</h4>
+                                    <p>Bespoke visual interface, charts & animations.</p>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="wizard-actions">
+                            <button type="button" class="btn btn-secondary btn-prev-step" data-prev="1">&larr; Back</button>
+                            <button type="button" class="btn btn-primary btn-next-step" data-next="3">Continue to Scope &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: Scope & Milestone Terms -->
+                    <div class="wizard-step-panel" id="wizard-step-3">
+                        <h3 class="w-panel-title">Project Scope & Milestone Schedule</h3>
+                        <p class="w-panel-subtitle">Select your target timeline and budget tier. Governed by our 25% / 50% / 25% milestone schedule.</p>
+
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label for="w-timeline">Target Timeline</label>
+                                <select name="timeline" id="w-timeline">
+                                    <option value="Rapid Sprint (1 - 2 Weeks)">Rapid Sprint (1 - 2 Weeks)</option>
+                                    <option value="Standard Release (2 - 4 Weeks)" selected>Standard Release (2 - 4 Weeks)</option>
+                                    <option value="Full Platform Sprint (4 - 8 Weeks)">Full Platform Sprint (4 - 8 Weeks)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group flex-1">
+                                <label for="w-budget">Project Scope Tier</label>
+                                <select name="budget" id="w-budget">
+                                    <option value="Focused Utility ($50 - $200)">Focused Utility ($50 - $200)</option>
+                                    <option value="Essential App Edition ($200 - $500)" selected>Essential App Edition ($200 - $500)</option>
+                                    <option value="Professional Edition ($500 - $1,000)">Professional Edition ($500 - $1,000)</option>
+                                    <option value="Enterprise Platform ($1,000 - $5,000+)">Enterprise Platform ($1,000 - $5,000+)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="payment-milestones-box card" style="margin-top: 20px;">
+                            <div class="p-box-header">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                <h4>RITYM 25% / 50% / 25% Milestone Protection</h4>
+                            </div>
+                            <div class="p-milestone-grid">
+                                <div class="p-milestone-card">
+                                    <div class="m-badge">25% Deposit</div>
+                                    <div class="m-title">1. Scope Approval</div>
+                                    <div class="m-desc">Paid when architecture & scope document are approved.</div>
+                                </div>
+                                <div class="p-milestone-card">
+                                    <div class="m-badge blue">50% Midpoint</div>
+                                    <div class="m-title">2. Core Build Demo</div>
+                                    <div class="m-desc">Paid after core build demo is tested on real hardware.</div>
+                                </div>
+                                <div class="p-milestone-card">
+                                    <div class="m-badge green">25% Final Balance</div>
+                                    <div class="m-title">3. Store Launch & Handover</div>
+                                    <div class="m-desc">Paid upon Play Store publishing and full IP code release.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label for="w-notes">Project Overview / Key Requirements</label>
+                            <textarea name="app_notes" id="w-notes" rows="4" placeholder="Briefly describe your app goals, target users, or hardware integrations..."></textarea>
+                        </div>
+
+                        <div class="wizard-actions">
+                            <button type="button" class="btn btn-secondary btn-prev-step" data-prev="2">&larr; Back</button>
+                            <button type="button" class="btn btn-primary btn-next-step" data-next="4">Review Summary &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: Review & Submit Request -->
+                    <div class="wizard-step-panel" id="wizard-step-4">
+                        <h3 class="w-panel-title">Review & Request Estimate</h3>
+                        <p class="w-panel-subtitle">Review your configuration and provide contact details for your proposal.</p>
+
+                        <div class="review-box card">
+                            <div class="review-row">
+                                <span class="r-label">Selected Platforms:</span>
+                                <span class="r-val" id="rev-platforms">Android Smartphone</span>
+                            </div>
+                            <div class="review-row">
+                                <span class="r-label">Required Capabilities:</span>
+                                <span class="r-val" id="rev-features">Hardware Sync</span>
+                            </div>
+                            <div class="review-row">
+                                <span class="r-label">Timeline & Scope Tier:</span>
+                                <span class="r-val" id="rev-timeline-budget">Standard (2-4 Weeks) | $200 - $500</span>
+                            </div>
+                            <div class="review-row">
+                                <span class="r-label">Milestone Protection:</span>
+                                <span class="r-val text-orange" id="rev-payment-terms">25% Scope | 50% Build Demo | 25% Store Launch</span>
+                            </div>
+                        </div>
+
+                        <div class="form-row" style="margin-top: 20px;">
+                            <div class="form-group flex-1">
+                                <label for="w-name">Your Full Name</label>
+                                <input type="text" name="client_name" id="w-name" placeholder="e.g. David Miller" required>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label for="w-email">Your Work Email</label>
+                                <input type="email" name="client_email" id="w-email" placeholder="david@company.com" required>
+                            </div>
+                        </div>
+
+                        <!-- Enterprise Distorted Visual Canvas CAPTCHA -->
+                        <div class="form-group visual-captcha-card" style="margin-top: 18px;">
+                            <label for="w-captcha-code-input">Security Verification (Enter exact 5-character code below)</label>
+                            <div class="captcha-canvas-row">
+                                <canvas id="wizard-captcha-canvas" width="160" height="50"></canvas>
+                                <button type="button" class="btn btn-xs btn-outline" id="btn-refresh-w-captcha" title="Refresh CAPTCHA Code">Refresh Code</button>
+                            </div>
+                            <input type="text" id="w-captcha-code-input" placeholder="Type the 5 characters shown" maxlength="5" autocomplete="off" required>
+                        </div>
+
+                        <div class="inline-error-banner" id="w-captcha-error" style="display:none;"></div>
+                        <input type="text" name="website_hp" id="w-hp" style="display:none" tabindex="-1" autocomplete="off">
+
+                        <div class="wizard-actions">
+                            <button type="button" class="btn btn-secondary btn-prev-step" data-prev="3">&larr; Back</button>
+                            <button type="submit" class="btn btn-primary btn-lg" id="btn-submit-wizard">
+                                Get Free Estimate
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Status & Lifecycle Tracking Section -->
+    <section class="section bg-surface" id="tracker">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <div class="section-tag tag-primary">PROJECT LIFECYCLE TRACKER</div>
+                <h2 class="section-title">Track Your Project Progress Live</h2>
+                <p class="section-subtitle">Active clients can enter their unique Tracking ID below to view real-time sprint milestones and status updates.</p>
+            </div>
+
+            <!-- Search Status Input -->
+            <div class="card tracker-search-card" style="margin-bottom: 28px;">
+                <div class="tracker-search-bar">
+                    <input type="text" id="track-id-input" placeholder="Enter your Tracking ID (e.g. RITYM-1024)" autocomplete="off">
+                    <button class="btn btn-primary" id="btn-lookup-status">Track Status</button>
+                </div>
+            </div>
+
+            <!-- Tracker Output Card -->
+            <div class="card tracker-status-card" id="tracker-output-card" style="display:none;">
+                <div class="t-card-header">
+                    <div class="t-order-info">
+                        <span class="t-id-badge" id="t-order-id">RITYM-TRACKER</span>
+                        <span class="t-client-name" id="t-client-name">Project Lookup</span>
+                    </div>
+                    <div class="t-status-pill status-in-dev" id="t-current-status">
+                        <span class="status-dot"></span> Active Project
+                    </div>
+                </div>
+
+                <!-- 7-Stage Pipeline Visual -->
+                <div class="lifecycle-pipeline">
+                    <div class="pipe-step completed" data-stage="1">
+                        <div class="pipe-node">1</div>
+                        <div class="pipe-title">Request Received</div>
+                        <div class="pipe-sub">Open</div>
+                    </div>
+                    <div class="pipe-line completed"></div>
+
+                    <div class="pipe-step completed" data-stage="2">
+                        <div class="pipe-node">2</div>
+                        <div class="pipe-title">Architect Review</div>
+                        <div class="pipe-sub">In Review</div>
+                    </div>
+                    <div class="pipe-line completed"></div>
+
+                    <div class="pipe-step completed" data-stage="3">
+                        <div class="pipe-node">3</div>
+                        <div class="pipe-title">Team Allocated</div>
+                        <div class="pipe-sub">Assigned</div>
+                    </div>
+                    <div class="pipe-line active"></div>
+
+                    <div class="pipe-step active" data-stage="4">
+                        <div class="pipe-node">4</div>
+                        <div class="pipe-title">Active Build</div>
+                        <div class="pipe-sub">In Development</div>
+                    </div>
+                    <div class="pipe-line"></div>
+
+                    <div class="pipe-step" data-stage="5">
+                        <div class="pipe-node">5</div>
+                        <div class="pipe-title">QA & Testing</div>
+                        <div class="pipe-sub">Validation</div>
+                    </div>
+                    <div class="pipe-line"></div>
+
+                    <div class="pipe-step" data-stage="6">
+                        <div class="pipe-node">6</div>
+                        <div class="pipe-title">Docs & Specs</div>
+                        <div class="pipe-sub">Documentation</div>
+                    </div>
+                    <div class="pipe-line"></div>
+
+                    <div class="pipe-step" data-stage="7">
+                        <div class="pipe-node">7</div>
+                        <div class="pipe-title">Play Store Release</div>
+                        <div class="pipe-sub">Build & Release</div>
+                    </div>
+                </div>
+
+                <!-- Active Stage Info Box -->
+                <div class="stage-info-box card">
+                    <div class="s-info-header">
+                        <h4 id="t-stage-heading">Project Progress</h4>
+                        <span class="s-progress-text" id="t-progress-pct">Progress: 50%</span>
+                    </div>
+                    <p id="t-stage-desc">Enter a valid Tracking ID above to load your live project status details.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies & Portfolio -->
+    <section class="section" id="portfolio">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <div class="section-tag">ENGINEERING CASE STUDIES</div>
+                <h2 class="section-title">Selected Projects & Technical Outcomes</h2>
+                <p class="section-subtitle">Examine how we engineer high-reliability Android applications and smart hardware integrations.</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card case-card">
+                    <div class="case-img-wrapper">
+                        <img src="assets/ritym_mobile_app.png" alt="RITYM Fleet Telemetry Hub Case Study" class="case-img">
+                    </div>
+                    <div class="case-body">
+                        <span class="case-badge">ROBOTICS & LOGISTICS TELEMETRY</span>
+                        <h3>RITYM Fleet & Telemetry Control Hub</h3>
+                        <p>Low-latency Android tablet application engineered for real-time sensor streams, battery health monitoring, and spatial fleet tracking.</p>
+                        <div class="case-impact-box">
+                            <div class="c-impact-item">
+                                <strong>99.9%</strong>
+                                <span>Cloud API Uptime</span>
+                            </div>
+                            <div class="c-impact-item">
+                                <strong>&lt;10ms</strong>
+                                <span>Data Telemetry Latency</span>
+                            </div>
+                            <div class="c-impact-item">
+                                <strong>4 Weeks</strong>
+                                <span>Sprint to Release</span>
+                            </div>
+                        </div>
+                        <div class="case-tags">
+                            <span>Android Tablet</span><span>Hardware BLE</span><span>Real-Time Sync</span><span>Play Store Shipped</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card case-card">
+                    <div class="case-img-wrapper">
+                        <img src="assets/ritym_robot_lab.png" alt="Autonomous Cybernetics Platform Case Study" class="case-img">
+                    </div>
+                    <div class="case-body">
+                        <span class="case-badge">SMART HARDWARE & EDGE ML</span>
+                        <h3>Autonomous Hardware Control Platform</h3>
+                        <p>End-to-end mobile control system connecting Android devices with smart hardware nodes, camera vision, and industrial motor drivers.</p>
+                        <div class="case-impact-box">
+                            <div class="c-impact-item">
+                                <strong>High Efficiency</strong>
+                                <span>On-Device Processing</span>
+                            </div>
+                            <div class="c-impact-item">
+                                <strong>High Stability</strong>
+                                <span>30-Day Support Warranty</span>
+                            </div>
+                            <div class="c-impact-item">
+                                <strong>100%</strong>
+                                <span>Client IP Ownership</span>
+                            </div>
+                        </div>
+                        <div class="case-tags">
+                            <span>Embedded C++</span><span>Camera Vision</span><span>Sensor Streams</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Direct Contact Section -->
+    <section class="section bg-surface" id="contact">
+        <div class="section-container">
+            <div class="card contact-wrapper">
+                <div class="contact-left">
+                    <div class="section-tag">DIRECT CONSULTATION</div>
+                    <h2>Let's Talk About Your Project</h2>
+                    <p>Ready to build a custom Android app, POS tablet utility, or IoT hardware platform? Contact our engineering team directly.</p>
+
+                    <div class="contact-method-card">
+                        <div class="c-icon-wrap">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <div class="c-info">
+                            <span class="c-label">Encrypted Form Submission</span>
+                            <strong style="color: var(--text-main); font-size: 0.92rem;">Direct Engineering Review & NDA Guaranteed</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-right">
+                    <form id="direct-contact-form">
+                        <div class="form-group">
+                            <label for="c-name">Your Full Name</label>
+                            <input type="text" id="c-name" placeholder="e.g. David Miller" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="c-email">Your Work Email</label>
+                            <input type="email" id="c-email" placeholder="david@company.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="c-message">Project Description / Requirements</label>
+                            <textarea id="c-message" rows="4" placeholder="Tell us about your project requirements or key features..." required></textarea>
+                        </div>
+
+                        <!-- Enterprise Distorted Visual Canvas CAPTCHA -->
+                        <div class="form-group visual-captcha-card">
+                            <label for="c-captcha-code-input">Security Verification (Enter exact 5-character code below)</label>
+                            <div class="captcha-canvas-row">
+                                <canvas id="contact-captcha-canvas" width="160" height="50"></canvas>
+                                <button type="button" class="btn btn-xs btn-outline" id="btn-refresh-c-captcha" title="Refresh CAPTCHA Code">Refresh Code</button>
+                            </div>
+                            <input type="text" id="c-captcha-code-input" placeholder="Type the 5 characters shown" maxlength="5" autocomplete="off" required>
+                        </div>
+
+                        <div class="inline-error-banner" id="c-captcha-error" style="display:none;"></div>
+                        <input type="text" name="contact_hp" id="c-hp" style="display:none" tabindex="-1" autocomplete="off">
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">Send Inquiry Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="padding: 60px 0; background: #0b0f19; border-top: 1px solid rgba(255,255,255,0.1); color: #f9fafb;">
+        <div class="footer-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1280px; margin: 0 auto; padding: 0 24px;">
+            <div class="footer-brand" style="grid-column: span 2;">
+                <div class="brand-logo" style="margin-bottom: 15px;">
+                    <img src="assets/ritym_logo.png" alt="RITYM Technologies Logo" class="official-logo-img-footer" style="max-height: 40px;">
+                </div>
+                <p style="color: #9ca3af; margin-bottom: 10px;">Professional GPS communication software & custom systems engineering.</p>
+                <p style="font-size: 0.85rem; color: #ff6b00; font-family: var(--font-mono);">RIGHT TIME | SMART SOLUTIONS | LASTING IMPACT</p>
+            </div>
+            <div>
+                <h4 style="color: #ffffff; margin-bottom: 15px; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Products</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+                    <li><a href="products.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: var(--transition);">EXOS GPS</a></li>
+                    <li><a href="downloads.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: var(--transition);">Downloads</a></li>
+                    <li><a href="pricing.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: var(--transition);">Pricing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #ffffff; margin-bottom: 15px; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Resources</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+                    <li><a href="docs.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: var(--transition);">Documentation</a></li>
+                    <li><a href="support.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: var(--transition);">Help Center</a></li>
+                    <li><a href="security.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: var(--transition);">Security Page</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #ffffff; margin-bottom: 15px; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Legal & Privacy</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+                    <li><a href="privacy.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: var(--transition);">Privacy Policy</a></li>
+                    <li><a href="terms.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: var(--transition);">Terms & Conditions</a></li>
+                    <li><a href="refund.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: var(--transition);">Refund Policy</a></li>
+                    <li><a href="cookie.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: var(--transition);">Cookie Policy</a></li>
+                    <li><a href="delete-account.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: var(--transition); font-weight: bold; color: #ef4444;">Delete Account</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="max-width: 1280px; margin: 40px auto 0 auto; padding: 20px 24px 0 24px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #9ca3af; font-size: 0.85rem;">
+            <p>© 2026 RITYM Technologies. All rights reserved. Android, Google Play and Google Play Billing are trademarks of Google LLC. Windows is a trademark of Microsoft Corporation.</p>
+        </div>
+    </footer>
+
+
+    <!-- Clean Production Success Modal (Hidden by default, triggered on submit) -->
+    <div class="otp-modal-overlay" id="request-success-modal" style="display: none;">
+        <div class="card otp-modal-card">
+            <div class="otp-header">
+                <div class="otp-shield-icon green-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </div>
+                <h3>Inquiry Submitted Successfully</h3>
+                <button type="button" class="otp-close-btn" id="success-close-btn">&times;</button>
+            </div>
+            
+            <p class="otp-subtitle">
+                Thank you! Your project inquiry has been received by our engineering team. We will review your requirements and respond shortly.
+            </p>
+
+            <div class="submission-summary-box">
+                <div class="s-row">
+                    <span>Your Tracking ID:</span>
+                    <strong class="text-orange" id="succ-tracking-id">---</strong>
+                </div>
+                <div class="s-row">
+                    <span>Status:</span>
+                    <span class="status-badge green">STAGE 1: OPEN (Request Received)</span>
+                </div>
+                <div class="s-row">
+                    <span>Sender Email:</span>
+                    <strong id="succ-client-email">---</strong>
+                </div>
+            </div>
+
+            <div class="otp-footer">
+                <button type="button" class="btn btn-primary btn-block btn-lg" id="btn-success-done">Done & View Tracker</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- JavaScript -->
+    <script src="src/main.js"></script>
+</body>
+</html>

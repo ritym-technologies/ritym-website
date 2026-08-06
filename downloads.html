@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download EXOS GPS Clients & APKs | RITYM Technologies</title>
+    <meta name="description" content="Download EXOS GPS latest releases for Windows and Android. Verify SHA-256 integrity checksums and view platform requirements.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body class="light-theme">
+
+    <!-- Header Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo" id="brand-logo">
+                <img src="assets/ritym_logo.png" alt="RITYM Technologies Logo" class="official-logo-img">
+            </a>
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="downloads.html" class="nav-link active">Downloads</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="docs.html" class="nav-link">Documentation</a>
+                <a href="portal.html" class="nav-link">Portal</a>
+                <a href="support.html" class="nav-link">Support</a>
+            </nav>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 12px;">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Dark Mode">🌓</button>
+                <a href="downloads.html" class="btn btn-sm btn-primary">Download EXOS</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subpage Hero -->
+    <section class="subpage-hero">
+        <div class="section-container">
+            <h1 class="subpage-title">Downloads & Releases</h1>
+            <p class="subpage-subtitle">Get the latest stable production build of EXOS GPS for your platforms.</p>
+        </div>
+    </section>
+
+    <!-- Download Platforms Grid -->
+    <section class="section">
+        <div class="section-container">
+            <div class="grid grid-2">
+                <!-- Windows Client -->
+                <div class="card" style="text-align: left;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🪟</div>
+                    <h2>Windows Desktop Client</h2>
+                    <p style="margin: 10px 0 20px 0; color: var(--text-muted);">Recommended for computers, industrial hubs, and field surveying hardware running Windows 10/11.</p>
+                    <ul style="margin: 15px 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+                        <li>Version: v2.4.0 (Stable)</li>
+                        <li>Size: 34.2 MB</li>
+                        <li>Requirements: Windows 10/11 (64-bit), .NET Runtime 6.0+</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" onclick="event.preventDefault(); alert('Downloading EXOS_GPS_Setup_x64.msi...');">Download installer (.MSI)</a>
+                    <div class="checksum-box">
+                        SHA256: <code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>
+                    </div>
+                </div>
+
+                <!-- Android Client -->
+                <div class="card" style="text-align: left;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🤖</div>
+                    <h2>Android Mobile Client</h2>
+                    <p style="margin: 10px 0 20px 0; color: var(--text-muted);">Recommended for smartphones, high-precision tablets, Wear OS wearables, and rugged IoT terminals.</p>
+                    <ul style="margin: 15px 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+                        <li>Version: v2.4.0 (Stable)</li>
+                        <li>Size: 18.7 MB</li>
+                        <li>Requirements: Android 8.0 (Oreo) or higher</li>
+                    </ul>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="#" class="btn btn-outline" onclick="event.preventDefault(); alert('Downloading EXOS_GPS_Mobile_v2.4.0.apk...');">Download direct APK</a>
+                        <button class="btn btn-secondary" disabled style="opacity: 0.5; cursor: not-allowed;" title="Initially disabled. Automatically enabled when Google Play submission is complete.">
+                            Download on Google Play (Pending Review)
+                        </button>
+                    </div>
+                    <div class="checksum-box">
+                        SHA256: <code>8f4a7c06283db199ee9c27ee985f549ca495882b49692bbda31f855d49603091</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Platform Releases -->
+    <section class="section bg-surface">
+        <div class="section-container text-center">
+            <h2>Future Platforms Support</h2>
+            <p style="max-width: 600px; margin: 10px auto 30px auto; color: var(--text-muted);">We are working on bringing EXOS GPS capabilities to Apple macOS and Linux servers.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <span class="cap-pill" style="opacity: 0.7;">🍎 macOS Client (v2.5.0 Alpha)</span>
+                <span class="cap-pill" style="opacity: 0.7;">🐧 Linux Daemon (CLI Only)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Release Notes & Version History -->
+    <section class="section">
+        <div class="section-container" style="max-width: 800px; text-align: left;">
+            <h2 style="margin-bottom: 20px;">Version History & Release Notes</h2>
+            
+            <div style="border-left: 3px solid var(--primary-orange); padding-left: 20px; margin-bottom: 30px;">
+                <h3 style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <span>v2.4.0 (Latest Release)</span>
+                    <span style="font-size: 0.85rem; color: var(--text-dim); font-weight: normal;">August 6, 2026</span>
+                </h3>
+                <p style="margin-top: 8px;">Added BLE (Bluetooth Low Energy) receiver diagnostics for direct integration with smart telemetry units. Improved mock location path interpolation algorithm for smooth coordinates update.</p>
+            </div>
+
+            <div style="border-left: 3px solid var(--bg-card-border); padding-left: 20px; margin-bottom: 30px;">
+                <h3 style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <span>v2.3.1</span>
+                    <span style="font-size: 0.85rem; color: var(--text-dim); font-weight: normal;">June 18, 2026</span>
+                </h3>
+                <p style="margin-top: 8px;">Security hardening release to verify licenses securely. Fixed latency overhead in raw socket UDP packet forwarding.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer-injected"></footer>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="src/main.js"></script>
+    <script>
+        // Inject shared footer
+        fetch('index.html')
+            .then(res => res.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const footerContent = doc.querySelector('footer.footer').innerHTML;
+                document.getElementById('footer-injected').innerHTML = footerContent;
+                initThemeToggler();
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center & Developer Support | RITYM Technologies</title>
+    <meta name="description" content="Submit technical bug reports, request custom features, view software release notes, and contact RitYm customer support.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body class="light-theme">
+
+    <!-- Header Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo" id="brand-logo">
+                <img src="assets/ritym_logo.png" alt="RITYM Technologies Logo" class="official-logo-img">
+            </a>
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="downloads.html" class="nav-link">Downloads</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="docs.html" class="nav-link">Documentation</a>
+                <a href="portal.html" class="nav-link">Portal</a>
+                <a href="support.html" class="nav-link active">Support</a>
+            </nav>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 12px;">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Dark Mode">🌓</button>
+                <a href="downloads.html" class="btn btn-sm btn-primary">Download EXOS</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subpage Hero -->
+    <section class="subpage-hero">
+        <div class="section-container">
+            <h1 class="subpage-title">EXOS Help Center</h1>
+            <p class="subpage-subtitle">Submit feature requests, report bugs, get technical answers, or contact support.</p>
+        </div>
+    </section>
+
+    <!-- Support Form Section -->
+    <section class="section">
+        <div class="section-container" style="max-width: 700px;">
+            <div class="card" style="text-align: left;">
+                <h2>Submit a Support Request</h2>
+                <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 0.95rem;">Fill out the form below to register a ticket. Our developers typically respond within 24 hours.</p>
+                
+                <form id="support-ticket-form" onsubmit="event.preventDefault(); alert('Your request has been successfully submitted to the developer support queue.');">
+                    <div class="form-group">
+                        <label for="sup-name">Your Name</label>
+                        <input type="text" id="sup-name" class="form-control" placeholder="Full Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sup-email">Your Work Email</label>
+                        <input type="email" id="sup-email" class="form-control" placeholder="you@company.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sup-type">Request Category</label>
+                        <select id="sup-type" class="form-control">
+                            <option value="question">General Technical Inquiry</option>
+                            <option value="bug">Report a Bug / Glitch</option>
+                            <option value="feature">Submit a Feature Request</option>
+                            <option value="licensing">Licensing / Billing issue</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sup-message">Details / Description</label>
+                        <textarea id="sup-message" rows="5" class="form-control" placeholder="Describe the error, step-by-step replication, or feature request details..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Submit Ticket</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Methods Grid -->
+    <section class="section bg-surface">
+        <div class="section-container">
+            <div class="grid grid-3">
+                <div class="card" style="text-align: left;">
+                    <div style="font-size: 1.8rem; margin-bottom: 10px;">📧</div>
+                    <h3>Direct Email Support</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px;">For commercial questions or custom licensing, email us directly: <strong>assist@ritym.com</strong></p>
+                </div>
+                <div class="card" style="text-align: left;">
+                    <div style="font-size: 1.8rem; margin-bottom: 10px;">🐙</div>
+                    <h3>GitHub Issues</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px;">Submit issues, trace changes, or request feature integrations in our public repository logs.</p>
+                </div>
+                <div class="card" style="text-align: left;">
+                    <div style="font-size: 1.8rem; margin-bottom: 10px;">💬</div>
+                    <h3>Community Support</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px;">Connect with other systems integrators, survey operators, and embedded system designers (Discord coming soon).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer-injected"></footer>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="src/main.js"></script>
+    <script>
+        // Inject shared footer
+        fetch('index.html')
+            .then(res => res.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const footerContent = doc.querySelector('footer.footer').innerHTML;
+                document.getElementById('footer-injected').innerHTML = footerContent;
+                initThemeToggler();
+            });
+    </script>
+</body>
+</html>

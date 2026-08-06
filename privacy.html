@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - RITYM Technologies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body class="light-theme">
+
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo">
+                <img src="assets/ritym_logo.png" alt="RITYM Technologies Logo" class="official-logo-img">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="downloads.html" class="nav-link">Downloads</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="docs.html" class="nav-link">Documentation</a>
+                <a href="portal.html" class="nav-link">Portal</a>
+                <a href="support.html" class="nav-link">Support</a>
+            </nav>
+            <div class="nav-actions">
+                <button id="theme-toggle-btn" class="theme-toggle-btn">🌓</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="subpage-hero">
+        <div class="section-container">
+            <h1 class="subpage-title">Privacy Policy</h1>
+            <p class="subpage-subtitle">Last updated: August 6, 2026</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-container" style="max-width: 800px; text-align: left;">
+            <p style="margin-bottom: 20px;">
+                RITYM Technologies is committed to protecting your privacy. This Privacy Policy describes how EXOS GPS collects, uses, and safeguards information when operating on Windows Desktop, Android devices, and embedded systems.
+            </p>
+
+            <h2>1. Location Permissions & Data Collection</h2>
+            <p style="margin: 10px 0 20px 0; color: var(--text-muted);">
+                EXOS GPS accesses location coordinates to process telemetry streams and provide mock location forwarding. <strong>All location calculations are completed locally on your physical device.</strong> We do not upload location coordinates, tracks, or GPX logs to external cloud storage servers.
+            </p>
+
+            <h2>2. Hardware & Connection Interfaces</h2>
+            <p style="margin: 10px 0 20px 0; color: var(--text-muted);">
+                Our software utilizes Bluetooth, Wi-Fi, and USB COM port interfaces to communicate with GNSS receivers. Access to these channels is strictly controlled by device operating system permissions.
+            </p>
+
+            <h2>3. Third-party SDKs & Google Play Integrity</h2>
+            <p style="margin: 10px 0 20px 0; color: var(--text-muted);">
+                We implement the Google Play Integrity API to detect tampered app versions and protect licensing. This API is subject to the Google Play Services Privacy Policy. No location data is shared with Google through this integration.
+            </p>
+
+            <h2>4. Your Consent & Rights</h2>
+            <p style="margin: 10px 0 20px 0; color: var(--text-muted);">
+                By operating EXOS GPS, you agree to local processing of telemetry coordinates. You can revoke permissions or request account deletion at any time via our <a href="delete-account.html">Account Deletion Page</a>.
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer" id="footer-injected"></footer>
+    <script src="src/main.js"></script>
+    <script>
+        fetch('index.html')
+            .then(res => res.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                document.getElementById('footer-injected').innerHTML = doc.querySelector('footer.footer').innerHTML;
+                initThemeToggler();
+            });
+    </script>
+</body>
+</html>

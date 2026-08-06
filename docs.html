@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Hub - EXOS GPS | RITYM Technologies</title>
+    <meta name="description" content="Access user guides, installation steps, configuration settings, and troubleshooting articles for EXOS GPS on Windows and Android.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body class="light-theme">
+
+    <!-- Header Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo" id="brand-logo">
+                <img src="assets/ritym_logo.png" alt="RITYM Technologies Logo" class="official-logo-img">
+            </a>
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="downloads.html" class="nav-link">Downloads</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="docs.html" class="nav-link active">Documentation</a>
+                <a href="portal.html" class="nav-link">Portal</a>
+                <a href="support.html" class="nav-link">Support</a>
+            </nav>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 12px;">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Dark Mode">🌓</button>
+                <a href="downloads.html" class="btn btn-sm btn-primary">Download EXOS</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subpage Hero -->
+    <section class="subpage-hero" style="padding-bottom: 20px;">
+        <div class="section-container">
+            <h1 class="subpage-title">EXOS GPS Documentation</h1>
+            <p class="subpage-subtitle">Learn how to install, set up telemetry streams, and troubleshoot EXOS GPS configurations.</p>
+        </div>
+    </section>
+
+    <!-- Split Sidebar Layout -->
+    <section class="section" style="padding-top: 20px;">
+        <div class="section-container">
+            <div class="docs-layout">
+                <!-- Navigation Sidebar -->
+                <aside class="docs-sidebar">
+                    <div class="docs-nav-group">
+                        <div class="docs-nav-title">Get Started</div>
+                        <a href="#doc-install" class="docs-nav-link active">Installation</a>
+                        <a href="#doc-quickstart" class="docs-nav-link">Quick Start Guide</a>
+                    </div>
+                    <div class="docs-nav-group">
+                        <div class="docs-nav-title">Interfaces</div>
+                        <a href="#doc-bluetooth" class="docs-nav-link">Bluetooth Setup</a>
+                        <a href="#doc-usb" class="docs-nav-link">USB Serial Ports</a>
+                        <a href="#doc-wifi" class="docs-nav-link">WiFi Networks</a>
+                    </div>
+                    <div class="docs-nav-group">
+                        <div class="docs-nav-title">Troubleshoot</div>
+                        <a href="#doc-faq" class="docs-nav-link">Frequently Asked Questions</a>
+                        <a href="#doc-troubleshoot" class="docs-nav-link">Troubleshooting Guide</a>
+                    </div>
+                </aside>
+
+                <!-- Document Content Panel -->
+                <main class="docs-content" style="text-align: left;">
+                    <!-- Section: Installation -->
+                    <section id="doc-install" class="docs-section">
+                        <h2>Installation Steps</h2>
+                        <p>Follow these steps to deploy EXOS GPS on your primary workspace system.</p>
+                        <h3 style="margin-top:20px;">Windows Desktop Client</h3>
+                        <p style="margin-top:8px;">Download the `.msi` installation package from our <a href="downloads.html">Downloads page</a>. Execute the setup package and follow the installation wizard. Ensure you run the application with Administrator rights to allow the mock location controller to interact with the Windows Sensor Framework.</p>
+                        
+                        <h3 style="margin-top:20px;">Android Mobile App</h3>
+                        <p style="margin-top:8px;">Download the raw `.apk` package directly or install it via the Google Play store. To enable the Mock Location feature, go to Android Settings &rarr; System &rarr; Developer Options, and set <strong>EXOS GPS</strong> as the mock location application.</p>
+                    </section>
+
+                    <!-- Section: Quick Start -->
+                    <section id="doc-quickstart" class="docs-section">
+                        <h2>Quick Start Guide</h2>
+                        <p>Get your telemetry stream active in under 3 minutes.</p>
+                        <ol style="margin-top:15px; padding-left: 20px; display: flex; flex-direction: column; gap: 10px;">
+                            <li>Start the EXOS GPS client app on your desktop computer or mobile.</li>
+                            <li>Navigate to the <strong>Input Settings</strong> and choose the interface representing your GPS receiver device (e.g. Serial Port COM3, or Bluetooth paired accessory).</li>
+                            <li>Click the <strong>Start Telemetry Stream</strong> toggle button to initiate listening.</li>
+                            <li>Inspect the real-time sentence feeds inside the <strong>NMEA Monitor</strong> log console.</li>
+                        </ol>
+                    </section>
+
+                    <!-- Section: Bluetooth -->
+                    <section id="doc-bluetooth" class="docs-section">
+                        <h2>Bluetooth Setup</h2>
+                        <p>EXOS GPS supports Bluetooth Classic SPP profiles and Bluetooth Low Energy (BLE) services.</p>
+                        <h3 style="margin-top:20px;">Bluetooth Classic</h3>
+                        <p style="margin-top:8px;">Pair your external Bluetooth GNSS device inside your OS system settings. Once paired, open EXOS GPS, select "Bluetooth Classic", choose the paired hardware name from the dropdown list, and open the connection channel.</p>
+                    </section>
+
+                    <!-- Section: USB -->
+                    <section id="doc-usb" class="docs-section">
+                        <h2>USB Serial Configuration</h2>
+                        <p>To connect a USB GPS mouse receiver:</p>
+                        <ul style="margin-top:15px; padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+                            <li>Plug the receiver device into an available USB port.</li>
+                            <li>Verify the assigned COM Port ID inside the Device Manager dashboard.</li>
+                            <li>Select the matching COM Port and configure the baud rate (usually 9600 or 4800) in EXOS GPS.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Section: WiFi -->
+                    <section id="doc-wifi" class="docs-section">
+                        <h2>WiFi Network Forwarding</h2>
+                        <p>Transmit location data records across local network interfaces using TCP or UDP sockets.</p>
+                        <p style="margin-top:10px;">Configure the target device IP address and socket port inside the EXOS Client network forwarding panel. Ensure your network firewalls allow traffic on the selected port (default is port 5555).</p>
+                    </section>
+
+                    <!-- Section: FAQ -->
+                    <section id="doc-faq" class="docs-section">
+                        <h2>Frequently Asked Questions</h2>
+                        <h4 style="margin-top:15px;">Can I use a single license key on multiple machines?</h4>
+                        <p style="margin-top:5px; color: var(--text-muted);">Each Lifetime License purchase activates one physical hardware machine or developer station. You can release and re-associate licenses inside the customer portal.</p>
+
+                        <h4 style="margin-top:15px;">Does EXOS GPS require active internet access to run?</h4>
+                        <p style="margin-top:5px; color: var(--text-muted);">No. Internet access is only required during initial license validation. Telemetry parsing, local bridges, and GPX playback functions operate completely offline.</p>
+                    </section>
+
+                    <!-- Section: Troubleshooting -->
+                    <section id="doc-troubleshoot" class="docs-section">
+                        <h2>Troubleshooting Guide</h2>
+                        <h3 style="margin-top:20px;">No NMEA coordinates visible in logs</h3>
+                        <p style="margin-top:8px;">Ensure the GPS device has a clear line of sight to the sky. Receivers placed indoors might not lock onto satellites (meaning no valid GGA coordinates are broadcast).</p>
+
+                        <h3 style="margin-top:20px;">COM Port permission errors</h3>
+                        <p style="margin-top:8px;">Verify that no other GPS viewer software or serial console client is currently connected to that COM port. Serial channels allow only one active client connection at a time.</p>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer-injected"></footer>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="src/main.js"></script>
+    <script>
+        // Inject shared footer
+        fetch('index.html')
+            .then(res => res.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const footerContent = doc.querySelector('footer.footer').innerHTML;
+                document.getElementById('footer-injected').innerHTML = footerContent;
+                initThemeToggler();
+            });
+
+        // Handle Active Link switching on scroll
+        const sections = document.querySelectorAll('.docs-section');
+        const navLinks = document.querySelectorAll('.docs-nav-link');
+
+        window.addEventListener('scroll', () => {
+            let currentId = '';
+            sections.forEach(sec => {
+                const top = sec.offsetTop - 120;
+                if (window.scrollY >= top) {
+                    currentId = sec.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === currentId) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

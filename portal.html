@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Portal & Licensing - EXOS GPS | RITYM Technologies</title>
+    <meta name="description" content="Access your RitYm customer portal. Activate licenses, view purchase history, download software invoices, and manage device activations.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body class="light-theme">
+
+    <!-- Header Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo" id="brand-logo">
+                <img src="assets/ritym_logo.png" alt="RITYM Technologies Logo" class="official-logo-img">
+            </a>
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="downloads.html" class="nav-link">Downloads</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="docs.html" class="nav-link">Documentation</a>
+                <a href="portal.html" class="nav-link active">Portal</a>
+                <a href="support.html" class="nav-link">Support</a>
+            </nav>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 12px;">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Dark Mode">🌓</button>
+                <a href="downloads.html" class="btn btn-sm btn-primary">Download EXOS</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subpage Hero -->
+    <section class="subpage-hero">
+        <div class="section-container">
+            <h1 class="subpage-title">EXOS Customer Portal</h1>
+            <p class="subpage-subtitle">Manage device license keys, download invoices, track support tickets, and view purchase history.</p>
+        </div>
+    </section>
+
+    <!-- Activation & Restore Section -->
+    <section class="section">
+        <div class="section-container">
+            <div class="grid grid-2">
+                <!-- License Key Activation -->
+                <div class="card portal-card" style="margin: 0; text-align: left;">
+                    <h3>Activate EXOS GPS License</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;">Enter the lifetime license key received via email to register this device.</p>
+                    <form id="activate-license-form">
+                        <div class="form-group">
+                            <label for="license-key">License Activation Key</label>
+                            <input type="text" id="license-key" class="form-control" placeholder="EXOS-XXXX-XXXX-XXXX-XXXX" required>
+                        </div>
+                        <button type="submit" id="activate-license-btn" class="btn btn-primary btn-block">Activate Device</button>
+                    </form>
+                </div>
+
+                <!-- Restore Purchase -->
+                <div class="card portal-card" style="margin: 0; text-align: left;">
+                    <h3>Restore Purchases</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;">Retrieve license keys and download active setup installers associated with your account.</p>
+                    <form id="restore-purchase-form">
+                        <div class="form-group">
+                            <label for="restore-email">Billing Email Address</label>
+                            <input type="email" id="restore-email" class="form-control" placeholder="you@company.com" required>
+                        </div>
+                        <button type="submit" id="restore-purchase-btn" class="btn btn-outline btn-block">Restore Purchase History</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Portal Architecture Layout (MOCK / Future design) -->
+    <section class="section bg-surface">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <div class="section-tag">FUTURE ARCHITECTURE</div>
+                <h2>Next-Gen Portal Capabilities</h2>
+                <p class="section-subtitle">We are building an integrated workspace to self-manage accounts, billing invoices, and technical tickets.</p>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="card" style="text-align: left;">
+                    <div style="font-size: 1.8rem; margin-bottom: 10px;">👤</div>
+                    <h3>OAuth2 & MFA Login</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 8px;">Secure access using passwordless credentials, Google Sign-In, and multi-factor verification codes.</p>
+                </div>
+                <div class="card" style="text-align: left;">
+                    <div style="font-size: 1.8rem; margin-bottom: 10px;">🧾</div>
+                    <h3>Automated PDF Invoices</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 8px;">Download tax-compliant commercial billing invoices and manage subscription details on demand.</p>
+                </div>
+                <div class="card" style="text-align: left;">
+                    <div style="font-size: 1.8rem; margin-bottom: 10px;">🎟️</div>
+                    <h3>Technical Helpdesk</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 8px;">Submit support tickets directly to developers, upload diagnostic logs, and track resolution steps.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer-injected"></footer>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="src/main.js"></script>
+    <script>
+        // Inject shared footer
+        fetch('index.html')
+            .then(res => res.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const footerContent = doc.querySelector('footer.footer').innerHTML;
+                document.getElementById('footer-injected').innerHTML = footerContent;
+                initThemeToggler();
+            });
+    </script>
+</body>
+</html>
