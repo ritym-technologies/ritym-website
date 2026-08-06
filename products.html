@@ -35,10 +35,68 @@
     </header>
 
     <!-- Subpage Hero -->
-    <section class="subpage-hero">
+    <section class="subpage-hero" style="padding-bottom: 20px;">
         <div class="section-container">
             <h1 class="subpage-title">EXOS GPS Product Capabilities</h1>
             <p class="subpage-subtitle">A versatile, low-latency telemetry bridge engineered for precise location sharing across devices and industrial hardware.</p>
+        </div>
+    </section>
+
+    <!-- App UI Mockup Showcase -->
+    <section class="section" style="padding: 20px 0;">
+        <div class="section-container">
+            <div class="section-header text-center" style="margin-bottom: 30px;">
+                <div class="section-tag">LIVE INTERFACE PREVIEW</div>
+                <h2>A Unified Location Control Center</h2>
+                <p class="section-subtitle">Real-time status updates, satellites maps, and stream logs inside a sleek cross-platform console.</p>
+            </div>
+
+            <div class="mockup-window">
+                <div class="mockup-header">
+                    <div class="mockup-dots">
+                        <span class="mockup-dot red"></span>
+                        <span class="mockup-dot yellow"></span>
+                        <span class="mockup-dot green"></span>
+                    </div>
+                    <div class="mockup-title">EXOS GPS Controller v2.4.0</div>
+                    <div style="width: 50px;"></div>
+                </div>
+                <div class="mockup-body">
+                    <aside class="mockup-sidebar">
+                        <div class="mockup-menu-item active">🛰️ Dashboard</div>
+                        <div class="mockup-menu-item">🔌 USB Config</div>
+                        <div class="mockup-menu-item">📶 Net Stream</div>
+                        <div class="mockup-menu-item">⚙️ Settings</div>
+                    </aside>
+                    <main class="mockup-content">
+                        <div class="mockup-status-card">
+                            <div class="mockup-stat">
+                                <span>CONNECTION STATUS</span>
+                                <strong style="color: #22c55e;">● ACTIVE (Bluetooth LE)</strong>
+                            </div>
+                            <div class="mockup-stat">
+                                <span>RECEIVER HARDWARE</span>
+                                <strong>Garmin GLO 2 [MAC: 00:18:BD:<span class="masked-data">••:••:••</span>]</strong>
+                            </div>
+                            <div class="mockup-stat">
+                                <span>LATITUDE</span>
+                                <strong>45.512<span class="masked-data">•••</span>° N</strong>
+                            </div>
+                            <div class="mockup-stat">
+                                <span>LONGITUDE</span>
+                                <strong>-122.684<span class="masked-data">•••</span>° W</strong>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #94a3b8; font-weight: bold; text-align: left;">PARSE FEED (NMEA-0183 Logs)</div>
+                        <div class="mockup-logs">
+$GPGGA,172814.00,4530.76<span class="masked-data">••</span>,N,12241.05<span class="masked-data">••</span>,W,2,10,1.2,35.4,M...<br>
+$GPRMC,172814.00,A,4530.76<span class="masked-data">••</span>,N,12241.05<span class="masked-data">••</span>,W,0.022,,060826,,,A*73<br>
+$GPGSV,3,1,11,03,03,111,31,08,11,043,26,14,35,137,37,17,59,053,44*7C<br>
+$GPGSA,A,3,17,24,15,19,12,28,11,14,,,,1.5,1.2,0.8*3B
+                        </div>
+                    </main>
+                </div>
+            </div>
         </div>
     </section>
 
