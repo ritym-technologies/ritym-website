@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing & Licenses - EXOS GPS | RITYM Technologies</title>
-    <meta name="description" content="View EXOS GPS license options: 7-day free trial or lifetime license for $12.99. Compare features and explore secure payment options.">
+    <title>Pricing &amp; Licenses — EXOS GPS | RITYM Technologies</title>
+    <meta name="description" content="EXOS GPS pricing: 7-day free trial, $12.99 Standard License with 1 year of updates, and affordable major version upgrades. Secure checkout via Stripe, Razorpay, and Google Play Billing.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -24,7 +24,6 @@
                 <a href="downloads.html" class="nav-link">Downloads</a>
                 <a href="pricing.html" class="nav-link active">Pricing</a>
                 <a href="docs.html" class="nav-link">Documentation</a>
-                <a href="portal.html" class="nav-link">Portal</a>
                 <a href="support.html" class="nav-link">Support</a>
             </nav>
             <div class="nav-actions" style="display: flex; align-items: center; gap: 12px;">
@@ -37,104 +36,192 @@
     <!-- Subpage Hero -->
     <section class="subpage-hero">
         <div class="section-container">
-            <h1 class="subpage-title">Simple, Direct Pricing</h1>
-            <p class="subpage-subtitle">Start with a 7-day trial, then unlock full capabilities with a single lifetime license key.</p>
+            <h1 class="subpage-title">Simple, Transparent Pricing</h1>
+            <p class="subpage-subtitle">Start with a free trial. Buy once, own forever. Pay only for major version upgrades when you're ready.</p>
         </div>
     </section>
 
-    <!-- Pricing Cards Grid -->
+    <!-- ================================================================== -->
+    <!-- PRICING CARDS                                                      -->
+    <!-- ================================================================== -->
     <section class="section">
         <div class="section-container">
-            <div class="grid grid-2" style="max-width: 900px; margin: 0 auto;">
+            <div class="section-header text-center">
+                <div class="section-tag">LICENSING MODEL</div>
+                <h2>Perpetual License + Versioned Upgrades</h2>
+                <p class="section-subtitle">Your license never expires. When a new major version ships, you decide if and when to upgrade — at a discounted price.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1050px; margin: 0 auto;">
                 <!-- Trial Card -->
                 <div class="card" style="text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
-                        <span class="status-badge" style="background: #e2e8f0; color: #475569;">EVALUATION</span>
-                        <h2 style="margin: 15px 0 10px 0;">7-Day Free Trial</h2>
-                        <p style="color: var(--text-muted); margin-bottom: 20px;">Evaluate all telemetry bridges, diagnostic tools, and location simulation features on your own hardware.</p>
-                        <span style="font-size: 2.5rem; font-weight: 800; font-family: var(--font-heading);">$0.00</span>
+                        <span class="status-badge" style="background: #e2e8f0; color: #475569;">FREE TRIAL</span>
+                        <h2 style="margin: 15px 0 10px 0;">7-Day Evaluation</h2>
+                        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">Full access to every feature. No credit card needed. Evaluate on your own hardware.</p>
+                        <span style="font-size: 2.5rem; font-weight: 800; font-family: var(--font-heading);">$0</span>
+                        <span style="font-size: 0.9rem; color: var(--text-dim);">&nbsp;/ 7 days</span>
                     </div>
-                    <ul style="list-style: none; padding: 0; margin: 25px 0; display: flex; flex-direction: column; gap: 10px;">
-                        <li><span class="check-icon">✓</span> 7 days of full feature access</li>
-                        <li><span class="check-icon">✓</span> USB & Network bridges</li>
-                        <li><span class="check-icon">✓</span> Bluetooth & BLE bridges</li>
-                        <li><span class="check-icon">✓</span> Live NMEA monitor</li>
+                    <ul style="list-style: none; padding: 0; margin: 25px 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+                        <li><span class="check-icon">✓</span> All transport protocols</li>
+                        <li><span class="check-icon">✓</span> All connectivity modes</li>
+                        <li><span class="check-icon">✓</span> NMEA monitor &amp; logging</li>
+                        <li><span class="check-icon">✓</span> Mock location injection</li>
+                        <li><span class="cross-icon">✗</span> Expires after 7 days</li>
                     </ul>
                     <a href="downloads.html" class="btn btn-outline btn-block">Download Trial</a>
                 </div>
 
-                <!-- Lifetime License Card -->
-                <div class="card" style="text-align: left; border-color: var(--primary-orange); box-shadow: var(--shadow-orange); display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Standard License Card (Recommended) -->
+                <div class="card" style="text-align: left; border-color: var(--primary-orange); box-shadow: var(--shadow-orange); display: flex; flex-direction: column; justify-content: space-between; position: relative;">
                     <div>
                         <span class="status-badge" style="background: var(--primary-orange-light); color: var(--primary-orange);">RECOMMENDED</span>
                         <h2 style="margin: 15px 0 10px 0;">Standard License</h2>
-                        <p style="color: var(--text-muted); margin-bottom: 20px;">Permanent activation code for single-device operation. Includes 1 full year of software updates & security releases.</p>
+                        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">Perpetual license for the current major version (v2.x). Includes 1 year of updates and security patches.</p>
                         <span style="font-size: 2.5rem; font-weight: 800; font-family: var(--font-heading);">$12.99</span>
+                        <span style="font-size: 0.9rem; color: var(--text-dim);">&nbsp;one-time</span>
                     </div>
-                    <ul style="list-style: none; padding: 0; margin: 25px 0; display: flex; flex-direction: column; gap: 10px;">
-                        <li><span class="check-icon">✓</span> Perpetual offline execution fallback</li>
-                        <li><span class="check-icon">✓</span> 1 year of included software updates</li>
-                        <li><span class="check-icon">✓</span> Discounted major version renewals</li>
-                        <li><span class="check-icon">✓</span> Google Play Integrity verified</li>
+                    <ul style="list-style: none; padding: 0; margin: 25px 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+                        <li><span class="check-icon">✓</span> Perpetual use — never expires</li>
+                        <li><span class="check-icon">✓</span> 1 year of minor updates included</li>
+                        <li><span class="check-icon">✓</span> Security patches &amp; bug fixes</li>
+                        <li><span class="check-icon">✓</span> Works offline after activation</li>
+                        <li><span class="check-icon">✓</span> Commercial use permitted</li>
                     </ul>
-                    <a href="#" class="btn btn-primary btn-block" onclick="event.preventDefault(); alert('Redirecting to secure payment checkout gateway... (Mock Checkout)');">Purchase License</a>
+                    <button class="btn btn-primary btn-block" id="btn-purchase-standard" onclick="document.getElementById('purchase-modal').classList.add('active');">Purchase License</button>
+                </div>
+
+                <!-- Major Upgrade Card -->
+                <div class="card" style="text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <span class="status-badge" style="background: #dbeafe; color: #2563eb;">FUTURE UPGRADE</span>
+                        <h2 style="margin: 15px 0 10px 0;">Major Version Upgrade</h2>
+                        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">When v3.0 ships, existing customers get a discounted upgrade. Your v2.x licence continues to work forever.</p>
+                        <span style="font-size: 2.5rem; font-weight: 800; font-family: var(--font-heading);">$7.99</span>
+                        <span style="font-size: 0.9rem; color: var(--text-dim);">&nbsp;per major version</span>
+                    </div>
+                    <ul style="list-style: none; padding: 0; margin: 25px 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+                        <li><span class="check-icon">✓</span> Access new major features</li>
+                        <li><span class="check-icon">✓</span> Fresh 1-year update window</li>
+                        <li><span class="check-icon">✓</span> Discounted for existing customers</li>
+                        <li><span class="check-icon">✓</span> Old version keeps working</li>
+                        <li><span class="check-icon">✓</span> Upgrade when you're ready</li>
+                    </ul>
+                    <button class="btn btn-secondary btn-block" disabled style="opacity: 0.5; cursor: not-allowed;">Not Yet Available</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Professional Comparison Table -->
+    <!-- ================================================================== -->
+    <!-- HOW LICENSING WORKS                                                 -->
+    <!-- ================================================================== -->
     <section class="section bg-surface">
+        <div class="section-container" style="max-width: 800px;">
+            <div class="section-header text-center">
+                <h2>How Versioned Licensing Works</h2>
+            </div>
+            <div class="install-steps">
+                <div class="install-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Download &amp; Evaluate</h4>
+                        <p>Install EXOS GPS on Windows or Android. The 7-day trial gives you full access — every protocol, every feature. No payment information collected.</p>
+                    </div>
+                </div>
+                <div class="install-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Purchase Standard License ($12.99)</h4>
+                        <p>Buy a perpetual license for the current major version (v2.x). On Android, purchase via Google Play Billing. On Windows, use Stripe or Razorpay through our secure checkout.</p>
+                    </div>
+                </div>
+                <div class="install-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Receive Updates for 1 Year</h4>
+                        <p>All minor versions (v2.1, v2.2, v2.3...) and security patches within the v2.x line are included free during your update window.</p>
+                    </div>
+                </div>
+                <div class="install-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Upgrade to v3.0 When Ready ($7.99)</h4>
+                        <p>When a new major version ships, existing customers pay a discounted upgrade fee. Your v2.x licence continues to work forever — you upgrade only when you want to.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- FEATURE COMPARISON TABLE                                           -->
+    <!-- ================================================================== -->
+    <section class="section">
         <div class="section-container">
             <div class="section-header text-center">
-                <h2>Feature Comparison Matrix</h2>
-                <p class="section-subtitle">Examine the capability differences between evaluation trial and activated lifetime licenses.</p>
+                <h2>Feature Comparison</h2>
             </div>
 
             <div class="comparison-table-wrapper">
                 <table class="comparison-table">
                     <thead>
                         <tr>
-                            <th>Capability Feature</th>
-                            <th>7-Day Evaluation Trial</th>
-                            <th>Lifetime Activated License</th>
+                            <th>Capability</th>
+                            <th>7-Day Trial</th>
+                            <th>Standard License (v2.x)</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>USB & Serial COM Receiver Bridges</td>
-                            <td><span class="check-icon">✓</span> Included</td>
-                            <td><span class="check-icon">✓</span> Included</td>
+                            <td>USB &amp; Serial COM Bridges</td>
+                            <td><span class="check-icon">✓</span> Full access</td>
+                            <td><span class="check-icon">✓</span> Full access</td>
                         </tr>
                         <tr>
-                            <td>Bluetooth Classic / BLE Connections</td>
-                            <td><span class="check-icon">✓</span> Included</td>
-                            <td><span class="check-icon">✓</span> Included</td>
+                            <td>Bluetooth Classic / SPP</td>
+                            <td><span class="check-icon">✓</span> Full access</td>
+                            <td><span class="check-icon">✓</span> Full access</td>
                         </tr>
                         <tr>
-                            <td>WiFi & Network Socket Streams (TCP/UDP)</td>
-                            <td><span class="check-icon">✓</span> Included</td>
-                            <td><span class="check-icon">✓</span> Included</td>
+                            <td>Bluetooth Low Energy (BLE)</td>
+                            <td><span class="check-icon">✓</span> Full access</td>
+                            <td><span class="check-icon">✓</span> Full access</td>
                         </tr>
                         <tr>
-                            <td>NMEA Monitor Console & Logging</td>
-                            <td><span class="check-icon">✓</span> Included</td>
-                            <td><span class="check-icon">✓</span> Included</td>
+                            <td>WiFi TCP/UDP Streams</td>
+                            <td><span class="check-icon">✓</span> Full access</td>
+                            <td><span class="check-icon">✓</span> Full access</td>
                         </tr>
                         <tr>
-                            <td>Mock Location Injection & Replays</td>
-                            <td><span class="check-icon">✓</span> Included</td>
-                            <td><span class="check-icon">✓</span> Included</td>
+                            <td>NMEA Monitor &amp; Logging</td>
+                            <td><span class="check-icon">✓</span> Full access</td>
+                            <td><span class="check-icon">✓</span> Full access</td>
                         </tr>
                         <tr>
-                            <td>Duration Limits</td>
-                            <td><span class="cross-icon">✗</span> Expires after 7 days</td>
-                            <td><span class="check-icon">✓</span> Unlimited, never expires</td>
+                            <td>Mock Location Injection</td>
+                            <td><span class="check-icon">✓</span> Full access</td>
+                            <td><span class="check-icon">✓</span> Full access</td>
                         </tr>
                         <tr>
-                            <td>Commercial Systems Deployment</td>
+                            <td>Usage Duration</td>
+                            <td><span class="cross-icon">✗</span> 7 days only</td>
+                            <td><span class="check-icon">✓</span> Unlimited — never expires</td>
+                        </tr>
+                        <tr>
+                            <td>Software Updates</td>
+                            <td><span class="cross-icon">✗</span> None</td>
+                            <td><span class="check-icon">✓</span> 1 year within major version</td>
+                        </tr>
+                        <tr>
+                            <td>Commercial Deployment</td>
                             <td><span class="cross-icon">✗</span> Evaluation only</td>
                             <td><span class="check-icon">✓</span> Permitted</td>
+                        </tr>
+                        <tr>
+                            <td>Offline Operation</td>
+                            <td><span class="check-icon">✓</span> After initial check</td>
+                            <td><span class="check-icon">✓</span> After initial activation</td>
                         </tr>
                     </tbody>
                 </table>
@@ -142,46 +229,125 @@
         </div>
     </section>
 
-    <!-- Secure Payment Architecture Diagram / Description -->
-    <section class="section">
+    <!-- ================================================================== -->
+    <!-- PAYMENT GATEWAYS                                                   -->
+    <!-- ================================================================== -->
+    <section class="section bg-surface">
         <div class="section-container" style="max-width: 800px; text-align: left;">
-            <div class="section-tag" style="text-align: center; margin: 0 auto 10px auto;">SECURITY-FIRST BILLING</div>
-            <h2 style="text-align: center; margin-bottom: 20px;">Payment Gateway Architecture</h2>
-            <p style="color: var(--text-muted); margin-bottom: 20px;">
-                Our checkout infrastructure integrates seamlessly with top global and regional providers. To keep customer data safe, we adhere to strict standards:
-            </p>
-            
+            <div class="section-header text-center">
+                <div class="section-tag">SECURE PAYMENTS</div>
+                <h2>Payment Gateway Architecture</h2>
+                <p class="section-subtitle">We integrate with industry-leading payment processors. Your card data never touches our servers.</p>
+            </div>
+
             <div class="grid grid-2" style="gap: 20px;">
-                <div style="background: var(--bg-surface); padding: 20px; border-radius: var(--radius-sm); border: 1px solid var(--bg-card-border);">
-                    <h4>🔒 Server-Side Validation</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">We never process transactions or verify billing keys client-side. Cryptographic verification tokens are resolved securely on RitYm licensing servers.</p>
+                <div style="background: var(--bg-card); padding: 24px; border-radius: var(--radius-sm); border: 1px solid var(--bg-card-border);">
+                    <h4 style="margin-bottom: 8px;">📱 Android — Google Play Billing</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">In-app purchase verified via Google Play Integrity API. Licence state synced across devices signed into the same Google account.</p>
                 </div>
-                <div style="background: var(--bg-surface); padding: 20px; border-radius: var(--radius-sm); border: 1px solid var(--bg-card-border);">
-                    <h4>💳 Third-Party Checkouts</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">We support Stripe, Razorpay, BillDesk, and Google Play Billing. API secret keys are securely stored on our servers and are never exposed in browser scripts.</p>
+                <div style="background: var(--bg-card); padding: 24px; border-radius: var(--radius-sm); border: 1px solid var(--bg-card-border);">
+                    <h4 style="margin-bottom: 8px;">🖥️ Windows — Stripe &amp; Razorpay</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Secure checkout hosted by Stripe (global) or Razorpay (India). Licence key is emailed upon successful payment.</p>
+                </div>
+                <div style="background: var(--bg-card); padding: 24px; border-radius: var(--radius-sm); border: 1px solid var(--bg-card-border);">
+                    <h4 style="margin-bottom: 8px;">🔒 Server-Side Verification</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Purchase receipts are verified server-side. No billing secrets or API keys are exposed in client code. OWASP Top 10 compliant.</p>
+                </div>
+                <div style="background: var(--bg-card); padding: 24px; border-radius: var(--radius-sm); border: 1px solid var(--bg-card-border);">
+                    <h4 style="margin-bottom: 8px;">🔄 Restore Purchases</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Reinstall on a new device? Tap "Restore Purchases" to re-validate your licence. Works on Android via Google account and on Windows via email-linked key.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer" id="footer-injected"></footer>
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <div class="section-container text-center">
+            <h2 style="color: #ffffff; margin-bottom: 12px;">Start Your Free Trial Today</h2>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto;">7 days of unrestricted access. All features. No credit card.</p>
+            <a href="downloads.html" class="btn btn-white">Download EXOS GPS</a>
+        </div>
+    </section>
 
-    <!-- Toast Notification Container -->
+    <!-- ================================================================== -->
+    <!-- PURCHASE MODAL (replaces alert())                                  -->
+    <!-- ================================================================== -->
+    <div class="purchase-modal-overlay" id="purchase-modal">
+        <div class="purchase-modal">
+            <h3>🔐 Secure Checkout</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">EXOS GPS Standard License — <strong>$12.99</strong> (one-time)</p>
+
+            <div class="purchase-gateway-list">
+                <div class="gateway-item">
+                    <span class="gateway-icon">📱</span>
+                    <div>
+                        <div class="gateway-name">Google Play Billing</div>
+                        <div class="gateway-status">Purchase directly in the Android app → tap "Unlock Full Version"</div>
+                    </div>
+                </div>
+                <div class="gateway-item">
+                    <span class="gateway-icon">💳</span>
+                    <div>
+                        <div class="gateway-name">Stripe (International)</div>
+                        <div class="gateway-status">🚧 Checkout integration coming soon — Q3 2026</div>
+                    </div>
+                </div>
+                <div class="gateway-item">
+                    <span class="gateway-icon">🇮🇳</span>
+                    <div>
+                        <div class="gateway-name">Razorpay (India)</div>
+                        <div class="gateway-status">🚧 Checkout integration coming soon — Q3 2026</div>
+                    </div>
+                </div>
+            </div>
+
+            <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 20px;">For Android users, the purchase can be completed directly inside the app. Windows checkout will be available shortly.</p>
+
+            <button class="btn btn-outline btn-block" onclick="document.getElementById('purchase-modal').classList.remove('active');">Close</button>
+        </div>
+    </div>
+
+    <!-- Footer (Inline) -->
+    <footer class="footer" style="padding: 60px 0; background: #0b0f19; border-top: 1px solid rgba(255,255,255,0.1); color: #f9fafb;">
+        <div class="footer-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1280px; margin: 0 auto; padding: 0 24px;">
+            <div class="footer-brand" style="grid-column: span 2;">
+                <div class="brand-logo" style="margin-bottom: 15px;">
+                    <img src="assets/ritym_logo.png" alt="RITYM Technologies Logo" class="official-logo-img-footer" style="max-height: 40px;">
+                </div>
+                <p style="color: #9ca3af; margin-bottom: 10px;">Professional GPS communication software &amp; custom systems engineering.</p>
+                <p style="font-size: 0.85rem; color: #ff6b00; font-family: var(--font-mono);">RIGHT TIME | SMART SOLUTIONS | LASTING IMPACT</p>
+            </div>
+            <div>
+                <h4 style="color: #ffffff; margin-bottom: 15px; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Products</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+                    <li><a href="products.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">EXOS GPS</a></li>
+                    <li><a href="downloads.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Downloads</a></li>
+                    <li><a href="pricing.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Pricing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #ffffff; margin-bottom: 15px; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Resources</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+                    <li><a href="docs.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Documentation</a></li>
+                    <li><a href="support.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Help Center</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #ffffff; margin-bottom: 15px; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Legal</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+                    <li><a href="privacy.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Privacy Policy</a></li>
+                    <li><a href="terms.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Terms &amp; Conditions</a></li>
+                    <li><a href="refund.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="max-width: 1280px; margin: 40px auto 0 auto; padding: 20px 24px 0 24px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #9ca3af; font-size: 0.85rem;">
+            <p>&copy; 2026 RITYM Technologies. All rights reserved.</p>
+        </div>
+    </footer>
+
     <div class="toast-container" id="toast-container"></div>
-
     <script src="src/main.js"></script>
-    <script>
-        // Inject shared footer
-        fetch('index.html')
-            .then(res => res.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const footerContent = doc.querySelector('footer.footer').innerHTML;
-                document.getElementById('footer-injected').innerHTML = footerContent;
-                initThemeToggler();
-            });
-    </script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EXOS GPS Features & Specifications | RITYM Technologies</title>
-    <meta name="description" content="Explore EXOS GPS features: USB, Bluetooth, WiFi, and TCP/UDP GPS forwarding, mock locations, NMEA diagnostics, and cross-platform support.">
+    <title>EXOS GPS — Professional GPS Telemetry Bridge | RITYM Technologies</title>
+    <meta name="description" content="EXOS GPS is a high-precision GPS telemetry bridge that streams NMEA 0183 data over Bluetooth, WiFi, USB, and BLE between Android phones, Windows PCs, and GNSS hardware.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -24,7 +24,6 @@
                 <a href="downloads.html" class="nav-link">Downloads</a>
                 <a href="pricing.html" class="nav-link">Pricing</a>
                 <a href="docs.html" class="nav-link">Documentation</a>
-                <a href="portal.html" class="nav-link">Portal</a>
                 <a href="support.html" class="nav-link">Support</a>
             </nav>
             <div class="nav-actions" style="display: flex; align-items: center; gap: 12px;">
@@ -34,180 +33,432 @@
         </div>
     </header>
 
-    <!-- Subpage Hero -->
-    <section class="subpage-hero" style="padding-bottom: 20px;">
+    <!-- ================================================================== -->
+    <!-- HERO: Product Story                                                -->
+    <!-- ================================================================== -->
+    <section class="product-hero">
         <div class="section-container">
-            <h1 class="subpage-title">EXOS GPS Product Capabilities</h1>
-            <p class="subpage-subtitle">A versatile, low-latency telemetry bridge engineered for precise location sharing across devices and industrial hardware.</p>
-        </div>
-    </section>
-
-    <!-- App UI Mockup Showcase -->
-    <section class="section" style="padding: 20px 0;">
-        <div class="section-container">
-            <div class="section-header text-center" style="margin-bottom: 30px;">
-                <div class="section-tag">LIVE INTERFACE PREVIEW</div>
-                <h2>A Unified Location Control Center</h2>
-                <p class="section-subtitle">Real-time status updates, satellites maps, and stream logs inside a sleek cross-platform console.</p>
-            </div>
-
-            <div class="mockup-window">
-                <div class="mockup-header">
-                    <div class="mockup-dots">
-                        <span class="mockup-dot red"></span>
-                        <span class="mockup-dot yellow"></span>
-                        <span class="mockup-dot green"></span>
+            <div class="product-hero-grid">
+                <div class="product-hero-text">
+                    <span class="section-tag" style="margin-bottom: 12px;">EXOS GPS SOLUTIONS</span>
+                    <h1>Turn Any Device Into a<br><span class="gradient-text-orange">Professional GPS Station</span></h1>
+                    <p class="product-hero-desc">
+                        EXOS GPS is a cross-platform telemetry bridge that reads standard NMEA 0183 sentences from any GPS/GNSS receiver and streams them in real-time over <strong>Bluetooth SPP</strong>, <strong>Bluetooth LE</strong>, <strong>Wi-Fi TCP</strong>, or <strong>USB Serial</strong> — connecting Android phones, Windows desktops, and dedicated GNSS hardware into a unified location pipeline.
+                    </p>
+                    <div class="product-hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Transport Protocols</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">Platforms</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">&lt;50ms</span>
+                            <span class="stat-label">Latency</span>
+                        </div>
                     </div>
-                    <div class="mockup-title">EXOS GPS Controller v2.4.0</div>
-                    <div style="width: 50px;"></div>
+                    <div style="display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap;">
+                        <a href="downloads.html" class="btn btn-primary">Download Free Trial</a>
+                        <a href="docs.html" class="btn btn-outline">Read Documentation</a>
+                    </div>
                 </div>
-                <div class="mockup-body">
-                    <aside class="mockup-sidebar">
-                        <div class="mockup-menu-item active">🛰️ Dashboard</div>
-                        <div class="mockup-menu-item">🔌 USB Config</div>
-                        <div class="mockup-menu-item">📶 Net Stream</div>
-                        <div class="mockup-menu-item">⚙️ Settings</div>
-                    </aside>
-                    <main class="mockup-content">
-                        <div class="mockup-status-card">
-                            <div class="mockup-stat">
-                                <span>CONNECTION STATUS</span>
-                                <strong style="color: #22c55e;">● ACTIVE (Bluetooth LE)</strong>
-                            </div>
-                            <div class="mockup-stat">
-                                <span>RECEIVER HARDWARE</span>
-                                <strong>Garmin GLO 2 [MAC: 00:18:BD:<span class="masked-data">••:••:••</span>]</strong>
-                            </div>
-                            <div class="mockup-stat">
-                                <span>LATITUDE</span>
-                                <strong>45.512<span class="masked-data">•••</span>° N</strong>
-                            </div>
-                            <div class="mockup-stat">
-                                <span>LONGITUDE</span>
-                                <strong>-122.684<span class="masked-data">•••</span>° W</strong>
-                            </div>
-                        </div>
-                        <div style="font-size: 0.85rem; color: #94a3b8; font-weight: bold; text-align: left;">PARSE FEED (NMEA-0183 Logs)</div>
-                        <div class="mockup-logs">
-$GPGGA,172814.00,4530.76<span class="masked-data">••</span>,N,12241.05<span class="masked-data">••</span>,W,2,10,1.2,35.4,M...<br>
-$GPRMC,172814.00,A,4530.76<span class="masked-data">••</span>,N,12241.05<span class="masked-data">••</span>,W,0.022,,060826,,,A*73<br>
-$GPGSV,3,1,11,03,03,111,31,08,11,043,26,14,35,137,37,17,59,053,44*7C<br>
-$GPGSA,A,3,17,24,15,19,12,28,11,14,,,,1.5,1.2,0.8*3B
-                        </div>
-                    </main>
+                <div class="product-hero-visual">
+                    <img src="assets/windows_station_screenshot.png" alt="EXOS GPS Station — Windows Desktop Command Center showing live satellite telemetry, Earth globe visualization, and NMEA stream logs" class="product-hero-img" loading="lazy">
+                    <span class="product-img-caption">EXOS GPS Station — Windows Desktop Telemetry Command Center</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Core Features Grid -->
-    <section class="section">
-        <div class="section-container">
-            <div class="section-header text-center">
-                <div class="section-tag">HARDWARE BRIDGING</div>
-                <h2>Seamless Connectivity Interfaces</h2>
-                <p class="section-subtitle">Exos GPS bridges almost any GNSS/GPS device to your local applications.</p>
-            </div>
-
-            <div class="product-card-grid">
-                <div class="product-spec-card">
-                    <div class="icon-wrap">🔌</div>
-                    <h3>USB GPS Connectivity</h3>
-                    <p>Auto-detect serial COM ports and connect to major USB receiver chips (u-blox, Prolific, FTDI) with configurable baud rates.</p>
-                </div>
-                <div class="product-spec-card">
-                    <div class="icon-wrap">📱</div>
-                    <h3>Bluetooth Classic GPS</h3>
-                    <p>Pair external high-accuracy Bluetooth GPS/GNSS receivers with legacy Windows applications and modern mobile software.</p>
-                </div>
-                <div class="product-spec-card">
-                    <div class="icon-wrap">⚡</div>
-                    <h3>BLE GPS (Bluetooth LE)</h3>
-                    <p>Low-energy telemetry pipelines optimized for long-running battery-powered IoT nodes and wearable accessories.</p>
-                </div>
-                <div class="product-spec-card">
-                    <div class="icon-wrap">🌐</div>
-                    <h3>WiFi & Network Streams</h3>
-                    <p>Broadcast NMEA telemetry packets over local Wi-Fi networks using standard IP configurations.</p>
-                </div>
-                <div class="product-spec-card">
-                    <div class="icon-wrap">🔄</div>
-                    <h3>TCP/IP & UDP Bridges</h3>
-                    <p>Direct raw socket streams for industrial marine systems, field mapping, and remote servers demanding real-time tracking.</p>
-                </div>
-                <div class="product-spec-card">
-                    <div class="icon-wrap">🖥️</div>
-                    <h3>NMEA Monitor</h3>
-                    <p>Real-time sentence inspector parsing GGA, RMC, GSA, and GSV records directly inside a developer console.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Advanced Capabilities Section -->
+    <!-- ================================================================== -->
+    <!-- WHO IS IT FOR                                                      -->
+    <!-- ================================================================== -->
     <section class="section bg-surface">
         <div class="section-container">
             <div class="section-header text-center">
-                <div class="section-tag">DEVELOPER UTILITIES</div>
-                <h2>Simulation & Diagnostics</h2>
-                <p class="section-subtitle">Unlock advanced control with GPS replay, mapping integrations, and mocked providers.</p>
+                <div class="section-tag">WHO IS IT FOR</div>
+                <h2>Built For Professionals Who Need Reliable GPS Data</h2>
+                <p class="section-subtitle">From field surveyors to app developers, EXOS GPS replaces fragile ad-hoc setups with a robust, tested pipeline.</p>
             </div>
 
-            <div class="product-card-grid">
-                <div class="product-spec-card">
-                    <div class="icon-wrap">🗺️</div>
-                    <h3>Mock Location & Replays</h3>
-                    <p>Inject location coordinates directly into Android mock location providers or Windows location services using recorded GPX tracks.</p>
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <div class="use-case-icon">📡</div>
+                    <h3>Fleet &amp; Vehicle Tracking</h3>
+                    <p>Stream phone GPS to a central Windows station over Bluetooth. Monitor multiple vehicles from one dashboard with sub-second position updates.</p>
                 </div>
-                <div class="product-spec-card">
-                    <div class="icon-wrap">🎯</div>
-                    <h3>High-Precision Mapping</h3>
-                    <p>Render satellites, fix accuracy metrics (HDOP/VDOP), and verify spatial positions on local vector map overlays.</p>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🚢</div>
+                    <h3>Marine &amp; Nautical Navigation</h3>
+                    <p>Bridge external GNSS hardware to marine charting software via TCP/UDP sockets. Standard NMEA 0183 compatible with OpenCPN, Navionics, and custom AIS systems.</p>
                 </div>
-                <div class="product-spec-card">
-                    <div class="icon-wrap">📁</div>
-                    <h3>GPX Log Recorder</h3>
-                    <p>Record raw telemetry streams into standardized GPX or CSV formats for archiving, post-processing, and path audits.</p>
+                <div class="use-case-card">
+                    <div class="use-case-icon">📐</div>
+                    <h3>Field Surveying &amp; Mapping</h3>
+                    <p>Connect u-blox, SiRF, or Garmin USB receivers to field tablets. Record GPX tracks, monitor HDOP/VDOP precision metrics, and export to GIS tools.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">💻</div>
+                    <h3>App Development &amp; Testing</h3>
+                    <p>Inject mock GPS coordinates into Android system location services. Test location-aware apps (Google Maps, Waze, Uber) without physically moving.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🏭</div>
+                    <h3>IoT &amp; Embedded Systems</h3>
+                    <p>Pair ESP32 EXOS hardware modules with the EXOS receiver. Authenticated BLE transport with identity hash verification prevents spoofing.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🗺️</div>
+                    <h3>GPS Relay Between Devices</h3>
+                    <p>Share your phone's GPS with a tablet that has no GPS chip. The receiver device uses mock location injection so all apps see the relayed position.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Future Roadmap Bar -->
+    <!-- ================================================================== -->
+    <!-- ARCHITECTURE DIAGRAM (Inline SVG)                                  -->
+    <!-- ================================================================== -->
+    <section class="section">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <div class="section-tag">SYSTEM ARCHITECTURE</div>
+                <h2>How EXOS GPS Works</h2>
+                <p class="section-subtitle">A real-time telemetry pipeline from GPS source to destination application.</p>
+            </div>
+
+            <div class="architecture-diagram">
+                <svg viewBox="0 0 960 320" xmlns="http://www.w3.org/2000/svg" class="arch-svg">
+                    <!-- Background -->
+                    <defs>
+                        <linearGradient id="grad-source" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.15"/>
+                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.05"/>
+                        </linearGradient>
+                        <linearGradient id="grad-bridge" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ff6b00;stop-opacity:0.15"/>
+                            <stop offset="100%" style="stop-color:#ff6b00;stop-opacity:0.05"/>
+                        </linearGradient>
+                        <linearGradient id="grad-dest" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.15"/>
+                            <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.05"/>
+                        </linearGradient>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+                        </marker>
+                    </defs>
+
+                    <!-- SOURCE COLUMN -->
+                    <rect x="20" y="20" width="260" height="280" rx="16" fill="url(#grad-source)" stroke="#3b82f6" stroke-width="1.5" stroke-opacity="0.3"/>
+                    <text x="150" y="52" text-anchor="middle" font-family="Outfit, sans-serif" font-size="13" font-weight="700" fill="#3b82f6">GPS SOURCE</text>
+
+                    <rect x="45" y="70" width="210" height="48" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+                    <text x="80" y="92" font-family="Inter, sans-serif" font-size="20">📱</text>
+                    <text x="105" y="89" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0f172a">Android Phone GPS</text>
+                    <text x="105" y="106" font-family="Inter, sans-serif" font-size="10" fill="#64748b">Internal GNSS Chip</text>
+
+                    <rect x="45" y="130" width="210" height="48" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+                    <text x="80" y="152" font-family="Inter, sans-serif" font-size="20">🔌</text>
+                    <text x="105" y="149" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0f172a">USB GPS Receiver</text>
+                    <text x="105" y="166" font-family="Inter, sans-serif" font-size="10" fill="#64748b">u-blox, FTDI, Prolific</text>
+
+                    <rect x="45" y="190" width="210" height="48" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+                    <text x="80" y="212" font-family="Inter, sans-serif" font-size="20">📶</text>
+                    <text x="105" y="209" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0f172a">EXOS Hardware Module</text>
+                    <text x="105" y="226" font-family="Inter, sans-serif" font-size="10" fill="#64748b">ESP32 + BLE/WiFi</text>
+
+                    <rect x="45" y="250" width="210" height="36" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+                    <text x="80" y="272" font-family="Inter, sans-serif" font-size="18">🛰️</text>
+                    <text x="105" y="273" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0f172a">BT GPS Puck (Garmin GLO)</text>
+
+                    <!-- ARROWS: Source → Bridge -->
+                    <line x1="280" y1="95" x2="345" y2="135" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+                    <line x1="280" y1="155" x2="345" y2="155" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+                    <line x1="280" y1="215" x2="345" y2="175" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+
+                    <!-- BRIDGE COLUMN (EXOS GPS) -->
+                    <rect x="350" y="60" width="260" height="200" rx="16" fill="url(#grad-bridge)" stroke="#ff6b00" stroke-width="2" stroke-opacity="0.5"/>
+                    <text x="480" y="92" text-anchor="middle" font-family="Outfit, sans-serif" font-size="14" font-weight="800" fill="#ff6b00">EXOS GPS ENGINE</text>
+
+                    <text x="380" y="120" font-family="Inter, sans-serif" font-size="11" fill="#334155">⚡ NMEA 0183 Parser (GGA, RMC, GSA, GSV)</text>
+                    <text x="380" y="142" font-family="Inter, sans-serif" font-size="11" fill="#334155">🔐 BLE Identity Hash Verification</text>
+                    <text x="380" y="164" font-family="Inter, sans-serif" font-size="11" fill="#334155">📡 Bluetooth SPP Relay Service</text>
+                    <text x="380" y="186" font-family="Inter, sans-serif" font-size="11" fill="#334155">🌐 WiFi TCP/UDP Socket Bridge</text>
+                    <text x="380" y="208" font-family="Inter, sans-serif" font-size="11" fill="#334155">🗺️ Mock Location Provider Injection</text>
+                    <text x="380" y="230" font-family="Inter, sans-serif" font-size="11" fill="#334155">📊 Live Telemetry Dashboard UI</text>
+
+                    <!-- ARROWS: Bridge → Dest -->
+                    <line x1="610" y1="135" x2="680" y2="95" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+                    <line x1="610" y1="160" x2="680" y2="160" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+                    <line x1="610" y1="185" x2="680" y2="225" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+
+                    <!-- DEST COLUMN -->
+                    <rect x="685" y="20" width="255" height="280" rx="16" fill="url(#grad-dest)" stroke="#10b981" stroke-width="1.5" stroke-opacity="0.3"/>
+                    <text x="812" y="52" text-anchor="middle" font-family="Outfit, sans-serif" font-size="13" font-weight="700" fill="#10b981">DESTINATION</text>
+
+                    <rect x="710" y="70" width="205" height="48" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+                    <text x="745" y="92" font-family="Inter, sans-serif" font-size="20">🖥️</text>
+                    <text x="770" y="89" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0f172a">Windows GPS Station</text>
+                    <text x="770" y="106" font-family="Inter, sans-serif" font-size="10" fill="#64748b">Telemetry Command Center</text>
+
+                    <rect x="710" y="130" width="205" height="48" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+                    <text x="745" y="152" font-family="Inter, sans-serif" font-size="20">📱</text>
+                    <text x="770" y="149" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0f172a">Android Receiver App</text>
+                    <text x="770" y="166" font-family="Inter, sans-serif" font-size="10" fill="#64748b">Mock Location + Maps</text>
+
+                    <rect x="710" y="190" width="205" height="48" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+                    <text x="745" y="212" font-family="Inter, sans-serif" font-size="20">🚢</text>
+                    <text x="770" y="209" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0f172a">Marine / GIS Software</text>
+                    <text x="770" y="226" font-family="Inter, sans-serif" font-size="10" fill="#64748b">OpenCPN, QGIS, Custom</text>
+
+                    <rect x="710" y="250" width="205" height="36" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+                    <text x="745" y="272" font-family="Inter, sans-serif" font-size="18">⚙️</text>
+                    <text x="770" y="273" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0f172a">Custom TCP/UDP Client</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- PLATFORM SHOWCASE WITH SCREENSHOTS                                 -->
+    <!-- ================================================================== -->
+    <section class="section bg-surface">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <div class="section-tag">CROSS-PLATFORM</div>
+                <h2>One Product, Two Platforms</h2>
+                <p class="section-subtitle">The same professional-grade telemetry engine runs natively on Windows and Android.</p>
+            </div>
+
+            <div class="platform-showcase">
+                <!-- Windows Platform -->
+                <div class="platform-card">
+                    <div class="platform-card-header">
+                        <span class="platform-icon">🪟</span>
+                        <div>
+                            <h3>Windows Desktop</h3>
+                            <span class="platform-version">v0.16 — Python + Tkinter</span>
+                        </div>
+                    </div>
+                    <div class="platform-screenshot-wrap">
+                        <img src="assets/windows_station_screenshot.png" alt="EXOS GPS Station on Windows showing orbital Earth visualization, satellite signal cards, NMEA stream log, and live position telemetry" class="platform-screenshot" loading="lazy">
+                    </div>
+                    <ul class="platform-features">
+                        <li>🛰️ Animated orbital space visualization with satellite pulse indicators</li>
+                        <li>📊 Live telemetry cards — position, satellites, speed, altitude, heading</li>
+                        <li>📡 NMEA 0183 real-time signal log console (GGA, RMC, GSA, GSV)</li>
+                        <li>🔌 Auto-detects COM ports: USB, Bluetooth SPP, WiFi TCP</li>
+                        <li>🔍 Smart device labeling — shows device names, not raw COM numbers</li>
+                        <li>⏱️ 15-second BT connection timeout with cancel button and countdown</li>
+                        <li>📡 Receiver + Transmitter dual modes</li>
+                    </ul>
+                    <a href="downloads.html" class="btn btn-primary btn-block">Download for Windows</a>
+                </div>
+
+                <!-- Android Platform -->
+                <div class="platform-card">
+                    <div class="platform-card-header">
+                        <span class="platform-icon">🤖</span>
+                        <div>
+                            <h3>Android Mobile</h3>
+                            <span class="platform-version">Kotlin + Jetpack Compose + Material 3</span>
+                        </div>
+                    </div>
+                    <div class="platform-screenshot-wrap">
+                        <img src="assets/android_app_screenshot.png" alt="EXOS GPS Android app showing Transmitter mode with Bluetooth device selection, live GPS coordinates, satellite count, and connection status cards in Material Design 3" class="platform-screenshot" loading="lazy">
+                    </div>
+                    <ul class="platform-features">
+                        <li>📡 Transmitter Mode — broadcast phone GPS over Bluetooth SPP to any receiver</li>
+                        <li>💻 Receiver Mode — receive GPS from another phone and inject as mock location</li>
+                        <li>🌍 3D globe visualization with real-time satellite tracking</li>
+                        <li>🗺️ System mock location injection — feeds Google Maps, Waze, and all Android apps</li>
+                        <li>🔗 Bluetooth device picker with live discovery and pairing assistant</li>
+                        <li>🔐 Google Play Billing licence verification with offline fallback</li>
+                        <li>⚡ Foreground Service — runs reliably in background with notification</li>
+                    </ul>
+                    <a href="downloads.html" class="btn btn-primary btn-block">Download for Android</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- CONNECTIVITY INTERFACES                                            -->
+    <!-- ================================================================== -->
+    <section class="section">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <div class="section-tag">CONNECTIVITY</div>
+                <h2>Five Transport Protocols, One Unified Interface</h2>
+                <p class="section-subtitle">EXOS GPS bridges virtually any GPS source to any destination using the protocol that fits your setup.</p>
+            </div>
+
+            <div class="product-card-grid">
+                <div class="product-spec-card">
+                    <div class="icon-wrap">📶</div>
+                    <h3>Bluetooth Classic (SPP)</h3>
+                    <p>Serial Port Profile over Bluetooth Classic. The primary transport for phone-to-PC GPS streaming. Auto-pairs and assigns COM ports on Windows.</p>
+                    <span class="spec-badge">UUID: 00001101-...-00805F9B34FB</span>
+                </div>
+                <div class="product-spec-card">
+                    <div class="icon-wrap">⚡</div>
+                    <h3>Bluetooth Low Energy (BLE)</h3>
+                    <p>Encrypted GATT characteristics for low-power EXOS hardware modules. Identity hash verification prevents rogue device spoofing.</p>
+                    <span class="spec-badge">AES-encrypted transport</span>
+                </div>
+                <div class="product-spec-card">
+                    <div class="icon-wrap">🌐</div>
+                    <h3>WiFi TCP Streams</h3>
+                    <p>LAN-based TCP socket connections with automatic DNS-SD service discovery. Ideal for high-throughput fixed installations and marine environments.</p>
+                    <span class="spec-badge">mDNS / Zeroconf</span>
+                </div>
+                <div class="product-spec-card">
+                    <div class="icon-wrap">🔌</div>
+                    <h3>USB Serial (COM Port)</h3>
+                    <p>Direct serial connection to USB GPS receivers. Auto-detects u-blox, Prolific PL2303, and FTDI chipsets with configurable baud rates (4800–115200).</p>
+                    <span class="spec-badge">NMEA 0183 @ 9600 baud default</span>
+                </div>
+                <div class="product-spec-card">
+                    <div class="icon-wrap">🖥️</div>
+                    <h3>Windows Sensor API</h3>
+                    <p>Feeds GPS coordinates directly into the Windows Location Sensor framework, enabling native location services for Edge, UWP apps, and system APIs.</p>
+                    <span class="spec-badge">ExosWindowsSensor.exe</span>
+                </div>
+                <div class="product-spec-card">
+                    <div class="icon-wrap">🗺️</div>
+                    <h3>Android Mock Location</h3>
+                    <p>Injects received GPS positions as the system's mock location provider. Google Maps, Waze, and all installed apps see the relayed position as their own.</p>
+                    <span class="spec-badge">Developer Options → EXOS GPS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- KEY DIFFERENTIATORS / USPs                                          -->
+    <!-- ================================================================== -->
+    <section class="section bg-surface">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <div class="section-tag">WHY EXOS GPS</div>
+                <h2>Unique Selling Points</h2>
+            </div>
+
+            <div class="usp-grid">
+                <div class="usp-item">
+                    <div class="usp-number">01</div>
+                    <h3>Dual-Mode Operation</h3>
+                    <p>Every EXOS GPS installation works as both a <strong>Transmitter</strong> (reads GPS and broadcasts) and a <strong>Receiver</strong> (accepts remote GPS data). Switch modes with one tap/click.</p>
+                </div>
+                <div class="usp-item">
+                    <div class="usp-number">02</div>
+                    <h3>Smart Device Discovery</h3>
+                    <p>No manual COM port numbers or IP addresses. EXOS discovers GPS devices automatically and shows them in plain language: <em>"Mobile GPS — Bluetooth — Galaxy S24 FE (COM6)"</em>.</p>
+                </div>
+                <div class="usp-item">
+                    <div class="usp-number">03</div>
+                    <h3>Hardware Identity Verification</h3>
+                    <p>BLE connections use a <strong>cryptographic identity hash</strong> derived from the device's protected canonical ID. NMEA data is rejected if the hash doesn't match the selected advertisement.</p>
+                </div>
+                <div class="usp-item">
+                    <div class="usp-number">04</div>
+                    <h3>Resilient Bluetooth Connections</h3>
+                    <p>Bluetooth COM connections run in an <strong>isolated helper process</strong>. A driver timeout is cancelled after 15 seconds without freezing the main app or blocking the next connection attempt.</p>
+                </div>
+                <div class="usp-item">
+                    <div class="usp-number">05</div>
+                    <h3>Offline-First Design</h3>
+                    <p>Internet is only needed for initial licence validation. All GPS parsing, bridging, mock location, and recording works <strong>completely offline</strong> — critical for field and marine environments.</p>
+                </div>
+                <div class="usp-item">
+                    <div class="usp-number">06</div>
+                    <h3>Cross-Device GPS Sharing</h3>
+                    <p>Share your Samsung Galaxy S24 FE's GPS with a Lenovo Tab that has no GPS chip. The tablet receives the position and feeds it to Google Maps as if it were its own GPS.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- ROADMAP                                                            -->
+    <!-- ================================================================== -->
     <section class="section">
         <div class="section-container text-center">
-            <div class="section-tag">COMING SOON</div>
-            <h2>Upcoming Commercial Features</h2>
+            <div class="section-tag">ROADMAP</div>
+            <h2>Upcoming Capabilities</h2>
             <p style="max-width: 600px; margin: 10px auto 30px auto; color: var(--text-muted);">
-                We are actively developing AIS (Automatic Identification System) marine telemetry overlays and direct marine chart plotting plugins.
+                We are actively developing advanced marine and industrial features.
             </p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                 <span class="cap-pill">🚢 AIS Marine Telemetry</span>
                 <span class="cap-pill">🗺️ NOAA Marine Charting</span>
                 <span class="cap-pill">🌐 RTK Centimeter-Level Precision</span>
+                <span class="cap-pill">🍎 macOS Client</span>
+                <span class="cap-pill">🐧 Linux Daemon (CLI)</span>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer" id="footer-injected"></footer>
+    <!-- ================================================================== -->
+    <!-- CTA BANNER                                                         -->
+    <!-- ================================================================== -->
+    <section class="cta-banner">
+        <div class="section-container text-center">
+            <h2 style="color: #ffffff; margin-bottom: 12px;">Ready to Get Started?</h2>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto;">Download the 7-day free trial with full feature access. No credit card required.</p>
+            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <a href="downloads.html" class="btn btn-white">Download Free Trial</a>
+                <a href="pricing.html" class="btn btn-outline-white">View Pricing</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Inline) -->
+    <footer class="footer" style="padding: 60px 0; background: #0b0f19; border-top: 1px solid rgba(255,255,255,0.1); color: #f9fafb;">
+        <div class="footer-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1280px; margin: 0 auto; padding: 0 24px;">
+            <div class="footer-brand" style="grid-column: span 2;">
+                <div class="brand-logo" style="margin-bottom: 15px;">
+                    <img src="assets/ritym_logo.png" alt="RITYM Technologies Logo" class="official-logo-img-footer" style="max-height: 40px;">
+                </div>
+                <p style="color: #9ca3af; margin-bottom: 10px;">Professional GPS communication software &amp; custom systems engineering.</p>
+                <p style="font-size: 0.85rem; color: #ff6b00; font-family: var(--font-mono);">RIGHT TIME | SMART SOLUTIONS | LASTING IMPACT</p>
+            </div>
+            <div>
+                <h4 style="color: #ffffff; margin-bottom: 15px; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Products</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+                    <li><a href="products.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">EXOS GPS</a></li>
+                    <li><a href="downloads.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Downloads</a></li>
+                    <li><a href="pricing.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Pricing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #ffffff; margin-bottom: 15px; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Resources</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+                    <li><a href="docs.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Documentation</a></li>
+                    <li><a href="support.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Help Center</a></li>
+                    <li><a href="security.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Security Page</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #ffffff; margin-bottom: 15px; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Legal &amp; Privacy</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+                    <li><a href="privacy.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Privacy Policy</a></li>
+                    <li><a href="terms.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Terms &amp; Conditions</a></li>
+                    <li><a href="refund.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Refund Policy</a></li>
+                    <li><a href="cookie.html" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem;">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="max-width: 1280px; margin: 40px auto 0 auto; padding: 20px 24px 0 24px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #9ca3af; font-size: 0.85rem;">
+            <p>&copy; 2026 RITYM Technologies. All rights reserved. Android, Google Play and Google Play Billing are trademarks of Google LLC. Windows is a trademark of Microsoft Corporation.</p>
+        </div>
+    </footer>
 
     <!-- Toast Notification Container -->
     <div class="toast-container" id="toast-container"></div>
 
     <script src="src/main.js"></script>
-    <script>
-        // Inject shared footer
-        fetch('index.html')
-            .then(res => res.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const footerContent = doc.querySelector('footer.footer').innerHTML;
-                document.getElementById('footer-injected').innerHTML = footerContent;
-                // Re-bind theme button in the new footer if needed
-                initThemeToggler();
-            });
-    </script>
 </body>
 </html>
