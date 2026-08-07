@@ -3,12 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation &amp; User Guide — EXOS GPS | RITYM Technologies</title>
-    <meta name="description" content="Complete user guide and documentation for EXOS GPS: Bluetooth SPP setup, USB COM ports, WiFi TCP streaming, Android mock location, and troubleshooting.">
+    <title>EXOS GPS Station — Desktop User Guide &amp; Documentation | RITYM Technologies</title>
+    <meta name="description" content="Complete professional user guide for EXOS GPS Station Windows desktop application. Learn all features: station connection, satellite telemetry, Location Override spoofing, Native Windows Sensor Setup, Google Maps browser integration, NMEA 0183, and more.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/style.css">
+    <style>
+        /* Docs layout and typography styling */
+        .docs-hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,107,0,0.12); border: 1px solid rgba(255,107,0,0.3);
+            color: #ff6b00; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
+            text-transform: uppercase; padding: 5px 14px; border-radius: 999px;
+            margin-bottom: 20px;
+        }
+        .docs-layout { display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: start; }
+        @media (max-width: 992px) { .docs-layout { grid-template-columns: 1fr; } .docs-sidebar { display: none; } }
+        .docs-sidebar { position: sticky; top: 100px; }
+        .docs-nav-group { margin-bottom: 28px; }
+        .docs-nav-title {
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--text-dim, #64748b); margin-bottom: 10px; padding-left: 12px;
+        }
+        .docs-nav-link {
+            display: block; padding: 8px 12px; border-radius: 8px; font-size: 0.88rem;
+            color: var(--text-muted, #94a3b8); text-decoration: none; transition: all 0.18s;
+            border-left: 3px solid transparent;
+        }
+        .docs-nav-link:hover { color: var(--primary-orange,#ff6b00); background: rgba(255,107,0,0.06); }
+        .docs-nav-link.active { color: var(--primary-orange,#ff6b00); background: rgba(255,107,0,0.1); border-left-color: var(--primary-orange,#ff6b00); font-weight: 600; }
+        .docs-section { margin-bottom: 60px; padding-top: 20px; }
+        .docs-section h2 {
+            font-size: 1.6rem; font-weight: 700; margin-bottom: 12px;
+            color: var(--text-primary, #0f172a); padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,107,0,0.15);
+        }
+        .docs-section h3 { font-size: 1.2rem; font-weight: 600; margin: 24px 0 10px; color: var(--text-primary, #0f172a); }
+        .docs-section h4 { font-size: 1rem; font-weight: 600; margin: 18px 0 6px; color: var(--text-primary, #0f172a); }
+        .docs-section p { line-height: 1.8; color: var(--text-muted, #475569); margin-bottom: 14px; }
+        .docs-section ul, .docs-section ol { padding-left: 24px; display: flex; flex-direction: column; gap: 10px; color: var(--text-muted, #475569); line-height: 1.7; margin-bottom: 18px; }
+        .docs-section li strong { color: var(--text-primary, #0f172a); }
+        code {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+            background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;
+            color: #d97706;
+        }
+        .dark-theme code { background: rgba(255,255,255,0.08); color: #fbbf24; }
+        .docs-diagram {
+            background: var(--bg-surface, #f8fafc); border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 12px; padding: 20px 22px; margin: 22px 0;
+        }
+        .dark-theme .docs-diagram { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+        .docs-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .flow-step {
+            background: var(--bg-base,#ffffff); border: 1.5px solid rgba(0,0,0,0.1);
+            border-radius: 8px; padding: 10px 16px; font-size: 0.85rem; font-weight: 600;
+            text-align: center; color: var(--text-primary, #0f172a); line-height: 1.4;
+        }
+        .dark-theme .flow-step { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
+        .flow-arrow { font-size: 1.2rem; color: var(--primary-orange,#ff6b00); font-weight: 700; }
+        .ui-callout {
+            display: flex; gap: 14px; align-items: flex-start;
+            background: rgba(255,107,0,0.06); border: 1px solid rgba(255,107,0,0.22);
+            border-radius: 12px; padding: 16px 20px; margin: 20px 0;
+        }
+        .ui-callout-icon { font-size: 1.4rem; flex-shrink: 0; }
+        .ui-callout p { margin: 0; font-size: 0.9rem; line-height: 1.6; }
+        .ui-callout.info { background: rgba(56,189,248,0.06); border-color: rgba(56,189,248,0.25); color: #0284c7; }
+        .ui-callout.info p { color: #0369a1; }
+        .dark-theme .ui-callout.info p { color: #38bdf8; }
+        .ui-callout.warn { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.28); }
+        .ui-callout.warn p { color: #b45309; }
+        .dark-theme .ui-callout.warn p { color: #fbbf24; }
+        .ui-callout.success { background: rgba(74,222,128,0.07); border-color: rgba(74,222,128,0.25); }
+        .ui-callout.success p { color: #15803d; }
+        .dark-theme .ui-callout.success p { color: #4ade80; }
+        .install-steps { display: flex; flex-direction: column; gap: 18px; margin: 20px 0; }
+        .install-step { display: flex; gap: 16px; align-items: flex-start; }
+        .step-number {
+            width: 32px; height: 32px; border-radius: 50%; background: var(--primary-orange,#ff6b00);
+            color: #ffffff; font-weight: 700; font-size: 0.9rem;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .step-content h4 { margin: 0 0 6px; font-size: 1rem; color: var(--text-primary, #0f172a); }
+        .step-content p { margin: 0; font-size: 0.88rem; line-height: 1.6; }
+        .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 22px 0; }
+        @media (max-width: 768px) { .feature-grid { grid-template-columns: 1fr; } }
+        .feature-card {
+            background: var(--bg-surface,#f8fafc); border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 12px; padding: 18px 20px;
+        }
+        .dark-theme .feature-card { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); }
+        .feature-card-title { font-size: 0.95rem; font-weight: 700; color: var(--primary-orange,#ff6b00); margin-bottom: 8px; }
+        .feature-card p { margin: 0; font-size: 0.85rem; line-height: 1.6; }
+        .sys-req-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 20px 0; text-align: left; }
+        .sys-req-table th { background: rgba(255,107,0,0.08); color: var(--primary-orange,#ff6b00); font-weight: 700; padding: 12px 16px; border-bottom: 2px solid rgba(255,107,0,0.15); }
+        .sys-req-table td { padding: 11px 16px; border-bottom: 1px solid rgba(0,0,0,0.06); color: var(--text-muted,#475569); line-height: 1.6; }
+        .dark-theme .sys-req-table td { border-color: rgba(255,255,255,0.05); color: #94a3b8; }
+        .sys-req-table tr:hover td { background: rgba(0,0,0,0.015); }
+        .dark-theme .sys-req-table tr:hover td { background: rgba(255,255,255,0.01); }
+        .sys-req-table tr:last-child td { border-bottom: none; }
+        .toc-top { display: flex; justify-content: flex-end; margin-top: 15px; }
+        .toc-top a { font-size: 0.8rem; color: var(--text-dim,#94a3b8); text-decoration: none; font-weight: 500; }
+        .toc-top a:hover { color: var(--primary-orange,#ff6b00); }
+        .workflow-scenario {
+            background: linear-gradient(135deg, rgba(255,107,0,0.04), rgba(56,189,248,0.03));
+            border: 1px solid rgba(255,107,0,0.18); border-radius: 14px; padding: 24px 28px; margin: 26px 0;
+        }
+        .workflow-scenario-title { font-size: 1.05rem; font-weight: 700; color: var(--primary-orange,#ff6b00); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .badge-green { display: inline-block; background: rgba(74,222,128,0.12); color: #16a34a; border-radius: 6px; padding: 3px 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+        .badge-orange { display: inline-block; background: rgba(255,107,0,0.1); color: #d97706; border-radius: 6px; padding: 3px 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+        .badge-blue { display: inline-block; background: rgba(56,189,248,0.1); color: #0284c7; border-radius: 6px; padding: 3px 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+    </style>
 </head>
 <body class="light-theme">
 
@@ -34,10 +141,11 @@
     </header>
 
     <!-- Subpage Hero -->
-    <section class="subpage-hero" style="padding-bottom: 20px;">
+    <section class="subpage-hero" style="padding-bottom: 24px;">
         <div class="section-container">
+            <div class="docs-hero-badge">🛰️ EXOS GPS Station · Desktop User Guide · v0.17</div>
             <h1 class="subpage-title">Documentation &amp; User Guide</h1>
-            <p class="subpage-subtitle">Complete setup guides, visual workflow diagrams, and technical specifications for EXOS GPS on Windows and Android.</p>
+            <p class="subpage-subtitle">Complete technical reference for EXOS GPS Station — covering the desktop UI, all workflows, connection modes, Location Override, Windows Sensor integration, and GNSS satellite inspection.</p>
         </div>
     </section>
 
@@ -48,20 +156,35 @@
                 <!-- Navigation Sidebar -->
                 <aside class="docs-sidebar">
                     <div class="docs-nav-group">
-                        <div class="docs-nav-title">Getting Started</div>
-                        <a href="#doc-overview" class="docs-nav-link active">Overview</a>
-                        <a href="#doc-quickstart" class="docs-nav-link">Quick Start Guide</a>
+                        <div class="docs-nav-title">Overview</div>
+                        <a href="#doc-overview" class="docs-nav-link active">System Overview</a>
+                        <a href="#doc-ui" class="docs-nav-link">Desktop UI Walkthrough</a>
                     </div>
                     <div class="docs-nav-group">
-                        <div class="docs-nav-title">Setup Guides</div>
+                        <div class="docs-nav-title">Connection &amp; Transports</div>
                         <a href="#doc-bluetooth" class="docs-nav-link">Bluetooth SPP Bridge</a>
-                        <a href="#doc-usb" class="docs-nav-link">USB Serial Receiver</a>
-                        <a href="#doc-wifi" class="docs-nav-link">WiFi TCP/UDP Network</a>
-                        <a href="#doc-mock" class="docs-nav-link">Android Mock Location</a>
+                        <a href="#doc-ble" class="docs-nav-link">Bluetooth LE (BLE)</a>
+                        <a href="#doc-usb" class="docs-nav-link">USB Serial / Hardware GPS</a>
+                        <a href="#doc-wifi" class="docs-nav-link">Wi-Fi TCP / DNS-SD</a>
+                    </div>
+                    <div class="docs-nav-group">
+                        <div class="docs-nav-title">Tools &amp; Features</div>
+                        <a href="#doc-googlemaps" class="docs-nav-link">Launch Google Maps</a>
+                        <a href="#doc-sensor" class="docs-nav-link">Native Windows Sensor Setup</a>
+                        <a href="#doc-override" class="docs-nav-link">Location Override</a>
+                        <a href="#doc-satellite" class="docs-nav-link">Satellite Inspector</a>
+                        <a href="#doc-nmea" class="docs-nav-link">NMEA 0183 &amp; Web API</a>
+                    </div>
+                    <div class="docs-nav-group">
+                        <div class="docs-nav-title">Scenarios &amp; Workflows</div>
+                        <a href="#doc-workflow-phone" class="docs-nav-link">Phone → Windows Bridge</a>
+                        <a href="#doc-workflow-usb" class="docs-nav-link">USB Hardware Receiver</a>
+                        <a href="#doc-workflow-override" class="docs-nav-link">Location Override Scenario</a>
+                        <a href="#doc-workflow-sensor" class="docs-nav-link">Windows Sensor Scenario</a>
                     </div>
                     <div class="docs-nav-group">
                         <div class="docs-nav-title">Reference &amp; Help</div>
-                        <a href="#doc-nmea" class="docs-nav-link">NMEA 0183 Reference</a>
+                        <a href="#doc-mock" class="docs-nav-link">Android Mock Location</a>
                         <a href="#doc-troubleshoot" class="docs-nav-link">Troubleshooting</a>
                         <a href="#doc-faq" class="docs-nav-link">FAQ</a>
                     </div>
@@ -70,197 +193,390 @@
                 <!-- Document Content Panel -->
                 <main class="docs-content" style="text-align: left;">
                     
-                    <!-- Section: Overview -->
+                    <!-- Section: System Overview -->
                     <section id="doc-overview" class="docs-section">
                         <h2>System Overview</h2>
-                        <p>EXOS GPS connects location providers (phones, USB dongles, hardware puchs) with location consumers (Windows stations, field tablets, marine charting software). Understanding the workflow makes setup easy.</p>
+                        <p><strong>EXOS GPS Station</strong> is a professional-grade Windows desktop application by RiTym Technologies that ingests real-time GNSS satellite telemetry from any source — Android smartphones over Bluetooth, USB hardware GPS pucks, or Wi-Fi TCP streams — and surfaces that data as a live dashboard, a system-wide Windows Location Sensor, and a Chrome/Edge geolocation signal for mapping applications such as Google Maps.</p>
+                        <p>The application also includes a <strong>Location Override / Spoofing</strong> tool that allows you to synthetically inject any geographic coordinates into both the Windows Location API and any browser running under the built-in Chrome DevTools Protocol bridge — without needing a physical GPS signal.</p>
 
                         <div class="docs-diagram">
-                            <div style="font-size: 0.8rem; font-weight: 700; color: var(--primary-orange); margin-bottom: 12px; font-family: var(--font-mono); text-transform: uppercase;">Primary Telemetry Flow</div>
+                            <div style="font-size: 0.78rem; font-weight: 700; color: var(--primary-orange); margin-bottom: 14px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em;">Primary Telemetry Flow</div>
                             <div class="docs-flow">
-                                <div class="flow-step">📱 Android Phone<br><span style="font-size:0.75rem; color:var(--text-dim);">Internal GPS</span></div>
+                                <div class="flow-step">📡 GPS Source<br><span style="font-size:0.74rem; color:var(--text-dim);">Phone / USB / Wi-Fi</span></div>
                                 <span class="flow-arrow">➔</span>
-                                <div class="flow-step" style="border-color: var(--primary-orange);">📡 EXOS Service<br><span style="font-size:0.75rem; color:var(--primary-orange);">BT Classic SPP</span></div>
+                                <div class="flow-step">🔵 EXOS Transport<br><span style="font-size:0.74rem; color:var(--text-dim);">BT / USB / TCP</span></div>
                                 <span class="flow-arrow">➔</span>
-                                <div class="flow-step">🖥️ Windows PC<br><span style="font-size:0.75rem; color:var(--text-dim);">Assigned COM Port</span></div>
+                                <div class="flow-step" style="border-color: var(--primary-orange);">🖥️ EXOS Station<br><span style="font-size:0.74rem; color:var(--primary-orange);">NMEA Parser + Dashboard</span></div>
                                 <span class="flow-arrow">➔</span>
-                                <div class="flow-step" style="border-color: var(--accent-green);">🛰️ EXOS Station<br><span style="font-size:0.75rem; color:var(--accent-green);">Visual Telemetry</span></div>
+                                <div class="flow-step" style="border-color: #38bdf8;">🌐 Chrome / Edge<br><span style="font-size:0.74rem; color:#38bdf8;">Live Google Maps</span></div>
+                            </div>
+                            <div class="docs-flow" style="margin-top: 12px;">
+                                <div style="width:100%; font-size:0.78rem; color: var(--text-dim); margin-bottom:6px; font-weight:600;">Also feeds simultaneously:</div>
+                                <div class="flow-step" style="border-color: #4ade80;">🧩 Windows Location Sensor<br><span style="font-size:0.74rem; color:#4ade80;">Native OS Geolocation API</span></div>
+                                <span class="flow-arrow">➔</span>
+                                <div class="flow-step">📌 Any Windows App<br><span style="font-size:0.74rem; color:var(--text-dim);">Maps, Edge, Bing, etc.</span></div>
                             </div>
                         </div>
-                    </section>
 
-                    <!-- Section: Quick Start -->
-                    <section id="doc-quickstart" class="docs-section">
-                        <h2>Quick Start Guide (Phone to PC)</h2>
-                        <p>Follow these 4 steps to stream your phone's GPS to a Windows computer in under 3 minutes:</p>
-
-                        <div class="install-steps" style="margin-top: 20px;">
-                            <div class="install-step">
-                                <div class="step-number">1</div>
-                                <div class="step-content">
-                                    <h4>Pair Phone &amp; PC via Bluetooth</h4>
-                                    <p>Go to Windows Settings &rarr; Bluetooth &amp; Devices &rarr; Add Device. Pair your Android phone with Windows. Confirm the 6-digit PIN on both screens.</p>
-                                </div>
-                            </div>
-                            <div class="install-step">
-                                <div class="step-number">2</div>
-                                <div class="step-content">
-                                    <h4>Launch Android App in Transmitter Mode</h4>
-                                    <p>Open EXOS GPS on your phone. Ensure the <strong>TRANSMITTER</strong> tab is selected, pick your paired PC from the list, and tap <strong>START TRANSMITTING</strong>.</p>
-                                </div>
-                            </div>
-                            <div class="install-step">
-                                <div class="step-number">3</div>
-                                <div class="step-content">
-                                    <h4>Launch Windows EXOS GPS Station</h4>
-                                    <p>Run <code style="font-family: var(--font-mono); font-size: 0.85rem; background: var(--bg-surface); padding: 2px 6px;">run_windows_bridge.bat</code> on your PC. The application will scan available serial ports automatically.</p>
-                                </div>
-                            </div>
-                            <div class="install-step">
-                                <div class="step-number">4</div>
-                                <div class="step-content">
-                                    <h4>Select Port &amp; Connect</h4>
-                                    <p>Select the entry labeled <code style="font-family: var(--font-mono); font-size: 0.85rem; background: var(--bg-surface); padding: 2px 6px;">Mobile GPS - Bluetooth - [Phone Name] (Recommended)</code> from the dropdown, then click <strong>Connect Station</strong>.</p>
-                                </div>
-                            </div>
+                        <div class="ui-callout info">
+                            <div class="ui-callout-icon">ℹ️</div>
+                            <p>EXOS GPS Station operates <strong>100% offline</strong>. Internet access is only used for initial licence key validation and for world map tile display. All GPS telemetry, parsing, and spoofing works without any network connection.</p>
                         </div>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
                     </section>
 
-                    <!-- Section: Bluetooth -->
+                    <!-- Section: Desktop UI Walkthrough -->
+                    <section id="doc-ui" class="docs-section">
+                        <h2>Desktop UI Walkthrough</h2>
+                        <p>The EXOS GPS Station window is organized into five distinct zones. Understanding each zone will allow you to operate the application with confidence.</p>
+
+                        <h3>Zone 1 — Title Bar &amp; Mission Branding</h3>
+                        <p>The title bar displays the application branding: <code>E X O S   G P S   S T A T I O N</code> in a NASA mission-control style monospaced typeface, followed by the sub-label <em>RiTym Technologies · RiTym.com · Exos GPS Solutions</em>. This bar contains no interactive controls — it is purely for identification and product branding.</p>
+
+                        <h3>Zone 2 — Control Toolbar</h3>
+                        <p>Immediately below the title bar is the primary connection control toolbar split into two logical rows:</p>
+                        <ul>
+                            <li><strong>Row 1 (Hardware Connection Controls):</strong>
+                                <ul>
+                                    <li><strong>Station Mode:</strong> A dropdown fixed to <em>RECEIVER MODE (Active)</em>. This confirms the application is running in receive mode.</li>
+                                    <li><strong>GPS Device:</strong> The main source-selection dropdown. Displays all detected EXOS-compatible sources (Bluetooth, BLE, USB serial COM ports, Wi-Fi TCP emitters) found on the system.</li>
+                                    <li><strong>Rescan Ports:</strong> Scans all hardware COM ports, query cached Bluetooth SPP ports, and broadcasts DNS-SD requests for Wi-Fi receivers.</li>
+                                    <li><strong>Connect Station:</strong> Initiates connection to the selected GPS device. Once connected, it changes to <em>Disconnect Station</em>. If a Bluetooth connection is opening, this button changes to a <em>Cancel Connection [15s]</em> countdown timer to prevent app freezing.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Row 2 (Action Buttons):</strong>
+                                <ul>
+                                    <li><strong>Launch Google Maps:</strong> Opens an isolated Chrome or Microsoft Edge browser instance controlled via Chrome DevTools Protocol (CDP) on port 9222 to project live location telemetry.</li>
+                                    <li><strong>Native Windows Sensor Setup:</strong> Opens a guided driver configuration dialog to integrate coordinates directly with the Windows OS Location API.</li>
+                                    <li><strong>Location Override:</strong> Opens the Location Override / Spoofing dialog.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3>Zone 3 — Space Visualizer Canvas (Left Panel)</h3>
+                        <p>An animated high-tech radar canvas representing the Earth and satellite status:</p>
+                        <ul>
+                            <li><strong>Spinning Earth Globe:</strong> Renders natural continent outlines, atmosphere glow, and night shading.</li>
+                            <li><strong>Position Pin:</strong> Places a pin at your coordinates on the globe once a satellite fix is acquired.</li>
+                            <li><strong>Orbiting Satellites:</strong> Real-time polar projection of satellites in view, showing actual elevation and azimuth.</li>
+                            <li><strong>HUD Status:</strong> Text overlays showing active satellites, fixed counts, and reverse-geocoded country/ocean regions.</li>
+                        </ul>
+
+                        <h3>Zone 4 — Telemetry Dashboard (Right Panel)</h3>
+                        <p>A fixed 420px column displaying coordinates and telemetry metrics on high-contrast cards:</p>
+                        <ul>
+                            <li><strong>Position:</strong> Live latitude and longitude in decimal degrees, alongside country reverse-geocoding.</li>
+                            <li><strong>Satellites in Fix:</strong> Total satellites locked, fix quality status, and a button to launch the <em>Satellite Inspector</em>.</li>
+                            <li><strong>Speed &amp; Heading:</strong> Direct reading of velocity in knots (and km/h) and track direction in degrees from True North.</li>
+                            <li><strong>Altitude:</strong> Current altitude in meters and feet referenced to Mean Sea Level (MSL).</li>
+                        </ul>
+
+                        <h3>Zone 5 — Live NMEA 0183 Signal Terminal Log (Bottom Panel)</h3>
+                        <p>A scrollable console output window displaying raw incoming NMEA sentences (e.g., <code>$GPGGA</code>, <code>$GPRMC</code>, <code>$GPGSV</code>). Essential for visual troubleshooting and ensuring signal integrity.</p>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
+                    </section>
+
+                    <!-- Section: Bluetooth SPP Bridge -->
                     <section id="doc-bluetooth" class="docs-section">
-                        <h2>Bluetooth SPP &amp; BLE Configuration</h2>
-                        <p>EXOS GPS uses Bluetooth Classic Serial Port Profile (SPP) with UUID <code style="font-family: var(--font-mono); font-size: 0.85rem; background: var(--bg-surface); padding: 2px 6px;">00001101-0000-1000-8000-00805F9B34FB</code> for reliable NMEA sentence streaming.</p>
+                        <h2>Bluetooth SPP Bridge</h2>
+                        <p>The Bluetooth Classic Serial Port Profile (SPP) is the primary transport channel for streaming your Android smartphone's internal GPS receiver data to your Windows PC. This connection operates over the standard Bluetooth SPP UUID: <code>00001101-0000-1000-8000-00805F9B34FB</code>.</p>
 
-                        <div class="docs-diagram">
-                            <div style="font-size: 0.8rem; font-weight: 700; color: var(--primary-orange); margin-bottom: 12px; font-family: var(--font-mono); text-transform: uppercase;">Bluetooth Connection Lifecycle</div>
-                            <div class="docs-flow">
-                                <div class="flow-step">Discovery</div>
-                                <span class="flow-arrow">➔</span>
-                                <div class="flow-step">PIN Verify</div>
-                                <span class="flow-arrow">➔</span>
-                                <div class="flow-step">COM Assigned</div>
-                                <span class="flow-arrow">➔</span>
-                                <div class="flow-step" style="border-color: var(--primary-orange);">15s Timeout Watchdog</div>
-                                <span class="flow-arrow">➔</span>
-                                <div class="flow-step" style="border-color: var(--accent-green);">Stream Active</div>
-                            </div>
-                        </div>
-
-                        <h3 style="margin-top: 20px;">Resilient Connection Handler</h3>
-                        <p>Windows Bluetooth COM ports can freeze if a device disconnects unexpectedly. EXOS GPS Station wraps port connection calls in an isolated process. If a port does not respond within <strong>15 seconds</strong>, the attempt is safely cancelled and a <strong>Cancel Connection</strong> countdown button appears — ensuring the desktop UI never freezes.</p>
-                    </section>
-
-                    <!-- Section: USB Serial -->
-                    <section id="doc-usb" class="docs-section">
-                        <h2>USB Serial Receiver Setup</h2>
-                        <p>To connect a hardware USB GPS puck (u-blox, FTDI, Prolific PL2303, SiRF):</p>
-                        
-                        <ol style="margin-top: 15px; padding-left: 20px; display: flex; flex-direction: column; gap: 10px;">
-                            <li>Plug the USB receiver into a USB port on your Windows PC.</li>
-                            <li>Open Windows Device Manager &rarr; Ports (COM &amp; LPT) to verify the assigned COM port (e.g. COM3).</li>
-                            <li>In EXOS GPS Station, click <strong>Rescan Ports</strong> and select the entry matching your USB serial hardware.</li>
-                            <li>Baud rate is configured automatically (default: 9600 for standard NMEA receivers).</li>
+                        <h3>Prerequisites &amp; Setup</h3>
+                        <ol>
+                            <li>Ensure Bluetooth is enabled on both devices.</li>
+                            <li>Pair the Android phone inside Windows Settings &rarr; Bluetooth &amp; Devices. Confirm the matching 6-digit PIN.</li>
+                            <li>Launch the EXOS GPS Android app, switch to the <strong>Transmitter</strong> tab, select your PC name, and tap <strong>Start Transmitting</strong>.</li>
                         </ol>
+
+                        <h3>Resilient Connection Watchdog</h3>
+                        <p>Windows COM ports can hang indefinitely if a Bluetooth link drops or if the receiver is opened before the transmitter starts broadcasting. EXOS GPS Station implements a dedicated background serial worker. If no NMEA sentence arrives within <strong>15 seconds</strong>, the connection attempt is aborted. The UI provides a <code>Cancel Connection</code> countdown button to immediately release the port if clicked.</p>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
                     </section>
 
-                    <!-- Section: WiFi TCP -->
-                    <section id="doc-wifi" class="docs-section">
-                        <h2>WiFi Network Forwarding</h2>
-                        <p>Stream NMEA data over local Wi-Fi networks using automatic DNS-SD service discovery or direct TCP/UDP sockets.</p>
+                    <!-- Section: Bluetooth LE (BLE) -->
+                    <section id="doc-ble" class="docs-section">
+                        <h2>Bluetooth LE (BLE)</h2>
+                        <p>For modern hardware accessories and battery-efficient transmitters, EXOS GPS Station supports Bluetooth Low Energy (BLE) NMEA streams. BLE devices advertise standard NMEA GATT services and are automatically detected during scans.</p>
+                        <p>When connecting to a BLE source, the application initiates a GATT notification subscription. A safety watchdog monitors incoming packets: if no NMEA sentences are detected for <strong>8 seconds</strong>, the connection is treated as dead and is torn down to prevent the app thread from stalling.</p>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
+                    </section>
 
-                        <div class="docs-diagram">
-                            <div style="font-size: 0.8rem; font-weight: 700; color: var(--primary-orange); margin-bottom: 12px; font-family: var(--font-mono); text-transform: uppercase;">WiFi Network Architecture</div>
-                            <div class="docs-flow">
-                                <div class="flow-step">EXOS Hardware / Phone</div>
-                                <span class="flow-arrow">➔</span>
-                                <div class="flow-step">DNS-SD Broadcast<br><span style="font-size:0.75rem;">_exos-gps._tcp</span></div>
-                                <span class="flow-arrow">➔</span>
-                                <div class="flow-step">Auto-Discovered by Windows</div>
-                                <span class="flow-arrow">➔</span>
-                                <div class="flow-step" style="border-color: var(--accent-green);">TCP Socket Stream</div>
-                            </div>
+                    <!-- Section: USB Serial / Hardware GPS -->
+                    <section id="doc-usb" class="docs-section">
+                        <h2>USB Serial / Hardware GPS</h2>
+                        <p>EXOS GPS Station is fully compatible with standard USB GPS dongles, pucks, and professional GNSS receivers (such as u-blox M8/M9, FTDI, Prolific, or Silicon Labs serial chips).</p>
+                        <ul>
+                            <li><strong>Auto-Detection:</strong> When you connect the USB GPS receiver to a USB port, Windows assigns it a COM port. Clicking <strong>Rescan Ports</strong> lists the device as <code>Hardware GPS - USB - EXOS-GPS-[ID]</code>.</li>
+                            <li><strong>Baud Rate Configuration:</strong> The receiver uses a standard serial connection. Common baud rates are 9600 (default for standard GPS) or 115200 (for high-rate 10Hz receivers). EXOS GPS Station auto-detects standard configurations.</li>
+                        </ul>
+                        <div class="ui-callout warn">
+                            <div class="ui-callout-icon">⚠️</div>
+                            <p><strong>Note:</strong> USB hardware receivers must have a clear line of sight to the sky to lock onto satellites. Under clear skies, a cold start fix typically takes between 30 to 90 seconds. Indoors, the device may stay in "Awaiting Fix" indefinitely.</p>
+                        </div>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
+                    </section>
+
+                    <!-- Section: Wi-Fi TCP / DNS-SD -->
+                    <section id="doc-wifi" class="docs-section">
+                        <h2>Wi-Fi TCP / DNS-SD Network Streaming</h2>
+                        <p>To stream GPS data across local network connections, EXOS GPS supports TCP network sockets combined with Zero-Configuration Networking (Zeroconf / DNS-SD):</p>
+                        <ul>
+                            <li><strong>DNS-SD Service Discovery:</strong> EXOS Wi-Fi hardware transmitters broadcast a service named <code>_exos-gps._tcp</code>. EXOS GPS Station listens for these broadcasts. When a device is found, it appears in the device picker list automatically.</li>
+                            <li><strong>Hardware AP Mode:</strong> For field configurations, EXOS GPS hardware units can run as Wi-Fi Access Points. Connect your PC to the SSID (e.g. <code>EXOS-GPS-XXXX</code>, password: <code>exosgps1</code>) and select <code>Hardware GPS - Wi-Fi - Setup Mode</code> (default address: <code>192.168.4.1:2000</code>).</li>
+                            <li><strong>Manual Socket Connection:</strong> You can input custom TCP endpoints by typing directly into the dropdown input field in the format: <code>tcp://[ip_address]:[port]</code> (e.g. <code>tcp://192.168.1.50:2000</code>).</li>
+                        </ul>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
+                    </section>
+
+                    <!-- Section: Launch Google Maps -->
+                    <section id="doc-googlemaps" class="docs-section">
+                        <h2>Launch Google Maps</h2>
+                        <p>The <strong>Launch Google Maps</strong> button fires a highly integrated, remote-controlled web browser instance designed specifically for live navigation tracking.</p>
+
+                        <h3>How It Works</h3>
+                        <ol>
+                            <li>The application scans your PC for installations of Google Chrome or Microsoft Edge.</li>
+                            <li>It launches a dedicated browser process with special debugging flags:
+                                <ul>
+                                    <li><code>--remote-debugging-port=9222</code> (enables Chrome DevTools Protocol)</li>
+                                    <li><code>--load-extension=...</code> (injects our custom browser extension)</li>
+                                    <li><code>--user-data-dir=...</code> (isolates navigation from your main browser profile)</li>
+                                </ul>
+                            </li>
+                            <li>The browser opens directly to Google Maps, centered at your coordinates.</li>
+                            <li>EXOS GPS Station establishes a WebSocket connection to the browser on port 9222. Every second, it sends an <code>Emulation.setGeolocationOverride</code> command to force all open tabs to use the GPS Station coordinates.</li>
+                            <li>A custom javascript polyfill is injected to override <code>navigator.geolocation</code> and mock Google API geolocation lookups inside the web pages.</li>
+                        </ol>
+
+                        <h3>Purpose and Utility</h3>
+                        <p>This feature is designed for:
+                            <br>&bull; <strong>Real-time Field Monitoring:</strong> View your active movement on standard web map overlays.
+                            <br>&bull; <strong>QA &amp; Verification:</strong> Confirm that your mock or real GPS coordinates are correctly parsed and read by standard web applications.
+                            <br>&bull; <strong>Fallback Mode:</strong> If Chrome or Edge are not installed, the application falls back to standard <code>webbrowser.open()</code>, which opens a static coordinates link in your default browser.
+                        </p>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
+                    </section>
+
+                    <!-- Section: Native Windows Sensor Setup -->
+                    <section id="doc-sensor" class="docs-section">
+                        <h2>Native Windows Sensor Setup</h2>
+                        <p>The <strong>Native Windows Sensor Setup</strong> button opens a guided workflow to install the <strong>GpsDirect</strong> sensor driver. This driver exposes the incoming GPS serial stream as a native Windows system location sensor (<code>Windows.Devices.Sensors</code>).</p>
+
+                        <h3>Why Use the Native Sensor?</h3>
+                        <p>By default, Windows uses Wi-Fi access point triangulation and IP geolocation to determine your position. This is often inaccurate in rural areas or offline environments. Registering your GPS device as a native Windows Location Sensor forces the OS to use accurate satellite coordinates. This enables geolocation for all native applications, including:
+                            <br>&bull; <strong>Windows Maps App:</strong> For offline vector maps and desktop routing.
+                            <br>&bull; <strong>Microsoft Edge / Chrome:</strong> Native location permission prompts inside the browser will query the system sensor directly.
+                            <br>&bull; <strong>Weather and Time Zone tools:</strong> To update automatically based on physical movement.
+                        </p>
+
+                        <h3>Setup Configuration Guide</h3>
+                        <p>During the setup utility wizard, you must choose the following options:</p>
+                        <table class="sys-req-table">
+                            <thead><tr><th>Setting Name</th><th>Value to Choose</th><th>Purpose</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>COM Port</strong></td><td>The COM port assigned to your GPS device (e.g. <code>COM5</code>).</td><td>Tells GpsDirect where to listen for raw NMEA sentences.</td></tr>
+                                <tr><td><strong>Baud Rate</strong></td><td><code>9600</code> (or matching your hardware GPS spec).</td><td>Matches serial communication speeds.</td></tr>
+                                <tr><td><strong>When signal is lost</strong></td><td>Choose <code>Always tell Windows I have data</code>.</td><td>Prevents Windows from immediately reverting to IP-based location during brief satellite drops.</td></tr>
+                                <tr><td><strong>Shared COM Port Opening</strong></td><td><strong>Check the box ☑️</strong></td><td><strong>CRITICAL:</strong> Allows both EXOS GPS Station and GpsDirect to read from the COM port simultaneously without locking errors.</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
+                    </section>
+
+                    <!-- Section: Location Override -->
+                    <section id="doc-override" class="docs-section">
+                        <h2>Location Override (Spoofing Tool)</h2>
+                        <p>The <strong>Location Override</strong> tool allows you to manually mock coordinates. This feature is crucial for developers testing geolocation behaviors or verifying app reactions in different regions.</p>
+
+                        <h3>Important Constraints</h3>
+                        <div class="ui-callout warn">
+                            <div class="ui-callout-icon">⚠️</div>
+                            <p><strong>Satellite Telemetry Precedence:</strong> Location Override is deactivated when a connection to a live GPS source is established. Real-time NMEA satellite telemetry from a device always takes precedence over synthetic overrides. To use Location Override, you must first disconnect the active station.</p>
                         </div>
 
-                        <p style="margin-top: 12px;">For direct access to hardware GPS modules in AP mode (e.g. <code style="font-family: var(--font-mono); font-size: 0.85rem;">EXOS-GPS-NXKRA</code>), connect your PC Wi-Fi to the device SSID using default passphrase <code style="font-family: var(--font-mono); font-size: 0.85rem;">exosgps1</code> and navigate to <code style="font-family: var(--font-mono); font-size: 0.85rem;">http://192.168.4.1</code>.</p>
+                        <h3>How to Spoof Coordinates</h3>
+                        <ol>
+                            <li>Click <strong>Location Override (Germany/Custom)</strong>.</li>
+                            <li><strong>Select a Preset:</strong> Click any preset buttons (Berlin, Paris, London, New York, Tokyo, Sydney) to instantly warp the location.</li>
+                            <li><strong>Custom Coordinates:</strong> Enter manual Latitude and Longitude values (e.g., Lat: <code>37.7749</code>, Lon: <code>-122.4194</code>) and click <strong>Apply Custom Location</strong>.</li>
+                            <li><strong>Verify:</strong> Click <strong>Launch Google Maps</strong> to verify the blue dot resides at the overridden position.</li>
+                            <li><strong>Restore:</strong> To disable override, reopen the dialog and click <strong>🟢 Restore Live Satellite GPS</strong>.</li>
+                        </ol>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
                     </section>
 
-                    <!-- Section: Mock Location -->
+                    <!-- Section: Satellite Inspector -->
+                    <section id="doc-satellite" class="docs-section">
+                        <h2>GNSS Satellite Inspector</h2>
+                        <p>The <strong>Satellite Inspector</strong> is a professional diagnostic utility. Open it by clicking <strong>🔍 Inspect Satellites...</strong> on the right telemetry panel.</p>
+                        
+                        <h3>Technical Features</h3>
+                        <ul>
+                            <li><strong>Real-Time Table:</strong> Displays detailed information for each satellite: Tag, Constellation, PRN, Elevation, Azimuth, and Signal-to-Noise Ratio (SNR).</li>
+                            <li><strong>Constellation Support:</strong> Decodes and displays country flags matching the satellite identity (GPS 🇺🇸, GLONASS 🇷🇺, Galileo 🇪🇺, BeiDou 🇨🇳).</li>
+                            <li><strong>Column Sorting:</strong> Click any header (such as SNR or Elevation) to sort the table dynamically.</li>
+                            <li><strong>Orbital Specifications:</strong> Double-click any row to view structural telemetry: Operating authority, launch vehicle, atomic clock standard, calculated slant range (km), and signal frequency bands.</li>
+                        </ul>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
+                    </section>
+
+                    <!-- Section: NMEA 0183 & Web API -->
+                    <section id="doc-nmea" class="docs-section">
+                        <h2>NMEA 0183 &amp; HTTP Web API Reference</h2>
+                        <p>EXOS GPS Station parses standard NMEA 0183 sentences. The parsed sentences are formatted into a JSON structure available to local software.</p>
+
+                        <h3>NMEA Parser Matrix</h3>
+                        <table class="sys-req-table">
+                            <thead><tr><th>Sentence</th><th>Type</th><th>Parameters Extracted</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>$xxGGA</code></td><td>Fix Info</td><td>UTC Time, Latitude, Longitude, Fix Quality, Satellites in Use, Altitude (MSL)</td></tr>
+                                <tr><td><code>$xxRMC</code></td><td>Navigation</td><td>Position Status, Speed Over Ground (knots), Track Angle, Date</td></tr>
+                                <tr><td><code>$xxGSA</code></td><td>DOP &amp; Active</td><td>Fix Selection Mode, Fix Type (2D/3D), Satellite PRNs used for triangulation</td></tr>
+                                <tr><td><code>$xxGSV</code></td><td>Satellites</td><td>Total sentences, Satellites in view, PRN, Elevation, Azimuth, SNR values</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Local HTTP Web API</h3>
+                        <p>The application runs a lightweight HTTP server on port <code>9001</code>. Developers can query live coordinates via HTTP requests:</p>
+                        <p><code>GET http://127.0.0.1:9001/location</code></p>
+                        <p><strong>Response Schema:</strong></p>
+<pre style="background: var(--bg-surface, #f1f5f9); border-radius: 8px; padding: 12px 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; overflow-x: auto; color: #475569;">
+{
+  "lat": 52.520000,
+  "lon": 13.405000,
+  "alt": 50.0,
+  "speed": 0.0,
+  "bearing": 0.0,
+  "sats": 12,
+  "time": 1786043022.23
+}
+</pre>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
+                    </section>
+
+                    <!-- Section: Scenarios & Workflows -->
+                    <section id="doc-workflows" class="docs-section">
+                        <h2>Examples &amp; Operational Workflows</h2>
+                        <p>Review the standard workflows below to configure the app for your target scenario.</p>
+
+                        <!-- Scenario 1: Phone to PC -->
+                        <div id="doc-workflow-phone" class="workflow-scenario">
+                            <div class="workflow-scenario-title">📱 Scenario 1: Bridging Android Phone GPS to Windows PC</div>
+                            <ol>
+                                <li>Ensure your phone is paired to Windows in the OS Bluetooth Settings.</li>
+                                <li>Launch the <strong>EXOS GPS app</strong> on your phone. Tap the <strong>TRANSMITTER</strong> tab, select your PC, and tap <strong>Start Transmitting</strong>.</li>
+                                <li>Launch <strong>EXOS GPS Station</strong> on Windows. Click <strong>Rescan Ports</strong>.</li>
+                                <li>Select <code>Mobile GPS - Bluetooth - [Phone Name] (Recommended)</code> from the dropdown list.</li>
+                                <li>Click <strong>Connect Station</strong>. Raw NMEA data will begin scrolling in the log.</li>
+                                <li>Click <strong>Launch Google Maps</strong>. Centering updates automatically as you move.</li>
+                            </ol>
+                        </div>
+
+                        <!-- Scenario 2: USB Serial -->
+                        <div id="doc-workflow-usb" class="workflow-scenario">
+                            <div class="workflow-scenario-title">🔌 Scenario 2: Connecting USB Hardware GPS Receiver</div>
+                            <ol>
+                                <li>Plug your USB GPS receiver into a vacant USB port on your PC.</li>
+                                <li>Click <strong>Rescan Ports</strong> inside EXOS GPS Station.</li>
+                                <li>Locate <code>Hardware GPS - USB - EXOS-GPS-[ID]</code> in the device dropdown list. Select it.</li>
+                                <li>Click <strong>Connect Station</strong>. The log window will output incoming NMEA sentences.</li>
+                                <li>Ensure the antenna is placed near a window or outdoors. The visualizer globe will show satellite lines as the device locks.</li>
+                            </ol>
+                        </div>
+
+                        <!-- Scenario 3: Location Override -->
+                        <div id="doc-workflow-override" class="workflow-scenario">
+                            <div class="workflow-scenario-title">🎯 Scenario 3: Utilizing Location Override &amp; GPS Precedence</div>
+                            <p>Here is what happens when you combine overrides with hardware inputs:</p>
+                            <ul>
+                                <li><strong>Pre-condition:</strong> The GPS Station is disconnected.</li>
+                                <li>Click <strong>Location Override</strong> and select <strong>US New York, USA</strong>.</li>
+                                <li>The UI updates. Click <strong>Launch Google Maps</strong>. The browser blue dot moves to New York.</li>
+                                <li><strong>The Transition:</strong> Now select your USB GPS receiver (which is physically in London) and click <strong>Connect Station</strong>.</li>
+                                <li><strong>Automatic Override Revocation:</strong> The moment a live NMEA signal connects, the Location Override mode is immediately terminated. The dashboard and Chrome browser map will instantly transition to your real GPS location.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Scenario 4: Windows Sensor Setup -->
+                        <div id="doc-workflow-sensor" class="workflow-scenario">
+                            <div class="workflow-scenario-title">🧩 Scenario 4: Windows System Location Integration (GpsDirect)</div>
+                            <ol>
+                                <li>Follow the setup steps in the <a href="#doc-sensor">Native Windows Sensor Setup</a> section.</li>
+                                <li>Verify that GpsDirect is configured with <code>Shared COM Port Opening</code> enabled.</li>
+                                <li>Click <strong>Connect Station</strong> in the EXOS desktop application.</li>
+                                <li>Open the native Windows Maps application on your desktop.</li>
+                                <li>The Maps application will immediately track your live position.</li>
+                            </ol>
+                        </div>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
+                    </section>
+
+                    <!-- Section: Android Mock Location -->
                     <section id="doc-mock" class="docs-section">
                         <h2>Android System Mock Location</h2>
-                        <p>Allow Google Maps, Waze, Navionics, and all installed Android system apps to receive live GPS coordinates relayed from another phone or PC:</p>
+                        <p>The Android version of EXOS GPS supports <strong>Receiver Mode</strong>, which allows it to overwrite the smartphone's location provider using mock location framework. This enables you to feed external NMEA coordinates into all installed Android apps (Google Maps, Waze, etc.).</p>
 
-                        <div class="install-steps" style="margin-top: 16px;">
+                        <h3>How to Configure Mock Location on Android</h3>
+                        <div class="install-steps">
                             <div class="install-step">
                                 <div class="step-number">1</div>
                                 <div class="step-content">
-                                    <h4>Enable Developer Options</h4>
-                                    <p>Go to Android Settings &rarr; About Phone &rarr; Tap <strong>Build Number</strong> 7 times until Developer Options is enabled.</p>
+                                    <h4>Enable Android Developer Options</h4>
+                                    <p>Go to Android Settings &rarr; About Phone. Locate the <strong>Build Number</strong> and tap it seven times. Enter your device passcode if prompted.</p>
                                 </div>
                             </div>
                             <div class="install-step">
                                 <div class="step-number">2</div>
                                 <div class="step-content">
-                                    <h4>Select Mock Location App</h4>
-                                    <p>Go to Android Settings &rarr; System &rarr; Developer Options &rarr; <strong>Select mock location app</strong> &rarr; Choose <strong>Exos GPS Solutions</strong>.</p>
+                                    <h4>Set Mock Location App</h4>
+                                    <p>Go to Settings &rarr; System &rarr; Developer Options. Scroll down to find <strong>Select mock location app</strong>. Select <strong>Exos GPS Solutions</strong>.</p>
                                 </div>
                             </div>
                             <div class="install-step">
                                 <div class="step-number">3</div>
                                 <div class="step-content">
                                     <h4>Start Receiver Mode</h4>
-                                    <p>Open EXOS GPS, select the <strong>RECEIVER</strong> tab, and start receiving. The app banner will display <code style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-green);">MOCK LOCATION: ACTIVE 🟢</code>.</p>
+                                    <p>Open EXOS GPS, tap the <strong>RECEIVER</strong> tab, choose your PC or hardware transmitter, and connect. The app will display <code style="color: #16a34a;">MOCK LOCATION: ACTIVE</code>.</p>
                                 </div>
                             </div>
                         </div>
-                    </section>
-
-                    <!-- Section: NMEA Reference -->
-                    <section id="doc-nmea" class="docs-section">
-                        <h2>NMEA 0183 Sentence Reference</h2>
-                        <p>EXOS GPS parses and formats standard NMEA 0183 sentences. Supported sentence types:</p>
-
-                        <table class="sys-req-table" style="margin-top: 16px;">
-                            <thead>
-                                <tr><th>Sentence</th><th>Name</th><th>Description</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td><code>$GPGGA</code></td><td>Global Positioning Fix Data</td><td>Time, latitude, longitude, fix quality, satellite count, HDOP, altitude.</td></tr>
-                                <tr><td><code>$GPRMC</code></td><td>Recommended Minimum Nav Data</td><td>Time, position status (valid/invalid), speed in knots, track angle, date.</td></tr>
-                                <tr><td><code>$GPGSA</code></td><td>DOP &amp; Active Satellites</td><td>Selection mode (Auto/Manual), 3D fix mode, satellite IDs used, PDOP, HDOP, VDOP.</td></tr>
-                                <tr><td><code>$GPGSV</code></td><td>Satellites in View</td><td>Total sentences, sentence number, total satellites in view, elevation, azimuth, SNR.</td></tr>
-                            </tbody>
-                        </table>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
                     </section>
 
                     <!-- Section: Troubleshooting -->
                     <section id="doc-troubleshoot" class="docs-section">
                         <h2>Troubleshooting Guide</h2>
 
-                        <h3 style="margin-top: 16px;">Bluetooth COM port stays on "Connecting..."</h3>
-                        <p style="color: var(--text-muted);">Click <strong>Cancel Connection</strong> on the countdown button. In Windows Settings, unpair and re-pair the phone. Ensure the phone is actively broadcasting in Transmitter mode before connecting.</p>
+                        <h3>Bluetooth COM port stays on "Connecting..."</h3>
+                        <p>Windows can block serial openings if the phone is not transmitting yet. Click <strong>Cancel Connection</strong> on the connection button. Ensure the Android app shows "Broadcasting..." in Transmitter mode before connecting on Windows.</p>
 
-                        <h3 style="margin-top: 16px;">No GPS coordinates visible in log ("Awaiting Fix...")</h3>
-                        <p style="color: var(--text-muted);">Ensure the transmitting phone or receiver has a clear line of sight to the sky. GPS receivers indoors may take several minutes to acquire satellite locks (GGA fix quality = 0 means no satellites locked).</p>
+                        <h3>No satellite coordinates visible ("Awaiting Fix...")</h3>
+                        <p>Move your GPS receiver to a window or outdoors. The GPS unit requires a clear line of sight to the sky. Look at the satellite count: you need at least 4 satellites locked to resolve a 3D position coordinate.</p>
 
-                        <h3 style="margin-top: 16px;">Google Maps on receiver tablet isn't updating position</h3>
-                        <p style="color: var(--text-muted);">Verify that <strong>EXOS GPS Solutions</strong> is selected under Android Developer Options &rarr; Select mock location app. Toggle Location off and on in Android quick settings.</p>
+                        <h3>GpsDirect installer fails or fails to update system location</h3>
+                        <p>Run the GpsDirect installer as an Administrator. Ensure that <code>Shared COM Port Opening</code> is checked inside the GpsDirect interface so it doesn't collide with EXOS GPS Station.</p>
 
-                        <h3 style="margin-top: 16px;">Permission denied on COM Port</h3>
-                        <p style="color: var(--text-muted);">Ensure no other serial software (e.g. PuTTY, Arduino IDE Serial Monitor, OpenCPN) is currently connected to the same COM port. Serial channels allow only one active program at a time.</p>
+                        <h3>Google Maps doesn't follow my coordinates</h3>
+                        <p>Make sure you use the browser instance opened by the <strong>Launch Google Maps</strong> button. Standard browser windows lack the debug link. Click the target icon on the map to trigger the first sync.</p>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
                     </section>
 
                     <!-- Section: FAQ -->
                     <section id="doc-faq" class="docs-section">
                         <h2>Frequently Asked Questions</h2>
 
-                        <h4 style="margin-top: 16px;">Does EXOS GPS require an active internet connection?</h4>
-                        <p style="color: var(--text-muted);">No. Internet access is only needed during initial licence key validation. All GPS telemetry, bridging, mock location, and NMEA log parsing operates <strong>100% offline</strong>.</p>
+                        <h4>Does EXOS GPS require an internet connection?</h4>
+                        <p>No. Internet access is only needed during initial license activation. Telemetry parsing, mapping, and browser injection runs offline.</p>
 
-                        <h4 style="margin-top: 16px;">Can I share one phone's GPS with multiple Windows PCs?</h4>
-                        <p style="color: var(--text-muted);">Yes! The Android transmitter service accepts connections from multiple receiver clients simultaneously over Bluetooth SPP and Wi-Fi TCP sockets.</p>
+                        <h4>Can I share one phone's GPS with multiple computers?</h4>
+                        <p>Yes. The Android app's Transmitter service supports simultaneous TCP and Bluetooth client links.</p>
 
-                        <h4 style="margin-top: 16px;">What baud rate should I select for USB receivers?</h4>
-                        <p style="color: var(--text-muted);">Most standard USB GPS receivers use <strong>9600 baud</strong>. High-rate 10Hz receivers may use 38400 or 115200 baud. EXOS auto-detects standard rates.</p>
+                        <h4>What is the difference between major v1.x and future v2.x licenses?</h4>
+                        <p>Your license guarantees lifetime access to the v1.x series and its updates on supported operating systems. Future major versions (v2.x) may be sold separately.</p>
+
+                        <h4>Is this location override tool legal?</h4>
+                        <p>Yes, Location Override is designed for software debugging, testing, and validation on devices you own. Using coordinates for fraudulent activities is strictly prohibited.</p>
+                        <div class="toc-top"><a href="#">↑ Back to top</a></div>
                     </section>
 
                 </main>
@@ -268,7 +584,7 @@
         </div>
     </section>
 
-    <!-- Footer (Inline) -->
+    <!-- Footer -->
     <footer class="footer" style="padding: 60px 0; background: #0b0f19; border-top: 1px solid rgba(255,255,255,0.1); color: #f9fafb;">
         <div class="footer-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1280px; margin: 0 auto; padding: 0 24px;">
             <div class="footer-brand" style="grid-column: span 2;">
@@ -308,10 +624,10 @@
     <div class="toast-container" id="toast-container"></div>
     <script src="src/main.js"></script>
     <script>
-        // Handle Active Link switching on scroll
+        // Track active sidebar link on scroll
         const sections = document.querySelectorAll('.docs-section');
         const navLinks = document.querySelectorAll('.docs-nav-link');
-
+        
         window.addEventListener('scroll', () => {
             let currentId = '';
             sections.forEach(sec => {
