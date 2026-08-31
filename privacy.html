@@ -8,6 +8,33 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/style.css">
+    <style>
+        .privacy-box {
+            background: rgba(0, 229, 255, 0.05);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+        .privacy-section h2 {
+            margin-top: 28px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            font-size: 1.35rem;
+        }
+        .privacy-section p, .privacy-section li {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+        .privacy-section ul {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+        .privacy-section strong {
+            color: var(--text-primary);
+        }
+    </style>
 </head>
 <body class="light-theme">
 
@@ -34,34 +61,73 @@
     <section class="subpage-hero">
         <div class="section-container">
             <h1 class="subpage-title">Privacy Policy</h1>
-            <p class="subpage-subtitle">Last updated: August 6, 2026</p>
+            <p class="subpage-subtitle">Last updated: August 31, 2026</p>
         </div>
     </section>
 
-    <section class="section">
-        <div class="section-container" style="max-width: 800px; text-align: left;">
-            <p style="margin-bottom: 20px;">
-                RITYM Technologies is committed to protecting your privacy. This Privacy Policy describes how EXOS GPS collects, uses, and safeguards information when operating on Windows Desktop, Android devices, and embedded systems.
+    <section class="section privacy-section">
+        <div class="section-container" style="max-width: 860px; text-align: left;">
+            <p style="margin-bottom: 20px; font-size: 1.05rem;">
+                <strong>RiTym Technologies</strong> ("we", "our", or "us") is dedicated to protecting user privacy. This Privacy Policy governs the software applications developed and published by RiTym Technologies, including <strong>EXOS WAYFINDER™</strong> (<code>com.exos.wayfinder</code>), <strong>EXOS GPS™</strong> (<code>com.ritym.exosgps</code>), EXOS Station, and related desktop/embedded tools.
             </p>
 
-            <h2>1. Location Permissions & Data Collection</h2>
-            <p style="margin: 10px 0 20px 0; color: var(--text-muted);">
-                EXOS GPS accesses location coordinates to process telemetry streams and provide mock location forwarding. <strong>All location calculations are completed locally on your physical device.</strong> We do not upload location coordinates, tracks, or GPX logs to external cloud storage servers.
+            <div class="privacy-box">
+                <strong style="color: #00e5ff;">Offline-First Privacy Guarantee:</strong> All navigation algorithms, compass sensor fusion, satellite positioning, trail breadcrumb recording, and waypoint databases operate 100% locally on your physical device. We do not collect, track, store on remote cloud servers, or monetize your location coordinates or journey logs.
+            </div>
+
+            <h2>1. Location Data & Permissions</h2>
+            <p>
+                Our applications access location data (Precise GPS / GNSS and Coarse Network location) strictly to provide core navigation and positioning features:
+            </p>
+            <ul>
+                <li><strong>Live Heading & Velocity:</strong> Calculating Course-Over-Ground (COG), Doppler velocity, altitude, and steering vectors to target waypoints.</li>
+                <li><strong>Trail Backtrack & Safe Point:</strong> Recording local GPS breadcrumbs during active trek sessions so you can retrace your steps in wilderness areas.</li>
+                <li><strong>Foreground Service Operation:</strong> When active trail recording is initiated, a persistent Android foreground notification informs you that GPS logging is running in device memory.</li>
+                <li><strong>No Cloud Uploads:</strong> Location data is processed ephemerally in device RAM and stored exclusively in private local SQLite databases. It is never transmitted across external network servers.</li>
+            </ul>
+
+            <h2>2. Bluetooth & Nearby Device Communications</h2>
+            <p>
+                Our mobile applications utilize Bluetooth Low Energy (BLE) and Bluetooth Classic interfaces solely for local device-to-device communication:
+            </p>
+            <ul>
+                <li><strong>EXOS Hardware & GPS Bridge:</strong> Connecting to external GNSS transmitters, RTK receivers, and EXOS-Station microcontrollers to forward NMEA sentences into Android Mock Location providers.</li>
+                <li><strong>Buddy Radar (Peer Tracking):</strong> Broadcasting and receiving localized, encrypted peer beacon packets over short-range BLE radio mesh without cellular network connectivity or internet access.</li>
+            </ul>
+
+            <h2>3. Sensor & Hardware Telemetry</h2>
+            <p>
+                The software accesses device magnetometers, accelerometers, gyroscopes, and barometric sensors locally to compute tilt-compensated magnetic heading, pitch, roll, and elevation profiles. Sensor telemetry never leaves your hardware.
             </p>
 
-            <h2>2. Hardware & Connection Interfaces</h2>
-            <p style="margin: 10px 0 20px 0; color: var(--text-muted);">
-                Our software utilizes Bluetooth, Wi-Fi, and USB COM port interfaces to communicate with GNSS receivers. Access to these channels is strictly controlled by device operating system permissions.
+            <h2>4. In-App Purchases & Financial Billing</h2>
+            <p>
+                All in-app purchases and subscriptions (such as EXOS Pro Lifetime or Annual Pass) are processed directly and securely through <strong>Google Play Billing Services</strong>. RiTym Technologies does not process, receive, or store your payment card details, billing addresses, or banking information.
             </p>
 
-            <h2>3. Third-party SDKs & Google Play Integrity</h2>
-            <p style="margin: 10px 0 20px 0; color: var(--text-muted);">
-                We implement the Google Play Integrity API to detect tampered app versions and protect licensing. This API is subject to the Google Play Services Privacy Policy. No location data is shared with Google through this integration.
+            <h2>5. Third-Party Analytics & Advertising</h2>
+            <p>
+                We do <strong>not</strong> include third-party advertising SDKs, ad trackers, or data brokers in our applications. We do not sell or rent user data to third parties.
             </p>
 
-            <h2>4. Your Consent & Rights</h2>
-            <p style="margin: 10px 0 20px 0; color: var(--text-muted);">
-                By operating EXOS GPS, you agree to local processing of telemetry coordinates. You can revoke permissions or request account deletion at any time via our <a href="delete-account.html">Account Deletion Page</a>.
+            <h2>6. Data Retention & Account Deletion</h2>
+            <p>
+                Since navigation logs and waypoints are saved exclusively to your device's local storage, you retain complete ownership and control. You can clear your data at any time by resetting waypoints within the app settings or uninstalling the application. For further inquiries, visit our <a href="delete-account.html">Account & Data Management Page</a>.
+            </p>
+
+            <h2>7. Children's Privacy</h2>
+            <p>
+                Our applications comply with applicable global privacy standards and do not knowingly collect personal information from children under the age of 13.
+            </p>
+
+            <h2>8. Contact Information</h2>
+            <p>
+                If you have questions, feedback, or legal inquiries regarding this Privacy Policy, please contact our privacy compliance team:
+            </p>
+            <p>
+                <strong>RiTym Technologies</strong><br>
+                Official Website: <a href="https://www.ritym.com">https://www.ritym.com</a><br>
+                Support & Privacy Email: <a href="mailto:support@ritym.com">support@ritym.com</a>
             </p>
         </div>
     </section>
