@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | RiTym Technologies & EXOS Ecosystem</title>
+  <meta name="description" content="Official Privacy Policy for RiTym Technologies, covering EXOS Transceiver, EXOS Wayfinder, EXOS ECHO, Exos Watchout, and ESP32 hardware instruments.">
+  <link rel="icon" type="image/png" href="assets/ritym_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #334155; margin: 0; padding: 0; background-color: #f8fafc; }
+    .header { background: #0f172a; color: #fff; padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .header-container { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .header img { height: 34px; }
+    .content-wrap { max-width: 1000px; margin: 40px auto; background: #fff; padding: 48px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    h1 { color: #0f172a; font-size: 2.2rem; margin-bottom: 8px; font-weight: 800; }
+    .date-badge { color: #64748b; font-size: 0.9rem; margin-bottom: 24px; display: block; font-family: 'JetBrains Mono', monospace; }
+    h2 { color: #0f172a; font-size: 1.35rem; margin-top: 36px; margin-bottom: 14px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
+    p, li { font-size: 0.96rem; color: #475569; }
+    ul { padding-left: 24px; margin-bottom: 20px; }
+    .highlight-card { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 18px; margin: 24px 0; color: #0369a1; }
+    .footer { text-align: center; padding: 40px 20px; font-size: 0.85rem; color: #64748b; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+        <img src="assets/ritym_logo.png" alt="RiTym Logo">
+        <span style="color:#fff; font-weight:700; font-size:1.1rem;">RiTym Technologies</span>
+      </a>
+      <a href="index.html" style="color:#cbd5e1; text-decoration:none; font-size:0.9rem; font-weight:600;">&larr; Back to Home</a>
+    </div>
+  </header>
+
+  <div class="content-wrap">
+    <h1>Privacy Policy</h1>
+    <span class="date-badge">Effective Date: September 25, 2026 &bull; Version 2.2</span>
+
+    <div class="highlight-card">
+      <strong>Offline-First Privacy Guarantee:</strong> RiTym Technologies develops hardware and software tools engineered strictly around on-device data sovereignty. All location calculations, sensor fusion, radio communications, and waypoint storage execute 100% locally on your hardware. We do not collect, monitor, store on remote cloud servers, or monetize your location coordinates, voice packets, or usage telemetry.
+    </div>
+
+    <h2>1. Organization Scope & Covered Products</h2>
+    <p>This Privacy Policy governs the software applications and embedded hardware instruments manufactured and published by <strong>RiTym Technologies</strong> ("we", "our", or "us"):</p>
+    <ul>
+      <li><strong>EXOS GPS Transceiver:</strong> Package ID <code>com.ritym.exosgps</code> (Android) and Windows Desktop COM client.</li>
+      <li><strong>EXOS Wayfinder:</strong> Package ID <code>com.exos.wayfinder</code> (Android).</li>
+      <li><strong>EXOS ECHO:</strong> Mesh Walkie-Talkie & Messaging system (Android).</li>
+      <li><strong>Exos Watchout:</strong> Watch Face package <code>exos.ritym.watchout.watchface</code> and Companion app <code>exos.ritym.watchout</code> (Wear OS & Android).</li>
+      <li><strong>RiTym ESP32 Instruments:</strong> EXOS-Station ESP32-S3, Elecrow ESP32-S3 7.0" Touch, and EXOS-C5 units.</li>
+    </ul>
+
+    <h2>2. Location Permissions & Mock Location Usage</h2>
+    <p>Our applications request access to satellite GNSS location data (Fine and Coarse Location) exclusively to deliver local navigational features:</p>
+    <ul>
+      <li><strong>EXOS Transceiver:</strong> In Transmitter mode, reads hardware GNSS fixes and broadcasts standard NMEA 0183 sentences over local Bluetooth SPP. In Receiver mode, it utilizes Android's Smart Guided Mock Location service solely to inject external Bluetooth GPS fixes into the system location provider.</li>
+      <li><strong>EXOS Wayfinder:</strong> Computes real-time positioning, MGRS/UTM military coordinates, altitude, and course-over-ground. Saves local waypoint and trail backtrack logs exclusively to your device's private SQLite database.</li>
+      <li><strong>Exos Watchout:</strong> Reads ground speed and coordinate azimuth locally for 3D compass orientation.</li>
+      <li><strong>No Remote Uploads:</strong> Satellite coordinates are processed ephemerally in RAM and are never uploaded to remote servers or third parties.</li>
+    </ul>
+
+    <h2>3. Bluetooth & Nearby Device Communications</h2>
+    <p>Bluetooth Classic (RFCOMM/SPP) and Bluetooth Low Energy (BLE) permissions are utilized strictly for local peer-to-peer hardware communication:</p>
+    <ul>
+      <li>Connecting with external GNSS receivers, ESP32-S3 stations, and marine chartplotters.</li>
+      <li>Pairing between field tablets and Windows laptops for serial COM port data streaming.</li>
+      <li>Broadcasting and receiving localized peer beacon packets (Peer Radar) without internet or cellular networks.</li>
+    </ul>
+
+    <h2>4. Microphone & Audio Streaming (EXOS ECHO)</h2>
+    <p>EXOS ECHO requests microphone access solely while the user presses the Push-to-Talk (PTT) interface. Audio frames are digitized locally and transmitted directly to connected mesh peers via local Wi-Fi Direct or BLE mesh. Audio streams are never recorded to disk, analyzed, or sent to cloud servers.</p>
+
+    <h2>5. Body Sensors & Wear OS Metrics (Exos Watchout)</h2>
+    <p>On Wear OS smartwatches, Exos Watchout requests the <code>BODY_SENSORS</code> permission solely to display real-time heart rate on the 3 o'clock subdial. Sensor readings are processed ephemerally in RAM and are never recorded to persistent storage or transmitted off the watch.</p>
+
+    <h2>6. In-App Purchases & Financial Billing</h2>
+    <p>All in-app purchases and subscriptions (such as Pro Lifetime upgrades) are processed directly and securely through official <strong>Google Play In-App Billing</strong>. RiTym Technologies does not process, receive, or store your payment card details, billing addresses, or banking information.</p>
+
+    <h2>7. Third-Party Analytics & Advertising</h2>
+    <p>We do <strong>not</strong> include third-party advertising SDKs, ad trackers, or data brokers in our applications. We do not sell or rent user data to third parties.</p>
+
+    <h2>8. Contact Information</h2>
+    <p>If you have questions, feedback, or legal inquiries regarding this Privacy Policy, please contact our privacy compliance team:</p>
+    <p>
+      <strong>RiTym Technologies</strong><br>
+      Website: <a href="https://ritym.com">https://ritym.com</a><br>
+      Privacy & Support Email: <a href="mailto:support@ritym.com">support@ritym.com</a>
+    </p>
+  </div>
+
+  <footer class="footer">
+    &copy; 2026 RiTym Technologies &bull; All rights reserved.
+  </footer>
+</body>
+</html>

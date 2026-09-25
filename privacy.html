@@ -1,148 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - RITYM Technologies</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="src/style.css">
-    <style>
-        .privacy-box {
-            background: rgba(0, 229, 255, 0.05);
-            border: 1px solid rgba(0, 229, 255, 0.2);
-            border-radius: 8px;
-            padding: 16px 20px;
-            margin: 20px 0;
-        }
-        .privacy-section h2 {
-            margin-top: 28px;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-            font-size: 1.35rem;
-        }
-        .privacy-section p, .privacy-section li {
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 12px;
-        }
-        .privacy-section ul {
-            padding-left: 24px;
-            margin-bottom: 16px;
-        }
-        .privacy-section strong {
-            color: var(--text-primary);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | RiTym Technologies & EXOS Ecosystem</title>
+  <meta name="description" content="Official Privacy Policy for RiTym Technologies, covering EXOS Transceiver, EXOS Wayfinder, EXOS ECHO, Exos Watchout, and ESP32 hardware instruments.">
+  <link rel="icon" type="image/png" href="assets/ritym_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #334155; margin: 0; padding: 0; background-color: #f8fafc; }
+    .header { background: #0f172a; color: #fff; padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .header-container { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .header img { height: 34px; }
+    .content-wrap { max-width: 1000px; margin: 40px auto; background: #fff; padding: 48px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    h1 { color: #0f172a; font-size: 2.2rem; margin-bottom: 8px; font-weight: 800; }
+    .date-badge { color: #64748b; font-size: 0.9rem; margin-bottom: 24px; display: block; font-family: 'JetBrains Mono', monospace; }
+    h2 { color: #0f172a; font-size: 1.35rem; margin-top: 36px; margin-bottom: 14px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
+    p, li { font-size: 0.96rem; color: #475569; }
+    ul { padding-left: 24px; margin-bottom: 20px; }
+    .highlight-card { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 18px; margin: 24px 0; color: #0369a1; }
+    .footer { text-align: center; padding: 40px 20px; font-size: 0.85rem; color: #64748b; }
+  </style>
 </head>
-<body class="light-theme">
+<body>
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+        <img src="assets/ritym_logo.png" alt="RiTym Logo">
+        <span style="color:#fff; font-weight:700; font-size:1.1rem;">RiTym Technologies</span>
+      </a>
+      <a href="index.html" style="color:#cbd5e1; text-decoration:none; font-size:0.9rem; font-weight:600;">&larr; Back to Home</a>
+    </div>
+  </header>
 
-    <header class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="brand-logo">
-                <img src="assets/ritym_logo.png" alt="RITYM Technologies Logo" class="official-logo-img">
-            </a>
-            <nav class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="products.html" class="nav-link">Products</a>
-                <a href="downloads.html" class="nav-link">Downloads</a>
-                <a href="pricing.html" class="nav-link">Pricing</a>
-                <a href="docs.html" class="nav-link">Documentation</a>
-                <a href="portal.html" class="nav-link">Portal</a>
-                <a href="support.html" class="nav-link">Support</a>
-            </nav>
-            <div class="nav-actions">
-                <button id="theme-toggle-btn" class="theme-toggle-btn">🌓</button>
-            </div>
-        </div>
-    </header>
+  <div class="content-wrap">
+    <h1>Privacy Policy</h1>
+    <span class="date-badge">Effective Date: September 25, 2026 &bull; Version 2.2</span>
 
-    <section class="subpage-hero">
-        <div class="section-container">
-            <h1 class="subpage-title">Privacy Policy</h1>
-            <p class="subpage-subtitle">Last updated: August 31, 2026</p>
-        </div>
-    </section>
+    <div class="highlight-card">
+      <strong>Offline-First Privacy Guarantee:</strong> RiTym Technologies develops hardware and software tools engineered strictly around on-device data sovereignty. All location calculations, sensor fusion, radio communications, and waypoint storage execute 100% locally on your hardware. We do not collect, monitor, store on remote cloud servers, or monetize your location coordinates, voice packets, or usage telemetry.
+    </div>
 
-    <section class="section privacy-section">
-        <div class="section-container" style="max-width: 860px; text-align: left;">
-            <p style="margin-bottom: 20px; font-size: 1.05rem;">
-                <strong>RiTym Technologies</strong> ("we", "our", or "us") is dedicated to protecting user privacy. This Privacy Policy governs the software applications developed and published by RiTym Technologies, including <strong>EXOS WAYFINDER™</strong> (<code>com.exos.wayfinder</code>), <strong>EXOS GPS™</strong> (<code>com.ritym.exosgps</code>), EXOS Station, and related desktop/embedded tools.
-            </p>
+    <h2>1. Organization Scope & Covered Products</h2>
+    <p>This Privacy Policy governs the software applications and embedded hardware instruments manufactured and published by <strong>RiTym Technologies</strong> ("we", "our", or "us"):</p>
+    <ul>
+      <li><strong>EXOS GPS Transceiver:</strong> Package ID <code>com.ritym.exosgps</code> (Android) and Windows Desktop COM client.</li>
+      <li><strong>EXOS Wayfinder:</strong> Package ID <code>com.exos.wayfinder</code> (Android).</li>
+      <li><strong>EXOS ECHO:</strong> Mesh Walkie-Talkie & Messaging system (Android).</li>
+      <li><strong>Exos Watchout:</strong> Watch Face package <code>exos.ritym.watchout.watchface</code> and Companion app <code>exos.ritym.watchout</code> (Wear OS & Android).</li>
+      <li><strong>RiTym ESP32 Instruments:</strong> EXOS-Station ESP32-S3, Elecrow ESP32-S3 7.0" Touch, and EXOS-C5 units.</li>
+    </ul>
 
-            <div class="privacy-box">
-                <strong style="color: #00e5ff;">Offline-First Privacy Guarantee:</strong> All navigation algorithms, compass sensor fusion, satellite positioning, trail breadcrumb recording, and waypoint databases operate 100% locally on your physical device. We do not collect, track, store on remote cloud servers, or monetize your location coordinates or journey logs.
-            </div>
+    <h2>2. Location Permissions & Mock Location Usage</h2>
+    <p>Our applications request access to satellite GNSS location data (Fine and Coarse Location) exclusively to deliver local navigational features:</p>
+    <ul>
+      <li><strong>EXOS Transceiver:</strong> In Transmitter mode, reads hardware GNSS fixes and broadcasts standard NMEA 0183 sentences over local Bluetooth SPP. In Receiver mode, it utilizes Android's Smart Guided Mock Location service solely to inject external Bluetooth GPS fixes into the system location provider.</li>
+      <li><strong>EXOS Wayfinder:</strong> Computes real-time positioning, MGRS/UTM military coordinates, altitude, and course-over-ground. Saves local waypoint and trail backtrack logs exclusively to your device's private SQLite database.</li>
+      <li><strong>Exos Watchout:</strong> Reads ground speed and coordinate azimuth locally for 3D compass orientation.</li>
+      <li><strong>No Remote Uploads:</strong> Satellite coordinates are processed ephemerally in RAM and are never uploaded to remote servers or third parties.</li>
+    </ul>
 
-            <h2>1. Location Data & Permissions</h2>
-            <p>
-                Our applications access location data (Precise GPS / GNSS and Coarse Network location) strictly to provide core navigation and positioning features:
-            </p>
-            <ul>
-                <li><strong>Live Heading & Velocity:</strong> Calculating Course-Over-Ground (COG), Doppler velocity, altitude, and steering vectors to target waypoints.</li>
-                <li><strong>Trail Backtrack & Safe Point:</strong> Recording local GPS breadcrumbs during active trek sessions so you can retrace your steps in wilderness areas.</li>
-                <li><strong>Foreground Service Operation:</strong> When active trail recording is initiated, a persistent Android foreground notification informs you that GPS logging is running in device memory.</li>
-                <li><strong>No Cloud Uploads:</strong> Location data is processed ephemerally in device RAM and stored exclusively in private local SQLite databases. It is never transmitted across external network servers.</li>
-            </ul>
+    <h2>3. Bluetooth & Nearby Device Communications</h2>
+    <p>Bluetooth Classic (RFCOMM/SPP) and Bluetooth Low Energy (BLE) permissions are utilized strictly for local peer-to-peer hardware communication:</p>
+    <ul>
+      <li>Connecting with external GNSS receivers, ESP32-S3 stations, and marine chartplotters.</li>
+      <li>Pairing between field tablets and Windows laptops for serial COM port data streaming.</li>
+      <li>Broadcasting and receiving localized peer beacon packets (Peer Radar) without internet or cellular networks.</li>
+    </ul>
 
-            <h2>2. Bluetooth & Nearby Device Communications</h2>
-            <p>
-                Our mobile applications utilize Bluetooth Low Energy (BLE) and Bluetooth Classic interfaces solely for local device-to-device communication:
-            </p>
-            <ul>
-                <li><strong>EXOS Hardware & GPS Bridge:</strong> Connecting to external GNSS transmitters, RTK receivers, and EXOS-Station microcontrollers to forward NMEA sentences into Android Mock Location providers.</li>
-                <li><strong>Buddy Radar (Peer Tracking):</strong> Broadcasting and receiving localized, encrypted peer beacon packets over short-range BLE radio mesh without cellular network connectivity or internet access.</li>
-            </ul>
+    <h2>4. Microphone & Audio Streaming (EXOS ECHO)</h2>
+    <p>EXOS ECHO requests microphone access solely while the user presses the Push-to-Talk (PTT) interface. Audio frames are digitized locally and transmitted directly to connected mesh peers via local Wi-Fi Direct or BLE mesh. Audio streams are never recorded to disk, analyzed, or sent to cloud servers.</p>
 
-            <h2>3. Sensor & Hardware Telemetry</h2>
-            <p>
-                The software accesses device magnetometers, accelerometers, gyroscopes, and barometric sensors locally to compute tilt-compensated magnetic heading, pitch, roll, and elevation profiles. Sensor telemetry never leaves your hardware.
-            </p>
+    <h2>5. Body Sensors & Wear OS Metrics (Exos Watchout)</h2>
+    <p>On Wear OS smartwatches, Exos Watchout requests the <code>BODY_SENSORS</code> permission solely to display real-time heart rate on the 3 o'clock subdial. Sensor readings are processed ephemerally in RAM and are never recorded to persistent storage or transmitted off the watch.</p>
 
-            <h2>4. In-App Purchases & Financial Billing</h2>
-            <p>
-                All in-app purchases and subscriptions (such as EXOS Pro Lifetime or Annual Pass) are processed directly and securely through <strong>Google Play Billing Services</strong>. RiTym Technologies does not process, receive, or store your payment card details, billing addresses, or banking information.
-            </p>
+    <h2>6. In-App Purchases & Financial Billing</h2>
+    <p>All in-app purchases and subscriptions (such as Pro Lifetime upgrades) are processed directly and securely through official <strong>Google Play In-App Billing</strong>. RiTym Technologies does not process, receive, or store your payment card details, billing addresses, or banking information.</p>
 
-            <h2>5. Third-Party Analytics & Advertising</h2>
-            <p>
-                We do <strong>not</strong> include third-party advertising SDKs, ad trackers, or data brokers in our applications. We do not sell or rent user data to third parties.
-            </p>
+    <h2>7. Third-Party Analytics & Advertising</h2>
+    <p>We do <strong>not</strong> include third-party advertising SDKs, ad trackers, or data brokers in our applications. We do not sell or rent user data to third parties.</p>
 
-            <h2>6. Data Retention & Account Deletion</h2>
-            <p>
-                Since navigation logs and waypoints are saved exclusively to your device's local storage, you retain complete ownership and control. You can clear your data at any time by resetting waypoints within the app settings or uninstalling the application. For further inquiries, visit our <a href="delete-account.html">Account & Data Management Page</a>.
-            </p>
+    <h2>8. Contact Information</h2>
+    <p>If you have questions, feedback, or legal inquiries regarding this Privacy Policy, please contact our privacy compliance team:</p>
+    <p>
+      <strong>RiTym Technologies</strong><br>
+      Website: <a href="https://ritym.com">https://ritym.com</a><br>
+      Privacy & Support Email: <a href="mailto:support@ritym.com">support@ritym.com</a>
+    </p>
+  </div>
 
-            <h2>7. Children's Privacy</h2>
-            <p>
-                Our applications comply with applicable global privacy standards and do not knowingly collect personal information from children under the age of 13.
-            </p>
-
-            <h2>8. Contact Information</h2>
-            <p>
-                If you have questions, feedback, or legal inquiries regarding this Privacy Policy, please contact our privacy compliance team:
-            </p>
-            <p>
-                <strong>RiTym Technologies</strong><br>
-                Official Website: <a href="https://www.ritym.com">https://www.ritym.com</a><br>
-                Support & Privacy Email: <a href="mailto:support@ritym.com">support@ritym.com</a>
-            </p>
-        </div>
-    </section>
-
-    <footer class="footer" id="footer-injected"></footer>
-    <script src="src/main.js"></script>
-    <script>
-        fetch('index.html')
-            .then(res => res.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                document.getElementById('footer-injected').innerHTML = doc.querySelector('footer.footer').innerHTML;
-                initThemeToggler();
-            });
-    </script>
+  <footer class="footer">
+    &copy; 2026 RiTym Technologies &bull; All rights reserved.
+  </footer>
 </body>
 </html>
