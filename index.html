@@ -590,6 +590,8 @@
     .hero-actions { justify-content: center; }
     .hero-specs-bar { justify-content: center; }
     .hw-grid { grid-template-columns: 1fr; gap: 24px; }
+    .firmware-grid { grid-template-columns: 1fr; gap: 32px; }
+    .fw-features-grid { grid-template-columns: 1fr; gap: 12px; }
     .sw-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
   }
@@ -943,37 +945,73 @@
         </p>
       </div>
 
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items:center;">
+      <div class="firmware-grid">
         <div>
-          <h3 style="font-size:1.5rem; font-weight:700; color:var(--text-heading); margin-bottom:14px;">
+          <h3 style="font-size:clamp(1.25rem, 3.5vw, 1.55rem); font-weight:800; color:var(--text-heading); margin-bottom:14px; line-height:1.3; word-break:break-word;">
             Non-Blocking Architecture & Bounded Queues
           </h3>
-          <p style="color:var(--text-body); margin-bottom:16px;">
+          <p style="color:var(--text-body); margin-bottom:20px; font-size:0.95rem; line-height:1.65;">
             The EXOS-Station firmware isolates the high-speed UART GPS ingress task on Core 0 from the Wi-Fi/BLE network distribution task on Core 1. A bounded ring buffer ensures that slow or disconnecting wireless clients cannot cause backpressure or buffer bloat on the raw GNSS stream.
           </p>
-          <ul style="list-style:none; display:flex; flex-direction:column; gap:10px; font-size:0.92rem; color:var(--text-body);">
-            <li><strong>&check; Dedicated Core Pinning:</strong> UART DMA interrupt servicing pinned to Core 0; network sockets pinned to Core 1.</li>
-            <li><strong>&check; Authenticated BLE Pairing:</strong> LE Secure Connections with MITM protection and numeric comparison.</li>
-            <li><strong>&check; Local JSON Telemetry API:</strong> Real-time satellite constellation metadata exposed over REST at <code>http://192.168.4.1/api/telemetry</code>.</li>
-            <li><strong>&check; Password-Protected OTA:</strong> Over-The-Air firmware updates protected by cryptographic authentication.</li>
-          </ul>
+
+          <div class="fw-features-grid">
+            <div class="fw-feature-item">
+              <div class="fw-icon">&#x2699;&#xFE0F;</div>
+              <div>
+                <strong>Dedicated Core Pinning</strong>
+                <p>UART DMA interrupt servicing pinned to Core 0; network sockets pinned to Core 1.</p>
+              </div>
+            </div>
+            <div class="fw-feature-item">
+              <div class="fw-icon">&#x1F510;</div>
+              <div>
+                <strong>Authenticated BLE Pairing</strong>
+                <p>LE Secure Connections with MITM protection and numeric comparison.</p>
+              </div>
+            </div>
+            <div class="fw-feature-item">
+              <div class="fw-icon">&#x1F4E1;</div>
+              <div>
+                <strong>Local JSON Telemetry API</strong>
+                <p>Real-time constellation metadata exposed over REST at <code>/api/telemetry</code>.</p>
+              </div>
+            </div>
+            <div class="fw-feature-item">
+              <div class="fw-icon">&#x1F504;</div>
+              <div>
+                <strong>Cryptographic OTA Updates</strong>
+                <p>Over-The-Air firmware updates protected by cryptographic authentication.</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div>
-          <div class="code-box">
-<span style="color:#64748b;">// EXOS-Station Firmware: PlatformIO Hardware Pinout</span>
-<span style="color:#38bdf8;">#define</span> GPS_RX_PIN    <span style="color:#a5f3fc;">GPIO_NUM_44</span>  <span style="color:#64748b;">// D7 -> u-blox TX</span>
-<span style="color:#38bdf8;">#define</span> GPS_TX_PIN    <span style="color:#a5f3fc;">GPIO_NUM_43</span>  <span style="color:#64748b;">// D6 -> u-blox RX</span>
-<span style="color:#38bdf8;">#define</span> STATUS_LED    <span style="color:#a5f3fc;">GPIO_NUM_21</span>  <span style="color:#64748b;">// User Status LED</span>
-<span style="color:#38bdf8;">#define</span> GPS_BAUD      <span style="color:#fde047;">38400</span>        <span style="color:#64748b;">// High-Speed UART</span>
+          <div class="code-terminal">
+            <div class="code-terminal-header">
+              <div class="code-dots">
+                <span class="code-dot dot-red"></span>
+                <span class="code-dot dot-yellow"></span>
+                <span class="code-dot dot-green"></span>
+              </div>
+              <span class="code-title">exos_station_main.cpp</span>
+              <span class="code-badge">ESP-IDF &bull; FreeRTOS</span>
+            </div>
+            <pre class="code-terminal-body"><span style="color:#64748b;">// EXOS-Station: ESP32-S3 Hardware Pinout</span>
+<span style="color:#38bdf8;">#define</span> GPS_RX_PIN  <span style="color:#a5f3fc;">GPIO_NUM_44</span>  <span style="color:#64748b;">// u-blox TX</span>
+<span style="color:#38bdf8;">#define</span> GPS_TX_PIN  <span style="color:#a5f3fc;">GPIO_NUM_43</span>  <span style="color:#64748b;">// u-blox RX</span>
+<span style="color:#38bdf8;">#define</span> STATUS_LED  <span style="color:#a5f3fc;">GPIO_NUM_21</span>  <span style="color:#64748b;">// Status LED</span>
+<span style="color:#38bdf8;">#define</span> GPS_BAUD    <span style="color:#fde047;">38400</span>        <span style="color:#64748b;">// High-Speed UART</span>
 
-<span style="color:#64748b;">// FreeRTOS Task Affinity</span>
+<span style="color:#64748b;">// FreeRTOS Deterministic Core Pinning</span>
 xTaskCreatePinnedToCore(
-    gpsUartTask,    <span style="color:#a5f3fc;">"GPS_UART"</span>,  <span style="color:#fde047;">4096</span>, NULL, <span style="color:#fde047;">3</span>, NULL, <span style="color:#fde047;">0</span>
+    gpsUartTask, <span style="color:#a5f3fc;">"GPS_UART"</span>, <span style="color:#fde047;">4096</span>,
+    NULL, <span style="color:#fde047;">3</span>, NULL, <span style="color:#fde047;">0</span>  <span style="color:#64748b;">// Core 0: Ingress DMA</span>
 );
 xTaskCreatePinnedToCore(
-    networkTask,    <span style="color:#a5f3fc;">"NET_DIST"</span>,  <span style="color:#fde047;">8192</span>, NULL, <span style="color:#fde047;">2</span>, NULL, <span style="color:#fde047;">1</span>
-);
+    networkTask, <span style="color:#a5f3fc;">"NET_DIST"</span>, <span style="color:#fde047;">8192</span>,
+    NULL, <span style="color:#fde047;">2</span>, NULL, <span style="color:#fde047;">1</span>  <span style="color:#64748b;">// Core 1: Wi-Fi/BLE</span>
+);</pre>
           </div>
         </div>
       </div>
