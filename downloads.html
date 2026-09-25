@@ -3,24 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Firmware & Software Downloads | RiTym Technologies</title>
-  <link rel="icon" type="image/png" href="assets/ritym_logo.png">
+  <title>Developer Documentation & Hardware Pinouts | RiTym Technologies</title>
+  <meta name="description" content="Technical documentation, hardware schematics, and developer access guidelines for RiTym Technologies ESP32 hardware and EXOS software.">
+  <link rel="icon" type="image/png" href="assets/exos_logo_dark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #334155; margin: 0; padding: 0; background-color: #f8fafc; }
-    .header { background: #0f172a; color: #fff; padding: 18px 24px; }
+    .header { background: #0f172a; color: #fff; padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); }
     .header-container { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-    .header img { height: 34px; }
-    .content-wrap { max-width: 1000px; margin: 40px auto; background: #fff; padding: 48px; border-radius: 12px; border: 1px solid #e2e8f0; }
+    .header img { height: 48px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35)); }
+    .content-wrap { max-width: 1000px; margin: 40px auto; background: #fff; padding: 48px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
     h1 { color: #0f172a; font-size: 2.2rem; margin-bottom: 8px; font-weight: 800; }
     h2 { color: #0f172a; font-size: 1.35rem; margin-top: 36px; margin-bottom: 14px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
-    .dl-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #f1f5f9; }
-    .dl-title { font-weight: 600; color: #0f172a; }
-    .dl-meta { font-size: 0.82rem; color: #64748b; font-family: 'JetBrains Mono', monospace; }
-    .btn-dl { background: #0284c7; color: #fff; padding: 6px 14px; border-radius: 4px; font-size: 0.84rem; font-weight: 600; text-decoration: none; }
-    .btn-dl:hover { background: #0369a1; }
+    p, li { font-size: 0.96rem; color: #475569; }
+    .notice-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 18px; margin: 24px 0; color: #166534; }
+    .table-wrap { overflow-x: auto; margin: 20px 0; }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem; }
+    th, td { padding: 12px 16px; border-bottom: 1px solid #e2e8f0; }
+    th { background: #f8fafc; font-weight: 700; color: #0f172a; }
+    code { font-family: 'JetBrains Mono', monospace; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 0.88rem; color: #0f172a; }
     .footer { text-align: center; padding: 40px 20px; font-size: 0.85rem; color: #64748b; }
   </style>
 </head>
@@ -28,7 +31,7 @@
   <header class="header">
     <div class="header-container">
       <a href="index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-        <img src="assets/ritym_logo.png" alt="RiTym Logo">
+        <img src="assets/exos_logo_dark.png" alt="RiTym Logo">
         <span style="color:#fff; font-weight:700; font-size:1.1rem;">RiTym Technologies</span>
       </a>
       <a href="index.html" style="color:#cbd5e1; text-decoration:none; font-size:0.9rem; font-weight:600;">&larr; Back to Home</a>
@@ -36,50 +39,80 @@
   </header>
 
   <div class="content-wrap">
-    <h1>Firmware & Software Downloads</h1>
-    <p>Official firmware binaries, PlatformIO build packages, and mobile release links.</p>
+    <h1>Developer Documentation & Hardware Pinouts</h1>
+    <p>Engineering references, pinout assignments, and software distribution channels for RiTym Technologies systems.</p>
 
-    <h2>1. ESP32 Embedded Firmware</h2>
-    <div class="dl-item">
-      <div>
-        <div class="dl-title">EXOS-Station ESP32-S3 Firmware (PlatformIO Package)</div>
-        <div class="dl-meta">v1.4.2 &bull; Arduino / FreeRTOS &bull; XIAO ESP32-S3 + u-blox M9N</div>
-      </div>
-      <a href="downloads/exos-gps-windows-v0.16.zip" class="btn-dl">Download ZIP</a>
+    <div class="notice-box">
+      <strong>Software Distribution Notice:</strong> In compliance with security and production integrity policies, software releases (Android applications and Wear OS watch faces) are not hosted directly on this portal. All software downloads, updates, and beta test tracks are distributed exclusively through the official <strong>Google Play Store</strong> and official Microsoft partner channels.
     </div>
 
-    <div class="dl-item">
-      <div>
-        <div class="dl-title">EXOS GPS Windows Sensor Client & COM Bridge</div>
-        <div class="dl-meta">v0.16 &bull; Windows 10/11 x64</div>
-      </div>
-      <a href="downloads/exos-gps-windows-v0.16.zip" class="btn-dl">Download ZIP</a>
+    <h2>1. EXOS-Station ESP32-S3 Hardware Pinout</h2>
+    <p>The EXOS-Station pairs a Seeed XIAO ESP32-S3 dual-core microcontroller with an external u-blox NEO-M9N GNSS receiver.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>XIAO ESP32-S3 Pin</th>
+            <th>GPIO</th>
+            <th>u-blox NEO-M9N Pin</th>
+            <th>Function / Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>D7</code></td>
+            <td><code>GPIO44</code></td>
+            <td><code>TX</code></td>
+            <td>Hardware UART RX (GPS data into ESP32 at 38,400 baud)</td>
+          </tr>
+          <tr>
+            <td><code>D6</code></td>
+            <td><code>GPIO43</code></td>
+            <td><code>RX</code></td>
+            <td>Hardware UART TX (Configuration commands to u-blox)</td>
+          </tr>
+          <tr>
+            <td><code>GND</code></td>
+            <td><code>GND</code></td>
+            <td><code>GND</code></td>
+            <td>Common ground reference</td>
+          </tr>
+          <tr>
+            <td><code>3V3</code></td>
+            <td><code>3V3</code></td>
+            <td><code>VCC</code></td>
+            <td>Regulated 3.3V DC logic and power supply</td>
+          </tr>
+          <tr>
+            <td><code>D0</code></td>
+            <td><code>GPIO21</code></td>
+            <td>-</td>
+            <td>User status LED (Heartbeat flash / Solid GPS 3D fix indicator)</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <h2>2. Mobile Software & Google Play Releases</h2>
-    <div class="dl-item">
-      <div>
-        <div class="dl-title">EXOS GPS Transceiver (Google Play)</div>
-        <div class="dl-meta">Package: com.ritym.exosgps &bull; Bluetooth GNSS Bridge</div>
-      </div>
-      <a href="https://play.google.com/store/apps/details?id=com.ritym.exosgps" target="_blank" class="btn-dl">Google Play &nearr;</a>
-    </div>
+    <h2>2. Network & Telemetry Sockets</h2>
+    <p>When operating in AP mode, the EXOS-Station establishes an unthrottled local telemetry access point:</p>
+    <ul>
+      <li><strong>Wi-Fi AP SSID:</strong> <code>EXOS-GPS-XXXXX-WIFI</code> (5-character unique hardware unit ID)</li>
+      <li><strong>Local HTTP Dashboard:</strong> <code>http://192.168.4.1</code> (Password protected)</li>
+      <li><strong>Raw NMEA TCP Socket:</strong> <code>192.168.4.1:2000</code> (Streams NMEA 0183 sentences at up to 25Hz to up to 4 concurrent clients)</li>
+      <li><strong>Bluetooth LE Peripheral:</strong> <code>EXOS-GPS-XXXXX-BT</code> with LE Secure Connections (UUID 00001101)</li>
+    </ul>
 
-    <div class="dl-item">
-      <div>
-        <div class="dl-title">EXOS Wayfinder (Google Play)</div>
-        <div class="dl-meta">Package: com.exos.wayfinder &bull; Offline Topo Navigation</div>
-      </div>
-      <a href="https://play.google.com/store/apps/details?id=com.exos.wayfinder" target="_blank" class="btn-dl">Google Play &nearr;</a>
-    </div>
+    <h2>3. Application Software Access (Google Play)</h2>
+    <p>To install or test our mobile and wearable companion applications, access the verified listings directly on Google Play:</p>
+    <ul>
+      <li><strong>EXOS GPS Transceiver:</strong> <a href="https://play.google.com/store/apps/details?id=com.ritym.exosgps" target="_blank" rel="noopener">Google Play Store &nearr;</a> (Testing Opt-In: <a href="https://play.google.com/apps/testing/com.ritym.exosgps" target="_blank" rel="noopener">Opt-In Link</a>)</li>
+      <li><strong>EXOS Wayfinder:</strong> <a href="https://play.google.com/store/apps/details?id=com.exos.wayfinder" target="_blank" rel="noopener">Google Play Store &nearr;</a> (Testing Opt-In: <a href="https://play.google.com/apps/testing/com.exos.wayfinder" target="_blank" rel="noopener">Opt-In Link</a>)</li>
+      <li><strong>Exos Watchout (Watch Face):</strong> <a href="https://play.google.com/store/apps/details?id=exos.ritym.watchout.watchface" target="_blank" rel="noopener">Wear OS Watch Face &nearr;</a></li>
+      <li><strong>Exos Watchout (Companion):</strong> <a href="https://play.google.com/store/apps/details?id=exos.ritym.watchout" target="_blank" rel="noopener">Companion App &nearr;</a></li>
+    </ul>
 
-    <div class="dl-item">
-      <div>
-        <div class="dl-title">Exos Watchout Watch Face (Google Play)</div>
-        <div class="dl-meta">Package: exos.ritym.watchout.watchface &bull; Wear OS WFF v1</div>
-      </div>
-      <a href="https://play.google.com/store/apps/details?id=exos.ritym.watchout.watchface" target="_blank" class="btn-dl">Google Play &nearr;</a>
-    </div>
+    <h2>4. Partner Firmware Inquiries</h2>
+    <p>Commercial hardware partners and integration developers requiring pre-flashed ESP32-S3 modules, custom PCB gerbers, or compiled firmware binaries may contact our engineering lab directly at <a href="mailto:support@ritym.com">support@ritym.com</a>.</p>
   </div>
 
   <footer class="footer">
