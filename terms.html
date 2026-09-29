@@ -7,17 +7,20 @@
   <link rel="icon" type="image/png" href="assets/exos_logo_dark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #334155; margin: 0; padding: 0; background-color: #f8fafc; }
     .header { background: #0f172a; color: #fff; padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); }
     .header-container { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
     .header img { height: 48px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35)); }
-    .content-wrap { max-width: 1000px; margin: 40px auto; background: #fff; padding: 48px; border-radius: 12px; border: 1px solid #e2e8f0; }
+    .content-wrap { max-width: 1000px; margin: 40px auto; background: #fff; padding: 48px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
     h1 { color: #0f172a; font-size: 2.2rem; margin-bottom: 8px; font-weight: 800; }
     h2 { color: #0f172a; font-size: 1.35rem; margin-top: 36px; margin-bottom: 14px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
     p, li { font-size: 0.96rem; color: #475569; }
+    .card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-top: 14px; }
     .footer { text-align: center; padding: 40px 20px; font-size: 0.85rem; color: #64748b; }
+    .footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    .footer a:hover { color: #0f172a; }
   </style>
 </head>
 <body>
@@ -33,18 +36,51 @@
 
   <div class="content-wrap">
     <h1>Terms of Service</h1>
-    <p>Last updated: September 25, 2026</p>
-    <p>These terms govern the use of embedded electronics, firmware documentation, and software applications provided by RiTym Technologies.</p>
-    <h2>1. Electronic Hardware & Firmware Usage</h2>
-    <p>ESP32 hardware designs, schematics, and firmware source documentation provided by RiTym Technologies are engineered for precision telemetry and prototyping. Users operating in mission-critical environments must perform independent validation.</p>
-    <h2>2. Intellectual Property</h2>
-    <p>All hardware schematics, PCB artwork, firmware architectures, and software algorithms remain the intellectual property of RiTym Technologies.</p>
-    <h2>3. Limitation of Liability</h2>
-    <p>RiTym Technologies shall not be held liable for damages resulting from RF interference, hardware modification, or navigational decisions made while utilizing electronic telemetry data.</p>
+    <p>Last updated: September 2026</p>
+    <p>These Terms of Service ("Terms") constitute a legally binding agreement between you and <strong>RiTym Technologies</strong> ("RiTym", "we", "us", or "our"), governing your access to and use of our website (<a href="https://ritym.com">ritym.com</a>), product portals (<a href="https://exosgps.com">exosgps.com</a>), mobile applications (including EXOS GPS Transceiver, EXOS Wayfinder, EXOS ECHO, and Exos Watchout), firmware, and related electronic products.</p>
+
+    <h2>1. Acceptance of Terms</h2>
+    <p>By downloading, installing, accessing, or purchasing any software or hardware developed by RiTym Technologies, you agree to be bound by these Terms and our Privacy Policy. If you do not agree, do not use our services or products.</p>
+
+    <h2>2. Digital Services & In-App Purchases</h2>
+    <p>Our software applications may offer free trials and optional one-time in-app purchases for Pro lifetime licenses:</p>
+    <ul>
+      <li><strong>Pricing & Taxes:</strong> Prices are clearly displayed in the application prior to purchase. Applicable local taxes and payment processing fees are handled via Google Play Billing.</li>
+      <li><strong>Instant Delivery:</strong> In-app digital features unlock immediately upon transaction authorization.</li>
+      <li><strong>Refund Terms:</strong> Refunds are administered in accordance with our <a href="refund.html" style="color:#0284c7; font-weight:600;">Refund Policy</a> and Google Play Developer policies.</li>
+    </ul>
+
+    <h2>3. Permitted Use & Navigational Advisory</h2>
+    <p>RiTym Technologies provides precision GNSS telemetry, sensor fusion, and NMEA bridges. Our software is designed as an auxiliary electronic navigation aid and must not be used as the sole primary life-safety system in aeronautical, maritime, or hazardous wilderness operations.</p>
+
+    <h2>4. Intellectual Property</h2>
+    <p>All source code, designs, algorithms, trademarks, PCB schematics, and UI assets are the proprietary intellectual property of RiTym Technologies. Reverse engineering or unauthorized distribution of licensed components is strictly prohibited.</p>
+
+    <h2>5. Limitation of Liability</h2>
+    <p>To the maximum extent permitted by applicable law, RiTym Technologies shall not be liable for any indirect, punitive, or consequential damages resulting from hardware sensor variances, environmental satellite obstruction, or user operational choices.</p>
+
+    <h2>6. Governing Law & Dispute Resolution</h2>
+    <p>These Terms shall be governed by and construed in accordance with the laws of India. The courts of Bengaluru, Karnataka shall have exclusive jurisdiction regarding any dispute arising under these Terms.</p>
+
+    <h2>7. Contact Information & Customer Grievances</h2>
+    <div class="card">
+      <p style="margin:0 0 6px 0;"><strong>Company:</strong> RiTym Technologies</p>
+      <p style="margin:0 0 6px 0;"><strong>Support Email:</strong> <a href="mailto:assist@ritym.com" style="color:#0284c7; font-weight:600;">assist@ritym.com</a></p>
+      <p style="margin:0 0 6px 0;"><strong>Customer Helpline:</strong> <a href="tel:+917996753319" style="color:#0284c7; font-weight:600;">+91 7996753319</a></p>
+      <p style="margin:0 0 6px 0;"><strong>Operating Hours:</strong> Mon &ndash; Sat, 9:00 AM &ndash; 6:00 PM IST</p>
+      <p style="margin:0;"><strong>Address:</strong> Bengaluru, Karnataka, India</p>
+    </div>
   </div>
 
   <footer class="footer">
-    &copy; 2026 RiTym Technologies. All rights reserved.
+    <p>&copy; 2026 RiTym Technologies. All rights reserved.</p>
+    <p>
+      <a href="index.html">Home</a> &bull;
+      <a href="privacy.html">Privacy Policy</a> &bull;
+      <a href="terms.html">Terms of Service</a> &bull;
+      <a href="refund.html">Refund Policy</a> &bull;
+      <a href="support.html">Customer Support</a>
+    </p>
   </footer>
 </body>
 </html>
