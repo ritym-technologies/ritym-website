@@ -58,29 +58,35 @@
     .top-bar a { color: #38bdf8; font-weight: 500; }
     .top-bar a:hover { text-decoration: underline; color: #7dd3fc; }
 
-    /* Primary Sticky Navbar */
+    /* Primary Sticky Navbar (Precision Engineering Aesthetic) */
     .navbar {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background-color: var(--navy);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      background: rgba(11, 17, 32, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.4);
+      height: 72px;
+      display: flex;
+      align-items: center;
     }
     .nav-container {
-      max-width: 1280px;
+      max-width: 1360px;
+      width: 100%;
       margin: 0 auto;
       padding: 0 24px;
-      height: 82px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 20px;
     }
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 14px;
       text-decoration: none;
+      flex-shrink: 0;
     }
     .brand-logo img {
       height: 36px;
@@ -88,49 +94,92 @@
       display: block;
       object-fit: contain;
     }
+    .brand-divider {
+      width: 1px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.16);
+      margin: 0 16px;
+      flex-shrink: 0;
+    }
     .brand-text-wrap {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .brand-name {
       color: #ffffff;
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: -0.01em;
+      font-family: var(--font-main);
+      font-size: 1.08rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
       line-height: 1.2;
+      white-space: nowrap;
     }
     .brand-sub {
-      color: #94a3b8;
-      font-size: 0.72rem;
+      color: #38bdf8;
       font-family: var(--font-mono);
-      letter-spacing: 0.04em;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      line-height: 1.3;
+      margin-top: 2px;
+      white-space: nowrap;
     }
     .nav-menu {
       display: flex;
       align-items: center;
-      gap: 22px;
+      gap: 4px;
       list-style: none;
+      margin: 0;
+      padding: 0;
     }
     .nav-link {
       font-size: 0.88rem;
       font-weight: 500;
-      color: #cbd5e1;
-      padding: 6px 0;
+      color: #94a3b8;
+      padding: 8px 14px;
+      border-radius: 6px;
+      white-space: nowrap;
+      display: inline-block;
+      transition: color 0.18s ease, background-color 0.18s ease;
     }
-    .nav-link:hover { color: #ffffff; }
+    .nav-link:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+    }
     .nav-cta-btn {
-      background-color: var(--primary);
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
       color: #ffffff;
       padding: 8px 18px;
       border-radius: 6px;
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       font-weight: 600;
+      letter-spacing: 0.01em;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
+      white-space: nowrap;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
     }
-    .nav-cta-btn:hover { background-color: var(--primary-dark); }
+    .nav-cta-btn:hover {
+      background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
+      border-color: #38bdf8;
+      box-shadow: 0 0 18px rgba(2, 132, 199, 0.45);
+      transform: translateY(-1px);
+      color: #ffffff;
+    }
+    .nav-cta-btn svg {
+      transition: transform 0.2s ease;
+    }
+    .nav-cta-btn:hover svg {
+      transform: translate(2px, -2px);
+    }
 
     /* Buttons */
     .btn {
@@ -611,11 +660,18 @@
       padding: 0 16px;
     }
     .brand-logo img {
-      height: 44px;
-      max-width: 195px;
+      height: 32px;
+      max-width: 140px;
     }
-    .brand-text-wrap {
-      display: none;
+    .brand-divider {
+      height: 22px;
+      margin: 0 10px;
+    }
+    .brand-name {
+      font-size: 0.95rem;
+    }
+    .brand-sub {
+      font-size: 0.60rem;
     }
     .nav-menu {
       display: none;
@@ -682,7 +738,7 @@
   <!-- Top Corporate Identity Bar -->
   <div class="top-bar">
     <div>
-      <span>RiTym Technologies &bull; Embedded Systems, ESP32 Hardware & Navigation Software</span>
+      <span>RiTym Technologies &bull; Embedded Systems, Hardware & Navigation Software</span>
     </div>
     <div>
       <span>Flagship Software Division: </span>
@@ -690,32 +746,35 @@
     </div>
   </div>
 
-  <!-- Primary Sticky Header Navigation (With User-Provided Official Logo) -->
+  <!-- Primary Sticky Header Navigation -->
   <header class="navbar">
     <div class="nav-container">
-      <a href="index.html" class="brand-logo" title="RiTym Technologies">
-        <img src="assets/exos_logo_dark.png" alt="RiTym Technologies EXOS Logo">
+      <a href="index.html" class="brand-logo" title="RiTym Technologies &bull; Electronics & Embedded Systems">
+        <img src="assets/exos_logo_dark.png" alt="EXOS Navigation Systems">
+        <div class="brand-divider"></div>
         <div class="brand-text-wrap">
           <span class="brand-name">RiTym Technologies</span>
-          <span class="brand-sub">Electronics & Embedded Systems</span>
+          <span class="brand-sub">Electronics &amp; Embedded Systems</span>
         </div>
       </a>
 
       <nav>
         <ul class="nav-menu">
-          <li><a href="#hardware" class="nav-link">ESP32 Hardware</a></li>
-          <li><a href="#firmware" class="nav-link">Firmware Architecture</a></li>
-          <li><a href="#software" class="nav-link">EXOS Software</a></li>
-          <li><a href="products.html" class="nav-link">Products Catalog</a></li>
-          <li><a href="downloads.html" class="nav-link">Developer Docs</a></li>
-          <li><a href="privacy.html" class="nav-link">Privacy Policy</a></li>
-          <li><a href="support.html" class="nav-link">Engineering Support</a></li>
+          <li><a href="#hardware" class="nav-link">Hardware</a></li>
+          <li><a href="#firmware" class="nav-link">Firmware</a></li>
+          <li><a href="#software" class="nav-link">Software</a></li>
+          <li><a href="products.html" class="nav-link">Products</a></li>
+          <li><a href="downloads.html" class="nav-link">Documentation</a></li>
+          <li><a href="support.html" class="nav-link">Support</a></li>
         </ul>
       </nav>
 
       <div>
         <a href="https://exosgps.com" target="_blank" rel="noopener" class="nav-cta-btn">
-          EXOS Portal &nearr;
+          <span>EXOS Portal</span>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </a>
       </div>
     </div>
@@ -732,14 +791,14 @@
             <span>ELECTRONICS & EMBEDDED SYSTEMS ENGINEERING</span>
           </div>
           <h1 class="hero-title">
-            Custom <span>ESP32 Electronics</span>, Real-Time Firmware & Field Software
+            Custom <span>Embedded Electronics</span>, Real-Time Firmware & Field Software
           </h1>
           <p class="hero-subtitle">
-            At RiTym Technologies, we engineer end-to-end hardware-to-software solutions from silicon to screen. We design custom ESP32-S3 microcontroller hardware, u-blox GNSS receiver stations, low-power RF instruments, and pair them with high-reliability Android and Wear OS companion applications.
+            At RiTym Technologies, we engineer end-to-end hardware-to-software solutions from silicon to screen. We design custom microcontroller and RF hardware, u-blox GNSS receiver stations, low-power RF instruments, and pair them with high-reliability Android and Wear OS companion applications.
           </p>
 
           <div class="hero-actions">
-            <a href="#hardware" class="btn btn-primary">Explore ESP32 Hardware</a>
+            <a href="#hardware" class="btn btn-primary">Explore Hardware Systems</a>
             <a href="https://exosgps.com" target="_blank" rel="noopener" class="btn btn-secondary">
               View EXOS Software Portal &nearr;
             </a>
@@ -750,8 +809,8 @@
 
           <div class="hero-specs-bar">
             <div>
-              <div class="spec-num">ESP32-S3</div>
-              <div class="spec-label">Dual-Core Xtensa LX7</div>
+              <div class="spec-num">Multi-MCU</div>
+              <div class="spec-label">Custom Architectures</div>
             </div>
             <div>
               <div class="spec-num">u-blox M9N</div>
