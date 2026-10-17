@@ -159,11 +159,13 @@
       text-align: center;
     }
   </style>
-</head>
+<style>
+body{display:flex;align-items:flex-start}.sidebar{width:210px;padding:24px 14px}.content{min-width:0;width:calc(100% - 210px);max-width:1000px;padding:32px 30px 72px}.content h1{font-size:28px;line-height:1.3}.content p,.content li{font-size:14px;line-height:1.75}.content code{overflow-wrap:anywhere}.content section{max-width:100%}.content details{margin-top:32px;padding:18px;border:1px solid var(--border);border-radius:6px}.content summary{cursor:pointer;font-weight:600;color:var(--accent)}.content details h2{font-size:19px}.nav-link{font-size:13px}.callout ol{margin:12px 0 0;padding-left:22px}.callout p:last-child{margin-bottom:0}table{width:100%;table-layout:fixed}td,th{overflow-wrap:anywhere}
+@media(max-width:720px){body{display:block}.sidebar{position:static;width:100%;height:auto;border-right:0;border-bottom:1px solid var(--border)}.nav-list{display:grid;grid-template-columns:1fr 1fr}.content{width:100%;padding:24px}.brand{margin-bottom:12px}}
+</style></head>
 <body>
   <div class="sidebar">
     <div class="brand">
-      <img src="images/overview-poster.jpg" alt="PulseStage Icon" onerror="this.style.display='none'">
       <div>
         <h1>PulseStage</h1>
         <span>MIDI Studio Manual</span>
@@ -185,14 +187,12 @@
 
   <div class="content">
     <h1>PulseStage — MIDI Studio Operator Guide</h1>
-    <p><em>Version 1.0.0 — Standalone Windows Production Manual</em></p>
+    <p><em>Version 1.1.0 · Windows desktop operator guide</em></p>
 
-    <div class="img-card">
-      <img src="images/control-room-desktop.jpg" alt="PulseStage Dark Console">
-      <div class="img-caption">Figure 1.1: PulseStage Studio Command Station in Dark Console mode</div>
-    </div>
+    
 
-    <h2 id="section1">1. What PulseStage Does (And What It Does Not)</h2>
+    <div class="callout info"><strong>First session · no musical hardware needed</strong><ol><li>Install Setup.exe and open the PulseStage shortcut.</li><li>Click <b>Connect keybed</b>, then click and release a piano key. RECEIVED counts the note messages.</li><li>Click <b>Connect receiver</b>. Send a preset or controller from the command station and watch the reference pedal respond.</li><li>Click the small metal <b>Footswitch</b> button: the amber light and ON/OFF text confirm CC64 receipt.</li><li>Open <b>Test bench</b> for guided checks. Internal practice requires no loopMIDI or MIDI-OX.</li></ol><p>MIDI carries instructions. This lab is silent; it does not synthesize audio.</p></div>
+<h2 id="section1">1. What PulseStage Does (And What It Does Not)</h2>
     <p><strong>PulseStage</strong> is a dedicated Windows application engineered for stage musicians, keyboardists, guitarists, and studio engineers who need reliable, direct control over their MIDI equipment. It manages preset changes, continuous controllers, master tempo clocks, and custom performance sequences while offering real-time diagnostic monitoring.</p>
     
     <h3>What PulseStage Is:</h3>
@@ -200,8 +200,8 @@
       <li><strong>A MIDI Control Command Station:</strong> Transmits Program Change (PC), Bank Select (MSB CC0 / LSB CC32), and Control Change (CC) messages to hardware synthesizers, digital guitar modelers, vocal processors, and outboard gear.</li>
       <li><strong>A Master MIDI Clock Source:</strong> Generates stable 24-PPQN (pulses per quarter note) MIDI timing with Start, Continue, and Stop transport commands.</li>
       <li><strong>An Inspection and Diagnostic Monitor:</strong> Captures, decodes, timestamps, and graphs every incoming and outgoing byte stream across all 16 MIDI channels.</li>
-      <li><strong>A Macro Action Engine:</strong> Executes custom multi-step preset and parameter chains with deterministic millisecond delays.</li>
-      <li><strong>An Integrated Practice Lab:</strong> Features an on-screen velocity-sensitive keybed and a reference receiving pedal for driver-free testing.</li>
+      <li><strong>A Macro Action Engine:</strong> Executes custom multi-step preset and parameter chains with ordered steps and requested millisecond delays.</li>
+      <li><strong>An Integrated Practice Lab:</strong> Features an on-screen keybed with adjustable velocity and a reference receiving pedal for driver-free testing.</li>
     </ul>
 
     <div class="callout">
@@ -214,18 +214,15 @@
     </div>
 
     <h2 id="section2">2. Installation and First Launch</h2>
-    <p>PulseStage is distributed as a self-contained Windows setup executable: <code>PulseStage-Setup-1.0.0-x64.exe</code>.</p>
+    <p>PulseStage is distributed as a self-contained Windows setup executable: <code>PulseStage-Setup-1.1.0-x64.exe</code>.</p>
     <ul>
-      <li><strong>Zero Prerequisites:</strong> You do <strong>not</strong> need Python, pip, C++ compilers, or developer tools installed. The complete runtime, dependencies, and UI assets are bundled.</li>
-      <li><strong>Installation Path:</strong> Installs cleanly to <code>C:\Program Files\PulseStage</code> (or per-user Programs directory).</li>
+      <li><strong>Included runtime:</strong> You do <strong>not</strong> need Python, pip, C++ compilers, or developer tools installed. The complete runtime, dependencies, and UI assets are bundled.</li>
+      <li><strong>Installation Path:</strong> Installs cleanly to <code>%LOCALAPPDATA%\Programs\PulseStage</code> by default.</li>
       <li><strong>AppData Persistence:</strong> User preferences, custom actions, and logs reside in <code>%APPDATA%\PulseStage\</code>, keeping your presets completely safe across application updates.</li>
-      <li><strong>Dedicated Desktop App:</strong> Runs as an isolated desktop window without distracting terminal popups, binding securely to local loopback <code>127.0.0.1</code>.</li>
+      <li><strong>Dedicated Desktop App:</strong> Runs as an isolated desktop window with its own bundled renderer. No separately installed browser, localhost address, or application HTTP server is used.</li>
     </ul>
 
-    <div class="img-card">
-      <img src="images/installed-light-console.jpg" alt="PulseStage Light Console">
-      <div class="img-caption">Figure 2.1: PulseStage Light Console mode for high-ambient daylight environments</div>
-    </div>
+    
 
     <h2 id="section3">3. Non-Musician MIDI Primer</h2>
     <table>
@@ -266,10 +263,7 @@
       <li><strong>Reference Pedal:</strong> Live incoming status display (Program, Expression CC11, Volume CC7, Params CC12/13, Footswitch CC64, and measured BPM).</li>
     </ul>
 
-    <div class="img-card">
-      <img src="images/test-bench.jpg" alt="PulseStage Test Bench">
-      <div class="img-caption">Figure 6.1: Test Bench showing receiver-verified pass badges</div>
-    </div>
+    
 
     <h2 id="section7">7. Event Monitor & Diagnostics</h2>
     <p>The Event Monitor records, timestamps, and decodes every MIDI packet. Includes real-time controller graphs, clock interval timing traces, and export options (JSON, CSV, formatted text).</p>
@@ -278,10 +272,11 @@
     <p>Four automated tests verify: Note On/Off, Preset Change, Parameter Control, and 120 BPM Clock tracking. Tests only PASS when confirmed receipt bytes arrive at the receiver.</p>
 
     <h2 id="section9">9. Performance Actions & Utilities</h2>
-    <p>Create and execute multi-step macros with deterministic millisecond delays. Pitch bend (14-bit bipolar), Channel Pressure, and raw SysEx tools are built-in.</p>
+    <p>Create and execute multi-step macros with ordered steps and requested millisecond delays. Pitch bend (14-bit bipolar), Channel Pressure, and raw SysEx tools are built-in.</p>
 
     <h2 id="section10">10. Troubleshooting & FAQ</h2>
     <p>Consult the guide for port conflict resolution, driver restarts, and single-instance handling.</p>
+<section><h2>Reference footswitch</h2><p>The metal footswitch displays received CC64 status. Its amber lamp and ON/OFF readout follow MIDI received by the reference receiver. Clicking the metal button alternates 127 and 0 to the reference receiver only. OFFLINE means disconnected. Consult the device manual for real hardware mappings.</p></section><details><summary>Desktop installation and technical notes</summary><section><h2>Desktop architecture and qualification</h2><p>PulseStage 1.1 bundles Python, its application packages and a Qt WebEngine renderer. Edge, Chrome, WebView2, Python and pip are not required as separately installed applications. The desktop shell loads packaged local assets through an internal resource scheme and calls the MIDI engine through Qt WebChannel IPC. It does not start Uvicorn, an HTTP server, a WebSocket server or an application TCP listening port. Users never enter a localhost address or IP.</p><p>The renderer is still web technology inside a native window. Bundling that engine makes the installer and installed footprint larger than the former browser-dependent build. Chromium renderer helper processes belong to PulseStage; they are not an installed browser. Standard Windows system libraries and supported graphics drivers remain operating-system prerequisites. Keep Qt/Chromium patched in future releases.</p><h2>Install and open</h2><p>Install `PulseStage-Setup-1.1.0-x64.exe`, then use the PulseStage shortcut. Windows 10/11 x64 is the intended target; qualification is limited to the recorded test environment. The installer contains the UI engine and requires no renderer download. The build is unsigned unless accompanied by a verified signing record.</p><p>The title bar belongs to PulseStage. Closing the window shuts down the MIDI engine and releases owned notes/handles. Launching a second copy for the same user-data directory activates the existing window using a user-scoped Windows named pipe. There is no browser-process lifetime dependency or port-conflict selection. Help &gt; User guide opens the offline guide inside the application.</p><p>Settings and actions remain under `%APPDATA%\PulseStage\config\user_config.json`. Renderer cache/state is under `%APPDATA%\PulseStage\renderer`; logs are under `logs`. Export opens a native Save dialog, initially in the `exports` folder. Installation/upgrade must preserve these user files. The desktop renderer&#x27;s theme storage is separate from the old external browser&#x27;s storage; choose the theme once in the new window. The dedicated desktop saves the theme through native Windows settings (HKCU/Software/PulseStage/PulseStage), avoiding browser local storage.</p><h2>Practice without hardware or extra drivers</h2><p>Open Test bench and use Internal Practice Lab. Connect the keybed and reference receiver. No loopMIDI or MIDI-OX installation is needed for this mode. The paths are separate: keybed -&gt; internal input monitor; command station -&gt; internal reference receiver. Incoming notes are not automatically forwarded to the chosen output.</p><p>Run the guided note, preset, parameter and clock checks. They require received evidence in the active transport. A changing editor value alone is not a send: click Send command. The reference knobs display received settings. The metal footswitch sends a CC64 test message; its lamp and readout confirm received state. They do not process audio. The keybed has adjustable velocity; this is not a pressure-sensitive physical piano.</p><p>Switch to Windows loopMIDI mode only for independent OS-port inspection or inter-application testing. Create `PulseStage Keyboard` and `PulseStage Pedal Test` in separately installed/running loopMIDI, then connect. The mode switch stops engine activity, releases notes and clears input/output selections. Missing ports produce an error. Never describe internal practice as Windows-driver or physical-hardware qualification.</p><h2>Physical equipment</h2><p>Compatible USB-MIDI hardware uses Windows-exposed MIDI ports; some devices need their manufacturer&#x27;s driver. DIN equipment needs a USB-MIDI interface/cables. Select the actual port, match channel and documented PC/CC/bank mapping, and enable external MIDI clock if supported. Direct hardware operation does not need loopMIDI or MIDI-OX. An ordinary audio instrument/cable/footswitch is not automatically a MIDI endpoint. Sound requires the instrument&#x27;s own sound generator and audio path. Physical hardware was not verified in this desktop conversion.</p><h2>Development and build</h2><p>Normal source launch: `python run_app.py` after installing the pinned build environment. Developer tools are not operator prerequisites. For reproducible packaging, install `requirements-build.lock`, run `python -m PyInstaller --clean --noconfirm pulsestage.spec`, then compile `installer.iss` with Inno Setup 6. Build files resolve the checkout directory instead of hard-coding a developer drive. Source-only HTTP development is explicitly separate: `python -m src.launcher.development_server`; it is not started by the desktop product.</p><p>`PulseStage.exe --self-check --report result.json` exercises the socket-free application transport with temporary configuration and simulated hardware. It checks internal RX note-on/off and received PC24, and shuts down. It is not a visual renderer, installer or physical-device test.</p><h2>Known limits</h2><p>Actual physical instrument response, a clean Windows VM without any browsers installed, long-duration physical timing, broad accessibility/high-DPI coverage and every supported GPU remain separate qualification work. The architecture does not discover/launch installed browsers or expose a network-control server in desktop mode. The existing video predates this conversion and describes the old loopMIDI-based demo; follow this guide for the new internal default. Do not distribute that video as an exact 1.1 installation walkthrough without updating it.</p></section></details>
   </div>
 </body>
 </html>
