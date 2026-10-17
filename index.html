@@ -1,1354 +1,476 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) - Privacy-safe anonymous analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNKE55GVQD"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-HNKE55GVQD', { 'anonymize_ip': true });
-  </script>
-
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>RiTym Technologies | Autonomous Field Telemetry, Edge Computing & Navigation Systems</title>
-  <meta name="description" content="RiTym Technologies engineers high-reliability off-grid positioning instruments, tactical cockpit telemetry consoles, autonomous edge computing architectures, and the EXOS navigation software suite.">
-  <link rel="icon" type="image/png" href="assets/ritym_logo.png">
-
-  <!-- Enterprise Human-Aesthetic Typography -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ritym — Simple, Focused Tools for Signal, Timing & Sound</title>
+  <meta name="description" content="RiTym is an independent engineering workshop. We build practical MIDI software, timing utilities, and lightweight location tools without buzzwords or vaporware.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
   <style>
     :root {
-      --primary: #0284c7;
-      --primary-dark: #0369a1;
-      --primary-light: #e0f2fe;
-      --navy: #0f172a;
-      --navy-dark: #090d16;
-      --navy-card: #1e293b;
-      --accent-blue: #2563eb;
-      --accent-cyan: #38bdf8;
-      --accent-amber: #d97706;
-      --accent-emerald: #059669;
-      --accent-teal: #0d9488;
-      --bg-white: #ffffff;
-      --bg-slate: #f8fafc;
-      --bg-slate-alt: #f1f5f9;
-      --border-light: #e2e8f0;
-      --border-dark: #cbd5e1;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --text-heading: #0f172a;
-      --text-body: #334155;
-      --text-muted: #64748b;
-      --text-light: #94a3b8;
-      --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-mono: 'JetBrains Mono', Consolas, monospace;
+      --bg-dark: #0a0d12;
+      --bg-card: #121720;
+      --bg-card-hover: #18202c;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(2, 65, 254, 0.3);
+      --text: #f1f5f9;
+      --text-muted: #8c9ba5;
+      --text-dim: #5a6874;
+      --blue: #0241fe;
+      --blue-glow: rgba(2, 65, 254, 0.15);
+      --amber: #f59e0b;
+      --emerald: #10b981;
     }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; background-color: var(--bg-white); color: var(--text-body); font-family: var(--font-main); -webkit-font-smoothing: antialiased; }
-    body { overflow-x: hidden; line-height: 1.65; background-color: var(--bg-white); }
-    a { color: inherit; text-decoration: none; transition: all 0.2s ease; }
-
-    /* Top Corporate Ticker */
-    .top-corp-bar {
-      background-color: #0b1120;
-      color: #94a3b8;
-      font-size: 0.8rem;
-      padding: 7px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    .top-corp-bar a { color: #38bdf8; font-weight: 500; }
-    .top-corp-bar a:hover { text-decoration: underline; color: #7dd3fc; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
 
-    /* Navigation Bar */
+    /* Navbar */
     .navbar {
       position: sticky;
       top: 0;
-      z-index: 1000;
-      background-color: var(--navy);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      z-index: 100;
+      background: rgba(10, 13, 18, 0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
-    .nav-container {
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 82px;
+    .nav-inner {
+      height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
     }
-    .brand-logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-    }
-    .brand-logo-img {
-      height: 48px;
-      width: auto;
+    .brand-logo {
+      height: 28px;
       display: block;
-      object-fit: contain;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+      transition: opacity 0.2s;
     }
-    .brand-text-block {
-      display: flex;
-      flex-direction: column;
-    }
-    .brand-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.02em;
-    }
-    .brand-subtitle {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: #38bdf8;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      font-family: var(--font-mono);
-    }
-    .nav-menu {
+    .brand-logo:hover { opacity: 0.9; }
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 22px;
+      gap: 28px;
       list-style: none;
     }
     .nav-link {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       font-weight: 500;
-      color: #cbd5e1;
-      padding: 6px 0;
-      position: relative;
-    }
-    .nav-link:hover { color: #ffffff; }
-    .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: var(--primary);
-    }
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .nav-cta-btn {
-      background-color: var(--primary);
-      color: #ffffff;
-      padding: 9px 18px;
-      border-radius: 6px;
-      font-size: 0.86rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: background-color 0.2s ease, transform 0.2s ease;
-    }
-    .nav-cta-btn:hover { background-color: var(--primary-dark); transform: translateY(-1px); }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 11px 22px;
-      font-size: 0.92rem;
-      font-weight: 600;
-      border-radius: 6px;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
-      text-align: center;
-    }
-    .btn-primary { background-color: var(--primary); color: #ffffff; }
-    .btn-primary:hover { background-color: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35); }
-    .btn-secondary { background-color: #ffffff; color: var(--navy); border-color: var(--border-dark); }
-    .btn-secondary:hover { background-color: var(--bg-slate); border-color: #94a3b8; transform: translateY(-1px); }
-    .btn-dark { background-color: var(--navy); color: #ffffff; border: 1px solid rgba(255,255,255,0.2); }
-    .btn-dark:hover { background-color: #1e293b; border-color: #38bdf8; color: #38bdf8; }
-
-    /* Container & Layout */
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    .section {
-      padding: 88px 0;
-      border-bottom: 1px solid var(--border-light);
-    }
-    .section-slate {
-      background-color: var(--bg-slate);
-    }
-    .section-dark {
-      background-color: #0b1120;
-      color: #f1f5f9;
-    }
-    .section-header {
-      text-align: center;
-      max-width: 820px;
-      margin: 0 auto 56px auto;
-    }
-    .section-eyebrow {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 12px;
-      background-color: var(--primary-light);
-      padding: 4px 12px;
-      border-radius: 4px;
-    }
-    .section-eyebrow-dark {
-      background-color: rgba(2, 132, 199, 0.2);
-      color: #38bdf8;
-    }
-    .section-title {
-      font-size: 2.3rem;
-      font-weight: 800;
-      line-height: 1.25;
-      color: var(--text-heading);
-      margin-bottom: 16px;
-      letter-spacing: -0.025em;
-    }
-    .section-title-dark {
-      color: #ffffff;
-    }
-    .section-desc {
-      font-size: 1.1rem;
       color: var(--text-muted);
-      line-height: 1.65;
+      transition: color 0.2s;
     }
+    .nav-link:hover { color: #fff; }
+    .nav-link.active { color: #fff; font-weight: 600; }
+    .nav-btn {
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { background: #0036d6; transform: translateY(-1px); }
 
-    /* Hero Section */
+    /* Hero */
     .hero {
-      background: linear-gradient(180deg, #090d16 0%, #0f172a 100%);
-      color: #ffffff;
-      padding: 80px 0 100px 0;
+      padding: 90px 0 70px;
+      text-align: center;
       position: relative;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-image: 
-        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 56px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
     }
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
+      background: rgba(2, 65, 254, 0.1);
+      border: 1px solid var(--border-accent);
+      color: #60a5fa;
       padding: 6px 14px;
-      font-size: 0.82rem;
-      color: #38bdf8;
-      font-family: var(--font-mono);
-      margin-bottom: 22px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
     }
-    .hero-title {
-      font-size: 3.2rem;
+    .hero-badge .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 2px;
+      background: var(--blue);
+      display: inline-block;
+    }
+    .hero h1 {
+      font-size: 3.4rem;
       font-weight: 800;
       line-height: 1.15;
-      letter-spacing: -0.03em;
+      letter-spacing: -1.2px;
       margin-bottom: 20px;
       color: #ffffff;
     }
-    .hero-title span { color: #38bdf8; }
-    .hero-subtitle {
-      font-size: 1.15rem;
-      line-height: 1.65;
-      color: #cbd5e1;
-      margin-bottom: 32px;
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
     }
     .hero-actions {
       display: flex;
-      gap: 14px;
+      justify-content: center;
+      gap: 16px;
       flex-wrap: wrap;
       margin-bottom: 40px;
     }
-    .hero-specs-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      padding-top: 28px;
-    }
-    .spec-num {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #38bdf8;
-      font-family: var(--font-mono);
-      line-height: 1.2;
-    }
-    .spec-label {
-      font-size: 0.78rem;
-      color: #94a3b8;
-      margin-top: 4px;
-      line-height: 1.35;
-    }
-
-    /* Architecture Stack Infographic Card */
-    .arch-card {
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.5);
-    }
-    .arch-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 12px;
-    }
-    .arch-card-header h3 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.02em;
-    }
-    .arch-tag {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: #38bdf8;
-      background: rgba(56, 189, 248, 0.1);
-      padding: 2px 8px;
-      border-radius: 4px;
-      border: 1px solid rgba(56, 189, 248, 0.2);
-    }
-    .arch-stack-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .arch-stack-item {
-      background: rgba(30, 41, 59, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+    .btn-main {
+      background: var(--blue);
+      color: #fff;
+      padding: 13px 26px;
       border-radius: 8px;
-      padding: 12px 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: border-color 0.2s ease, background 0.2s ease;
-    }
-    .arch-stack-item:hover {
-      background: rgba(30, 41, 59, 0.9);
-      border-color: rgba(56, 189, 248, 0.35);
-    }
-    .stack-meta h4 {
-      font-size: 0.86rem;
-      font-weight: 700;
-      color: #ffffff;
-    }
-    .stack-meta p {
-      font-size: 0.74rem;
-      color: #94a3b8;
-      margin-top: 2px;
-    }
-    .stack-badge {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: 0.98rem;
       font-weight: 600;
-      color: #38bdf8;
-      background: rgba(2, 132, 199, 0.15);
-      border: 1px solid rgba(2, 132, 199, 0.3);
-      padding: 3px 8px;
-      border-radius: 4px;
-      white-space: nowrap;
-    }
-
-    /* Hardware Cards Grid */
-    .hw-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 28px;
-    }
-    .hw-card {
-      background: #ffffff;
-      border: 1px solid var(--border-light);
-      border-radius: 12px;
-      padding: 32px;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      transition: all 0.25s ease;
-      position: relative;
-    }
-    .hw-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--primary);
-    }
-    .hw-badge {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--primary);
-      background-color: var(--primary-light);
-      padding: 3px 10px;
-      border-radius: 4px;
-      margin-bottom: 14px;
-      align-self: flex-start;
-    }
-    .hw-title {
-      font-size: 1.45rem;
-      font-weight: 800;
-      color: var(--text-heading);
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-      line-height: 1.3;
-    }
-    .hw-desc {
-      font-size: 0.95rem;
-      color: var(--text-body);
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
-    .hw-specs-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 28px;
-      border-top: 1px solid var(--border-light);
-      padding-top: 18px;
-    }
-    .hw-specs-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 0.88rem;
-      color: var(--text-body);
-      line-height: 1.45;
-    }
-    .hw-specs-list li span.bullet {
-      color: var(--primary);
-      font-weight: bold;
-    }
-    .hw-specs-list li strong {
-      color: var(--text-heading);
-    }
-
-    /* Edge Processing / Architecture Section */
-    .edge-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 48px;
-      align-items: center;
-    }
-    .pillar-card {
-      background: #ffffff;
-      border: 1px solid var(--border-light);
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      transition: border-color 0.2s ease;
-    }
-    .pillar-card:hover {
-      border-color: var(--primary);
-    }
-    .pillar-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      background: var(--primary-light);
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.15rem;
-      flex-shrink: 0;
-    }
-    .pillar-text h4 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text-heading);
-      margin-bottom: 4px;
-    }
-    .pillar-text p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-    .pillars-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    /* Architecture Flow Diagram Box */
-    .flow-diagram-box {
-      background: #090d16;
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      border-radius: 12px;
-      padding: 28px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    }
-    .flow-diagram-title {
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: #38bdf8;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .flow-diagram-title::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #00ff88;
-      box-shadow: 0 0 8px #00ff88;
-    }
-    .flow-steps-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      position: relative;
-    }
-    .flow-node {
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-    }
-    .flow-node-content h5 {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: #ffffff;
-    }
-    .flow-node-content p {
-      font-size: 0.74rem;
-      color: #94a3b8;
-      margin-top: 2px;
-      font-family: var(--font-mono);
-    }
-    .flow-badge-metric {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      background: rgba(56, 189, 248, 0.12);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 3px 8px;
-      border-radius: 4px;
-      white-space: nowrap;
-    }
-    .flow-connector {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #38bdf8;
-      font-size: 0.9rem;
-      margin: -4px 0;
-    }
-
-    /* Software Suite Grid */
-    .sw-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-    }
-    .sw-card {
-      background: #ffffff;
-      border: 1px solid var(--border-light);
-      border-radius: 10px;
-      padding: 24px;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      transition: all 0.25s ease;
-    }
-    .sw-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--primary);
-    }
-    .sw-tag {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-    .sw-title {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--text-heading);
-      margin-bottom: 10px;
-    }
-    .sw-desc {
-      font-size: 0.88rem;
-      color: var(--text-body);
-      margin-bottom: 20px;
-      line-height: 1.55;
-      flex-grow: 1;
-    }
-    .sw-links {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      border-top: 1px solid var(--border-light);
-      padding-top: 14px;
-      font-size: 0.84rem;
-      font-weight: 600;
-    }
-    .sw-links a { color: var(--primary); }
-    .sw-links a:hover { text-decoration: underline; color: var(--primary-dark); }
-
-    /* Operational Sectors Grid */
-    .sector-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-    }
-    .sector-card {
-      background: #0f172a;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
-      padding: 24px;
-      color: #f1f5f9;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.25s ease;
-    }
-    .sector-card:hover {
-      border-color: #38bdf8;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    }
-    .sector-icon {
-      font-size: 1.8rem;
-      margin-bottom: 14px;
-    }
-    .sector-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 8px;
-    }
-    .sector-card p {
-      font-size: 0.86rem;
-      color: #94a3b8;
-      line-height: 1.55;
-    }
-
-    /* Privacy & Security Mandate Card */
-    .privacy-banner-card {
-      background: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
-      border: 1px solid rgba(5, 150, 105, 0.35);
-      border-radius: 12px;
-      padding: 40px;
-      color: #ffffff;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    }
-    .privacy-banner-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 36px;
-      align-items: center;
-    }
-    .privacy-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: #34d399;
-      background: rgba(5, 150, 105, 0.15);
-      border: 1px solid rgba(5, 150, 105, 0.3);
-      padding: 4px 10px;
-      border-radius: 4px;
-      margin-bottom: 16px;
+      gap: 10px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(2, 65, 254, 0.35);
     }
-    .privacy-features-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+    .btn-main:hover { background: #0036d6; transform: translateY(-2px); }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      border: 1px solid var(--border);
+      padding: 13px 24px;
+      border-radius: 8px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
     }
-    .privacy-feature-item {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 12px 14px;
-      border-radius: 6px;
+    .btn-outline:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); }
+    .status-strip {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(18, 23, 32, 0.8);
+      border: 1px solid var(--border);
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
     }
-    .privacy-feature-item b {
-      display: block;
-      font-size: 0.86rem;
-      color: #ffffff;
-      margin-bottom: 3px;
-    }
-    .privacy-feature-item p {
-      font-size: 0.78rem;
-      color: #94a3b8;
-      line-height: 1.4;
+    .status-strip span { display: inline-flex; align-items: center; gap: 6px; }
+    .status-pill {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emerald);
     }
 
-    /* Portal CTA Banner */
-    .portal-banner {
-      background: linear-gradient(135deg, #0369a1 0%, #0f172a 100%);
-      border-radius: 12px;
-      padding: 48px;
-      color: #ffffff;
+    /* Section Styling */
+    .section-wrap { padding: 90px 0; border-top: 1px solid var(--border); }
+    .section-head { margin-bottom: 48px; }
+    .section-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      line-height: 1.6;
+    }
+
+    /* Product Spotlight Card */
+    .spotlight-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      transition: border-color 0.2s;
+    }
+    .spotlight-card:hover { border-color: rgba(255, 255, 255, 0.16); }
+    .spotlight-media {
+      background: #000;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .spotlight-media video {
+      width: 100%;
+      display: block;
+      max-height: 520px;
+      object-fit: cover;
+    }
+    .spotlight-body {
+      padding: 40px;
+    }
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin: 32px 0;
+    }
+    .feature-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .feature-item h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .feature-item p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* Other Project Card */
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 32px;
-      box-shadow: var(--shadow-lg);
+      flex-wrap: wrap;
     }
-    .portal-banner h3 {
-      font-size: 1.85rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 8px;
+    .project-info h3 { font-size: 1.4rem; color: #fff; margin-bottom: 8px; }
+    .project-info p { color: var(--text-muted); font-size: 0.95rem; max-width: 600px; line-height: 1.6; }
+    .badge-dev {
+      background: rgba(245, 158, 11, 0.12);
+      color: #fbbf24;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      margin-bottom: 12px;
     }
-    .portal-banner p {
-      color: #e0f2fe;
-      font-size: 1.05rem;
-      max-width: 650px;
-      line-height: 1.6;
+
+    /* Philosophy / Story Section */
+    .story-card {
+      background: linear-gradient(180deg, #121720 0%, #0a0d12 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .story-card { grid-template-columns: 1fr; gap: 32px; padding: 28px; }
+      .hero h1 { font-size: 2.4rem; }
+    }
+    .story-text h3 { font-size: 1.8rem; color: #fff; margin-bottom: 16px; letter-spacing: -0.5px; }
+    .story-text p { color: var(--text-muted); font-size: 0.98rem; margin-bottom: 16px; line-height: 1.65; }
+    .meaning-box {
+      background: rgba(2, 65, 254, 0.05);
+      border-left: 3px solid var(--blue);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-top: 20px;
     }
 
     /* Footer */
     .footer {
-      background-color: var(--navy-dark);
-      color: #cbd5e1;
-      padding: 72px 0 32px 0;
-      border-top: 1px solid var(--border-subtle);
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 56px;
-    }
-    .footer-logo {
-      height: 48px;
-      width: auto;
-      margin-bottom: 18px;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
-    }
-    .footer-desc {
+      border-top: 1px solid var(--border);
+      padding: 60px 0 32px;
+      background: #080a0e;
       font-size: 0.88rem;
-      color: #94a3b8;
-      line-height: 1.65;
-      margin-bottom: 18px;
+      color: var(--text-dim);
     }
-    .footer-title {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: #ffffff;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 20px;
-    }
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 0.88rem;
-    }
-    .footer-links a:hover {
-      color: #38bdf8;
-      text-decoration: underline;
-    }
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 28px;
+    .footer-inner {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+    .footer-brand p {
+      color: var(--text-muted);
+      max-width: 340px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .footer-links {
+      display: flex;
+      gap: 48px;
+      list-style: none;
+    }
+    .footer-links h5 {
+      color: #fff;
       font-size: 0.82rem;
-      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
     }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .hw-grid { grid-template-columns: 1fr; }
-      .edge-grid { grid-template-columns: 1fr; }
-      .sw-grid { grid-template-columns: repeat(2, 1fr); }
-      .sector-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: repeat(2, 1fr); }
-      .portal-banner { flex-direction: column; text-align: center; }
-      .privacy-banner-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 768px) {
-      .nav-menu { display: none; }
-      .hero-title { font-size: 2.3rem; }
-      .hero-specs-bar { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-      .sw-grid { grid-template-columns: 1fr; }
-      .sector-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-      .privacy-features-list { grid-template-columns: 1fr; }
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 8px; }
+    .footer-links a { color: var(--text-muted); font-size: 0.85rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Corporate Identity Bar -->
-  <div class="top-corp-bar">
-    <div>
-      <span>RiTym Technologies &bull; Autonomous Field Telemetry, Edge Computing & Navigation Systems</span>
-    </div>
-    <div>
-      <span>Flagship Navigation Division: </span>
-      <a href="https://exosgps.com" target="_blank" rel="noopener">exosgps.com &rarr;</a>
-    </div>
-  </div>
-
-  <!-- Primary Sticky Navigation Bar -->
+  <!-- Navigation -->
   <header class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="brand-logo-wrap" title="RiTym Technologies &bull; Edge Systems & Telemetry">
-        <img src="assets/ritym_logo.png" alt="RiTym Technologies Logo" class="brand-logo-img">
-        <div class="brand-text-block">
-          <span class="brand-title">RiTym Technologies</span>
-          <span class="brand-subtitle">Telemetry &bull; Edge Systems &bull; Software</span>
-        </div>
+    <div class="container nav-inner">
+      <a href="index.html">
+        <img src="assets/ritym_logo_white.png" alt="ritym" class="brand-logo">
       </a>
-
-      <nav>
-        <ul class="nav-menu">
-          <li><a href="#hardware" class="nav-link">Hardware Platforms</a></li>
-          <li><a href="#architecture" class="nav-link">Edge Architecture</a></li>
-          <li><a href="#software" class="nav-link">EXOS Software</a></li>
-          <li><a href="#sectors" class="nav-link">Sectors</a></li>
-          <li><a href="products.html" class="nav-link">Products</a></li>
-          <li><a href="pulsestage.html" class="nav-link" style="color: #38bdf8;">PulseStage MIDI</a></li>
-          <li><a href="downloads.html" class="nav-link">Documentation</a></li>
-          <li><a href="portal.html" class="nav-link">Portal</a></li>
-        </ul>
-      </nav>
-
-      <div class="nav-actions">
-        <a href="portal.html" class="nav-cta-btn">
-          <span>Customer Portal</span>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
+      <ul class="nav-links">
+        <li><a href="pulsestage.html" class="nav-link active">PulseStage (MIDI)</a></li>
+        <li><a href="downloads.html" class="nav-link">Downloads</a></li>
+        <li><a href="pulsestage-guide.html" class="nav-link">Operator Guide</a></li>
+        <li><a href="https://exosgps.com" target="_blank" class="nav-link">Exos GPS ↗</a></li>
+        <li><a href="https://github.com/ritym-technologies/ritym-website/tree/pulsestage" target="_blank" class="nav-link">GitHub ↗</a></li>
+      </ul>
+      <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="nav-btn">Download v1.0.0 &darr;</a>
     </div>
   </header>
 
-  <!-- ========================================================================= -->
-  <!-- HERO SECTION                                                              -->
-  <!-- ========================================================================= -->
+  <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <div class="hero-grid">
-        <div>
-          <div class="hero-badge">
-            <span>MISSION-CRITICAL FIELD COMPUTING & TELEMETRY</span>
-          </div>
-          <h1 class="hero-title">
-            Autonomous Navigation Hardware, <span>Edge Telemetry</span> & Mission Software
-          </h1>
-          <p class="hero-subtitle">
-            RiTym Technologies engineers high-reliability off-grid positioning instruments, tactical cockpit telemetry consoles, and autonomous companion applications. Built for expeditionary teams, marine operators, and defense professionals operating beyond cellular coverage.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#hardware" class="btn btn-primary">Explore Hardware Platforms</a>
-            <a href="https://exosgps.com" target="_blank" rel="noopener" class="btn btn-secondary">
-              View EXOS Software Suite &nearr;
-            </a>
-            <a href="portal.html" class="btn btn-dark">
-              Customer & Licensing Portal
-            </a>
-          </div>
-
-          <div class="hero-specs-bar">
-            <div>
-              <div class="spec-num">Multi-Band</div>
-              <div class="spec-label">GPS &bull; GLONASS &bull; Galileo &bull; BeiDou</div>
-            </div>
-            <div>
-              <div class="spec-num">100% Offline</div>
-              <div class="spec-label">Zero-Cloud Telemetry &bull; Air-Gapped</div>
-            </div>
-            <div>
-              <div class="spec-num">&lt; 1.2m</div>
-              <div class="spec-label">Precision Multi-Frequency Fix</div>
-            </div>
-            <div>
-              <div class="spec-num">-40&deg;C to +85&deg;C</div>
-              <div class="spec-label">Industrial Operating Envelope</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Architecture Infographic Card -->
-        <div>
-          <div class="arch-card">
-            <div class="arch-card-header">
-              <h3>Enterprise Systems Architecture</h3>
-              <span class="arch-tag">Air-Gapped Core</span>
-            </div>
-            <div class="arch-stack-list">
-              <div class="arch-stack-item">
-                <div class="stack-meta">
-                  <h4>Layer 4: Field & Mission Software</h4>
-                  <p>EXOS Transceiver, Wayfinder, Echo Radio Mesh, Watchout Wear OS</p>
-                </div>
-                <span class="stack-badge">Native Multi-OS</span>
-              </div>
-              <div class="arch-stack-item">
-                <div class="stack-meta">
-                  <h4>Layer 3: OS Integration & Serial Bridges</h4>
-                  <p>Android Mock Location Injection, High-Speed NMEA 0183 TCP Sockets</p>
-                </div>
-                <span class="stack-badge">Standard NMEA</span>
-              </div>
-              <div class="arch-stack-item">
-                <div class="stack-meta">
-                  <h4>Layer 2: Real-Time Edge Processing</h4>
-                  <p>Dual-Core Ingress Isolation, Zero-Loss Memory Ring Buffers</p>
-                </div>
-                <span class="stack-badge">Deterministic</span>
-              </div>
-              <div class="arch-stack-item">
-                <div class="stack-meta">
-                  <h4>Layer 1: Rugged Field Instruments & RF</h4>
-                  <p>Multi-Band GNSS Engines, Optically Bonded Displays, 9-36V DC Power</p>
-                </div>
-                <span class="stack-badge">MIL-Grade PCB</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="hero-badge">
+        <span class="dot"></span> Independent Product &amp; Software Studio
       </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================= -->
-  <!-- 1. HARDWARE SHOWCASE: ENTERPRISE FIELD PLATFORMS                          -->
-  <!-- ========================================================================= -->
-  <section class="section" id="hardware">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-eyebrow">Enterprise Hardware Engineering</span>
-        <h2 class="section-title">Engineered for Harsh Operating Environments</h2>
-        <p class="section-desc">
-          We design and manufacture ruggedized micro-stations, touchscreen telemetry consoles, and autonomous field telemetry instruments built to withstand high vibration, wide thermal fluctuations, and continuous mission deployment.
-        </p>
-      </div>
-
-      <div class="hw-grid">
-        <!-- Hardware Platform 1 -->
-        <div class="hw-card">
-          <span class="hw-badge">DEPLOYED TELEMETRY STATION</span>
-          <h3 class="hw-title">Tactical GNSS Base Station & Edge Gateway</h3>
-          <p class="hw-desc">
-            Compact all-weather satellite receiver station engineered for surveying expeditions, overland vehicle convoys, search & rescue forward bases, and remote field research camps.
-          </p>
-          <ul class="hw-specs-list">
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>High-Rate Satellite Acquisition:</strong> Multi-constellation GNSS engine concurrently tracking GPS, GLONASS, Galileo, and BeiDou up to 25Hz with active multi-path filtering.</div>
-            </li>
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>Dual Wireless Distribution:</strong> Broadcasts raw NMEA sentences across high-throughput local Wi-Fi and authenticated Bluetooth LE simultaneously.</div>
-            </li>
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>Zero-Cloud Local API Engine:</strong> Embedded on-device configuration dashboard and real-time JSON telemetry endpoints; raw TCP NMEA stream on dedicated local port 2000.</div>
-            </li>
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>Cryptographic Security:</strong> Authenticated Bluetooth LE connections with MITM protection and dynamic numeric comparison passkeys to prevent unauthorized interception.</div>
-            </li>
-          </ul>
-          <a href="products.html" class="btn btn-secondary" style="margin-top:auto;">View System Specifications &rarr;</a>
-        </div>
-
-        <!-- Hardware Platform 2 -->
-        <div class="hw-card">
-          <span class="hw-badge">RUGGED COCKPIT TERMINAL</span>
-          <h3 class="hw-title">Command Bridge & Vehicle Navigation Display (7.0" Touch)</h3>
-          <p class="hw-desc">
-            Large-format rugged touchscreen telemetry instrument engineered for tactical overland vehicle dashboards, marine bridge consoles, search & rescue command vehicles, and expedition cockpits.
-          </p>
-          <ul class="hw-specs-list">
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>High-Visibility Optical Bonding:</strong> 7.0-inch 800x480 high-contrast daylight-readable display with multi-point capacitive touch, optimized for gloved operation and harsh glare.</div>
-            </li>
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>Dual Isolated High-Speed Serial:</strong> Hardware-isolated serial channels for simultaneous GNSS receiver communication and vehicle bus telemetry integration.</div>
-            </li>
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>Solid-State Local Logging:</strong> Integrated non-volatile storage slot supporting high-frequency continuous NMEA 0183 and GPX route recording without host dependencies.</div>
-            </li>
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>Industrial Vehicle Power:</strong> Wide-input 9–36V DC power regulation with reverse-polarity protection, transient voltage suppression, and marine surge immunity.</div>
-            </li>
-          </ul>
-          <a href="products.html" class="btn btn-secondary" style="margin-top:auto;">View Console Specifications &rarr;</a>
-        </div>
-
-        <!-- Hardware Platform 3 -->
-        <div class="hw-card">
-          <span class="hw-badge">HANDHELD FIELD INSTRUMENT</span>
-          <h3 class="hw-title">Tactical Handheld Navigator & Dismounted Instrument</h3>
-          <p class="hw-desc">
-            Ultra-compact handheld telemetry terminal and directional waypoint guide for dismounted field operators, alpine expeditions, and search & rescue personnel.
-          </p>
-          <ul class="hw-specs-list">
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>Autonomous Sensor Fusion:</strong> Integrated 3-axis solid-state magnetic compass for tilt-compensated azimuth heading and precision barometric altimeter for altitude tracking.</div>
-            </li>
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>Ultra-Low Power Budgeting:</strong> Engineered power management delivering multi-day operational endurance with intelligent micro-sleep states below 15 &micro;A.</div>
-            </li>
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>Integrated Energy Subsystem:</strong> Sealed Li-Ion/LiPo battery management with hardware fuel gauge for precise state-of-charge calculation across extreme temperatures.</div>
-            </li>
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>Rugged Ergonomic Form Factor:</strong> Impact-resistant polycarbonate/elastomer chassis engineered to withstand drop impacts and heavy precipitation.</div>
-            </li>
-          </ul>
-          <a href="products.html" class="btn btn-secondary" style="margin-top:auto;">View Handheld Specifications &rarr;</a>
-        </div>
-
-        <!-- Hardware Platform 4 -->
-        <div class="hw-card">
-          <span class="hw-badge">CUSTOM SYSTEMS & ODM</span>
-          <h3 class="hw-title">Custom RF Engineering & Embedded Telemetry Systems</h3>
-          <p class="hw-desc">
-            End-to-end original design manufacturing (ODM), custom high-density multi-layer PCB layout, and embedded hardware engineering for mission-critical environmental monitoring and fleet operations.
-          </p>
-          <ul class="hw-specs-list">
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>Impedance-Matched RF Layout:</strong> 50-ohm microstrip design for high-gain multi-band GNSS patch antennas, active external low-noise amplifiers, and local wireless networks.</div>
-            </li>
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>Thermal & Environmental Hardening:</strong> Industrial temperature validation (-40&deg;C to +85&deg;C) with specialized conformal coating for marine humidity and chemical resistance.</div>
-            </li>
-            <li>
-              <span class="bullet">&bull;</span>
-              <div><strong>Regulatory Pre-Compliance:</strong> Engineered to meet international FCC Part 15 and CE RED electromagnetic compatibility and emission standards.</div>
-            </li>
-          </ul>
-          <a href="support.html" class="btn btn-secondary" style="margin-top:auto;">Inquire for Custom Systems &rarr;</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================= -->
-  <!-- 2. FIRMWARE & SYSTEMS ARCHITECTURE (REPLACING CODE SNIPPETS)              -->
-  <!-- ========================================================================= -->
-  <section class="section section-slate" id="architecture">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-eyebrow">Systems Architecture & Reliability</span>
-        <h2 class="section-title">Deterministic Edge Processing & Real-Time Pipeline</h2>
-        <p class="section-desc">
-          Our embedded firmware architecture guarantees deterministic multi-tasking and sub-millisecond telemetry dispatch under heavy operational loads without dropping a single satellite fix.
-        </p>
-      </div>
-
-      <div class="edge-grid">
-        <!-- 4 Architectural Pillars -->
-        <div class="pillars-stack">
-          <div class="pillar-card">
-            <div class="pillar-icon">&#x2699;&#xFE0F;</div>
-            <div class="pillar-text">
-              <h4>Dual-Core Hardware Task Isolation</h4>
-              <p>Hardware-level separation allocates high-frequency satellite and sensor DMA ingestion exclusively to a dedicated processing core, while the secondary core handles authenticated wireless broadcast and network sockets.</p>
-            </div>
-          </div>
-
-          <div class="pillar-card">
-            <div class="pillar-icon">&#x1F504;</div>
-            <div class="pillar-text">
-              <h4>Bounded Non-Blocking Buffers</h4>
-              <p>Strictly bounded memory ring buffers prevent slow wireless clients, intermittent connection drops, or sudden Wi-Fi reconnects from creating backpressure on the primary navigation data stream.</p>
-            </div>
-          </div>
-
-          <div class="pillar-card">
-            <div class="pillar-icon">&#x1F4E1;</div>
-            <div class="pillar-text">
-              <h4>Air-Gapped Local Socket Engine</h4>
-              <p>High-throughput onboard NMEA 0183 TCP server and RESTful JSON telemetry engine allow mobile apps and navigation computers to ingest fixes directly over local Wi-Fi or Bluetooth LE with zero cloud reliance.</p>
-            </div>
-          </div>
-
-          <div class="pillar-card">
-            <div class="pillar-icon">&#x1F510;</div>
-            <div class="pillar-text">
-              <h4>Cryptographic Firmware Integrity</h4>
-              <p>Cryptographically signed firmware updates, tamper-evident boot verification, and LE Secure Connections with dynamic passkeys protect deployed field units against unauthorized modification.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Visual Architecture Flow Diagram -->
-        <div class="flow-diagram-box">
-          <div class="flow-diagram-title">Real-Time Telemetry Pipeline (Zero Backpressure)</div>
-          <div class="flow-steps-list">
-            <div class="flow-node">
-              <div class="flow-node-content">
-                <h5>1. Orbital Constellation Ingress</h5>
-                <p>GPS &bull; GLONASS &bull; Galileo &bull; BeiDou (Active Antenna)</p>
-              </div>
-              <span class="flow-badge-metric">25Hz Multi-GNSS</span>
-            </div>
-            <div class="flow-connector">&#x25BC;</div>
-            <div class="flow-node">
-              <div class="flow-node-content">
-                <h5>2. Isolated Ingress DMA Task</h5>
-                <p>Hardware Interrupt Servicing & Sentence Validation</p>
-              </div>
-              <span class="flow-badge-metric">Core 0 (Pinned)</span>
-            </div>
-            <div class="flow-connector">&#x25BC;</div>
-            <div class="flow-node">
-              <div class="flow-node-content">
-                <h5>3. Bounded Zero-Loss Ring Buffer</h5>
-                <p>Lock-Free Queue Pacing & Buffer Bloat Prevention</p>
-              </div>
-              <span class="flow-badge-metric">&lt; 1ms Latency</span>
-            </div>
-            <div class="flow-connector">&#x25BC;</div>
-            <div class="flow-node">
-              <div class="flow-node-content">
-                <h5>4. Secure Multi-Channel Broadcast</h5>
-                <p>Wi-Fi AP Socket (TCP 2000) & Bluetooth LE SPP</p>
-              </div>
-              <span class="flow-badge-metric">Core 1 (Pinned)</span>
-            </div>
-            <div class="flow-connector">&#x25BC;</div>
-            <div class="flow-node">
-              <div class="flow-node-content">
-                <h5>5. Mission Displays & Operator Endpoints</h5>
-                <p>EXOS Transceiver, Wayfinder, Cockpit Terminals, Windows</p>
-              </div>
-              <span class="flow-badge-metric">100% Offline</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================= -->
-  <!-- 3. SOFTWARE SHOWCASE: THE EXOS ECOSYSTEM                                  -->
-  <!-- ========================================================================= -->
-  <section class="section" id="software">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-eyebrow">Companion Software Ecosystem</span>
-        <h2 class="section-title">The EXOS Navigation Platform</h2>
-        <p class="section-desc">
-          To accompany our field telemetry hardware, RiTym Technologies develops four native software applications for Android, Wear OS, and Windows Desktop.
-        </p>
-      </div>
-
-      <div class="sw-grid">
-        <!-- 1. EXOS Transceiver -->
-        <div class="sw-card">
-          <span class="sw-tag">PLATFORM 01</span>
-          <h3 class="sw-title">EXOS Transceiver</h3>
-          <p class="sw-desc">
-            Industrial Bluetooth GNSS bridge, satellite signal analyzer, and Android Mock Location provider. Directly streams raw NMEA 0183 data into any mobile GIS or aviation app.
-          </p>
-          <div class="sw-links">
-            <a href="https://exosgps.com/#transceiver" target="_blank" rel="noopener">EXOS Platform Specs &rarr;</a>
-            <a href="https://play.google.com/store/apps/details?id=com.ritym.exosgps" target="_blank" rel="noopener" style="color:var(--text-muted);">Google Play Store &nearr;</a>
-          </div>
-        </div>
-
-        <!-- 2. EXOS Wayfinder -->
-        <div class="sw-card">
-          <span class="sw-tag">PLATFORM 02</span>
-          <h3 class="sw-title">EXOS Wayfinder</h3>
-          <p class="sw-desc">
-            Standalone backcountry navigation with offline vector topographic maps, MGRS/UTM tactical coordinates, breadcrumb trail recording, and reverse backtrack guidance.
-          </p>
-          <div class="sw-links">
-            <a href="https://exosgps.com/#wayfinder" target="_blank" rel="noopener">EXOS Platform Specs &rarr;</a>
-            <a href="https://play.google.com/store/apps/details?id=com.exos.wayfinder" target="_blank" rel="noopener" style="color:var(--text-muted);">Google Play Store &nearr;</a>
-          </div>
-        </div>
-
-        <!-- 3. EXOS ECHO -->
-        <div class="sw-card">
-          <span class="sw-tag">PLATFORM 03</span>
-          <h3 class="sw-title">EXOS ECHO</h3>
-          <p class="sw-desc">
-            Off-grid digital walkie-talkie connecting mobile field units over Wi-Fi Direct and BLE radio mesh with push-to-talk voice, offline text messaging, and emergency beacons.
-          </p>
-          <div class="sw-links">
-            <a href="https://exosgps.com/#echo" target="_blank" rel="noopener">EXOS Platform Specs &rarr;</a>
-            <a href="https://exosgps.com/#getting-started" target="_blank" rel="noopener" style="color:var(--text-muted);">Field Deployment Guide &nearr;</a>
-          </div>
-        </div>
-
-        <!-- 4. Exos Watchout -->
-        <div class="sw-card">
-          <span class="sw-tag">PLATFORM 04</span>
-          <h3 class="sw-title">Exos Watchout</h3>
-          <p class="sw-desc">
-            Precision Wear OS tactical analog chronograph watch face paired with a 3D tilt-compensated magnetic compass companion, dual color themes, and battery-optimized AOD.
-          </p>
-          <div class="sw-links">
-            <a href="https://exosgps.com/#watchout" target="_blank" rel="noopener">EXOS Platform Specs &rarr;</a>
-            <a href="https://play.google.com/store/apps/details?id=exos.ritym.watchout.watchface" target="_blank" rel="noopener" style="color:var(--text-muted);">Google Play Store &nearr;</a>
-          </div>
-        </div>
-      </div>
-
-      <div style="text-align:center; margin-top:44px;">
-        <a href="https://exosgps.com" target="_blank" rel="noopener" class="btn btn-primary">
-          Explore Complete EXOS Navigation Portal &nearr;
+      <h1>Simple, focused tools.<br>Grounded in reality.</h1>
+      <p>
+        No corporate theater, no military buzzwords. We build straightforward MIDI software, precision timing tools, and lightweight positioning instruments that actually work.
+      </p>
+      <div class="hero-actions">
+        <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="btn-main">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.951"/></svg>
+          Download PulseStage for Windows (14.6 MB)
+        </a>
+        <a href="#showcase" class="btn-outline">
+          Watch Walkthrough &amp; Video Tour &darr;
         </a>
       </div>
+      <div class="status-strip">
+        <span><span class="status-pill"></span> PulseStage v1.0.0 Released</span>
+        <span>&bull;</span>
+        <span>Windows 10/11 x64</span>
+        <span>&bull;</span>
+        <span>SHA-256 Verified</span>
+        <span>&bull;</span>
+        <span>Zero Developer Tools Required</span>
+      </div>
     </div>
   </section>
 
-  <!-- ========================================================================= -->
-  <!-- 4. OPERATIONAL SECTORS & APPLICATIONS                                     -->
-  <!-- ========================================================================= -->
-  <section class="section section-dark" id="sectors">
+  <!-- Flagship: PulseStage -->
+  <section class="section-wrap" id="showcase">
     <div class="container">
-      <div class="section-header">
-        <span class="section-eyebrow section-eyebrow-dark">Operational Sectors</span>
-        <h2 class="section-title section-title-dark">Mission-Critical Field Deployments</h2>
-        <p class="section-desc" style="color:#94a3b8;">
-          RiTym Technologies platforms are engineered to maintain high-precision positioning and situational awareness where commercial telecom networks fail.
+      <div class="section-head">
+        <span class="section-tag">Featured Release &bull; Available Now</span>
+        <h2 class="section-title">PulseStage &mdash; MIDI Studio</h2>
+        <p class="section-desc">
+          A dedicated Windows MIDI control station, diagnostic packet monitor, master 24-PPQN clock, and driver-free practice lab designed for touring musicians, guitarists, and studio engineers.
         </p>
       </div>
 
-      <div class="sector-grid">
-        <div class="sector-card">
-          <div class="sector-icon">&#x1F691;</div>
-          <h3>Search & Rescue (SAR)</h3>
-          <p>Rapidly deployable telemetry beacons and offline mesh comms for wilderness rescue teams operating outside cellular coverage.</p>
+      <div class="spotlight-card">
+        <!-- Embedded Walkthrough Video -->
+        <div class="spotlight-media">
+          <video controls playsinline poster="assets/pulsestage/Poster.jpg">
+            <source src="assets/pulsestage/PulseStage-Guided-Demo.mp4" type="video/mp4">
+            <track kind="subtitles" src="assets/pulsestage/captions.vtt" srclang="en" label="English" default>
+            Your browser does not support HTML5 video.
+          </video>
         </div>
 
-        <div class="sector-card">
-          <div class="sector-icon">&#x26F5;</div>
-          <h3>Maritime & Coastal Vessels</h3>
-          <p>Rugged marine bridge consoles, NMEA 0183 heading distribution, and water-sealed GPS receivers for offshore navigation.</p>
-        </div>
-
-        <div class="sector-card">
-          <div class="sector-icon">&#x1F69B;</div>
-          <h3>Expedition & Overland Convoys</h3>
-          <p>Continuous vehicle telemetry, off-grid convoy tracking, and waypoint guidance for trans-continental overland expeditions.</p>
-        </div>
-
-        <div class="sector-card">
-          <div class="sector-icon">&#x1F3D7;&#xFE0F;</div>
-          <h3>Surveying & Critical Infrastructure</h3>
-          <p>High-rate multi-constellation satellite logging for remote pipeline surveying, forestry mapping, and environmental research stations.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================= -->
-  <!-- 5. SECURITY & AIR-GAPPED PRIVACY MANDATE                                  -->
-  <!-- ========================================================================= -->
-  <section class="section">
-    <div class="container">
-      <div class="privacy-banner-card">
-        <div class="privacy-banner-grid">
-          <div>
-            <div class="privacy-badge">&#x1F6E1;&#xFE0F; AIR-GAPPED BY DESIGN</div>
-            <h3 style="font-size:1.85rem; font-weight:800; line-height:1.25; margin-bottom:14px;">
-              Zero Cloud Telemetry. 100% On-Premises Privacy.
-            </h3>
-            <p style="color:#cbd5e1; font-size:0.95rem; line-height:1.65; margin-bottom:20px;">
-              RiTym Technologies hardware and EXOS software do not route your location fixes, coordinates, or telemetry through central servers. Our systems operate entirely locally over direct Wi-Fi and Bluetooth channels, ensuring absolute confidentiality for mission-critical field operations.
-            </p>
-            <a href="security.html" class="btn btn-secondary">Read Full Security Architecture &rarr;</a>
+        <div class="spotlight-body">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px;">
+            <div>
+              <h3 style="font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Full Console Tour &amp; Lab Verification</h3>
+              <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 680px;">
+                Watch the complete 5-minute unhurried walkthrough explaining real-world stage challenges, program indexing (0&ndash;127 vs 1&ndash;128), master tempo clock, and receipt-verified diagnostic testing.
+              </p>
+            </div>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="btn-main" style="padding: 10px 20px; font-size: 0.9rem;">
+                Download Setup EXE &darr;
+              </a>
+              <a href="pulsestage-guide.html" class="btn-outline" style="padding: 10px 18px; font-size: 0.9rem;">
+                Operator Manual &rarr;
+              </a>
+              <a href="pulsestage.html" class="btn-outline" style="padding: 10px 18px; font-size: 0.9rem;">
+                Full Feature Specs &rarr;
+              </a>
+            </div>
           </div>
 
-          <div class="privacy-features-list">
-            <div class="privacy-feature-item">
-              <b>No Account Required</b>
-              <p>Hardware and apps function out-of-the-box without sign-ups or profiling.</p>
+          <div class="spotlight-grid">
+            <div class="feature-item">
+              <h4>🎛️ Precision Command Station</h4>
+              <p>Send Program Changes with selectable 0&ndash;127 or 1&ndash;128 indexing without wire corruption. Full Bank Select (CC0 MSB / CC32 LSB) and tactile CC editing with explicit send protection.</p>
             </div>
-            <div class="privacy-feature-item">
-              <b>No Cloud Relay</b>
-              <p>Direct device-to-device local communications without internet routing.</p>
+            <div class="feature-item">
+              <h4>⏱️ Master 24-PPQN Clock</h4>
+              <p>Real-time clock engine with Start, Continue, and Stop transport commands, tap tempo, and live arrival interval tracking to diagnose host timing jitter.</p>
             </div>
-            <div class="privacy-feature-item">
-              <b>Local Data Ownership</b>
-              <p>All NMEA sentences, GPX tracks, and logs remain on your local storage.</p>
+            <div class="feature-item">
+              <h4>📊 Bidirectional Event Monitor</h4>
+              <p>Microsecond packet timestamps, port directionality tags, live CC activity curves, and clock interval graphs. Exports directly to CSV, JSON, and text.</p>
             </div>
-            <div class="privacy-feature-item">
-              <b>LE Secure Pairing</b>
-              <p>Cryptographic Bluetooth pairing prevents unauthorized local tapping.</p>
+            <div class="feature-item">
+              <h4>🎹 Driver-Free Practice Lab</h4>
+              <p>Built-in velocity keybed and reference receiving pedal with live 7-segment displays. Practice and verify complex presets out of the box with zero third-party drivers needed.</p>
+            </div>
+            <div class="feature-item">
+              <h4>⚡ Macro Cue Actions &amp; Delays</h4>
+              <p>Execute multi-step preset and parameter chains with deterministic millisecond pauses to give vintage synths and digital modelers time to process patch changes.</p>
+            </div>
+            <div class="feature-item">
+              <h4>🛡️ Receipt-Driven Test Bench</h4>
+              <p>Four automated checks (Note On/Off, Preset Change, Parameter CC, Clock sync) that only PASS when confirmation bytes are parsed at the receiving port.</p>
             </div>
           </div>
         </div>
@@ -1356,87 +478,115 @@
     </div>
   </section>
 
-  <!-- ========================================================================= -->
-  <!-- 6. CUSTOMER PORTAL & LICENSING BANNER                                     -->
-  <!-- ========================================================================= -->
-  <section class="section section-slate">
+  <!-- Project 2: Exos GPS Exploration -->
+  <section class="section-wrap">
     <div class="container">
-      <div class="portal-banner">
-        <div>
-          <h3>Enterprise Customer & Licensing Portal</h3>
+      <div class="section-head">
+        <span class="section-tag">Ongoing Hardware Prototype</span>
+        <h2 class="section-title">Exos GPS</h2>
+        <p class="section-desc">
+          Simple, offline location tools and lightweight positioning hardware for outdoor enthusiasts.
+        </p>
+      </div>
+
+      <div class="project-card">
+        <div class="project-info">
+          <span class="badge-dev">Hardware Prototype &bull; In Active Design</span>
+          <h3>Independent, Air-Gapped GPS Companion</h3>
           <p>
-            Access your RiTym customer account to activate device licenses, download official software builds, manage commercial fleet volume seats, and retrieve tax invoices.
+            We are designing a pocket-sized GPS instrument and clean companion tools for hikers, field travelers, and overlanders who want honest coordinate fixes and zero-cloud tracking. No subscriptions, no ads, no telemetry spying.
           </p>
+          <div style="margin-top: 16px; font-size: 0.88rem; color: var(--text-dim);">
+            <em>Status: Breadboard &amp; firmware exploration. We aren't taking pre-orders or making false military claims. Just building a solid tool that works when cellular coverage drops.</em>
+          </div>
         </div>
-        <div style="flex-shrink:0;">
-          <a href="portal.html" class="btn btn-secondary" style="font-size:1.02rem; padding:14px 28px;">
-            Open Customer Portal &rarr;
+        <div>
+          <a href="https://exosgps.com" target="_blank" class="btn-outline">
+            Visit ExosGPS.com ↗
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========================================================================= -->
-  <!-- FOOTER                                                                    -->
-  <!-- ========================================================================= -->
-  <footer class="footer">
+  <!-- Why ritym / The Meaning -->
+  <section class="section-wrap">
     <div class="container">
-      <div class="footer-grid">
-        <div>
-          <img src="assets/ritym_logo.png" alt="RiTym Technologies Logo" class="footer-logo">
-          <p class="footer-desc">
-            <strong>RiTym Technologies</strong> is an enterprise electronics, embedded systems, and mission-critical software engineering company. We design autonomous field telemetry instruments, cockpit navigation consoles, and the EXOS positioning ecosystem.
+      <div class="story-card">
+        <div class="story-text">
+          <span class="section-tag">About Our Name &amp; Work</span>
+          <h3>The Rhythm of Things</h3>
+          <p>
+            The name <strong>ritym</strong> comes from rhythm &mdash; the steady, dependable pulse that keeps systems aligned.
           </p>
-          <div style="font-size: 0.84rem; color: #94a3b8;">
-            Official Portal: <a href="https://ritym.com" style="color: #38bdf8;">ritym.com</a> &bull; Flagship Division: <a href="https://exosgps.com" target="_blank" rel="noopener" style="color: #38bdf8;">exosgps.com &nearr;</a>
+          <p>
+            Whether it's the 24 pulses per quarter note locking together synthesizers on a festival stage, or a nanosecond satellite timestamp pinpointing a coordinate on a topo map, precision timing is the foundation of every honest signal.
+          </p>
+          <p>
+            We are an independent software and hardware studio. We keep our team small, our overhead modest, and our claims true. We build tools we actually want to use ourselves.
+          </p>
+          <div class="meaning-box">
+            <strong>The Blue Square Dot:</strong> In our logo, the bright blue pixel above the "i" represents the fundamental unit of signal &mdash; the single clock pulse, the discrete MIDI byte, the clean coordinate fix.
           </div>
         </div>
 
-        <div>
-          <h4 class="footer-title">Hardware Platforms</h4>
-          <ul class="footer-links">
-            <li><a href="#hardware">Tactical GNSS Base Station</a></li>
-            <li><a href="#hardware">Command Bridge Display (7.0")</a></li>
-            <li><a href="#hardware">Handheld Navigator Instrument</a></li>
-            <li><a href="#architecture">Real-Time Edge Architecture</a></li>
-            <li><a href="products.html">Hardware Catalog & Specs</a></li>
-            <li><a href="downloads.html">Technical Documentation</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="footer-title">Software Applications</h4>
-          <ul class="footer-links">
-            <li><a href="https://exosgps.com/#transceiver" target="_blank">1. EXOS Transceiver</a></li>
-            <li><a href="https://exosgps.com/#wayfinder" target="_blank">2. EXOS Wayfinder</a></li>
-            <li><a href="https://exosgps.com/#echo" target="_blank">3. EXOS ECHO</a></li>
-            <li><a href="https://exosgps.com/#watchout" target="_blank">4. Exos Watchout</a></li>
-            <li><a href="portal.html">Customer & License Portal</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="footer-title">Compliance & Support</h4>
-          <ul class="footer-links">
-            <li><a href="portal.html">License Activation & Invoices</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-            <li><a href="terms.html">Terms of Service</a></li>
-            <li><a href="refund.html">Refund & Cancellation</a></li>
-            <li><a href="security.html">Security Architecture</a></li>
-            <li><a href="support.html">Customer Care & Support</a></li>
-            <li><a href="mailto:assist@ritym.com">assist@ritym.com</a></li>
-          </ul>
+        <div style="text-align: center;">
+          <img src="assets/ritym_logo_white.png" alt="ritym logo" style="max-width: 240px; margin-bottom: 24px;">
+          <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: left;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--text-muted); line-height: 1.8;">
+              <div style="color: #60a5fa;">// Our Operating Principles:</div>
+              <div>1. No fake aerospace/defense theater.</div>
+              <div>2. Only ship software that actually works.</div>
+              <div>3. Zero forced cloud logins or spyware.</div>
+              <div>4. Respect musicians and field users.</div>
+              <div>5. Keep code lean and installers offline.</div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+  </section>
 
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="assets/ritym_logo_white.png" alt="ritym" style="height: 24px;">
+          <p>
+            Independent engineering studio. Crafting precision MIDI control software and straightforward positioning tools.
+          </p>
+        </div>
+        <div class="footer-links">
+          <div>
+            <h5>Software</h5>
+            <ul>
+              <li><a href="pulsestage.html">PulseStage MIDI Studio</a></li>
+              <li><a href="downloads.html">Windows Setup (v1.0.0)</a></li>
+              <li><a href="pulsestage-guide.html">Operator Manual</a></li>
+            </ul>
+          </div>
+          <div>
+            <div>
+              <h5>Hardware</h5>
+              <ul>
+                <li><a href="https://exosgps.com" target="_blank">Exos GPS Project ↗</a></li>
+                <li><a href="https://github.com/ritym-technologies/ritym-website/tree/pulsestage" target="_blank">GitHub Code ↗</a></li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <h5>Legal &amp; Privacy</h5>
+            <ul>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="refund.html">Refund Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="footer-bottom">
-        <div>
-          &copy; 2026 RiTym Technologies. All rights reserved.
-        </div>
-        <div>
-          Autonomous Field Telemetry &bull; Real-Time Edge Computing &bull; 100% Offline Privacy
-        </div>
+        <div>&copy; 2026 ritym (RiTym Technologies). All rights reserved.</div>
+        <div>Simple tools built with care.</div>
       </div>
     </div>
   </footer>

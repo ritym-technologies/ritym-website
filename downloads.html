@@ -1,889 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) - Privacy-safe anonymous analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNKE55GVQD"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-HNKE55GVQD', { 'anonymize_ip': true });
-  </script>
-
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Technical Documentation, Interface Protocols &amp; Software Vault | RiTym Technologies</title>
-  <meta name="description" content="Technical documentation, hardware interface specifications, NMEA 0183 protocol sheets, and official software downloads for RiTym Technologies autonomous positioning systems.">
-  <link rel="icon" type="image/png" href="assets/ritym_logo.png">
-
-  <!-- Enterprise Human-Aesthetic Typography -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloads &amp; Verification | ritym</title>
+  <meta name="description" content="Download PulseStage MIDI Studio setup executable, user documentation, and check SHA-256 verification hashes.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
   <style>
     :root {
-      --primary: #0284c7;
-      --primary-dark: #0369a1;
-      --primary-light: #e0f2fe;
-      --navy: #0f172a;
-      --navy-dark: #090d16;
-      --navy-card: #1e293b;
-      --accent-blue: #2563eb;
-      --accent-cyan: #38bdf8;
-      --accent-amber: #d97706;
-      --accent-emerald: #059669;
-      --accent-teal: #0d9488;
-      --bg-white: #ffffff;
-      --bg-slate: #f8fafc;
-      --bg-slate-alt: #f1f5f9;
-      --border-light: #e2e8f0;
-      --border-dark: #cbd5e1;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-cyan: rgba(56, 189, 248, 0.25);
-      --text-heading: #0f172a;
-      --text-body: #334155;
-      --text-muted: #64748b;
-      --text-light: #94a3b8;
-      --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-mono: 'JetBrains Mono', Consolas, monospace;
+      --bg-dark: #0a0d12;
+      --bg-card: #121720;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(2, 65, 254, 0.3);
+      --text: #f1f5f9;
+      --text-muted: #8c9ba5;
+      --text-dim: #5a6874;
+      --blue: #0241fe;
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; background-color: var(--bg-white); color: var(--text-body); font-family: var(--font-main); -webkit-font-smoothing: antialiased; }
-    body { overflow-x: hidden; line-height: 1.65; background-color: var(--bg-white); }
-    a { color: inherit; text-decoration: none; transition: all 0.2s ease; }
-
-    /* Top Corporate Ticker */
-    .top-corp-bar {
-      background-color: #0b1120;
-      color: #94a3b8;
-      font-size: 0.8rem;
-      padding: 7px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .top-corp-bar a { color: #38bdf8; font-weight: 500; }
-    .top-corp-bar a:hover { text-decoration: underline; color: #7dd3fc; }
-    .status-badge-live {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: #4ade80;
-    }
-    .pulse-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #4ade80;
-      box-shadow: 0 0 8px #4ade80;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(0.9); opacity: 0.7; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(0.9); opacity: 0.7; }
-    }
-
-    /* Navigation Bar */
     .navbar {
       position: sticky;
       top: 0;
-      z-index: 1000;
-      background-color: var(--navy);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      z-index: 100;
+      background: rgba(10, 13, 18, 0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
-    .nav-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 76px;
+    .nav-inner {
+      height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .brand-logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-    .brand-logo-img {
-      height: 44px;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
-      transition: transform 0.2s ease;
-      width: auto;
-      display: block;
-      object-fit: contain;
-    }
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      list-style: none;
-    }
-    .nav-link {
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: #cbd5e1;
-      padding: 6px 0;
-      position: relative;
-    }
-    .nav-link:hover { color: #ffffff; }
-    .nav-link.active {
-      color: #ffffff;
-      font-weight: 600;
-    }
-    .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: var(--accent-cyan);
-    }
-    .nav-cta-btn {
-      background-color: var(--primary);
-      color: #ffffff;
-      padding: 8px 18px;
-      border-radius: 6px;
+    .brand-logo { height: 28px; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-link { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: #fff; }
+    .nav-btn {
+      background: var(--blue);
+      color: #fff;
       font-size: 0.85rem;
       font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.2s;
     }
-    .nav-cta-btn:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
-    }
+    .nav-btn:hover { background: #0036d6; }
 
-    /* Container */
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Hero Section */
-    .docs-hero {
-      position: relative;
-      background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.12) 0%, transparent 60%),
-                  radial-gradient(circle at 80% 40%, rgba(5, 150, 105, 0.08) 0%, transparent 50%),
-                  var(--navy-dark);
-      color: #ffffff;
-      padding: 64px 0 54px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-    }
-    .docs-hero::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-image: 
-        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
-      background-size: 32px 32px;
-      pointer-events: none;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 860px;
-      margin: 0 auto;
+    .page-header {
+      padding: 70px 0 40px;
       text-align: center;
+      border-bottom: 1px solid var(--border);
     }
-    .docs-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 14px;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid var(--border-cyan);
-      border-radius: 9999px;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: var(--accent-cyan);
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-    .docs-hero h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      margin-bottom: 16px;
-      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .docs-hero p {
-      font-size: 1.05rem;
-      color: #94a3b8;
-      max-width: 720px;
-      margin: 0 auto 28px;
-    }
+    .page-title { font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.5px; }
+    .page-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 580px; margin: 0 auto; }
 
-    /* Section Styling */
-    .section-wrap {
-      padding: 64px 0;
-    }
-    .bg-slate {
-      background-color: var(--bg-slate);
-      border-top: 1px solid var(--border-light);
-      border-bottom: 1px solid var(--border-light);
-    }
-    .section-heading-wrap {
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto 48px;
-    }
-    .section-tag {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 8px;
-    }
-    .section-heading-wrap h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--text-heading);
-      letter-spacing: -0.01em;
-      margin-bottom: 12px;
-    }
-    .section-heading-wrap p {
-      font-size: 0.98rem;
-      color: var(--text-muted);
-    }
-
-    /* Cards & Containers */
-    .doc-card {
-      background: #ffffff;
-      border: 1px solid var(--border-light);
-      border-radius: 12px;
-      padding: 36px;
-      box-shadow: var(--shadow-sm);
+    .dl-section { padding: 60px 0 100px; }
+    .dl-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
       margin-bottom: 32px;
     }
-    .doc-card h3 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--text-heading);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .doc-card p {
-      font-size: 0.95rem;
-      color: var(--text-body);
-      margin-bottom: 20px;
-    }
-
-    /* Grid Layouts */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-    }
-
-    /* Tables */
-    .table-wrap {
-      overflow-x: auto;
-      margin: 20px 0;
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.9rem;
-    }
-    th {
-      background: #f8fafc;
-      padding: 12px 18px;
-      font-weight: 700;
-      color: var(--text-heading);
-      border-bottom: 1px solid var(--border-light);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    td {
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--border-light);
-      color: var(--text-body);
-      vertical-align: middle;
-    }
-    tr:last-child td {
-      border-bottom: none;
-    }
-    code {
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      background: #f1f5f9;
-      padding: 2px 6px;
-      border-radius: 4px;
-      color: #0f172a;
-    }
-
-    /* Callout Note */
-    .policy-callout {
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 10px;
-      padding: 20px 24px;
-      margin-bottom: 36px;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      color: #166534;
-      font-size: 0.92rem;
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 18px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      border-radius: 6px;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s ease;
-      text-decoration: none;
-    }
-    .btn-primary {
-      background-color: var(--primary);
-      color: #ffffff;
-    }
-    .btn-primary:hover {
-      background-color: var(--primary-dark);
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
-      transform: translateY(-1px);
-    }
-    .btn-outline {
-      background-color: transparent;
-      border: 1px solid var(--border-dark);
-      color: var(--text-heading);
-    }
-    .btn-outline:hover {
-      background-color: #f1f5f9;
-      border-color: #94a3b8;
-    }
-    .btn-sm {
-      padding: 6px 12px;
-      font-size: 0.8rem;
-    }
-
-    /* Footer */
-    .footer {
-      background-color: var(--navy-dark);
-      color: #94a3b8;
-      padding: 64px 0 32px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 0.9rem;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 48px;
-    }
-    .footer-brand h4 {
-      color: #ffffff;
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    .footer-brand p {
-      font-size: 0.88rem;
-      line-height: 1.6;
-      max-width: 340px;
-    }
-    .footer-col h5 {
-      color: #ffffff;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 18px;
-    }
-    .footer-links {
-      list-style: none;
-    }
-    .footer-links li {
-      margin-bottom: 10px;
-    }
-    .footer-links a {
-      color: #94a3b8;
-    }
-    .footer-links a:hover {
-      color: #38bdf8;
-    }
-    .footer-bottom {
-      padding-top: 28px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    .dl-head {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem;
+      align-items: flex-start;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 20px;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
     }
+    .dl-badge {
+      display: inline-block;
+      background: rgba(2, 65, 254, 0.12);
+      color: #60a5fa;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .dl-title { font-size: 1.6rem; color: #fff; font-weight: 700; margin-bottom: 6px; }
+    .dl-summary { color: var(--text-muted); font-size: 0.95rem; max-width: 600px; }
+    .btn-dl {
+      background: var(--blue);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 14px rgba(2, 65, 254, 0.3);
+      transition: all 0.2s;
+    }
+    .btn-dl:hover { background: #0036d6; transform: translateY(-2px); }
 
-    @media (max-width: 992px) {
-      .grid-2 { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .docs-hero h1 { font-size: 2rem; }
+    .hash-wrap {
+      background: #080a0e;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
     }
-    @media (max-width: 768px) {
-      .nav-menu { display: none; }
-      .footer-grid { grid-template-columns: 1fr; }
+    .hash-label { font-size: 0.75rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
+    .hash-val { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #38bdf8; word-break: break-all; }
+
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 20px;
+    }
+    .details-table td {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .details-table td:first-child { color: var(--text-muted); width: 35%; }
+    .details-table td:last-child { color: #fff; font-weight: 500; }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      background: #080a0e;
+      font-size: 0.85rem;
+      color: var(--text-dim);
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Corporate Status Bar -->
-  <div class="top-corp-bar">
-    <div class="status-badge-live">
-      <span class="pulse-dot"></span>
-      <span>SYSTEM STATUS: OPERATIONAL &bull; AIR-GAPPED ON-PREMISES TELEMETRY</span>
-    </div>
-    <div style="display: flex; gap: 20px; align-items: center;">
-      <span>Zero-Cloud Privacy Guarantee</span>
-      <span style="color: rgba(255,255,255,0.2);">|</span>
-      <a href="https://exosgps.com" target="_blank" rel="noopener">Visit EXOS GPS Consumer Portal &rarr;</a>
-    </div>
-  </div>
-
-  <!-- Enterprise Navbar -->
   <header class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="brand-logo-wrap">
-        <img src="assets/ritym_logo.png" alt="RiTym Technologies" class="brand-logo-img">
+    <div class="container nav-inner">
+      <a href="index.html">
+        <img src="assets/ritym_logo_white.png" alt="ritym" class="brand-logo">
       </a>
-      <ul class="nav-menu">
+      <ul class="nav-links">
         <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="products.html" class="nav-link">Hardware Platforms</a></li>
-        <li><a href="index.html#software-suite" class="nav-link">EXOS Suite</a></li>
-        <li><a href="pulsestage.html" class="nav-link">PulseStage MIDI</a></li>
-        <li><a href="downloads.html" class="nav-link active">Tech Specs &amp; Downloads</a></li>
-        <li><a href="pricing.html" class="nav-link">Commercial Pricing</a></li>
-        <li><a href="portal.html" class="nav-link">Customer Workspace</a></li>
-        <li><a href="support.html" class="nav-link">Support</a></li>
+        <li><a href="products.html" class="nav-link">Products</a></li>
+        <li><a href="pulsestage.html" class="nav-link">PulseStage (MIDI)</a></li>
+        <li><a href="downloads.html" class="nav-link active">Downloads</a></li>
+        <li><a href="pulsestage-guide.html" class="nav-link">Operator Guide</a></li>
       </ul>
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <a href="portal.html" class="nav-cta-btn">
-          <span>Customer Portal</span> &rarr;
-        </a>
-      </div>
+      <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="nav-btn">Download v1.0.0 &darr;</a>
     </div>
   </header>
 
-  <!-- Hero Banner -->
-  <section class="docs-hero">
-    <div class="container hero-content">
-      <div class="docs-badge">
-        <span>FIELD INTEGRATION &bull; TECHNICAL SPECIFICATIONS &amp; DOWNLOADS</span>
-      </div>
-      <h1>Technical Specifications, Interface Standards &amp; Protocol Vault</h1>
-      <p>
-        Engineering references, physical wiring standards, low-latency telemetry socket protocols, and official software distribution channels for RiTym Technologies systems.
-      </p>
-    </div>
-  
-    <!-- PulseStage Section -->
-    <div style="margin-top: 60px; margin-bottom: 30px;">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
-        <div>
-          <span style="font-size: 0.75rem; font-weight: 700; color: #f59e0b; text-transform: uppercase; letter-spacing: 1px;">STAGE &amp; STUDIO MIDI SOFTWARE</span>
-          <h2 style="font-size: 1.8rem; font-weight: 700; color: #ffffff; margin-top: 4px;">PulseStage &mdash; MIDI Studio Downloads</h2>
-        </div>
-        <a href="pulsestage.html" style="color: #38bdf8; font-size: 0.9rem; font-weight: 600; text-decoration: underline;">View Full Product Suite &rarr;</a>
-      </div>
-
-      <div class="doc-card" style="border-left: 4px solid #f59e0b; margin-bottom: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
-          <div>
-            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-              <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">STANDALONE WINDOWS INSTALLER</span>
-              <span style="font-size: 0.8rem; color: #94a3b8;">v1.0.0 Production Release &bull; 64-bit Executable</span>
-            </div>
-            <h3 style="color: #ffffff; font-size: 1.3rem; font-weight: 700; margin-bottom: 8px;">PulseStage MIDI Studio Setup (x64)</h3>
-            <p style="color: #94a3b8; font-size: 0.92rem; max-width: 780px; margin-bottom: 12px;">
-              Self-contained Windows setup executable bundling the complete Python runtime, Uvicorn, FastAPI engine, native WinMM drivers, Dark/Light visual consoles, and internal practice lab. Preserves user configurations in <code>%APPDATA%\PulseStage</code>.
-            </p>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #38bdf8; background: #090d16; padding: 6px 12px; border-radius: 4px; display: inline-block; margin-bottom: 12px;">
-              SHA-256: d1c89b90e2345d64e653fb386cea26785413beb1212d176d81c76ab329cd5d2d
-            </div>
-          </div>
-          <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end;">
-            <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="btn-primary" style="padding: 10px 22px; font-size: 0.9rem; background: #f59e0b; color: #000; font-weight: 700; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
-              Download Setup EXE (14.6 MB) &darr;
-            </a>
-            <a href="pulsestage-guide.html" style="font-size: 0.85rem; color: #94a3b8; text-decoration: underline;">
-              View Operator Guide (HTML)
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-</section>
-
-  <!-- Content Section -->
-  <section class="section-wrap" id="interface-standards">
+  <section class="page-header">
     <div class="container">
-
-      <!-- Distribution Policy Callout -->
-      <div class="policy-callout">
-        <span style="font-size: 1.5rem; line-height: 1;">🛡️</span>
-        <div>
-          <strong style="color: #14532d; font-size: 0.98rem; display: block; margin-bottom: 4px;">Security &amp; Software Integrity Distribution Policy</strong>
-          In strict compliance with mission-critical security guidelines, software releases (Android applications and Wear OS watch faces) are distributed through verified, cryptographically signed channels including the <strong>Google Play Store</strong> and official Microsoft partner programs. Enterprise Windows Station installers (MSI) are available via our authenticated customer workspace.
-        </div>
-      </div>
-
-      <!-- Section 1: Physical & Electrical Standards -->
-      <div class="doc-card">
-        <h3>
-          <span>🔌</span>
-          <span>1. Physical Interfaces &amp; Electrical Specifications</span>
-        </h3>
-        <p>
-          RiTym autonomous hardware is engineered with industrial connector standards to withstand continuous automotive vibration, maritime salt spray, and extreme temperature cycling (-40&deg;C to +85&deg;C).
-        </p>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Interface Type</th>
-                <th>Physical Connector</th>
-                <th>Signal / Electrical Standard</th>
-                <th>Functional Assignment</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Primary Telemetry</strong></td>
-                <td>Phoenix 4-Pin Screw Terminal / M12 Circular</td>
-                <td>RS-232 / TTL (Baud: 38,400 to 115,200)</td>
-                <td>Raw NMEA 0183 serial output stream to cockpit displays and bridge autopilots.</td>
-              </tr>
-              <tr>
-                <td><strong>RF Antenna Port</strong></td>
-                <td>SMA Female (Gold-Plated, 50&Omega;)</td>
-                <td>3.3V DC Active LNA Bias (Up to 25mA)</td>
-                <td>Connection to external multi-constellation active patch or helical antenna.</td>
-              </tr>
-              <tr>
-                <td><strong>Power Supply Input</strong></td>
-                <td>Phoenix Terminal / 2.1mm DC Barrel</td>
-                <td>9V&ndash;36V DC Wide Input Range</td>
-                <td>Automotive transient TVS protection (ISO 7637-2 compliant) and reverse-polarity protection.</td>
-              </tr>
-              <tr>
-                <td><strong>Maintenance Console</strong></td>
-                <td>Ruggedized USB Type-C (IP67 sealed)</td>
-                <td>USB 2.0 OTG with 15kV ESD Protection</td>
-                <td>Local station diagnostics, firmware verification, and configuration recovery.</td>
-              </tr>
-              <tr>
-                <td><strong>Auxiliary I/O</strong></td>
-                <td>Internal Multi-Pin Header</td>
-                <td>Timepulse (1PPS) + Event Input</td>
-                <td>Sub-microsecond synchronization output for scientific surveying and LiDAR rigs.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Section 2: Real-time Sockets -->
-      <div class="doc-card">
-        <h3>
-          <span>📡</span>
-          <span>2. Network Architecture &amp; Real-Time Telemetry Sockets</span>
-        </h3>
-        <p>
-          When deployed in standalone field mode, the Tactical Base Station and Gateway host an air-gapped, zero-cloud local communications network:
-        </p>
-
-        <div class="grid-2">
-          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
-            <strong style="color: #0f172a; font-size: 1.05rem; display: block; margin-bottom: 8px;">📶 Autonomous Wi-Fi Telemetry AP</strong>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; color: #475569;">
-              <li><strong>SSID Format:</strong> <code>EXOS-GATEWAY-XXXXX</code> (Unique hardware unit ID)</li>
-              <li><strong>Local Gateway IP:</strong> <code>192.168.4.1</code></li>
-              <li><strong>HTTP Status Dashboard:</strong> <code>http://192.168.4.1</code> (Real-time satellite SNR &amp; fix health)</li>
-              <li><strong>Raw NMEA TCP Socket:</strong> <code>192.168.4.1:2000</code> (Unthrottled 10Hz&ndash;25Hz broadcast to up to 4 concurrent clients)</li>
-            </ul>
-          </div>
-
-          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
-            <strong style="color: #0f172a; font-size: 1.05rem; display: block; margin-bottom: 8px;">🔵 Bluetooth LE Secure Telemetry</strong>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; color: #475569;">
-              <li><strong>BLE Peripheral Name:</strong> <code>EXOS-GATEWAY-XXXXX-BT</code></li>
-              <li><strong>Security:</strong> LE Secure Connections (Numeric Comparison / Passkey)</li>
-              <li><strong>Telemetry Service UUID:</strong> <code>00001101-0000-1000-8000-00805F9B34FB</code></li>
-              <li><strong>Client Compatibility:</strong> Android tablets, field laptops, Wear OS smartwatches</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section 3: NMEA Protocol Specifications -->
-      <div class="doc-card">
-        <h3>
-          <span>📊</span>
-          <span>3. Supported NMEA 0183 Sentences &amp; Protocol Breakdown</span>
-        </h3>
-        <p>
-          RiTym positioning engines output standard NMEA 0183 v4.10 sentences compatible with all commercial marine chartplotters, GIS surveying software, and the EXOS platform.
-        </p>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Sentence Identifier</th>
-                <th>Standard Definition</th>
-                <th>Output Frequency</th>
-                <th>Key Data Elements</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>$GNGGA</code></td>
-                <td>Global Positioning System Fix Data</td>
-                <td>10Hz (Configurable up to 25Hz)</td>
-                <td>UTC time, latitude, longitude, fix status (3D/DGPS), satellite count, HDOP, altitude (MSL), geoid separation.</td>
-              </tr>
-              <tr>
-                <td><code>$GNRMC</code></td>
-                <td>Recommended Minimum Navigation Information</td>
-                <td>10Hz</td>
-                <td>UTC date &amp; time, position status, speed over ground (knots), course over ground (degrees true), magnetic variation.</td>
-              </tr>
-              <tr>
-                <td><code>$GNVTG</code></td>
-                <td>Course Over Ground and Ground Speed</td>
-                <td>10Hz</td>
-                <td>Track true degrees, track magnetic degrees, ground speed in knots and kilometers per hour.</td>
-              </tr>
-              <tr>
-                <td><code>$GNGSA</code></td>
-                <td>GNSS Dilution of Precision (DOP) &amp; Active Sats</td>
-                <td>1Hz</td>
-                <td>Operational mode (2D/3D), list of active satellite PRNs used for position solution, PDOP, HDOP, VDOP.</td>
-              </tr>
-              <tr>
-                <td><code>$GPGSV / $GLGSV / $GAGSV</code></td>
-                <td>Satellites in View &amp; Signal-to-Noise Ratio</td>
-                <td>1Hz</td>
-                <td>Constellation breakdown (GPS, GLONASS, Galileo, BeiDou), satellite azimuth, elevation, and SNR (C/N0 in dB-Hz).</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Section 4: Software Distribution Channels -->
-      <div class="doc-card">
-        <h3>
-          <span>📥</span>
-          <span>4. Official Software &amp; Firmware Distribution Channels</span>
-        </h3>
-        <p>
-          Access verified software releases, official Google Play listings, and desktop MSI installers:
-        </p>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Application / Component</th>
-                <th>Operating System</th>
-                <th>Distribution Channel</th>
-                <th>Technical Documentation</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>EXOS GPS Station for Windows Desktop</strong></td>
-                <td>Windows 10 / 11 (x64)</td>
-                <td>
-                  <a href="https://exosgps.com/downloads/EXOS-Station-Setup-v0.17.msi" class="btn btn-sm btn-primary">
-                    Download MSI (v0.17)
-                  </a>
-                </td>
-                <td>
-                  <a href="https://exosgps.com/station-guide.html" target="_blank" style="color: #0284c7; font-weight: 600;">
-                    Station Guide &nearr;
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>EXOS Transceiver Professional</strong></td>
-                <td>Android 10+ (ARM64)</td>
-                <td>
-                  <a href="https://play.google.com/store/apps/details?id=com.ritym.exos" target="_blank" class="btn btn-sm btn-outline">
-                    Google Play Store &nearr;
-                  </a>
-                </td>
-                <td>
-                  <a href="https://exosgps.com/transceiver-guide.html" target="_blank" style="color: #0284c7; font-weight: 600;">
-                    Transceiver Manual &nearr;
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>EXOS Wayfinder Expedition</strong></td>
-                <td>Android &amp; Wear OS</td>
-                <td>
-                  <a href="https://play.google.com/store/apps/details?id=com.ritym.wayfinder" target="_blank" class="btn btn-sm btn-outline">
-                    Google Play Store &nearr;
-                  </a>
-                </td>
-                <td>
-                  <a href="https://exosgps.com/wayfinder-guide.html" target="_blank" style="color: #0284c7; font-weight: 600;">
-                    Wayfinder Manual &nearr;
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>EXOS Echo Tactical Team Mesh</strong></td>
-                <td>Android 10+</td>
-                <td>
-                  <a href="https://play.google.com/store/apps/details?id=com.ritym.echo" target="_blank" class="btn btn-sm btn-outline">
-                    Google Play Store &nearr;
-                  </a>
-                </td>
-                <td>
-                  <a href="https://exosgps.com/echo-guide.html" target="_blank" style="color: #0284c7; font-weight: 600;">
-                    Mesh Protocol Guide &nearr;
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>EXOS Watchout Cockpit HUD</strong></td>
-                <td>Wear OS (WFF v1) &amp; Android</td>
-                <td>
-                  <a href="https://play.google.com/store/apps/details?id=com.ritym.watchout" target="_blank" class="btn btn-sm btn-outline">
-                    Google Play Store &nearr;
-                  </a>
-                </td>
-                <td>
-                  <a href="https://exosgps.com/#watchout" target="_blank" style="color: #0284c7; font-weight: 600;">
-                    HUD Technical Guide &nearr;
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Section 5: Enterprise Partner Inquiries -->
-      <div class="doc-card" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff;">
-        <h3 style="color: #ffffff;">
-          <span>🤝</span>
-          <span>5. Enterprise Integrator &amp; OEM Hardware Partnerships</span>
-        </h3>
-        <p style="color: #cbd5e1;">
-          Commercial vehicle manufacturers, marine defense integrators, and avionics contractors requiring custom form factors, tailored PCB design, conformal potting, or private cryptographic keys may connect directly with our senior engineering laboratory.
-        </p>
-        <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 20px;">
-          <a href="portal.html#fleet-licensing" class="btn btn-primary">Enterprise Licensing &amp; ODM Inquiries &rarr;</a>
-          <a href="mailto:support@ritym.com" class="btn btn-outline" style="border-color: rgba(255,255,255,0.3); color: #fff;">Contact Engineering Lab</a>
-        </div>
-      </div>
-
+      <h1 class="page-title">Downloads &amp; Packages</h1>
+      <p class="page-desc">
+        Direct binary setup files, checksums, and documentation. Everything runs self-contained without command-line dependencies.
+      </p>
     </div>
   </section>
 
-  <!-- Corporate Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h4>RiTym Technologies Inc.</h4>
-          <p>
-            Engineering autonomous GNSS base stations, 7-inch cockpit navigation consoles, edge telemetry firmware, and the EXOS navigation software suite. Built for mission-critical off-grid reliability.
-          </p>
-          <div style="margin-top: 18px; font-size: 0.8rem; color: #64748b;">
-            All hardware systems compliant with FCC Part 15B, CE RED &bull; Industrial Temp Range &minus;40&deg;C to +85&deg;C.
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h5>Hardware Systems</h5>
-          <ul class="footer-links">
-            <li><a href="products.html">Tactical GNSS Base Station</a></li>
-            <li><a href="products.html">Command Bridge 7.0" Touch</a></li>
-            <li><a href="products.html">Handheld Tactical Navigator</a></li>
-            <li><a href="products.html">Custom RF &amp; High-Density PCB</a></li>
-            <li><a href="downloads.html">Technical Specifications</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5>Software Ecosystem</h5>
-          <ul class="footer-links">
-            <li><a href="https://exosgps.com" target="_blank">EXOS GPS Official Portal</a></li>
-            <li><a href="portal.html">Windows Station v0.17</a></li>
-            <li><a href="https://exosgps.com/transceiver-guide.html" target="_blank">EXOS Transceiver</a></li>
-            <li><a href="https://exosgps.com/wayfinder-guide.html" target="_blank">EXOS Wayfinder</a></li>
-            <li><a href="https://exosgps.com/echo-guide.html" target="_blank">EXOS Echo Mesh</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5>Customer &amp; Legal</h5>
-          <ul class="footer-links">
-            <li><a href="portal.html">Customer Workspace</a></li>
-            <li><a href="pricing.html">Commercial Licensing</a></li>
-            <li><a href="support.html">Engineering Support</a></li>
-            <li><a href="privacy.html">Zero-Cloud Privacy Policy</a></li>
-            <li><a href="terms.html">Terms of Service</a></li>
-            <li><a href="refund.html">Refund &amp; Return Policy</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
+  <div class="container dl-section">
+    <div class="dl-card">
+      <div class="dl-head">
         <div>
-          &copy; 2026 RiTym Technologies Inc. All rights reserved. EXOS&trade; and RiTym&trade; are registered trademarks.
+          <span class="dl-badge">Production Release &bull; Windows</span>
+          <h2 class="dl-title">PulseStage &mdash; MIDI Studio (x64)</h2>
+          <p class="dl-summary">
+            Complete Windows setup executable. Bundles the standalone engine, desktop shell, native WinMM driver support, and driver-free practice lab.
+          </p>
         </div>
-        <div style="display: flex; gap: 24px;">
-          <a href="privacy.html">Privacy Architecture</a>
-          <a href="terms.html">Terms of Use</a>
-          <a href="security.html">Security Assurance</a>
-          <a href="support.html">Contact Engineering</a>
-        </div>
+        <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="btn-dl">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.951"/></svg>
+          Download Setup (14.6 MB)
+        </a>
       </div>
+
+      <div class="hash-wrap">
+        <div class="hash-label">SHA-256 Checksum:</div>
+        <div class="hash-val">d1c89b90e2345d64e653fb386cea26785413beb1212d176d81c76ab329cd5d2d</div>
+      </div>
+
+      <table class="details-table">
+        <tr><td>Version</td><td>1.0.0 (Production Release)</td></tr>
+        <tr><td>File Name</td><td><code>PulseStage-Setup-1.0.0-x64.exe</code></td></tr>
+        <tr><td>File Size</td><td>15,355,555 bytes (14.64 MB)</td></tr>
+        <tr><td>Supported OS</td><td>Microsoft Windows 10 &amp; 11 (64-bit)</td></tr>
+        <tr><td>User Settings</td><td>Saved in <code>%APPDATA%\PulseStage</code> (preserved during updates)</td></tr>
+        <tr><td>Operator Guide</td><td><a href="pulsestage-guide.html" style="color: #60a5fa; text-decoration: underline;">View Standalone Operator Guide &rarr;</a></td></tr>
+        <tr><td>Source Code</td><td><a href="https://github.com/ritym-technologies/ritym-website/tree/pulsestage" target="_blank" style="color: #60a5fa; text-decoration: underline;">GitHub Repository ↗</a></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <div>&copy; 2026 ritym (RiTym Technologies). All rights reserved.</div>
+      <div><a href="index.html" style="color: #60a5fa;">Back to Home &rarr;</a></div>
     </div>
   </footer>
 
