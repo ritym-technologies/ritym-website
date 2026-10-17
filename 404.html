@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting Download | ritym</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <script>
+    (function() {
+      var path = window.location.pathname;
+      if (path.indexOf('.exe') !== -1 || path.indexOf('downloads/') !== -1) {
+        var filename = path.split('/').pop();
+        if (!filename || filename === 'downloads') {
+          filename = 'PulseStage-Setup-1.1.0-x64.exe';
+        }
+        var cdnUrl = 'https://github.com/ritym-technologies/ritym-website/releases/download/v1.1.0/' + filename;
+        window.location.replace(cdnUrl);
+      }
+    })();
+  </script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #ffffff;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .box {
+      max-width: 480px;
+      padding: 32px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 16px;
+      background: #0241fe;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2 style="margin-bottom: 8px;">Starting Download...</h2>
+    <p style="color: #64748b; font-size: 0.95rem;">
+      If your download does not begin automatically within a few seconds, click the button below:
+    </p>
+    <a href="https://github.com/ritym-technologies/ritym-website/releases/download/v1.1.0/PulseStage-Setup-1.1.0-x64.exe" class="btn">Download PulseStage v1.1.0 &darr;</a>
+    <div style="margin-top: 24px;">
+      <a href="/" style="color: #0241fe; font-size: 0.88rem; text-decoration: none;">&larr; Return to ritym.com</a>
+    </div>
+  </div>
+</body>
+</html>
