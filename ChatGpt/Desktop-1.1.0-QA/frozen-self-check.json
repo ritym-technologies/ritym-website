@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "transport": "in-process IPC",
+  "network_listener": false,
+  "external_browser_required": false,
+  "keyboard_rx": 2,
+  "received_program": 24
+}

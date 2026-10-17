@@ -1,0 +1,11 @@
+PulseStage desktop includes third-party components.
+
+Python: Python Software Foundation License.
+PySide6/Shiboken6 and Qt: Qt project's applicable open-source licenses; license texts supplied under _internal/licenses. The dynamically linked Qt libraries remain separate files. Qt WebEngine includes Chromium and other upstream components with their own notices. Consult the Qt/Chromium distributions for complete source and notices:
+https://code.qt.io/
+https://www.qt.io/licensing/open-source-lgpl-obligations
+https://doc.qt.io/qt-6/qtwebengine-licensing.html
+
+FastAPI, Starlette, AnyIO, Pydantic and packaged dependencies retain their upstream copyrights/licenses. PyInstaller is the build/bootloader tool and permits distribution of bundled applications under its bootloader exception. This notice does not replace upstream license texts or a release owner's obligations. Keep bundled licensing material and make corresponding source/relinking information available as required for distributed components.
+
+loopMIDI and MIDI-OX are not included in this installer. They remain optional separately installed diagnostic/routing tools. Hardware manufacturer drivers are not bundled.

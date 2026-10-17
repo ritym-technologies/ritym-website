@@ -1,57 +1,36 @@
-; PulseStage MIDI Studio - Inno Setup 6 Script
-; Generates standalone Windows setup executable: PulseStage-Setup-1.0.0-x64.exe
-
-#define MyAppName "PulseStage"
-#define MyAppVersion "1.0.0"
-#define MyAppPublisher "RiTym Technologies"
-#define MyAppURL "https://ritym.com"
-#define MyAppExeName "PulseStage.exe"
-#define MyAppIcon "D:\Projects\MIDI\pulsestage.ico"
-#define MyDistDir "D:\Projects\MIDI\dist\PulseStage"
-#define MyOutputDir "D:\Projects\MIDI\dist"
-
+; PulseStage desktop: embedded Qt renderer and Python runtime included.
+#define MyAppVersion "1.1.0"
+#define MyRoot SourcePath
 [Setup]
 AppId={{5E28A359-2E8F-4D88-B341-92A1A8EF90B1}
-AppName={#MyAppName}
+AppName=PulseStage
 AppVersion={#MyAppVersion}
-AppPublisher={#MyAppPublisher}
-AppPublisherURL={#MyAppURL}
-AppSupportURL="https://ritym.com/pulsestage.html"
-AppUpdatesURL="https://ritym.com/pulsestage.html"
-DefaultDirName={autopf}\{#MyAppName}
-DefaultGroupName={#MyAppName}
-AllowNoIcons=yes
-LicenseFile=D:\Projects\MIDI\LICENSE.txt
-OutputDir={#MyOutputDir}
-OutputBaseFilename=PulseStage-Setup-1.0.0-x64
-SetupIconFile={#MyAppIcon}
-Compression=lzma2/max
+AppPublisher=PulseStage
+DefaultDirName={autopf}\PulseStage
+DefaultGroupName=PulseStage
+LicenseFile={#MyRoot}\LICENSE.txt
+OutputDir={#MyRoot}\dist
+OutputBaseFilename=PulseStage-Setup-{#MyAppVersion}-x64
+SetupIconFile={#MyRoot}\pulsestage.ico
+Compression=lzma2/normal
 SolidCompression=yes
 WizardStyle=modern
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
-UninstallDisplayIcon={app}\{#MyAppExeName}
-PrivilegesRequiredOverridesAllowed=dialog
+UninstallDisplayIcon={app}\PulseStage.exe
 PrivilegesRequired=lowest
-
+PrivilegesRequiredOverridesAllowed=dialog
+CloseApplications=yes
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
-
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-
 [Files]
-Source: "{#MyDistDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "D:\Projects\MIDI\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
-
+Source: "{#MyRoot}\dist\PulseStage\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#MyRoot}\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\pulsestage.ico"
-Name: "{group}\PulseStage User Guide"; Filename: "{app}\_internal\docs\PULSESTAGE-USER-GUIDE.html"
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; IconFilename: "{app}\pulsestage.ico"
-
+Name: "{group}\PulseStage"; Filename: "{app}\PulseStage.exe"
+Name: "{group}\Uninstall PulseStage"; Filename: "{uninstallexe}"
+Name: "{autodesktop}\PulseStage"; Filename: "{app}\PulseStage.exe"; Tasks: desktopicon
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
-
-[UninstallDelete]
-Type: filesandordirs; Name: "{app}"
+Filename: "{app}\PulseStage.exe"; Description: "Launch PulseStage"; Flags: nowait postinstall skipifsilent

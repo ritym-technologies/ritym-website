@@ -30,7 +30,6 @@ from ..engine.monitor import MidiMonitor, MonitorFilter
 from ..engine.actions import ActionRunner
 from ..engine.config_store import ConfigStore
 
-router = APIRouter(prefix="/api")
 
 
 # Request DTOs with strict boundary validation
@@ -103,6 +102,8 @@ def init_routes(
     profile_registry: ProfileRegistry,
     broadcast_func,
 ) -> APIRouter:
+    # Each desktop engine/test instance must own routes bound to its own state.
+    router = APIRouter(prefix="/api")
 
     @router.get("/status")
     def get_status():
@@ -110,7 +111,7 @@ def init_routes(
         inputs = manager.get_inputs()
         return {
             "application": "PulseStage MIDI",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "is_virtual": manager.is_virtual,
             "selected_output": manager.selected_output_name,
             "selected_input": manager.selected_input_name,

@@ -17,6 +17,19 @@ class MidiClient {
   }
 
   initWebSocket() {
+    if (window.PulseStageDesktop) {
+      window.PulseStageDesktop.ready.then(bridge => {
+        bridge.midiEvent.connect(raw => {
+          const data = JSON.parse(raw);
+          if (data.type === 'midi_message') this._emit('message', data.message);
+          else if (data.type === 'clock_status') this._emit('clock', data);
+          else this._emit(data.type, data);
+        });
+        this.isConnected = true;
+        this._emit('status', {connected: true});
+      }).catch(error => {console.error(error); this._emit('status', {connected: false});});
+      return;
+    }
     const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
     const host = window.location.host;
     const wsUrl = `${proto}//${host}/ws`;

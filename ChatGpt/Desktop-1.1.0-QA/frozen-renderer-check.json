@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "renderer": "bundled Qt WebEngine",
+  "bridge": "Qt WebChannel IPC",
+  "keyboard_rx": 2,
+  "program": 24,
+  "expression": 96,
+  "ticks": 120,
+  "footswitch_press_release": true,
+  "measured_bpm": 120,
+  "pushed_events": 6,
+  "clock_stopped": true,
+  "scheme": "pulsestage:",
+  "http_listener": false,
+  "physical_hardware_tested": false
+}

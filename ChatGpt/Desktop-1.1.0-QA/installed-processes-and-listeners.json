@@ -1,0 +1,17 @@
+{
+  "processes": [
+    {
+      "ProcessId": 23188,
+      "ParentProcessId": 19660,
+      "ExecutablePath": "C:\\Users\\Sinu\\AppData\\Local\\Programs\\PulseStage\\PulseStage.exe"
+    },
+    {
+      "ProcessId": 23232,
+      "ParentProcessId": 23188,
+      "ExecutablePath": "C:\\Users\\Sinu\\AppData\\Local\\Programs\\PulseStage\\_internal\\PySide6\\.\\QtWebEngineProcess.exe"
+    }
+  ],
+  "tcp_listeners": [],
+  "installed_guide_matches_source": true,
+  "installer_copy_matches": true
+}

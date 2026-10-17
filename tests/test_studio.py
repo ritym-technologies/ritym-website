@@ -74,7 +74,7 @@ class TestKeybedOwnership(unittest.TestCase):
         self.assertFalse(rack.notes)
 
     def test_native_features_explicitly_disabled_in_simulation(self):
-        rack = StudioRack(enabled=False)
+        rack = StudioRack(enabled=False, transport_mode='loopmidi')
         with self.assertRaises(RuntimeError):
             rack.connect('keyboard')
         self.assertFalse(rack.state()['native_enabled'])

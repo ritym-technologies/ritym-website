@@ -26,6 +26,7 @@ from .studio import StudioRack, studio_routes
 def create_app(
     config_path: Optional[Path] = None,
     use_virtual: bool = False,
+    event_sink=None,
 ) -> FastAPI:
     # Dynamic path resolution
     base_src_dir = Path(__file__).resolve().parent.parent
@@ -42,6 +43,8 @@ def create_app(
 
     # Thread-safe WebSocket broadcaster
     def broadcast_message(msg: dict):
+        if event_sink:
+            event_sink(msg)
         loop = app_state.get("main_loop")
         ws_set = app_state.get("active_websockets")
         if not loop or loop.is_closed() or not ws_set:
@@ -120,14 +123,14 @@ def create_app(
     async def lifespan(app: FastAPI):
         app_state["main_loop"] = asyncio.get_running_loop()
         yield
-        studio_rack.close()
         # Shutdown cleanup
         clock.emergency_stop()
         action_runner.cancel()
+        studio_rack.close()
         manager.stop_hotplug_monitor()
         manager.adapter.close_all()
 
-    app = FastAPI(title="PulseStage MIDI", version="1.0.0", lifespan=lifespan)
+    app = FastAPI(title="PulseStage MIDI", version="1.1.0", lifespan=lifespan)
 
     # Local Origin Security Middleware
     @app.middleware("http")
@@ -171,7 +174,12 @@ def create_app(
         broadcast_func=broadcast_message,
     )
     app.include_router(routes)
-    app.include_router(studio_routes(studio_rack))
+    def changing_studio_mode():
+        clock.emergency_stop()
+        action_runner.cancel()
+        manager.deselect_input()
+        manager.deselect_output()
+    app.include_router(studio_routes(studio_rack, changing_studio_mode))
 
     # WebSocket Endpoint with Origin Security Verification
     @app.websocket("/ws")

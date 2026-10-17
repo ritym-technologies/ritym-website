@@ -16,3 +16,8 @@ dist/PulseStage/
 scratch/
 test_install/
 .coverage
+
+# Distributable installer executables (hosted on GitHub Releases)
+dist/*.exe
+
+ChatGpt/Backups/

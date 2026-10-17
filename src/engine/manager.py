@@ -94,10 +94,13 @@ class DeviceManager:
         """Selects and opens input port by name, closing any prior input."""
         with self._lock:
             # Close prior input if different
+            if self._internal_rack and self._internal_rack.internal_input_cb:
+                self._internal_rack.release_notes()
+                self._internal_rack.internal_input_cb = None
             if self.selected_input_id and self.selected_input_id != "internal_keyboard":
                 self.adapter.close_input(self.selected_input_id)
-                self.selected_input_name = None
-                self.selected_input_id = None
+            self.selected_input_name = None
+            self.selected_input_id = None
 
             if self._internal_rack and getattr(self._internal_rack, 'transport_mode', None) == 'internal':
                 if port_name == getattr(self._internal_rack, 'keyboard_port_name', None):
@@ -121,6 +124,7 @@ class DeviceManager:
             if self.selected_input_id and self.selected_input_id != "internal_keyboard":
                 self.adapter.close_input(self.selected_input_id)
             if self._internal_rack:
+                self._internal_rack.release_notes()
                 self._internal_rack.internal_input_cb = None
             self.selected_input_name = None
             self.selected_input_id = None
@@ -130,7 +134,7 @@ class DeviceManager:
         with self._lock:
             if self._internal_rack and getattr(self._internal_rack, 'transport_mode', None) == 'internal':
                 if port_name == getattr(self._internal_rack, 'pedal_port_name', None):
-                    return True
+                    return bool(self._internal_rack.pedal_id)
 
             ports = self.adapter.get_output_ports()
             for p in ports:
@@ -142,6 +146,8 @@ class DeviceManager:
         with self._lock:
             if self._internal_rack and getattr(self._internal_rack, 'transport_mode', None) == 'internal':
                 if port_name == getattr(self._internal_rack, 'pedal_port_name', None):
+                    if not self._internal_rack.pedal_id:
+                        return False
                     self._internal_rack.pedal.receive(data, getattr(self._internal_rack, 'pedal_channel', 0))
                     return True
 

@@ -89,8 +89,8 @@ class StudioRack:
         self.internal_input_cb = None
         self.io_lock = threading.RLock()
         self.keyboard_id = self.pedal_id = None
-        self.keyboard_port_name = INTERNAL_KEYBOARD_PORT if transport_mode == 'internal' else KEYBOARD_PORT
-        self.pedal_port_name = INTERNAL_PEDAL_PORT if transport_mode == 'internal' else PEDAL_PORT
+        self.keyboard_port_name = INTERNAL_KEYBOARD_PORT if self.transport_mode == 'internal' else KEYBOARD_PORT
+        self.pedal_port_name = INTERNAL_PEDAL_PORT if self.transport_mode == 'internal' else PEDAL_PORT
         self.pedal_channel = 0
         self.notes = set()
         self.pedal = PedalState()
@@ -136,11 +136,12 @@ class StudioRack:
 
     def connect(self, instrument):
         with self.io_lock:
-            if not self.enabled and self.adapter is None:
+            if self.transport_mode != 'internal' and not self.enabled and self.adapter is None:
                 raise RuntimeError('Integrated instruments require native Windows mode, without --virtual.')
 
             if self.transport_mode == 'internal':
                 if instrument == 'keyboard':
+                    self.release_notes()
                     self.keyboard_id = 'internal_keyboard'
                     self.keyboard_port_name = INTERNAL_KEYBOARD_PORT
                     self.last_heartbeat = time.monotonic()
@@ -291,7 +292,7 @@ class TransportModeRequest(BaseModel):
     mode: str = Field(pattern='^(internal|loopmidi)$')
 
 
-def studio_routes(rack):
+def studio_routes(rack, changing_mode=None):
     router = APIRouter(prefix='/api/studio')
 
     def run(function):
@@ -306,7 +307,11 @@ def studio_routes(rack):
 
     @router.post('/mode')
     def set_mode(request: TransportModeRequest):
-        return run(lambda: rack.set_mode(request.mode))
+        def change():
+            if changing_mode:
+                changing_mode()
+            return rack.set_mode(request.mode)
+        return run(change)
 
     @router.post('/connect/{instrument}')
     def connect(instrument: str):
