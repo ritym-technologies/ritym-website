@@ -1,0 +1,62 @@
+{
+  "physical_hardware_tested": false,
+  "tests": {
+    "program_bank_cc": {
+      "passed": true,
+      "received": [
+        [
+          193,
+          24
+        ],
+        [
+          177,
+          0,
+          1
+        ],
+        [
+          177,
+          32,
+          2
+        ],
+        [
+          193,
+          9
+        ],
+        [
+          177,
+          11,
+          96
+        ]
+      ]
+    },
+    "wrong_destination_no_false_confirmation": {
+      "passed": true
+    },
+    "received_clock": {
+      "passed": true,
+      "ticks": 108,
+      "measured_bpm": 120.0,
+      "measurement": "host arrival"
+    },
+    "integrated_keybed": {
+      "passed": true,
+      "received": [
+        [
+          145,
+          60,
+          100
+        ],
+        [
+          129,
+          60,
+          0
+        ]
+      ]
+    },
+    "invalid_note_rejected": {
+      "passed": true,
+      "status": 422
+    }
+  },
+  "passed": true
+}

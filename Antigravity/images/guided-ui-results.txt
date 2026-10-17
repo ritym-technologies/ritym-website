@@ -1,0 +1,32 @@
+TEST 01 / INPUT
+VERIFIED
+Play a note.
+
+Keybed → virtual cable → input monitor
+
+Arm keyboard test
+Received note 60 on/off on channel1 through Windows MIDI.
+TEST 02 / PROGRAM
+VERIFIED
+Change a preset.
+
+Command station → pedal port → independent receiver
+
+Send program 24
+Receiver captured C0 18. Display preset25 / wire24.
+TEST 03 / CONTROL
+VERIFIED
+Move a parameter.
+
+CC11 expression → reference pedal test mapping
+
+Send expression 96
+Receiver captured CC11 value96. Reference knob follows received data.
+TEST 04 / SYNC
+VERIFIED
+Follow the clock.
+
+120 BPM → 48 ticks per second → measured arrival rate
+
+Run clock test
+Received 115 ticks; measured 119.97 BPM. Host arrival measurement, not physical-wire timing.
