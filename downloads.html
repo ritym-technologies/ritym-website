@@ -2,77 +2,131 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Downloads &amp; Verification | ritym</title>
-  <meta name="description" content="Download PulseStage MIDI Studio setup executable, user documentation, and check SHA-256 verification hashes.">
+  <meta name="description" content="Download PulseStage MIDI Studio setup executable, user documentation, and verify SHA-256 integrity.">
   <link rel="icon" type="image/png" href="assets/favicon.png">
+
+  <!-- Enterprise Human-Aesthetic Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg-dark: #0a0d12;
-      --bg-card: #121720;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-accent: rgba(2, 65, 254, 0.3);
-      --text: #f1f5f9;
-      --text-muted: #8c9ba5;
-      --text-dim: #5a6874;
-      --blue: #0241fe;
+      --primary: #0241fe;
+      --primary-dark: #0036d6;
+      --primary-light: #eff6ff;
+      --primary-border: #bfdbfe;
+      --navy: #0f172a;
+      --bg-white: #ffffff;
+      --bg-slate: #f8fafc;
+      --bg-slate-alt: #f1f5f9;
+      --border-light: #e2e8f0;
+      --border-dark: #cbd5e1;
+      --text-heading: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
+      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, monospace;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg-dark);
-      color: var(--text);
-      line-height: 1.6;
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html {
+      background-color: var(--bg-white);
+      color: var(--text-body);
+      font-family: var(--font-main);
+      -webkit-font-smoothing: antialiased;
     }
-    a { color: inherit; text-decoration: none; }
-    .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+    body { background-color: var(--bg-white); line-height: 1.65; }
+    a { color: inherit; text-decoration: none; transition: all 0.2s ease; }
+
+    .top-corp-bar {
+      background-color: #0f172a;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      padding: 8px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-corp-bar a { color: #60a5fa; font-weight: 500; }
 
     .navbar {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(10, 13, 18, 0.88);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
     }
-    .nav-inner {
-      height: 68px;
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .brand-logo { height: 28px; display: block; }
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-    .nav-link { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
-    .nav-link:hover, .nav-link.active { color: #fff; }
-    .nav-btn {
-      background: var(--blue);
-      color: #fff;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 8px 16px;
+    .brand-logo-img { height: 34px; width: auto; display: block; }
+    .nav-menu { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-link { font-size: 0.9rem; font-weight: 500; color: var(--text-body); }
+    .nav-link:hover, .nav-link.active { color: var(--primary); }
+    .nav-link.active { font-weight: 600; }
+    .nav-cta-btn {
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 9px 18px;
       border-radius: 6px;
-      transition: all 0.2s;
+      font-size: 0.88rem;
+      font-weight: 600;
     }
-    .nav-btn:hover { background: #0036d6; }
 
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
     .page-header {
-      padding: 70px 0 40px;
+      padding: 72px 0 44px 0;
       text-align: center;
-      border-bottom: 1px solid var(--border);
+      background-color: var(--bg-white);
+      border-bottom: 1px solid var(--border-light);
     }
-    .page-title { font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.5px; }
-    .page-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 580px; margin: 0 auto; }
+    .page-eyebrow {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      background-color: var(--primary-light);
+      border: 1px solid var(--primary-border);
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .page-desc {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+    }
 
-    .dl-section { padding: 60px 0 100px; }
+    .dl-section { padding: 70px 0 100px 0; background-color: var(--bg-slate); }
     .dl-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 40px;
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 44px;
+      box-shadow: var(--shadow-sm);
       margin-bottom: 32px;
     }
     .dl-head {
@@ -80,135 +134,148 @@
       justify-content: space-between;
       align-items: flex-start;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 24px;
       margin-bottom: 24px;
       padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-light);
     }
     .dl-badge {
       display: inline-block;
-      background: rgba(2, 65, 254, 0.12);
-      color: #60a5fa;
+      font-family: var(--font-mono);
       font-size: 0.75rem;
       font-weight: 700;
+      background: #d1fae5;
+      color: #065f46;
       padding: 4px 10px;
       border-radius: 4px;
       text-transform: uppercase;
       margin-bottom: 10px;
     }
-    .dl-title { font-size: 1.6rem; color: #fff; font-weight: 700; margin-bottom: 6px; }
-    .dl-summary { color: var(--text-muted); font-size: 0.95rem; max-width: 600px; }
+    .dl-title { font-size: 1.7rem; font-weight: 800; color: var(--text-heading); margin-bottom: 6px; }
+    .dl-summary { color: var(--text-body); font-size: 0.98rem; max-width: 620px; line-height: 1.6; }
     .btn-dl {
-      background: var(--blue);
-      color: #fff;
-      padding: 12px 24px;
-      border-radius: 8px;
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 13px 26px;
+      border-radius: 6px;
       font-size: 0.95rem;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 4px 14px rgba(2, 65, 254, 0.3);
-      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(2, 65, 254, 0.28);
     }
-    .btn-dl:hover { background: #0036d6; transform: translateY(-2px); }
+    .btn-dl:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
 
     .hash-wrap {
-      background: #080a0e;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background-color: var(--bg-slate);
+      border: 1px solid var(--border-light);
       border-radius: 8px;
       padding: 16px 20px;
       margin: 20px 0;
     }
-    .hash-label { font-size: 0.75rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
-    .hash-val { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #38bdf8; word-break: break-all; }
+    .hash-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; }
+    .hash-val { font-family: var(--font-mono); font-size: 0.85rem; color: var(--primary); word-break: break-all; }
 
     .details-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       margin-top: 20px;
     }
     .details-table td {
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-light);
     }
-    .details-table td:first-child { color: var(--text-muted); width: 35%; }
-    .details-table td:last-child { color: #fff; font-weight: 500; }
+    .details-table td:first-child { color: var(--text-muted); width: 35%; font-weight: 500; }
+    .details-table td:last-child { color: var(--text-heading); font-weight: 600; }
 
     .footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
-      background: #080a0e;
-      font-size: 0.85rem;
-      color: var(--text-dim);
+      background-color: var(--bg-white);
+      border-top: 1px solid var(--border-light);
+      padding: 48px 0;
+      font-size: 0.88rem;
+      color: var(--text-muted);
     }
   </style>
 </head>
 <body>
 
+  <div class="top-corp-bar">
+    <div>ritym software &bull; Direct Download Vault</div>
+    <div><a href="index.html">&larr; Back to Home</a></div>
+  </div>
+
   <header class="navbar">
-    <div class="container nav-inner">
-      <a href="index.html">
-        <img src="assets/ritym_logo_white.png" alt="ritym" class="brand-logo">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo-wrap">
+        <img src="assets/ritym_logo_dark.png" alt="ritym" class="brand-logo-img">
       </a>
-      <ul class="nav-links">
+      <ul class="nav-menu">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="products.html" class="nav-link">Products</a></li>
         <li><a href="pulsestage.html" class="nav-link">PulseStage (MIDI)</a></li>
         <li><a href="downloads.html" class="nav-link active">Downloads</a></li>
-        <li><a href="pulsestage-guide.html" class="nav-link">Operator Guide</a></li>
+        <li><a href="pulsestage-guide.html" class="nav-link">Documentation</a></li>
       </ul>
-      <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="nav-btn">Download v1.0.0 &darr;</a>
+      <div>
+        <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="nav-cta-btn">Download v1.0.0 &darr;</a>
+      </div>
     </div>
   </header>
 
   <section class="page-header">
     <div class="container">
-      <h1 class="page-title">Downloads &amp; Packages</h1>
+      <div class="page-eyebrow">Download Center</div>
+      <h1 class="page-title">Packages &amp; Binary Verification</h1>
       <p class="page-desc">
-        Direct binary setup files, checksums, and documentation. Everything runs self-contained without command-line dependencies.
+        Direct Windows setup binaries, SHA-256 integrity checksums, and offline manuals. Completely self-contained without command-line dependencies.
       </p>
     </div>
   </section>
 
-  <div class="container dl-section">
-    <div class="dl-card">
-      <div class="dl-head">
-        <div>
-          <span class="dl-badge">Production Release &bull; Windows</span>
-          <h2 class="dl-title">PulseStage &mdash; MIDI Studio (x64)</h2>
-          <p class="dl-summary">
-            Complete Windows setup executable. Bundles the standalone engine, desktop shell, native WinMM driver support, and driver-free practice lab.
-          </p>
+  <div class="dl-section">
+    <div class="container">
+      <div class="dl-card">
+        <div class="dl-head">
+          <div>
+            <span class="dl-badge">Production Release &bull; Windows</span>
+            <h2 class="dl-title">PulseStage &mdash; MIDI Studio (x64)</h2>
+            <p class="dl-summary">
+              Standalone Windows setup executable. Bundles the complete runtime, desktop launcher, native WinMM driver support, and driver-free practice lab.
+            </p>
+          </div>
+          <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="btn-dl">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.951"/></svg>
+            Download Setup (14.6 MB)
+          </a>
         </div>
-        <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="btn-dl">
-          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.951"/></svg>
-          Download Setup (14.6 MB)
-        </a>
-      </div>
 
-      <div class="hash-wrap">
-        <div class="hash-label">SHA-256 Checksum:</div>
-        <div class="hash-val">d1c89b90e2345d64e653fb386cea26785413beb1212d176d81c76ab329cd5d2d</div>
-      </div>
+        <div class="hash-wrap">
+          <div class="hash-label">SHA-256 Checksum:</div>
+          <div class="hash-val">d1c89b90e2345d64e653fb386cea26785413beb1212d176d81c76ab329cd5d2d</div>
+        </div>
 
-      <table class="details-table">
-        <tr><td>Version</td><td>1.0.0 (Production Release)</td></tr>
-        <tr><td>File Name</td><td><code>PulseStage-Setup-1.0.0-x64.exe</code></td></tr>
-        <tr><td>File Size</td><td>15,355,555 bytes (14.64 MB)</td></tr>
-        <tr><td>Supported OS</td><td>Microsoft Windows 10 &amp; 11 (64-bit)</td></tr>
-        <tr><td>User Settings</td><td>Saved in <code>%APPDATA%\PulseStage</code> (preserved during updates)</td></tr>
-        <tr><td>Operator Guide</td><td><a href="pulsestage-guide.html" style="color: #60a5fa; text-decoration: underline;">View Standalone Operator Guide &rarr;</a></td></tr>
-        <tr><td>Source Code</td><td><a href="https://github.com/ritym-technologies/ritym-website/tree/pulsestage" target="_blank" style="color: #60a5fa; text-decoration: underline;">GitHub Repository ↗</a></td></tr>
-      </table>
+        <table class="details-table">
+          <tr><td>Version</td><td>1.0.0 (Production Release)</td></tr>
+          <tr><td>File Name</td><td><code>PulseStage-Setup-1.0.0-x64.exe</code></td></tr>
+          <tr><td>File Size</td><td>15,355,555 bytes (14.64 MB)</td></tr>
+          <tr><td>Supported OS</td><td>Microsoft Windows 10 &amp; 11 (64-bit)</td></tr>
+          <tr><td>User Settings</td><td>Stored in <code>%APPDATA%\PulseStage</code> (preserved across updates)</td></tr>
+          <tr><td>Operator Manual</td><td><a href="pulsestage-guide.html" style="color: var(--primary); text-decoration: underline;">Open Standalone Operator Guide &rarr;</a></td></tr>
+          <tr><td>Source Code</td><td><a href="https://github.com/ritym-technologies/ritym-website/tree/pulsestage" target="_blank" style="color: var(--primary); text-decoration: underline;">GitHub Repository ↗</a></td></tr>
+        </table>
+      </div>
     </div>
   </div>
 
   <footer class="footer">
     <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
       <div>&copy; 2026 ritym (RiTym Technologies). All rights reserved.</div>
-      <div><a href="index.html" style="color: #60a5fa;">Back to Home &rarr;</a></div>
+      <div><a href="index.html" style="color: var(--primary);">Back to Home &rarr;</a></div>
     </div>
   </footer>
 

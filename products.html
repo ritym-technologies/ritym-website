@@ -2,203 +2,264 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Products &amp; Projects | ritym</title>
-  <meta name="description" content="Explore software and hardware tools created by ritym: PulseStage MIDI Studio and Exos GPS.">
+  <meta name="description" content="Explore products and engineering projects by ritym: PulseStage MIDI Studio and Exos GPS.">
   <link rel="icon" type="image/png" href="assets/favicon.png">
+
+  <!-- Enterprise Human-Aesthetic Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg-dark: #0a0d12;
-      --bg-card: #121720;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-accent: rgba(2, 65, 254, 0.3);
-      --text: #f1f5f9;
-      --text-muted: #8c9ba5;
-      --text-dim: #5a6874;
-      --blue: #0241fe;
-      --emerald: #10b981;
-      --amber: #f59e0b;
+      --primary: #0241fe;
+      --primary-dark: #0036d6;
+      --primary-light: #eff6ff;
+      --primary-border: #bfdbfe;
+      --navy: #0f172a;
+      --navy-card: #1e293b;
+      --accent-blue: #2563eb;
+      --accent-amber: #d97706;
+      --accent-emerald: #059669;
+      --bg-white: #ffffff;
+      --bg-slate: #f8fafc;
+      --bg-slate-alt: #f1f5f9;
+      --border-light: #e2e8f0;
+      --border-dark: #cbd5e1;
+      --text-heading: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, monospace;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg-dark);
-      color: var(--text);
-      line-height: 1.6;
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html {
+      background-color: var(--bg-white);
+      color: var(--text-body);
+      font-family: var(--font-main);
+      -webkit-font-smoothing: antialiased;
     }
-    a { color: inherit; text-decoration: none; }
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+    body { background-color: var(--bg-white); line-height: 1.65; }
+    a { color: inherit; text-decoration: none; transition: all 0.2s ease; }
+
+    .top-corp-bar {
+      background-color: #0f172a;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      padding: 8px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-corp-bar a { color: #60a5fa; font-weight: 500; }
 
     .navbar {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(10, 13, 18, 0.88);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
     }
-    .nav-inner {
-      height: 68px;
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .brand-logo { height: 28px; display: block; }
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-    .nav-link { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
-    .nav-link:hover, .nav-link.active { color: #fff; }
-    .nav-btn {
-      background: var(--blue);
-      color: #fff;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 8px 16px;
+    .brand-logo-img { height: 34px; width: auto; display: block; }
+    .nav-menu { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-link { font-size: 0.9rem; font-weight: 500; color: var(--text-body); }
+    .nav-link:hover, .nav-link.active { color: var(--primary); }
+    .nav-link.active { font-weight: 600; }
+    .nav-cta-btn {
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 9px 18px;
       border-radius: 6px;
-      transition: all 0.2s;
-    }
-    .nav-btn:hover { background: #0036d6; }
-
-    .page-header {
-      padding: 80px 0 50px;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-    }
-    .page-badge {
-      display: inline-block;
-      background: rgba(2, 65, 254, 0.1);
-      border: 1px solid var(--border-accent);
-      color: #60a5fa;
-      padding: 4px 12px;
-      border-radius: 9999px;
-      font-size: 0.78rem;
+      font-size: 0.88rem;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 16px;
-    }
-    .page-title { font-size: 2.8rem; font-weight: 800; color: #fff; margin-bottom: 12px; letter-spacing: -1px; }
-    .page-desc { font-size: 1.15rem; color: var(--text-muted); max-width: 620px; margin: 0 auto; }
-
-    .products-list { padding: 60px 0 100px; display: flex; flex-direction: column; gap: 48px; }
-    .product-row {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 40px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
-      transition: border-color 0.2s;
-    }
-    @media (max-width: 860px) {
-      .product-row { grid-template-columns: 1fr; gap: 32px; padding: 28px; }
-    }
-    .product-row:hover { border-color: rgba(255, 255, 255, 0.16); }
-    .product-row img { width: 100%; border-radius: 10px; display: block; border: 1px solid var(--border); }
-    .status-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
+    }
+    .nav-cta-btn:hover { background-color: var(--primary-dark); }
+
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+    .page-header {
+      padding: 72px 0 48px 0;
+      text-align: center;
+      background-color: var(--bg-white);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .page-eyebrow {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      background-color: var(--primary-light);
+      border: 1px solid var(--primary-border);
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    .page-title {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .page-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .products-wrap {
+      padding: 80px 0;
+      background-color: var(--bg-slate);
+    }
+    .product-row {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 44px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+      margin-bottom: 40px;
+      transition: all 0.2s ease;
+    }
+    .product-row:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-border);
+    }
+    @media (max-width: 860px) {
+      .product-row { grid-template-columns: 1fr; padding: 28px; }
+    }
+    .product-row img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      display: block;
+    }
+    .p-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
       font-size: 0.75rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
       padding: 4px 10px;
       border-radius: 4px;
-      margin-bottom: 16px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
     }
-    .status-released { background: rgba(16, 185, 129, 0.15); color: #34d399; }
-    .status-proto { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
-    .p-title { font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 12px; letter-spacing: -0.5px; }
-    .p-desc { font-size: 0.98rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
+    .p-badge-released { background: #d1fae5; color: #065f46; }
+    .p-badge-proto { background: #fef3c7; color: #92400e; }
+    .p-title { font-size: 1.8rem; font-weight: 800; color: var(--text-heading); margin-bottom: 12px; }
+    .p-desc { font-size: 1rem; color: var(--text-body); line-height: 1.65; margin-bottom: 24px; }
     .p-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
-    .spec-item { font-size: 0.88rem; color: #cbd5e1; display: flex; align-items: center; gap: 8px; }
-    .spec-item span { color: var(--blue); font-weight: 700; }
+    .p-spec { font-size: 0.88rem; color: var(--text-body); display: flex; align-items: center; gap: 8px; }
+    .p-spec span { color: var(--primary); font-weight: 700; }
     .p-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn-action {
-      background: var(--blue);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-size: 0.9rem;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      font-size: 0.92rem;
       font-weight: 600;
-      transition: all 0.2s;
-    }
-    .btn-action:hover { background: #0036d6; }
-    .btn-sub {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
-      color: #fff;
-      padding: 10px 18px;
       border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: all 0.2s;
+      cursor: pointer;
     }
-    .btn-sub:hover { background: rgba(255, 255, 255, 0.08); }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-secondary { background: #fff; color: var(--text-heading); border: 1px solid var(--border-dark); }
+    .btn-secondary:hover { background: var(--bg-slate); }
 
     .footer {
-      border-top: 1px solid var(--border);
-      padding: 50px 0 30px;
-      background: #080a0e;
-      font-size: 0.85rem;
-      color: var(--text-dim);
+      background-color: var(--bg-white);
+      border-top: 1px solid var(--border-light);
+      padding: 48px 0;
+      font-size: 0.88rem;
+      color: var(--text-muted);
     }
   </style>
 </head>
 <body>
 
+  <div class="top-corp-bar">
+    <div>ritym software &bull; PulseStage v1.0.0 Production Release</div>
+    <div><a href="downloads.html">Downloads Center &rarr;</a></div>
+  </div>
+
   <header class="navbar">
-    <div class="container nav-inner">
-      <a href="index.html">
-        <img src="assets/ritym_logo_white.png" alt="ritym" class="brand-logo">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo-wrap">
+        <img src="assets/ritym_logo_dark.png" alt="ritym" class="brand-logo-img">
       </a>
-      <ul class="nav-links">
+      <ul class="nav-menu">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="products.html" class="nav-link active">Products</a></li>
         <li><a href="pulsestage.html" class="nav-link">PulseStage (MIDI)</a></li>
         <li><a href="downloads.html" class="nav-link">Downloads</a></li>
+        <li><a href="pulsestage-guide.html" class="nav-link">Documentation</a></li>
         <li><a href="https://exosgps.com" target="_blank" class="nav-link">Exos GPS ↗</a></li>
       </ul>
-      <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="nav-btn">Download v1.0.0 &darr;</a>
+      <div>
+        <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="nav-cta-btn">Download v1.0.0 &darr;</a>
+      </div>
     </div>
   </header>
 
   <section class="page-header">
     <div class="container">
-      <div class="page-badge">Studio Catalog</div>
-      <h1 class="page-title">Tools &amp; Experiments</h1>
+      <div class="page-eyebrow">Studio Catalog</div>
+      <h1 class="page-title">Products &amp; Active Projects</h1>
       <p class="page-desc">
-        We only list software and devices that are real. Here is what is released and what is currently in active development.
+        We only list software and devices that are real. Here is what is currently released and what is actively in development.
       </p>
     </div>
   </section>
 
-  <div class="container">
-    <div class="products-list">
+  <div class="products-wrap">
+    <div class="container">
 
       <!-- PulseStage -->
       <div class="product-row">
         <div>
-          <span class="status-badge status-released">● Available Now &bull; v1.0.0 Release</span>
+          <span class="p-badge p-badge-released">● Available Now &bull; v1.0.0 Release</span>
           <h2 class="p-title">PulseStage &mdash; MIDI Studio</h2>
           <p class="p-desc">
             A precision Windows MIDI control station and diagnostic environment. Engineered for musicians, touring keyboardists, and guitarists who need direct, rock-solid control over presets, clocks, and controller streams without opening a complex DAW.
           </p>
           <div class="p-specs">
-            <div class="spec-item"><span>&bull;</span> 0&ndash;127 / 1&ndash;128 Program Changes</div>
-            <div class="spec-item"><span>&bull;</span> 24-PPQN Real-time Clock</div>
-            <div class="spec-item"><span>&bull;</span> Bidirectional Packet Monitor</div>
-            <div class="spec-item"><span>&bull;</span> Driver-Free Practice Lab</div>
+            <div class="p-spec"><span>&bull;</span> 0&ndash;127 / 1&ndash;128 Program Changes</div>
+            <div class="p-spec"><span>&bull;</span> 24-PPQN Real-time Clock</div>
+            <div class="p-spec"><span>&bull;</span> Bidirectional Packet Monitor</div>
+            <div class="p-spec"><span>&bull;</span> Driver-Free Practice Lab</div>
           </div>
           <div class="p-actions">
-            <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="btn-action">Download Windows Setup (14.6 MB) &darr;</a>
-            <a href="pulsestage.html" class="btn-sub">Feature Tour &rarr;</a>
-            <a href="pulsestage-guide.html" class="btn-sub">Operator Guide</a>
+            <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="btn btn-primary">Download Setup (14.6 MB) &darr;</a>
+            <a href="pulsestage.html" class="btn btn-secondary">Feature Tour &rarr;</a>
+            <a href="pulsestage-guide.html" class="btn btn-secondary">Operator Guide</a>
           </div>
         </div>
         <div>
@@ -209,23 +270,23 @@
       <!-- Exos GPS -->
       <div class="product-row">
         <div>
-          <span class="status-badge status-proto">● Active Prototype &bull; Breadboard Stage</span>
+          <span class="p-badge p-badge-proto">● Prototype Stage &bull; Active Exploration</span>
           <h2 class="p-title">Exos GPS</h2>
           <p class="p-desc">
             An independent, offline GPS location instrument. Pocket-sized, battery-powered, and designed for trail navigation, waypoint logging, and coordinate verification with zero subscriptions, zero ads, and zero cloud tracking.
           </p>
           <div class="p-specs">
-            <div class="spec-item"><span>&bull;</span> Multi-Band GNSS Receiver</div>
-            <div class="spec-item"><span>&bull;</span> 100% Offline Coordinates</div>
-            <div class="spec-item"><span>&bull;</span> Lightweight Display</div>
-            <div class="spec-item"><span>&bull;</span> Open Mapping Companion</div>
+            <div class="p-spec"><span>&bull;</span> Multi-Band GNSS Receiver</div>
+            <div class="p-spec"><span>&bull;</span> 100% Offline Coordinates</div>
+            <div class="p-spec"><span>&bull;</span> Lightweight Display</div>
+            <div class="p-spec"><span>&bull;</span> Open Mapping Companion</div>
           </div>
           <div class="p-actions">
-            <a href="https://exosgps.com" target="_blank" class="btn-action" style="background: rgba(255,255,255,0.08); border: 1px solid var(--border);">Visit ExosGPS.com ↗</a>
+            <a href="https://exosgps.com" target="_blank" class="btn btn-secondary">Visit ExosGPS.com ↗</a>
           </div>
         </div>
         <div>
-          <img src="assets/windows_station_screenshot.png" alt="Exos GPS prototype" onerror="this.src='assets/pulsestage/test-bench.jpg'">
+          <img src="assets/windows_station_screenshot.png" alt="Exos GPS preview" onerror="this.src='assets/pulsestage/test-bench.jpg'">
         </div>
       </div>
 
@@ -233,9 +294,9 @@
   </div>
 
   <footer class="footer">
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: gap: 16px;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
       <div>&copy; 2026 ritym (RiTym Technologies). All rights reserved.</div>
-      <div><a href="index.html" style="color: #60a5fa;">Back to Home &rarr;</a></div>
+      <div><a href="index.html" style="color: var(--primary);">Back to Home &rarr;</a></div>
     </div>
   </footer>
 

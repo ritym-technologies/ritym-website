@@ -2,61 +2,106 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ritym — Simple, Focused Tools for Signal, Timing & Sound</title>
-  <meta name="description" content="RiTym is an independent engineering workshop. We build practical MIDI software, timing utilities, and lightweight location tools without buzzwords or vaporware.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>ritym — Focused Tools for Signal, Timing &amp; Sound</title>
+  <meta name="description" content="RiTym is an independent software and hardware studio. We engineer PulseStage MIDI Studio and practical timing instruments. Simple, dependable, and grounded in reality.">
   <link rel="icon" type="image/png" href="assets/favicon.png">
+
+  <!-- Enterprise Human-Aesthetic Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg-dark: #0a0d12;
-      --bg-card: #121720;
-      --bg-card-hover: #18202c;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-accent: rgba(2, 65, 254, 0.3);
-      --text: #f1f5f9;
-      --text-muted: #8c9ba5;
-      --text-dim: #5a6874;
-      --blue: #0241fe;
-      --blue-glow: rgba(2, 65, 254, 0.15);
-      --amber: #f59e0b;
-      --emerald: #10b981;
+      --primary: #0241fe;
+      --primary-dark: #0036d6;
+      --primary-light: #eff6ff;
+      --primary-border: #bfdbfe;
+      --navy: #0f172a;
+      --navy-card: #1e293b;
+      --accent-blue: #2563eb;
+      --accent-cyan: #0284c7;
+      --accent-amber: #d97706;
+      --accent-emerald: #059669;
+      --bg-white: #ffffff;
+      --bg-slate: #f8fafc;
+      --bg-slate-alt: #f1f5f9;
+      --border-light: #e2e8f0;
+      --border-dark: #cbd5e1;
+      --text-heading: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, monospace;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg-dark);
-      color: var(--text);
-      line-height: 1.6;
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-white);
+      color: var(--text-body);
+      font-family: var(--font-main);
       -webkit-font-smoothing: antialiased;
     }
-    a { color: inherit; text-decoration: none; }
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+    body {
+      overflow-x: hidden;
+      line-height: 1.65;
+      background-color: var(--bg-white);
+    }
+    a { color: inherit; text-decoration: none; transition: all 0.2s ease; }
 
-    /* Navbar */
+    /* Top Corporate Banner */
+    .top-corp-bar {
+      background-color: #0f172a;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      padding: 8px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .top-corp-bar a { color: #60a5fa; font-weight: 500; }
+    .top-corp-bar a:hover { text-decoration: underline; color: #93c5fd; }
+
+    /* Navigation Bar */
     .navbar {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(10, 13, 18, 0.88);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
     }
-    .nav-inner {
-      height: 68px;
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .brand-logo {
-      height: 28px;
-      display: block;
-      transition: opacity 0.2s;
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
     }
-    .brand-logo:hover { opacity: 0.9; }
-    .nav-links {
+    .brand-logo-img {
+      height: 34px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+    .nav-menu {
       display: flex;
       align-items: center;
       gap: 28px;
@@ -65,523 +110,786 @@
     .nav-link {
       font-size: 0.9rem;
       font-weight: 500;
-      color: var(--text-muted);
-      transition: color 0.2s;
-    }
-    .nav-link:hover { color: #fff; }
-    .nav-link.active { color: #fff; font-weight: 600; }
-    .nav-btn {
-      background: var(--blue);
-      color: #fff;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 8px 16px;
-      border-radius: 6px;
-      transition: all 0.2s;
-    }
-    .nav-btn:hover { background: #0036d6; transform: translateY(-1px); }
-
-    /* Hero */
-    .hero {
-      padding: 90px 0 70px;
-      text-align: center;
+      color: var(--text-body);
+      padding: 6px 0;
       position: relative;
+    }
+    .nav-link:hover { color: var(--primary); }
+    .nav-link.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary);
+      border-radius: 2px;
+    }
+    .nav-cta-btn {
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 1px 2px rgba(2, 65, 254, 0.2);
+    }
+    .nav-cta-btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    /* Container & Sections */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .section {
+      padding: 92px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .section-slate {
+      background-color: var(--bg-slate);
+    }
+    .section-header {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto 56px auto;
+    }
+    .section-eyebrow {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+      background-color: var(--primary-light);
+      border: 1px solid var(--primary-border);
+      padding: 4px 12px;
+      border-radius: 4px;
+    }
+    .section-title {
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--text-heading);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .section-desc {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* Hero Section (Crisp Corporate White) */
+    .hero {
+      background-color: var(--bg-white);
+      padding: 84px 0 96px 0;
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: center;
+    }
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
     }
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(2, 65, 254, 0.1);
-      border: 1px solid var(--border-accent);
-      color: #60a5fa;
+      background-color: var(--primary-light);
+      border: 1px solid var(--primary-border);
+      border-radius: 20px;
       padding: 6px 14px;
-      border-radius: 9999px;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
+      color: var(--primary);
+      font-family: var(--font-mono);
       font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
     .hero-badge .dot {
       width: 7px;
       height: 7px;
       border-radius: 2px;
-      background: var(--blue);
+      background-color: var(--primary);
       display: inline-block;
     }
-    .hero h1 {
-      font-size: 3.4rem;
+    .hero-title {
+      font-size: 3.3rem;
       font-weight: 800;
       line-height: 1.15;
-      letter-spacing: -1.2px;
+      letter-spacing: -0.03em;
       margin-bottom: 20px;
-      color: #ffffff;
+      color: var(--text-heading);
     }
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--text-muted);
-      max-width: 680px;
-      margin: 0 auto 36px;
-      line-height: 1.6;
+    .hero-title span { color: var(--primary); }
+    .hero-subtitle {
+      font-size: 1.2rem;
+      line-height: 1.65;
+      color: var(--text-body);
+      margin-bottom: 32px;
+      max-width: 620px;
     }
     .hero-actions {
       display: flex;
-      justify-content: center;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
-    .btn-main {
-      background: var(--blue);
-      color: #fff;
-      padding: 13px 26px;
-      border-radius: 8px;
-      font-size: 0.98rem;
-      font-weight: 600;
+    .btn {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      transition: all 0.2s;
-      box-shadow: 0 4px 20px rgba(2, 65, 254, 0.35);
-    }
-    .btn-main:hover { background: #0036d6; transform: translateY(-2px); }
-    .btn-outline {
-      background: rgba(255, 255, 255, 0.04);
-      color: #fff;
-      border: 1px solid var(--border);
+      justify-content: center;
+      gap: 8px;
       padding: 13px 24px;
-      border-radius: 8px;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.2s;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      text-align: center;
     }
-    .btn-outline:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); }
-    .status-strip {
-      display: inline-flex;
-      align-items: center;
+    .btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(2, 65, 254, 0.28);
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(2, 65, 254, 0.35);
+    }
+    .btn-secondary {
+      background-color: var(--bg-white);
+      color: var(--text-heading);
+      border-color: var(--border-dark);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-secondary:hover {
+      background-color: var(--bg-slate);
+      border-color: #94a3b8;
+      transform: translateY(-1px);
+    }
+
+    /* Hero Quick Spec Pill */
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
-      background: rgba(18, 23, 32, 0.8);
-      border: 1px solid var(--border);
-      padding: 8px 18px;
-      border-radius: 9999px;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
+      border-top: 1px solid var(--border-light);
+      padding-top: 24px;
     }
-    .status-strip span { display: inline-flex; align-items: center; gap: 6px; }
-    .status-pill {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--emerald);
+    .hero-metric-val {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      font-family: var(--font-mono);
+    }
+    .hero-metric-lbl {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
     }
 
-    /* Section Styling */
-    .section-wrap { padding: 90px 0; border-top: 1px solid var(--border); }
-    .section-head { margin-bottom: 48px; }
-    .section-tag {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--blue);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-      display: block;
-    }
-    .section-title {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.5px;
-      margin-bottom: 12px;
-    }
-    .section-desc {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 640px;
-      line-height: 1.6;
-    }
-
-    /* Product Spotlight Card */
-    .spotlight-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+    /* Hero Preview Card */
+    .hero-preview-card {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
       overflow: hidden;
-      margin-bottom: 40px;
-      transition: border-color 0.2s;
-    }
-    .spotlight-card:hover { border-color: rgba(255, 255, 255, 0.16); }
-    .spotlight-media {
-      background: #000;
-      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-xl);
       position: relative;
     }
-    .spotlight-media video {
+    .hero-preview-card img {
       width: 100%;
+      height: auto;
       display: block;
-      max-height: 520px;
-      object-fit: cover;
     }
-    .spotlight-body {
-      padding: 40px;
-    }
-    .spotlight-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-      margin: 32px 0;
-    }
-    .feature-item {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 20px;
-      border-radius: 10px;
-    }
-    .feature-item h4 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .feature-item p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
-
-    /* Other Project Card */
-    .project-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 32px;
+    .hero-preview-caption {
+      padding: 14px 20px;
+      background-color: var(--bg-slate);
+      border-top: 1px solid var(--border-light);
+      font-size: 0.82rem;
+      color: var(--text-muted);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-    .project-info h3 { font-size: 1.4rem; color: #fff; margin-bottom: 8px; }
-    .project-info p { color: var(--text-muted); font-size: 0.95rem; max-width: 600px; line-height: 1.6; }
-    .badge-dev {
-      background: rgba(245, 158, 11, 0.12);
-      color: #fbbf24;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      display: inline-block;
-      margin-bottom: 12px;
     }
 
-    /* Philosophy / Story Section */
-    .story-card {
-      background: linear-gradient(180deg, #121720 0%, #0a0d12 100%);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+    /* Spotlight Media & Video Container */
+    .spotlight-card {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 48px;
+    }
+    .video-container {
+      background-color: #0b1120;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .video-container video {
+      width: 100%;
+      max-height: 540px;
+      display: block;
+      object-fit: cover;
+    }
+    .spotlight-content {
+      padding: 36px 40px;
+    }
+    .chapter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .chapter-tag {
+      background-color: var(--bg-slate);
+      border: 1px solid var(--border-light);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      color: var(--text-body);
+      font-family: var(--font-mono);
+    }
+    .chapter-tag strong { color: var(--primary); }
+
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+    .feature-card {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-border);
+    }
+    .feature-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 18px;
+    }
+    .feature-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 10px;
+    }
+    .feature-card p {
+      font-size: 0.92rem;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+
+    /* Project Cards (Light Corporate) */
+    .project-card {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 36px;
+      box-shadow: var(--shadow-md);
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (max-width: 860px) {
+      .project-card { grid-template-columns: 1fr; }
+    }
+    .project-card img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Philosophy Card */
+    .philosophy-card {
+      background-color: var(--bg-slate);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
       padding: 48px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 860px) {
+      .philosophy-card { grid-template-columns: 1fr; padding: 32px; }
+    }
+    .meaning-callout {
+      background-color: var(--bg-white);
+      border-left: 4px solid var(--primary);
+      padding: 20px 24px;
+      border-radius: 0 8px 8px 0;
+      box-shadow: var(--shadow-sm);
+      margin-top: 24px;
+    }
+    .meaning-callout p {
+      font-size: 0.92rem;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+
+    /* Download Box */
+    .download-card {
+      background-color: var(--bg-white);
+      border: 2px solid var(--primary-border);
+      border-radius: 12px;
+      padding: 44px;
+      box-shadow: var(--shadow-lg);
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 48px;
       align-items: center;
     }
-    @media (max-width: 768px) {
-      .story-card { grid-template-columns: 1fr; gap: 32px; padding: 28px; }
-      .hero h1 { font-size: 2.4rem; }
+    @media (max-width: 860px) {
+      .download-card { grid-template-columns: 1fr; gap: 32px; padding: 28px; }
     }
-    .story-text h3 { font-size: 1.8rem; color: #fff; margin-bottom: 16px; letter-spacing: -0.5px; }
-    .story-text p { color: var(--text-muted); font-size: 0.98rem; margin-bottom: 16px; line-height: 1.65; }
-    .meaning-box {
-      background: rgba(2, 65, 254, 0.05);
-      border-left: 3px solid var(--blue);
-      padding: 16px 20px;
-      border-radius: 0 8px 8px 0;
+    .hash-code {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--primary);
+      background-color: var(--bg-slate);
+      border: 1px solid var(--border-light);
+      padding: 10px 14px;
+      border-radius: 6px;
+      word-break: break-all;
+      margin: 16px 0;
+    }
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
       font-size: 0.9rem;
-      color: #cbd5e1;
-      margin-top: 20px;
     }
+    .spec-table td {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .spec-table td:first-child { color: var(--text-muted); font-weight: 500; }
+    .spec-table td:last-child { color: var(--text-heading); font-weight: 600; text-align: right; }
 
-    /* Footer */
+    /* Corporate Footer */
     .footer {
-      border-top: 1px solid var(--border);
-      padding: 60px 0 32px;
-      background: #080a0e;
+      background-color: var(--bg-slate);
+      border-top: 1px solid var(--border-light);
+      padding: 64px 0 32px 0;
       font-size: 0.88rem;
-      color: var(--text-dim);
+      color: var(--text-muted);
     }
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 32px;
-      margin-bottom: 40px;
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 860px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
     }
     .footer-brand p {
-      color: var(--text-muted);
-      max-width: 340px;
+      font-size: 0.86rem;
+      color: var(--text-body);
+      max-width: 360px;
       margin-top: 12px;
-      font-size: 0.85rem;
       line-height: 1.6;
     }
-    .footer-links {
-      display: flex;
-      gap: 48px;
-      list-style: none;
-    }
-    .footer-links h5 {
-      color: #fff;
-      font-size: 0.82rem;
+    .footer-col h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 14px;
+      letter-spacing: 0.05em;
+      color: var(--text-heading);
+      margin-bottom: 16px;
     }
-    .footer-links ul { list-style: none; }
-    .footer-links li { margin-bottom: 8px; }
-    .footer-links a { color: var(--text-muted); font-size: 0.85rem; transition: color 0.2s; }
-    .footer-links a:hover { color: #fff; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { color: var(--text-muted); }
+    .footer-col a:hover { color: var(--primary); }
     .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      border-top: 1px solid var(--border-light);
       padding-top: 24px;
       display: flex;
       justify-content: space-between;
-      font-size: 0.8rem;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.82rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- Top Corporate Bar -->
+  <div class="top-corp-bar">
+    <div>
+      <span>ritym software &bull; PulseStage v1.0.0 Production Release</span>
+    </div>
+    <div>
+      <a href="downloads.html">Download Windows Setup &rarr;</a>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
   <header class="navbar">
-    <div class="container nav-inner">
-      <a href="index.html">
-        <img src="assets/ritym_logo_white.png" alt="ritym" class="brand-logo">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo-wrap">
+        <img src="assets/ritym_logo_dark.png" alt="ritym" class="brand-logo-img">
       </a>
-      <ul class="nav-links">
-        <li><a href="pulsestage.html" class="nav-link active">PulseStage (MIDI)</a></li>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="products.html" class="nav-link">Products</a></li>
+        <li><a href="pulsestage.html" class="nav-link">PulseStage (MIDI)</a></li>
         <li><a href="downloads.html" class="nav-link">Downloads</a></li>
-        <li><a href="pulsestage-guide.html" class="nav-link">Operator Guide</a></li>
+        <li><a href="pulsestage-guide.html" class="nav-link">Documentation</a></li>
         <li><a href="https://exosgps.com" target="_blank" class="nav-link">Exos GPS ↗</a></li>
-        <li><a href="https://github.com/ritym-technologies/ritym-website/tree/pulsestage" target="_blank" class="nav-link">GitHub ↗</a></li>
       </ul>
-      <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="nav-btn">Download v1.0.0 &darr;</a>
+      <div>
+        <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="nav-cta-btn">
+          <span>Download PulseStage</span> &darr;
+        </a>
+      </div>
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section class="hero">
     <div class="container">
-      <div class="hero-badge">
-        <span class="dot"></span> Independent Product &amp; Software Studio
-      </div>
-      <h1>Simple, focused tools.<br>Grounded in reality.</h1>
-      <p>
-        No corporate theater, no military buzzwords. We build straightforward MIDI software, precision timing tools, and lightweight positioning instruments that actually work.
-      </p>
-      <div class="hero-actions">
-        <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="btn-main">
-          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.951"/></svg>
-          Download PulseStage for Windows (14.6 MB)
-        </a>
-        <a href="#showcase" class="btn-outline">
-          Watch Walkthrough &amp; Video Tour &darr;
-        </a>
-      </div>
-      <div class="status-strip">
-        <span><span class="status-pill"></span> PulseStage v1.0.0 Released</span>
-        <span>&bull;</span>
-        <span>Windows 10/11 x64</span>
-        <span>&bull;</span>
-        <span>SHA-256 Verified</span>
-        <span>&bull;</span>
-        <span>Zero Developer Tools Required</span>
+      <div class="hero-grid">
+        <div>
+          <div class="hero-badge">
+            <span class="dot"></span> Independent Product &amp; Software Studio
+          </div>
+          <h1 class="hero-title">
+            Focused tools for <span>signal, timing</span> &amp; control.
+          </h1>
+          <p class="hero-subtitle">
+            We build straightforward MIDI software, master clock instruments, and offline positioning tools. Thoughtful engineering, tactile interfaces, and zero corporate theater.
+          </p>
+          <div class="hero-actions">
+            <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="btn btn-primary">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.951"/></svg>
+              Download PulseStage for Windows (14.6 MB)
+            </a>
+            <a href="#showcase" class="btn btn-secondary">
+              Watch Video Walkthrough &darr;
+            </a>
+          </div>
+          <div class="hero-metrics">
+            <div>
+              <div class="hero-metric-val">v1.0.0</div>
+              <div class="hero-metric-lbl">Production Release</div>
+            </div>
+            <div>
+              <div class="hero-metric-val">Win 10/11</div>
+              <div class="hero-metric-lbl">64-bit Standalone</div>
+            </div>
+            <div>
+              <div class="hero-metric-val">Zero Setup</div>
+              <div class="hero-metric-lbl">No Python/Pip Required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-preview-card">
+          <img src="assets/pulsestage/control-room-desktop.jpg" alt="PulseStage Desktop Command Station">
+          <div class="hero-preview-caption">
+            <span>PulseStage Studio &bull; Command Station &amp; Keybed</span>
+            <span style="color: var(--primary); font-weight: 600;">Available Now</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Flagship: PulseStage -->
-  <section class="section-wrap" id="showcase">
+  <!-- Flagship Section: PulseStage -->
+  <section class="section section-slate" id="showcase">
     <div class="container">
-      <div class="section-head">
-        <span class="section-tag">Featured Release &bull; Available Now</span>
+      <div class="section-header">
+        <span class="section-eyebrow">Featured Software Release</span>
         <h2 class="section-title">PulseStage &mdash; MIDI Studio</h2>
         <p class="section-desc">
-          A dedicated Windows MIDI control station, diagnostic packet monitor, master 24-PPQN clock, and driver-free practice lab designed for touring musicians, guitarists, and studio engineers.
+          An approachable Windows MIDI control station, diagnostic packet monitor, master 24-PPQN clock, and driver-free practice lab designed for touring keyboardists, guitarists, and studio engineers.
         </p>
       </div>
 
+      <!-- Spotlight Media: Embedded Video -->
       <div class="spotlight-card">
-        <!-- Embedded Walkthrough Video -->
-        <div class="spotlight-media">
+        <div class="video-container">
           <video controls playsinline poster="assets/pulsestage/Poster.jpg">
             <source src="assets/pulsestage/PulseStage-Guided-Demo.mp4" type="video/mp4">
             <track kind="subtitles" src="assets/pulsestage/captions.vtt" srclang="en" label="English" default>
             Your browser does not support HTML5 video.
           </video>
         </div>
-
-        <div class="spotlight-body">
+        <div class="spotlight-content">
           <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px;">
             <div>
-              <h3 style="font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Full Console Tour &amp; Lab Verification</h3>
+              <h3 style="font-size: 1.4rem; font-weight: 700; color: var(--text-heading); margin-bottom: 6px;">
+                Guided Console Walkthrough &amp; Live Verification
+              </h3>
               <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 680px;">
-                Watch the complete 5-minute unhurried walkthrough explaining real-world stage challenges, program indexing (0&ndash;127 vs 1&ndash;128), master tempo clock, and receipt-verified diagnostic testing.
+                Watch the complete 5-minute unhurried technical walkthrough explaining practical stage challenges, program indexing conventions (0&ndash;127 vs 1&ndash;128), master tempo clock, and receipt-verified diagnostic testing.
               </p>
             </div>
             <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-              <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="btn-main" style="padding: 10px 20px; font-size: 0.9rem;">
+              <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="btn btn-primary" style="padding: 10px 20px;">
                 Download Setup EXE &darr;
               </a>
-              <a href="pulsestage-guide.html" class="btn-outline" style="padding: 10px 18px; font-size: 0.9rem;">
-                Operator Manual &rarr;
-              </a>
-              <a href="pulsestage.html" class="btn-outline" style="padding: 10px 18px; font-size: 0.9rem;">
-                Full Feature Specs &rarr;
+              <a href="pulsestage-guide.html" class="btn btn-secondary" style="padding: 10px 18px;">
+                Operator Guide &rarr;
               </a>
             </div>
           </div>
 
-          <div class="spotlight-grid">
-            <div class="feature-item">
-              <h4>🎛️ Precision Command Station</h4>
-              <p>Send Program Changes with selectable 0&ndash;127 or 1&ndash;128 indexing without wire corruption. Full Bank Select (CC0 MSB / CC32 LSB) and tactile CC editing with explicit send protection.</p>
-            </div>
-            <div class="feature-item">
-              <h4>⏱️ Master 24-PPQN Clock</h4>
-              <p>Real-time clock engine with Start, Continue, and Stop transport commands, tap tempo, and live arrival interval tracking to diagnose host timing jitter.</p>
-            </div>
-            <div class="feature-item">
-              <h4>📊 Bidirectional Event Monitor</h4>
-              <p>Microsecond packet timestamps, port directionality tags, live CC activity curves, and clock interval graphs. Exports directly to CSV, JSON, and text.</p>
-            </div>
-            <div class="feature-item">
-              <h4>🎹 Driver-Free Practice Lab</h4>
-              <p>Built-in velocity keybed and reference receiving pedal with live 7-segment displays. Practice and verify complex presets out of the box with zero third-party drivers needed.</p>
-            </div>
-            <div class="feature-item">
-              <h4>⚡ Macro Cue Actions &amp; Delays</h4>
-              <p>Execute multi-step preset and parameter chains with deterministic millisecond pauses to give vintage synths and digital modelers time to process patch changes.</p>
-            </div>
-            <div class="feature-item">
-              <h4>🛡️ Receipt-Driven Test Bench</h4>
-              <p>Four automated checks (Note On/Off, Preset Change, Parameter CC, Clock sync) that only PASS when confirmation bytes are parsed at the receiving port.</p>
-            </div>
+          <div class="chapter-tags">
+            <span class="chapter-tag"><strong>0:00</strong> Stage Challenge</span>
+            <span class="chapter-tag"><strong>0:42</strong> PC &amp; Bank Order</span>
+            <span class="chapter-tag"><strong>1:25</strong> 24-PPQN Clock</span>
+            <span class="chapter-tag"><strong>2:10</strong> Driver-Free Keybed</span>
+            <span class="chapter-tag"><strong>2:55</strong> Event Monitor &amp; Graphs</span>
+            <span class="chapter-tag"><strong>3:45</strong> Receipt Test Bench</span>
+            <span class="chapter-tag"><strong>4:30</strong> USB-MIDI Setup</span>
           </div>
+        </div>
+      </div>
+
+      <!-- Features Grid (6 Clean Corporate White Cards) -->
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon-wrap">🎛️</div>
+          <h3>Precision Command Station</h3>
+          <p>
+            Send Program Changes with selectable 0&ndash;127 or 1&ndash;128 indexing without wire corruption. Full Bank Select (CC0 MSB / CC32 LSB) and tactile CC rotary knobs with explicit transmission.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrap">⏱️</div>
+          <h3>Master 24-PPQN Clock</h3>
+          <p>
+            Real-time timing engine with Start, Continue, and Stop transport commands. Tap tempo capability, fractional BPM adjustments, and live arrival interval tracking to diagnose host timing jitter.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrap">📊</div>
+          <h3>Bidirectional Event Monitor</h3>
+          <p>
+            Inspect every incoming and outgoing MIDI byte with microsecond timestamps, port directionality tags, live CC activity curves, and clock interval graphs. Exports cleanly to CSV, JSON, and text.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrap">🎹</div>
+          <h3>Driver-Free Practice Lab</h3>
+          <p>
+            Built-in velocity keybed and reference receiving pedal with live 7-segment displays. Practice and verify complex presets out of the box with zero third-party virtual cable drivers needed.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrap">⚡</div>
+          <h3>Macro Cue Actions &amp; Delays</h3>
+          <p>
+            Execute multi-step preset and parameter chains with deterministic millisecond pauses to give vintage synthesizers and digital modelers time to process patch changes before receiving CC updates.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrap">🛡️</div>
+          <h3>Receipt-Driven Test Bench</h3>
+          <p>
+            Four automated checks (Note On/Off, Preset Change, Parameter CC, Clock sync) that only PASS when confirmed receipt bytes arrive at the receiving port, eliminating false positives.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Project 2: Exos GPS Exploration -->
-  <section class="section-wrap">
+  <!-- Project 2: Exos GPS -->
+  <section class="section">
     <div class="container">
-      <div class="section-head">
-        <span class="section-tag">Ongoing Hardware Prototype</span>
+      <div class="section-header">
+        <span class="section-eyebrow">Ongoing Hardware Exploration</span>
         <h2 class="section-title">Exos GPS</h2>
         <p class="section-desc">
-          Simple, offline location tools and lightweight positioning hardware for outdoor enthusiasts.
+          Lightweight, independent GPS instruments and offline positioning tools for outdoor enthusiasts and field travel.
         </p>
       </div>
 
       <div class="project-card">
-        <div class="project-info">
-          <span class="badge-dev">Hardware Prototype &bull; In Active Design</span>
-          <h3>Independent, Air-Gapped GPS Companion</h3>
-          <p>
-            We are designing a pocket-sized GPS instrument and clean companion tools for hikers, field travelers, and overlanders who want honest coordinate fixes and zero-cloud tracking. No subscriptions, no ads, no telemetry spying.
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--accent-amber); background: #fef3c7; padding: 4px 10px; border-radius: 4px; text-transform: uppercase;">
+            Prototype Stage &bull; Active Exploration
+          </span>
+          <h3 style="font-size: 1.6rem; font-weight: 700; color: var(--text-heading); margin: 12px 0;">
+            Independent, Air-Gapped Location Tools
+          </h3>
+          <p style="color: var(--text-body); font-size: 0.98rem; line-height: 1.65; margin-bottom: 20px;">
+            We are designing a pocket-sized GPS instrument and companion utilities for hikers, field travelers, and overlanders who want honest coordinate fixes and zero-cloud tracking. No subscriptions, no ads, and no background telemetry spying.
           </p>
-          <div style="margin-top: 16px; font-size: 0.88rem; color: var(--text-dim);">
-            <em>Status: Breadboard &amp; firmware exploration. We aren't taking pre-orders or making false military claims. Just building a solid tool that works when cellular coverage drops.</em>
+          <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 24px;">
+            <em>Current status: Breadboard and firmware iteration. We aren't taking pre-orders or making false defense claims &mdash; just building a clean tool that works when cellular towers drop out.</em>
+          </div>
+          <div>
+            <a href="https://exosgps.com" target="_blank" class="btn btn-secondary">
+              Visit ExosGPS.com ↗
+            </a>
           </div>
         </div>
+
         <div>
-          <a href="https://exosgps.com" target="_blank" class="btn-outline">
-            Visit ExosGPS.com ↗
-          </a>
+          <img src="assets/windows_station_screenshot.png" alt="Exos GPS prototype preview" onerror="this.src='assets/pulsestage/control-room-desktop.jpg'">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Why ritym / The Meaning -->
-  <section class="section-wrap">
+  <!-- Philosophy: The Meaning of ritym -->
+  <section class="section section-slate">
     <div class="container">
-      <div class="story-card">
-        <div class="story-text">
-          <span class="section-tag">About Our Name &amp; Work</span>
-          <h3>The Rhythm of Things</h3>
-          <p>
+      <div class="philosophy-card">
+        <div>
+          <span class="section-eyebrow">About ritym</span>
+          <h2 style="font-size: 2.1rem; font-weight: 800; color: var(--text-heading); margin-bottom: 16px; letter-spacing: -0.02em;">
+            The Rhythm of Things
+          </h2>
+          <p style="color: var(--text-body); font-size: 1rem; line-height: 1.65; margin-bottom: 16px;">
             The name <strong>ritym</strong> comes from rhythm &mdash; the steady, dependable pulse that keeps systems aligned.
           </p>
-          <p>
+          <p style="color: var(--text-body); font-size: 1rem; line-height: 1.65; margin-bottom: 16px;">
             Whether it's the 24 pulses per quarter note locking together synthesizers on a festival stage, or a nanosecond satellite timestamp pinpointing a coordinate on a topo map, precision timing is the foundation of every honest signal.
           </p>
-          <p>
-            We are an independent software and hardware studio. We keep our team small, our overhead modest, and our claims true. We build tools we actually want to use ourselves.
-          </p>
-          <div class="meaning-box">
-            <strong>The Blue Square Dot:</strong> In our logo, the bright blue pixel above the "i" represents the fundamental unit of signal &mdash; the single clock pulse, the discrete MIDI byte, the clean coordinate fix.
+          <div class="meaning-callout">
+            <p>
+              <strong>The Blue Square Dot:</strong> In our logo, the electric blue pixel above the "i" represents the fundamental quantum unit of signal &mdash; the discrete clock tick, the individual MIDI byte, the clean coordinate fix.
+            </p>
           </div>
         </div>
 
-        <div style="text-align: center;">
-          <img src="assets/ritym_logo_white.png" alt="ritym logo" style="max-width: 240px; margin-bottom: 24px;">
-          <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: left;">
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--text-muted); line-height: 1.8;">
-              <div style="color: #60a5fa;">// Our Operating Principles:</div>
-              <div>1. No fake aerospace/defense theater.</div>
-              <div>2. Only ship software that actually works.</div>
-              <div>3. Zero forced cloud logins or spyware.</div>
-              <div>4. Respect musicians and field users.</div>
-              <div>5. Keep code lean and installers offline.</div>
-            </div>
+        <div style="background-color: var(--bg-white); border: 1px solid var(--border-light); border-radius: 12px; padding: 36px; box-shadow: var(--shadow-sm);">
+          <div style="margin-bottom: 24px;">
+            <img src="assets/ritym_logo_dark.png" alt="ritym logo" style="height: 38px; display: block;">
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-body); line-height: 1.9;">
+            <div style="color: var(--primary); font-weight: 600;">// Our Operating Principles:</div>
+            <div>1. Grounded engineering, zero vaporware.</div>
+            <div>2. Only ship software that actually works.</div>
+            <div>3. Zero forced cloud logins or spyware.</div>
+            <div>4. Respect musicians and field users.</div>
+            <div>5. Keep installers offline and self-contained.</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Download & Specs Section -->
+  <section class="section" id="download">
+    <div class="container">
+      <div class="download-card">
+        <div>
+          <span class="section-eyebrow">Direct Windows Package</span>
+          <h3 style="font-size: 1.8rem; font-weight: 800; color: var(--text-heading); margin: 12px 0 16px 0;">
+            Download PulseStage v1.0.0
+          </h3>
+          <p style="color: var(--text-body); font-size: 0.98rem; line-height: 1.65; margin-bottom: 24px;">
+            Fully bundled standalone setup executable. Installs clean binaries, creates Start menu and desktop shortcuts, and safely preserves your presets in AppData.
+          </p>
+          <a href="downloads/PulseStage-Setup-1.0.0-x64.exe" class="btn btn-primary" style="padding: 14px 28px; font-size: 1rem;">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.951"/></svg>
+            Download Setup Executable (14.6 MB)
+          </a>
+          <div class="hash-code">
+            <strong>SHA-256:</strong> d1c89b90e2345d64e653fb386cea26785413beb1212d176d81c76ab329cd5d2d
+          </div>
+          <div style="font-size: 0.88rem; color: var(--text-muted);">
+            Need guidance? Read the <a href="pulsestage-guide.html" style="color: var(--primary); text-decoration: underline;">Operator Manual</a> or inspect the <a href="https://github.com/ritym-technologies/ritym-website/tree/pulsestage" target="_blank" style="color: var(--primary); text-decoration: underline;">GitHub Repository</a>.
+          </div>
+        </div>
+
+        <div>
+          <table class="spec-table">
+            <tr><td>Target Platform</td><td>Windows 10 / 11 (64-bit)</td></tr>
+            <tr><td>MIDI Driver Subsystem</td><td>Native WinMM (Windows Multimedia API)</td></tr>
+            <tr><td>Timing Engine</td><td>24-PPQN Real-Time Master Clock</td></tr>
+            <tr><td>Practice Lab Transport</td><td>Internal Dual-Pipe (Driver-Free)</td></tr>
+            <tr><td>User Presets</td><td><code>%APPDATA%\PulseStage</code> (Preserved)</td></tr>
+            <tr><td>License</td><td>MIT Open Software License</td></tr>
+            <tr><td>External Dependencies</td><td>None required (Self-contained)</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Corporate Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-inner">
+      <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/ritym_logo_white.png" alt="ritym" style="height: 24px;">
+          <img src="assets/ritym_logo_dark.png" alt="ritym" style="height: 28px;">
           <p>
             Independent engineering studio. Crafting precision MIDI control software and straightforward positioning tools.
           </p>
         </div>
-        <div class="footer-links">
-          <div>
-            <h5>Software</h5>
-            <ul>
-              <li><a href="pulsestage.html">PulseStage MIDI Studio</a></li>
-              <li><a href="downloads.html">Windows Setup (v1.0.0)</a></li>
-              <li><a href="pulsestage-guide.html">Operator Manual</a></li>
-            </ul>
-          </div>
-          <div>
-            <div>
-              <h5>Hardware</h5>
-              <ul>
-                <li><a href="https://exosgps.com" target="_blank">Exos GPS Project ↗</a></li>
-                <li><a href="https://github.com/ritym-technologies/ritym-website/tree/pulsestage" target="_blank">GitHub Code ↗</a></li>
-              </ul>
-            </div>
-          </div>
-          <div>
-            <h5>Legal &amp; Privacy</h5>
-            <ul>
-              <li><a href="privacy.html">Privacy Policy</a></li>
-              <li><a href="refund.html">Refund Policy</a></li>
-            </ul>
-          </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="pulsestage.html">PulseStage MIDI Studio</a></li>
+            <li><a href="downloads.html">Windows Setup (v1.0.0)</a></li>
+            <li><a href="products.html">Product Catalog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Documentation</h4>
+          <ul>
+            <li><a href="pulsestage-guide.html">Operator Manual</a></li>
+            <li><a href="https://exosgps.com" target="_blank">Exos GPS Project ↗</a></li>
+            <li><a href="https://github.com/ritym-technologies/ritym-website/tree/pulsestage" target="_blank">GitHub Repository ↗</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Corporate &amp; Legal</h4>
+          <ul>
+            <li><a href="portal.html">Support &amp; Community</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="refund.html">Refund Policy</a></li>
+          </ul>
         </div>
       </div>
       <div class="footer-bottom">
