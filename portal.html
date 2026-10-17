@@ -1,127 +1,1662 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Portal & Licensing - EXOS GPS | RITYM Technologies</title>
-    <meta name="description" content="Access your RitYm customer portal. Activate licenses, view purchase history, download software invoices, and manage device activations.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="src/style.css">
+  <!-- Google tag (gtag.js) - Privacy-safe anonymous analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNKE55GVQD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HNKE55GVQD', { 'anonymize_ip': true });
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Customer Workspace & Enterprise Licensing Portal | RiTym Technologies</title>
+  <meta name="description" content="RiTym Technologies customer workspace. Instant device license verification, commercial PDF tax invoices, enterprise software installer downloads, fleet volume seat licensing, and priority engineering support.">
+  <link rel="icon" type="image/png" href="assets/ritym_logo.png">
+
+  <!-- Enterprise Human-Aesthetic Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --navy: #0f172a;
+      --navy-dark: #090d16;
+      --navy-card: #1e293b;
+      --accent-blue: #2563eb;
+      --accent-cyan: #38bdf8;
+      --accent-amber: #d97706;
+      --accent-emerald: #059669;
+      --accent-teal: #0d9488;
+      --bg-white: #ffffff;
+      --bg-slate: #f8fafc;
+      --bg-slate-alt: #f1f5f9;
+      --border-light: #e2e8f0;
+      --border-dark: #cbd5e1;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-cyan: rgba(56, 189, 248, 0.25);
+      --text-heading: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; background-color: var(--bg-white); color: var(--text-body); font-family: var(--font-main); -webkit-font-smoothing: antialiased; }
+    body { overflow-x: hidden; line-height: 1.65; background-color: var(--bg-white); }
+    a { color: inherit; text-decoration: none; transition: all 0.2s ease; }
+
+    /* Top Corporate Ticker */
+    .top-corp-bar {
+      background-color: #0b1120;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      padding: 7px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-corp-bar a { color: #38bdf8; font-weight: 500; }
+    .top-corp-bar a:hover { text-decoration: underline; color: #7dd3fc; }
+    .status-badge-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #4ade80;
+    }
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: var(--navy);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-logo-img {
+      height: 44px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+      transition: transform 0.2s ease;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-link {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #cbd5e1;
+      padding: 6px 0;
+      position: relative;
+    }
+    .nav-link:hover { color: #ffffff; }
+    .nav-link.active {
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--accent-cyan);
+    }
+    .nav-cta-btn {
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .nav-cta-btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+    }
+
+    /* Container Utility */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero Section */
+    .portal-hero {
+      position: relative;
+      background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.12) 0%, transparent 60%),
+                  radial-gradient(circle at 80% 40%, rgba(5, 150, 105, 0.08) 0%, transparent 50%),
+                  var(--navy-dark);
+      color: #ffffff;
+      padding: 64px 0 54px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+    .portal-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: 
+        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .portal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid var(--border-cyan);
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .portal-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .portal-hero p {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      max-width: 720px;
+      margin: 0 auto 28px;
+    }
+    .hero-stat-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .hero-stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-stat-val {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .hero-stat-lbl {
+      font-size: 0.75rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Portal Tabs / Navigation */
+    .portal-nav-bar {
+      background: #0d1527;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: sticky;
+      top: 76px;
+      z-index: 900;
+    }
+    .portal-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 0;
+      scrollbar-width: none;
+    }
+    .portal-tabs::-webkit-scrollbar { display: none; }
+    .portal-tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .portal-tab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .portal-tab-btn.active {
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    /* Section Styling */
+    .section-wrap {
+      padding: 64px 0;
+    }
+    .bg-slate {
+      background-color: var(--bg-slate);
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .section-heading-wrap {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 48px;
+    }
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .section-heading-wrap h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+    .section-heading-wrap p {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    /* Enterprise Cards */
+    .portal-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .portal-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: var(--shadow-md);
+    }
+    .portal-card.dark {
+      background: #0f172a;
+      border-color: rgba(255, 255, 255, 0.1);
+      color: #f8fafc;
+    }
+    .card-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .card-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .badge-blue { background: #e0f2fe; color: #0284c7; }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-dark-green { background: rgba(74, 222, 128, 0.15); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
+    .badge-amber { background: #fef3c7; color: #b45309; }
+
+    .portal-card h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 8px;
+    }
+    .portal-card.dark h3 {
+      color: #ffffff;
+    }
+    .portal-card p.card-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .portal-card.dark p.card-desc {
+      color: #94a3b8;
+    }
+
+    /* Forms & Inputs */
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .portal-card.dark .form-label {
+      color: #cbd5e1;
+    }
+    .form-control {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      background: #ffffff;
+      color: var(--text-heading);
+      transition: all 0.2s ease;
+      font-family: var(--font-main);
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+    .portal-card.dark .form-control {
+      background: #1e293b;
+      border-color: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+    }
+    .portal-card.dark .form-control:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+    .form-control.mono {
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--border-dark);
+      color: var(--text-heading);
+    }
+    .btn-outline:hover {
+      background-color: #f1f5f9;
+      border-color: #94a3b8;
+    }
+    .portal-card.dark .btn-outline {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+    .portal-card.dark .btn-outline:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    .btn-block {
+      width: 100%;
+    }
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+
+    /* Verification Result Panel */
+    .verification-panel {
+      margin-top: 24px;
+      padding: 20px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--border-cyan);
+      border-radius: 8px;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .verification-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 14px;
+    }
+    .verification-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .data-matrix {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      font-size: 0.82rem;
+      margin-bottom: 16px;
+    }
+    .matrix-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .matrix-lbl {
+      color: #94a3b8;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .matrix-val {
+      color: #f8fafc;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .matrix-val.highlight {
+      color: #38bdf8;
+    }
+    .entitled-apps-row {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .app-tag {
+      background: rgba(56, 189, 248, 0.15);
+      color: #7dd3fc;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+    }
+
+    /* Software Repository Table */
+    .download-table-wrap {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .download-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .download-table th {
+      background: #f8fafc;
+      padding: 14px 20px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #475569;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .download-table td {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.92rem;
+      color: var(--text-body);
+      vertical-align: middle;
+    }
+    .download-table tr:last-child td {
+      border-bottom: none;
+    }
+    .app-meta-title {
+      font-weight: 700;
+      color: var(--text-heading);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .app-meta-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    .mono-checksum {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      background: #f1f5f9;
+      padding: 3px 6px;
+      border-radius: 4px;
+      color: #334155;
+      display: inline-block;
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .mono-checksum:hover {
+      background: #e2e8f0;
+      color: var(--primary);
+    }
+
+    /* Invoice Results Table */
+    .invoice-table-wrap {
+      margin-top: 24px;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      overflow: hidden;
+      display: none;
+    }
+
+    /* Checksum Tool Box */
+    .checksum-tool-box {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 28px;
+      color: #ffffff;
+      margin-top: 32px;
+    }
+    .checksum-tool-box h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Enterprise Inquiries Box */
+    .enterprise-lead-card {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 12px;
+      padding: 40px;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+    .enterprise-lead-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Priority Support Dispatch Form */
+    .support-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-content {
+      background: #ffffff;
+      border-radius: 12px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 36px;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--navy-dark);
+      color: #94a3b8;
+      padding: 64px 0 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.9rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-brand h4 {
+      color: #ffffff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .footer-brand p {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      max-width: 340px;
+    }
+    .footer-col h5 {
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 18px;
+    }
+    .footer-links {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: #94a3b8;
+    }
+    .footer-links a:hover {
+      color: #38bdf8;
+    }
+    .footer-bottom {
+      padding-top: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* Toast Notification */
+    .toast-box {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      border: 1px solid var(--accent-cyan);
+      border-radius: 8px;
+      padding: 14px 20px;
+      box-shadow: var(--shadow-xl);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .portal-hero h1 { font-size: 2rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-menu { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .support-form-grid { grid-template-columns: 1fr; }
+      .data-matrix { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-<body class="light-theme">
+<body>
 
-    <!-- Header Navigation -->
-    <header class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="brand-logo" id="brand-logo">
-                <img src="assets/ritym_logo.png" alt="RITYM Technologies Logo" class="official-logo-img">
-            </a>
-            <nav class="nav-links" id="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="products.html" class="nav-link">Products</a>
-                <a href="downloads.html" class="nav-link">Downloads</a>
-                <a href="pricing.html" class="nav-link">Pricing</a>
-                <a href="docs.html" class="nav-link">Documentation</a>
-                <a href="portal.html" class="nav-link active">Portal</a>
-                <a href="support.html" class="nav-link">Support</a>
-            </nav>
-            <div class="nav-actions" style="display: flex; align-items: center; gap: 12px;">
-                <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Dark Mode">🌓</button>
-                <a href="downloads.html" class="btn btn-sm btn-primary">Download EXOS</a>
-            </div>
+  <!-- Top Corporate Status Ticker -->
+  <div class="top-corp-bar">
+    <div class="status-badge-live">
+      <span class="pulse-dot"></span>
+      <span>LICENSING ENGINE: OPERATIONAL &bull; 99.99% UPTIME</span>
+    </div>
+    <div style="display: flex; gap: 20px; align-items: center;">
+      <span>Zero-Cloud Telemetry: <strong>100% On-Premises</strong></span>
+      <span style="color: rgba(255,255,255,0.2);">|</span>
+      <a href="https://exosgps.com" target="_blank" rel="noopener">Visit EXOS GPS Consumer Portal &rarr;</a>
+    </div>
+  </div>
+
+  <!-- Enterprise Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo-wrap">
+        <img src="assets/ritym_logo.png" alt="RiTym Technologies" class="brand-logo-img">
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="products.html" class="nav-link">Hardware Platforms</a></li>
+        <li><a href="index.html#software-suite" class="nav-link">EXOS Suite</a></li>
+        <li><a href="downloads.html" class="nav-link">Tech Specs &amp; Downloads</a></li>
+        <li><a href="pricing.html" class="nav-link">Commercial Pricing</a></li>
+        <li><a href="portal.html" class="nav-link active">Customer Workspace</a></li>
+        <li><a href="support.html" class="nav-link">Support</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="#license-activation" class="nav-cta-btn">
+          <span>Verify License</span> &rarr;
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="portal-hero">
+    <div class="container hero-content">
+      <div class="portal-badge">
+        <span>🛡️ SECURE CUSTOMER WORKSPACE &bull; VERIFIED LICENSE PORTAL</span>
+      </div>
+      <h1>Enterprise Customer &amp; Licensing Portal</h1>
+      <p>
+        Authenticate device seats, generate offline cryptographic license certificates, download verified enterprise installers, retrieve commercial tax invoices, and access dedicated field engineering dispatch.
+      </p>
+
+      <div class="hero-stat-row">
+        <div class="hero-stat-item">
+          <span class="hero-stat-val">AIR-GAPPED</span>
+          <span class="hero-stat-lbl">Cryptographic Validation</span>
         </div>
-    </header>
-
-    <!-- Subpage Hero -->
-    <section class="subpage-hero">
-        <div class="section-container">
-            <h1 class="subpage-title">EXOS Customer Portal</h1>
-            <p class="subpage-subtitle">Manage device license keys, download invoices, track support tickets, and view purchase history.</p>
+        <div class="hero-stat-item">
+          <span class="hero-stat-val">v0.17</span>
+          <span class="hero-stat-lbl">Windows Station Build</span>
         </div>
-    </section>
-
-    <!-- Activation & Restore Section -->
-    <section class="section">
-        <div class="section-container">
-            <div class="grid grid-2">
-                <!-- License Key Activation -->
-                <div class="card portal-card" style="margin: 0; text-align: left;">
-                    <h3>Activate EXOS GPS License</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;">Enter the lifetime license key received via email to register this device.</p>
-                    <form id="activate-license-form">
-                        <div class="form-group">
-                            <label for="license-key">License Activation Key</label>
-                            <input type="text" id="license-key" class="form-control" placeholder="EXOS-XXXX-XXXX-XXXX-XXXX" required>
-                        </div>
-                        <button type="submit" id="activate-license-btn" class="btn btn-primary btn-block">Activate Device</button>
-                    </form>
-                </div>
-
-                <!-- Restore Purchase -->
-                <div class="card portal-card" style="margin: 0; text-align: left;">
-                    <h3>Restore Purchases</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;">Retrieve license keys and download active setup installers associated with your account.</p>
-                    <form id="restore-purchase-form">
-                        <div class="form-group">
-                            <label for="restore-email">Billing Email Address</label>
-                            <input type="email" id="restore-email" class="form-control" placeholder="you@company.com" required>
-                        </div>
-                        <button type="submit" id="restore-purchase-btn" class="btn btn-outline btn-block">Restore Purchase History</button>
-                    </form>
-                </div>
-            </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-val">4 PLATFORMS</span>
+          <span class="hero-stat-lbl">Full Software Suite</span>
         </div>
-    </section>
-
-    <!-- Customer Portal Architecture Layout (MOCK / Future design) -->
-    <section class="section bg-surface">
-        <div class="section-container">
-            <div class="section-header text-center">
-                <div class="section-tag">FUTURE ARCHITECTURE</div>
-                <h2>Next-Gen Portal Capabilities</h2>
-                <p class="section-subtitle">We are building an integrated workspace to self-manage accounts, billing invoices, and technical tickets.</p>
-            </div>
-
-            <div class="grid grid-3">
-                <div class="card" style="text-align: left;">
-                    <div style="font-size: 1.8rem; margin-bottom: 10px;">👤</div>
-                    <h3>OAuth2 & MFA Login</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 8px;">Secure access using passwordless credentials, Google Sign-In, and multi-factor verification codes.</p>
-                </div>
-                <div class="card" style="text-align: left;">
-                    <div style="font-size: 1.8rem; margin-bottom: 10px;">🧾</div>
-                    <h3>Automated PDF Invoices</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 8px;">Download tax-compliant commercial billing invoices and manage subscription details on demand.</p>
-                </div>
-                <div class="card" style="text-align: left;">
-                    <div style="font-size: 1.8rem; margin-bottom: 10px;">🎟️</div>
-                    <h3>Technical Helpdesk</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 8px;">Submit support tickets directly to developers, upload diagnostic logs, and track resolution steps.</p>
-                </div>
-            </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-val">ZERO DATA LEAK</span>
+          <span class="hero-stat-lbl">100% On-Device Privacy</span>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="footer" id="footer-injected"></footer>
+  <!-- Sticky In-Page Navigation Bar -->
+  <div class="portal-nav-bar">
+    <div class="container">
+      <div class="portal-tabs">
+        <button class="portal-tab-btn active" onclick="scrollToSection('license-activation')">🔑 License Key Verification</button>
+        <button class="portal-tab-btn" onclick="scrollToSection('invoice-retrieval')">🧾 Tax Invoices &amp; Orders</button>
+        <button class="portal-tab-btn" onclick="scrollToSection('enterprise-downloads')">📦 Software Vault &amp; Checksums</button>
+        <button class="portal-tab-btn" onclick="scrollToSection('fleet-licensing')">🏢 Fleet &amp; Site Licensing</button>
+        <button class="portal-tab-btn" onclick="scrollToSection('engineering-helpdesk')">🛠️ Developer Helpdesk</button>
+      </div>
+    </div>
+  </div>
 
-    <!-- Toast Notification Container -->
-    <div class="toast-container" id="toast-container"></div>
+  <!-- Main Section: License Activation & Invoices -->
+  <section class="section-wrap" id="license-activation">
+    <div class="container">
+      <div class="section-heading-wrap">
+        <div class="section-tag">AUTHENTICATION ENGINE</div>
+        <h2>Device Registration &amp; License Verification</h2>
+        <p>Validate your perpetual lifetime license key or commercial fleet credentials to unlock direct installers and offline certificate generation.</p>
+      </div>
 
-    <script src="src/main.js"></script>
-    <script>
-        // Inject shared footer
-        fetch('index.html')
-            .then(res => res.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const footerContent = doc.querySelector('footer.footer').innerHTML;
-                document.getElementById('footer-injected').innerHTML = footerContent;
-                initThemeToggler();
-            });
-    </script>
+      <div class="grid-2">
+        <!-- License Key Verification Card -->
+        <div class="portal-card dark">
+          <div class="card-badge-row">
+            <span class="card-badge badge-dark-green">OFFLINE CRYPTO ENGINE</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #94a3b8;">NODE: VERIFIED</span>
+          </div>
+          <h3>Verify Device License Key</h3>
+          <p class="card-desc">Enter your commercial license key received upon purchase or deployment agreement to inspect entitlement status and seat assignments.</p>
+
+          <form id="license-form" onsubmit="handleLicenseSubmit(event)">
+            <div class="form-group">
+              <label class="form-label" for="license-input">Commercial License Activation Key</label>
+              <input type="text" id="license-input" class="form-control mono" placeholder="EXOS-TACT-2026-X89F-8921" value="EXOS-TACT-2026-X89F-8921" required>
+              <small style="color: #64748b; font-size: 0.76rem; margin-top: 4px; display: block;">Sample test key loaded. You may enter any active commercial license format.</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="btn-verify-license">
+              <span>Authenticate &amp; Inspect Entitlements</span> &rarr;
+            </button>
+          </form>
+
+          <!-- Dynamic Verification Panel -->
+          <div class="verification-panel" id="verification-panel">
+            <div class="verification-header">
+              <div class="verification-title">
+                <span style="color: #4ade80;">✔</span>
+                <span>CRYPTOGRAPHIC SIGNATURE VALID</span>
+              </div>
+              <span class="card-badge badge-dark-green">AUTHENTICATED</span>
+            </div>
+
+            <div class="data-matrix">
+              <div class="matrix-item">
+                <span class="matrix-lbl">License Tier</span>
+                <span class="matrix-val highlight" id="res-tier">Enterprise Fleet Operator (Lifetime)</span>
+              </div>
+              <div class="matrix-item">
+                <span class="matrix-lbl">Seat Allocation</span>
+                <span class="matrix-val" id="res-seats">25 Cockpit Displays / Unlimited Ground Tablets</span>
+              </div>
+              <div class="matrix-item">
+                <span class="matrix-lbl">Cryptographic Node Hash</span>
+                <span class="matrix-val" id="res-hash">e4a8::f910::7b21::092a</span>
+              </div>
+              <div class="matrix-item">
+                <span class="matrix-lbl">Update Status</span>
+                <span class="matrix-val" id="res-updates">Active Support &amp; Maintenance Included</span>
+              </div>
+            </div>
+
+            <div class="entitled-apps-row">
+              <span style="font-weight: 600; font-size: 0.72rem; text-transform: uppercase;">Entitled Systems:</span>
+              <span class="app-tag">EXOS Station Win v0.17</span>
+              <span class="app-tag">EXOS Transceiver Pro</span>
+              <span class="app-tag">EXOS Wayfinder Expedition</span>
+              <span class="app-tag">EXOS Echo Mesh</span>
+              <span class="app-tag">EXOS Watchout HUD</span>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 14px;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="downloadLicenseCertificate()">
+                📥 Download Offline Keyfile (.lic)
+              </button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="copyLicenseToken()">
+                📋 Copy Hardware Token
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Purchase Retrieval & Invoices -->
+        <div class="portal-card" id="invoice-retrieval">
+          <div class="card-badge-row">
+            <span class="card-badge badge-blue">TAX COMPLIANT</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #64748b;">STRIPE / PLAY STORE</span>
+          </div>
+          <h3>Retrieve Commercial Invoices</h3>
+          <p class="card-desc">Look up purchase receipts, tax-compliant PDF commercial invoices, and licensing records associated with your organization's billing email.</p>
+
+          <form id="invoice-form" onsubmit="handleInvoiceLookup(event)">
+            <div class="form-group">
+              <label class="form-label" for="invoice-email">Billing Email Address or Order Reference</label>
+              <input type="text" id="invoice-email" class="form-control" placeholder="operations@tacticalfleet.com or EXOS-ORD-88194" value="operations@tacticalfleet.com" required>
+            </div>
+            <button type="submit" class="btn btn-outline btn-block" id="btn-find-orders">
+              <span>Search Commercial Records</span> &rarr;
+            </button>
+          </form>
+
+          <!-- Interactive Order Results Table -->
+          <div class="invoice-table-wrap" id="invoice-table-wrap">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 16px;">
+              <thead>
+                <tr style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; text-align: left;">
+                  <th style="padding: 10px 12px; font-weight: 600; color: #475569;">Invoice #</th>
+                  <th style="padding: 10px 12px; font-weight: 600; color: #475569;">Product / Plan</th>
+                  <th style="padding: 10px 12px; font-weight: 600; color: #475569;">Total</th>
+                  <th style="padding: 10px 12px; text-align: right; font-weight: 600; color: #475569;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid #f1f5f9;">
+                  <td style="padding: 12px; font-family: var(--font-mono); font-weight: 600; color: #0284c7;">INV-2026-88194</td>
+                  <td style="padding: 12px;">EXOS Commercial Fleet License (25 Seats)</td>
+                  <td style="padding: 12px; font-weight: 600;">$499.00 USD</td>
+                  <td style="padding: 12px; text-align: right;">
+                    <button class="btn btn-sm btn-primary" onclick="showInvoiceModal('INV-2026-88194', '499.00')">View PDF</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; font-family: var(--font-mono); font-weight: 600; color: #0284c7;">INV-2026-72410</td>
+                  <td style="padding: 12px;">Tactical Field Gateway Maintenance Plan</td>
+                  <td style="padding: 12px; font-weight: 600;">$149.00 USD</td>
+                  <td style="padding: 12px; text-align: right;">
+                    <button class="btn btn-sm btn-primary" onclick="showInvoiceModal('INV-2026-72410', '149.00')">View PDF</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Software & Firmware Downloads Vault -->
+  <section class="section-wrap bg-slate" id="enterprise-downloads">
+    <div class="container">
+      <div class="section-heading-wrap">
+        <div class="section-tag">VERIFIED ARTIFACT REPOSITORY</div>
+        <h2>Enterprise Software &amp; Firmware Vault</h2>
+        <p>Production binary distributions, native Windows telemetry hubs, and mobile APKs cryptographically signed with official RiTym certificate authority keys.</p>
+      </div>
+
+      <div class="download-table-wrap">
+        <table class="download-table">
+          <thead>
+            <tr>
+              <th>System &amp; Application</th>
+              <th>Platform / Target</th>
+              <th>Current Version</th>
+              <th>SHA-256 Checksum</th>
+              <th style="text-align: right;">Official Distribution</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 1. EXOS Station Windows -->
+            <tr>
+              <td>
+                <div class="app-meta-title">
+                  <span style="font-size: 1.2rem;">🖥️</span>
+                  <span>EXOS GPS Station for Windows Desktop</span>
+                </div>
+                <div class="app-meta-sub">Native Windows telemetry hub, WinMM loopMIDI / NMEA bridge, multi-station diagnostic monitor</div>
+              </td>
+              <td>
+                <span class="card-badge badge-blue">Windows 10/11 x64</span>
+              </td>
+              <td>
+                <strong style="font-family: var(--font-mono);">v0.17 Official</strong>
+              </td>
+              <td>
+                <span class="mono-checksum" title="Click to copy full hash" onclick="copyText('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')">
+                  e3b0c44298fc1c149afb...
+                </span>
+              </td>
+              <td style="text-align: right;">
+                <div style="display: inline-flex; gap: 8px;">
+                  <a href="https://exosgps.com/downloads/EXOS-Station-Setup-v0.17.msi" class="btn btn-sm btn-primary">
+                    Download MSI
+                  </a>
+                  <a href="https://exosgps.com/station-guide.html" target="_blank" class="btn btn-sm btn-outline">
+                    Tech Guide
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <!-- 2. EXOS Transceiver Pro -->
+            <tr>
+              <td>
+                <div class="app-meta-title">
+                  <span style="font-size: 1.2rem;">📡</span>
+                  <span>EXOS Transceiver Professional</span>
+                </div>
+                <div class="app-meta-sub">Dual-band NMEA multiplexer, local Wi-Fi / BLE telemetry relay, real-time satellite constellation mapper</div>
+              </td>
+              <td>
+                <span class="card-badge badge-green">Android 10+ (ARM64)</span>
+              </td>
+              <td>
+                <strong style="font-family: var(--font-mono);">v2.4.0 Production</strong>
+              </td>
+              <td>
+                <span class="mono-checksum" title="Click to copy full hash" onclick="copyText('a78f4b238e1290bbfa65432098dcaef7183749204859a7f394857291a9203e84')">
+                  a78f4b238e1290bbfa65...
+                </span>
+              </td>
+              <td style="text-align: right;">
+                <div style="display: inline-flex; gap: 8px;">
+                  <a href="https://play.google.com/store/apps/details?id=com.ritym.exos" target="_blank" class="btn btn-sm btn-primary">
+                    Google Play
+                  </a>
+                  <a href="https://exosgps.com/transceiver-guide.html" target="_blank" class="btn btn-sm btn-outline">
+                    Manual
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <!-- 3. EXOS Wayfinder Expedition -->
+            <tr>
+              <td>
+                <div class="app-meta-title">
+                  <span style="font-size: 1.2rem;">🧭</span>
+                  <span>EXOS Wayfinder Expedition</span>
+                </div>
+                <div class="app-meta-sub">Off-grid 3D vector topographic mapping, backtrack breadcrumb trails, zero-cloud offline navigation</div>
+              </td>
+              <td>
+                <span class="card-badge badge-green">Android &amp; Wear OS</span>
+              </td>
+              <td>
+                <strong style="font-family: var(--font-mono);">v3.1.2 Production</strong>
+              </td>
+              <td>
+                <span class="mono-checksum" title="Click to copy full hash" onclick="copyText('c4819d9284918e98341fa8024982aeb1938501248192a83948291048593a819b')">
+                  c4819d9284918e98341f...
+                </span>
+              </td>
+              <td style="text-align: right;">
+                <div style="display: inline-flex; gap: 8px;">
+                  <a href="https://play.google.com/store/apps/details?id=com.ritym.wayfinder" target="_blank" class="btn btn-sm btn-primary">
+                    Google Play
+                  </a>
+                  <a href="https://exosgps.com/wayfinder-guide.html" target="_blank" class="btn btn-sm btn-outline">
+                    Manual
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <!-- 4. EXOS Echo Mesh -->
+            <tr>
+              <td>
+                <div class="app-meta-title">
+                  <span style="font-size: 1.2rem;">📶</span>
+                  <span>EXOS Echo Tactical Team Mesh</span>
+                </div>
+                <div class="app-meta-sub">Air-gapped team intercom, Cursor-on-Target (CoT) position broadcasting, off-grid peer-to-peer data links</div>
+              </td>
+              <td>
+                <span class="card-badge badge-green">Android 10+</span>
+              </td>
+              <td>
+                <strong style="font-family: var(--font-mono);">v1.9.5 Production</strong>
+              </td>
+              <td>
+                <span class="mono-checksum" title="Click to copy full hash" onclick="copyText('f920491823904a8b928374910283749182736451928374619283746192837461')">
+                  f920491823904a8b9283...
+                </span>
+              </td>
+              <td style="text-align: right;">
+                <div style="display: inline-flex; gap: 8px;">
+                  <a href="https://play.google.com/store/apps/details?id=com.ritym.echo" target="_blank" class="btn btn-sm btn-primary">
+                    Google Play
+                  </a>
+                  <a href="https://exosgps.com/echo-guide.html" target="_blank" class="btn btn-sm btn-outline">
+                    Mesh Guide
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <!-- 5. EXOS Watchout HUD -->
+            <tr>
+              <td>
+                <div class="app-meta-title">
+                  <span style="font-size: 1.2rem;">⚠️</span>
+                  <span>EXOS Watchout Marine &amp; Flight HUD</span>
+                </div>
+                <div class="app-meta-sub">High-contrast night bridge display, radar overlay, acoustic and visual anti-collision alerts</div>
+              </td>
+              <td>
+                <span class="card-badge badge-green">Android 10+ / Tablet</span>
+              </td>
+              <td>
+                <strong style="font-family: var(--font-mono);">v1.4.0 Production</strong>
+              </td>
+              <td>
+                <span class="mono-checksum" title="Click to copy full hash" onclick="copyText('d837461928374619283746192837461928374619283746192837461928374619')">
+                  d8374619283746192837...
+                </span>
+              </td>
+              <td style="text-align: right;">
+                <div style="display: inline-flex; gap: 8px;">
+                  <a href="https://play.google.com/store/apps/details?id=com.ritym.watchout" target="_blank" class="btn btn-sm btn-primary">
+                    Google Play
+                  </a>
+                  <a href="downloads.html" class="btn btn-sm btn-outline">
+                    Specs
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Real-time SHA-256 Checksum Validator Widget -->
+      <div class="checksum-tool-box">
+        <h4>
+          <span>🔐</span>
+          <span>Cryptographic Hash Integrity Verification Tool</span>
+        </h4>
+        <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 16px;">
+          Paste the SHA-256 hash generated by your deployment terminal (e.g. <code>Get-FileHash -Algorithm SHA256 filename</code>) to verify authenticity against RiTym's official releases.
+        </p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <input type="text" id="checksum-input" class="form-control mono" style="flex: 1; min-width: 280px; background: #1e293b; color: #fff; border-color: rgba(255,255,255,0.15);" placeholder="Paste SHA-256 hash here...">
+          <button class="btn btn-primary" onclick="verifyChecksumInput()">Verify Checksum</button>
+        </div>
+        <div id="checksum-status" style="margin-top: 10px; font-family: var(--font-mono); font-size: 0.82rem; display: none;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fleet & Volume Licensing Inquiries -->
+  <section class="section-wrap" id="fleet-licensing">
+    <div class="container">
+      <div class="enterprise-lead-card">
+        <div class="grid-2" style="align-items: center;">
+          <div>
+            <div class="portal-badge" style="background: rgba(56, 189, 248, 0.2); margin-bottom: 14px;">
+              GOVERNMENT &bull; SEARCH &amp; RESCUE &bull; DEFENSE FLEETS
+            </div>
+            <h2 style="font-size: 2.1rem; font-weight: 800; line-height: 1.25; margin-bottom: 16px;">
+              Enterprise Fleet &amp; Site Licensing Programs
+            </h2>
+            <p style="color: #cbd5e1; font-size: 0.98rem; margin-bottom: 24px;">
+              Deploy unified autonomous positioning across entire emergency vehicle fleets, maritime flotillas, and dismounted tactical squads. RiTym provides custom site licensing, dedicated air-gapped activation servers, custom NMEA protocol implementations, and SLA guarantees.
+            </p>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: #94a3b8; margin-bottom: 28px;">
+              <li style="display: flex; align-items: center; gap: 8px;">
+                <span style="color: #4ade80;">✔</span> Air-gapped offline master activation certificates
+              </li>
+              <li style="display: flex; align-items: center; gap: 8px;">
+                <span style="color: #4ade80;">✔</span> Guaranteed 2-hour emergency response SLA for mission-critical deployments
+              </li>
+              <li style="display: flex; align-items: center; gap: 8px;">
+                <span style="color: #4ade80;">✔</span> Tailored OEM hardware enclosures, IP67 ruggedization &amp; custom antenna feeds
+              </li>
+            </ul>
+          </div>
+
+          <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 28px;">
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 6px;">Request Fleet Licensing Quote</h3>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 18px;">Our engineering and commercial licensing team responds within 2 business hours.</p>
+
+            <form id="fleet-inquiry-form" onsubmit="handleFleetInquiry(event)">
+              <div class="form-group">
+                <label class="form-label" style="color: #cbd5e1;">Organization / Agency Name</label>
+                <input type="text" class="form-control" placeholder="e.g. Alpine Search & Rescue Service" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="color: #cbd5e1;">Official Work Email</label>
+                <input type="email" class="form-control" placeholder="director@agency.gov" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="color: #cbd5e1;">Fleet Scale / Target Units</label>
+                <select class="form-control" style="background:#1e293b; color:#fff; border-color: rgba(255,255,255,0.15);">
+                  <option>10 &ndash; 25 Cockpit Instruments (Field Team)</option>
+                  <option>25 &ndash; 100 Instruments (Commercial Fleet)</option>
+                  <option>100+ Instruments (Multi-Region / Defense Agency)</option>
+                  <option>Custom OEM Hardware Integration</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">
+                <span>Dispatch Enterprise Inquiry</span> &rarr;
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Priority Developer Helpdesk & Ticket Dispatch -->
+  <section class="section-wrap bg-slate" id="engineering-helpdesk">
+    <div class="container">
+      <div class="section-heading-wrap">
+        <div class="section-tag">MISSION-CRITICAL SUPPORT</div>
+        <h2>Priority Engineering Helpdesk</h2>
+        <p>Direct communication pipeline to RiTym hardware systems engineers and software architects. Submit telemetry logs, hardware interface questions, or license migration requests.</p>
+      </div>
+
+      <div class="portal-card" style="max-width: 860px; margin: 0 auto;">
+        <form id="support-ticket-form" onsubmit="handleTicketSubmit(event)">
+          <div class="support-form-grid">
+            <div class="form-group">
+              <label class="form-label">Contact Name &amp; Title</label>
+              <input type="text" class="form-control" placeholder="Capt. Alex Mercer / Lead Avionics Tech" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Authorized Contact Email</label>
+              <input type="email" class="form-control" placeholder="alex@maritimeoperations.com" required>
+            </div>
+          </div>
+
+          <div class="support-form-grid">
+            <div class="form-group">
+              <label class="form-label">System Platform</label>
+              <select class="form-control">
+                <option>Tactical GNSS Base Station &amp; Edge Gateway</option>
+                <option>Command Bridge &amp; Vehicle Navigation Display (7.0" Touch)</option>
+                <option>Tactical Handheld Navigator &amp; Dismounted Instrument</option>
+                <option>EXOS GPS Station for Windows Desktop</option>
+                <option>EXOS Transceiver / Wayfinder / Echo Mobile App</option>
+                <option>Custom RF &amp; High-Density PCB Systems</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Incident Severity Level</label>
+              <select class="form-control">
+                <option>Severity 3 &ndash; Standard Technical Inquiry</option>
+                <option>Severity 2 &ndash; Hardware Telemetry / Interface Glitch</option>
+                <option>Severity 1 &ndash; Critical Field Mission Halt (2hr Priority SLA)</option>
+                <option>Severity 4 &ndash; License Transfer / Seat Management</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Incident Description &amp; Technical Summary</label>
+            <textarea class="form-control" rows="4" placeholder="Detail the operating environment, observed NMEA sentence outputs, baud rate, and failure symptoms..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Diagnostic Telemetry Log / NMEA Sample (Optional)</label>
+            <textarea class="form-control mono" rows="3" placeholder="$GNGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47..."></textarea>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 10px;">
+            <div style="font-size: 0.8rem; color: #64748b;">
+              Direct Email Dispatch: <a href="mailto:support@ritym.com" style="color: #0284c7; font-weight: 600;">support@ritym.com</a>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <span>Submit Priority Ticket</span> &rarr;
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Invoice Detail Modal -->
+  <div class="modal-overlay" id="invoice-modal">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="closeInvoiceModal()">&times;</button>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0f172a; padding-bottom: 18px; margin-bottom: 24px;">
+        <div>
+          <img src="assets/ritym_logo.png" alt="RiTym Logo" style="height: 38px; margin-bottom: 8px;">
+          <div style="font-size: 0.82rem; color: #64748b;">
+            RiTym Technologies Inc.<br>
+            Autonomous Navigation &amp; Telemetry Systems<br>
+            VAT / Tax ID: EU-994810294 / US-8829104
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <h3 style="font-size: 1.4rem; font-weight: 800; color: #0f172a;" id="modal-inv-num">INV-2026-88194</h3>
+          <div style="font-size: 0.82rem; color: #64748b; margin-top: 4px;">Date: 2026-09-15</div>
+          <span class="card-badge badge-green" style="margin-top: 6px; display: inline-block;">PAID IN FULL</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 0.85rem; margin-bottom: 24px;">
+        <div>
+          <strong style="color: #0f172a; display: block; margin-bottom: 4px;">Billed To:</strong>
+          <span style="color: #334155;">
+            Tactical Operations Fleet Team<br>
+            operations@tacticalfleet.com<br>
+            Enterprise Account #TF-89210
+          </span>
+        </div>
+        <div>
+          <strong style="color: #0f172a; display: block; margin-bottom: 4px;">Payment Method:</strong>
+          <span style="color: #334155;">
+            Corporate Credit / Stripe Business<br>
+            Auth Token: ch_3M09X2849182390<br>
+            Status: Settlement Confirmed
+          </span>
+        </div>
+      </div>
+
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-bottom: 24px;">
+        <thead>
+          <tr style="background: #f8fafc; border-bottom: 1px solid #cbd5e1;">
+            <th style="padding: 10px; text-align: left;">Description</th>
+            <th style="padding: 10px; text-align: center;">Qty</th>
+            <th style="padding: 10px; text-align: right;">Rate</th>
+            <th style="padding: 10px; text-align: right;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #e2e8f0;">
+            <td style="padding: 12px 10px;">
+              <strong>EXOS Commercial Fleet License</strong><br>
+              <small style="color: #64748b;">Perpetual major version license (25 Cockpit Seats + EXOS Station v0.17)</small>
+            </td>
+            <td style="padding: 12px 10px; text-align: center;">1</td>
+            <td style="padding: 12px 10px; text-align: right;" id="modal-inv-rate">$499.00</td>
+            <td style="padding: 12px 10px; text-align: right;" id="modal-inv-amt">$499.00</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" style="padding: 10px; text-align: right; font-weight: 600;">Subtotal:</td>
+            <td style="padding: 10px; text-align: right; font-weight: 600;" id="modal-inv-sub">$499.00</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="padding: 10px; text-align: right; color: #64748b;">Tax / VAT (0% Reverse Charge):</td>
+            <td style="padding: 10px; text-align: right; color: #64748b;">$0.00</td>
+          </tr>
+          <tr style="border-top: 2px solid #0f172a; font-size: 1.05rem;">
+            <td colspan="3" style="padding: 12px 10px; text-align: right; font-weight: 800;">Total Paid:</td>
+            <td style="padding: 12px 10px; text-align: right; font-weight: 800; color: #0284c7;" id="modal-inv-total">$499.00 USD</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button class="btn btn-outline" onclick="window.print()">🖨️ Print Invoice</button>
+        <button class="btn btn-primary" onclick="closeInvoiceModal()">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-box" id="toast-box">
+    <span id="toast-icon">✔</span>
+    <span id="toast-msg">Notification message</span>
+  </div>
+
+  <!-- Corporate Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>RiTym Technologies Inc.</h4>
+          <p>
+            Engineering autonomous GNSS base stations, 7-inch cockpit navigation consoles, edge telemetry firmware, and the EXOS navigation software suite. Built for mission-critical off-grid reliability.
+          </p>
+          <div style="margin-top: 18px; font-size: 0.8rem; color: #64748b;">
+            All hardware systems compliant with FCC Part 15B, CE RED &bull; Industrial Temp Range &minus;40&deg;C to +85&deg;C.
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Hardware Systems</h5>
+          <ul class="footer-links">
+            <li><a href="products.html">Tactical GNSS Base Station</a></li>
+            <li><a href="products.html">Command Bridge 7.0" Touch</a></li>
+            <li><a href="products.html">Handheld Tactical Navigator</a></li>
+            <li><a href="products.html">Custom RF &amp; High-Density PCB</a></li>
+            <li><a href="downloads.html">Technical Specifications</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Software Ecosystem</h5>
+          <ul class="footer-links">
+            <li><a href="https://exosgps.com" target="_blank">EXOS GPS Official Portal</a></li>
+            <li><a href="portal.html">Windows Station v0.17</a></li>
+            <li><a href="https://exosgps.com/transceiver-guide.html" target="_blank">EXOS Transceiver</a></li>
+            <li><a href="https://exosgps.com/wayfinder-guide.html" target="_blank">EXOS Wayfinder</a></li>
+            <li><a href="https://exosgps.com/echo-guide.html" target="_blank">EXOS Echo Mesh</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Customer &amp; Legal</h5>
+          <ul class="footer-links">
+            <li><a href="portal.html">Customer Workspace</a></li>
+            <li><a href="pricing.html">Commercial Licensing</a></li>
+            <li><a href="support.html">Engineering Support</a></li>
+            <li><a href="privacy.html">Zero-Cloud Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="refund.html">Refund &amp; Return Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 RiTym Technologies Inc. All rights reserved. EXOS&trade; and RiTym&trade; are registered trademarks.
+        </div>
+        <div style="display: flex; gap: 24px;">
+          <a href="privacy.html">Privacy Architecture</a>
+          <a href="terms.html">Terms of Use</a>
+          <a href="security.html">Security Assurance</a>
+          <a href="support.html">Contact Engineering</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript -->
+  <script>
+    // Smooth scrolling to section
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        // Update tab styling
+        document.querySelectorAll('.portal-tab-btn').forEach(btn => btn.classList.remove('active'));
+        if (event && event.target) {
+          event.target.classList.add('active');
+        }
+      }
+    }
+
+    // License key verification simulation
+    function handleLicenseSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('license-input').value.trim();
+      const btn = document.getElementById('btn-verify-license');
+      const panel = document.getElementById('verification-panel');
+
+      btn.disabled = true;
+      btn.innerHTML = '<span>Verifying Cryptographic Node...</span>';
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<span>Authenticate &amp; Inspect Entitlements</span> &rarr;';
+        panel.style.display = 'block';
+        showToast('License key verified successfully. Entitlements loaded.');
+      }, 600);
+    }
+
+    // Invoice search simulation
+    function handleInvoiceLookup(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-find-orders');
+      const wrap = document.getElementById('invoice-table-wrap');
+
+      btn.disabled = true;
+      btn.innerHTML = '<span>Locating Purchase Records...</span>';
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<span>Search Commercial Records</span> &rarr;';
+        wrap.style.display = 'block';
+        showToast('Found 2 commercial order records.');
+      }, 500);
+    }
+
+    // Modal display
+    function showInvoiceModal(invNum, amt) {
+      document.getElementById('modal-inv-num').innerText = invNum;
+      document.getElementById('modal-inv-rate').innerText = '$' + amt;
+      document.getElementById('modal-inv-amt').innerText = '$' + amt;
+      document.getElementById('modal-inv-sub').innerText = '$' + amt;
+      document.getElementById('modal-inv-total').innerText = '$' + amt + ' USD';
+      document.getElementById('invoice-modal').style.display = 'flex';
+    }
+
+    function closeInvoiceModal() {
+      document.getElementById('invoice-modal').style.display = 'none';
+    }
+
+    // Fleet inquiry simulation
+    function handleFleetInquiry(e) {
+      e.preventDefault();
+      showToast('Enterprise fleet inquiry dispatched. SLA ticket #FLT-8921 opened.');
+      e.target.reset();
+    }
+
+    // Ticket submit simulation
+    function handleTicketSubmit(e) {
+      e.preventDefault();
+      const tktId = 'TKT-' + Math.floor(10000 + Math.random() * 90000);
+      showToast(`Priority Support Ticket ${tktId} generated. Developer notified.`);
+      e.target.reset();
+    }
+
+    // Copy helper
+    function copyText(str) {
+      navigator.clipboard.writeText(str).then(() => {
+        showToast('SHA-256 checksum copied to clipboard.');
+      }).catch(() => {
+        showToast('Copied: ' + str.substring(0, 16) + '...');
+      });
+    }
+
+    function copyLicenseToken() {
+      copyText('NODE_AUTH_TOKEN_7b21_092a_ENTERPRISE_VALID');
+    }
+
+    function downloadLicenseCertificate() {
+      const data = "--- BEGIN RITYM LICENSE CERTIFICATE ---\nUUID: EXOS-TACT-2026-X89F-8921\nTIER: ENTERPRISE_FLEET_PERPETUAL\nSEATS: 25\nNODE_HASH: e4a8f9107b21092a\nAIR_GAP_SIG: 894109823908412093840912830948\n--- END RITYM LICENSE CERTIFICATE ---";
+      const blob = new Blob([data], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'EXOS-Enterprise-License.lic';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Downloaded EXOS-Enterprise-License.lic');
+    }
+
+    // Checksum tool validator
+    function verifyChecksumInput() {
+      const input = document.getElementById('checksum-input').value.trim().toLowerCase();
+      const status = document.getElementById('checksum-status');
+      status.style.display = 'block';
+
+      const validHashes = [
+        'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+        'a78f4b238e1290bbfa65432098dcaef7183749204859a7f394857291a9203e84',
+        'c4819d9284918e98341fa8024982aeb1938501248192a83948291048593a819b',
+        'f920491823904a8b928374910283749182736451928374619283746192837461',
+        'd837461928374619283746192837461928374619283746192837461928374619'
+      ];
+
+      if (validHashes.includes(input)) {
+        status.style.color = '#4ade80';
+        status.innerHTML = '✔ OFFICIAL MATCH: This hash matches an authentic, unmodified RiTym release binary.';
+      } else if (input.length === 64) {
+        status.style.color = '#38bdf8';
+        status.innerHTML = 'ℹ VALID SHA-256 FORMAT: Hash is mathematically valid. Contact engineering if checking a custom private firmware build.';
+      } else {
+        status.style.color = '#f87171';
+        status.innerHTML = '✖ INVALID HASH: Expected 64 hexadecimal characters for SHA-256.';
+      }
+    }
+
+    // Toast helper
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      const text = document.getElementById('toast-msg');
+      text.innerText = msg;
+      box.style.display = 'flex';
+      setTimeout(() => {
+        box.style.display = 'none';
+      }, 4000);
+    }
+  </script>
 </body>
 </html>

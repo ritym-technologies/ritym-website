@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) - Privacy-safe anonymous analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNKE55GVQD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HNKE55GVQD', { 'anonymize_ip': true });
+  </script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>RiTym Technologies | Custom ESP32 Electronics, Embedded Systems & Field Software</title>
-  <meta name="description" content="RiTym Technologies specializes in ESP32 microcontroller electronics, u-blox GNSS telemetry stations, FreeRTOS firmware, and high-reliability navigation software including the EXOS platform.">
-  <link rel="icon" type="image/png" href="assets/exos_logo_dark.png">
+  <title>RiTym Technologies | Autonomous Field Telemetry, Edge Computing & Navigation Systems</title>
+  <meta name="description" content="RiTym Technologies engineers high-reliability off-grid positioning instruments, tactical cockpit telemetry consoles, autonomous edge computing architectures, and the EXOS navigation software suite.">
+  <link rel="icon" type="image/png" href="assets/ritym_logo.png">
 
   <!-- Enterprise Human-Aesthetic Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,21 +29,25 @@
       --navy: #0f172a;
       --navy-dark: #090d16;
       --navy-card: #1e293b;
-      --accent-cyan: #00e5ff;
+      --accent-blue: #2563eb;
+      --accent-cyan: #38bdf8;
       --accent-amber: #d97706;
       --accent-emerald: #059669;
+      --accent-teal: #0d9488;
       --bg-white: #ffffff;
       --bg-slate: #f8fafc;
       --bg-slate-alt: #f1f5f9;
       --border-light: #e2e8f0;
       --border-dark: #cbd5e1;
+      --border-subtle: rgba(255, 255, 255, 0.08);
       --text-heading: #0f172a;
       --text-body: #334155;
       --text-muted: #64748b;
+      --text-light: #94a3b8;
       --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
       --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-mono: 'JetBrains Mono', Consolas, monospace;
     }
@@ -44,142 +57,111 @@
     body { overflow-x: hidden; line-height: 1.65; background-color: var(--bg-white); }
     a { color: inherit; text-decoration: none; transition: all 0.2s ease; }
 
-    /* Top Corporate Bar */
-    .top-bar {
+    /* Top Corporate Ticker */
+    .top-corp-bar {
       background-color: #0b1120;
       color: #94a3b8;
       font-size: 0.8rem;
-      padding: 8px 24px;
+      padding: 7px 24px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .top-bar a { color: #38bdf8; font-weight: 500; }
-    .top-bar a:hover { text-decoration: underline; color: #7dd3fc; }
+    .top-corp-bar a { color: #38bdf8; font-weight: 500; }
+    .top-corp-bar a:hover { text-decoration: underline; color: #7dd3fc; }
 
-    /* Primary Sticky Navbar (Precision Engineering Aesthetic) */
+    /* Navigation Bar */
     .navbar {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(11, 17, 32, 0.94);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.4);
-      height: 72px;
-      display: flex;
-      align-items: center;
+      background-color: var(--navy);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
     .nav-container {
-      max-width: 1360px;
-      width: 100%;
+      max-width: 1320px;
       margin: 0 auto;
       padding: 0 24px;
+      height: 82px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 16px;
     }
-    .brand-logo {
+    .brand-logo-wrap {
       display: flex;
       align-items: center;
+      gap: 14px;
       text-decoration: none;
-      flex-shrink: 0;
     }
-    .brand-logo img {
-      height: 36px;
+    .brand-logo-img {
+      height: 48px;
       width: auto;
       display: block;
       object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
     }
-    .brand-divider {
-      width: 1px;
-      height: 28px;
-      background: rgba(255, 255, 255, 0.16);
-      margin: 0 16px;
-      flex-shrink: 0;
-    }
-    .brand-text-wrap {
+    .brand-text-block {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      white-space: nowrap;
-      flex-shrink: 0;
     }
-    .brand-name {
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 800;
       color: #ffffff;
-      font-family: var(--font-main);
-      font-size: 1.08rem;
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      line-height: 1.2;
-      white-space: nowrap;
+      letter-spacing: -0.02em;
     }
-    .brand-sub {
-      color: #38bdf8;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
+    .brand-subtitle {
+      font-size: 0.72rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      color: #38bdf8;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      line-height: 1.3;
-      margin-top: 2px;
-      white-space: nowrap;
+      font-family: var(--font-mono);
     }
     .nav-menu {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 22px;
       list-style: none;
-      margin: 0;
-      padding: 0;
     }
     .nav-link {
       font-size: 0.88rem;
       font-weight: 500;
-      color: #94a3b8;
-      padding: 8px 14px;
-      border-radius: 6px;
-      white-space: nowrap;
-      display: inline-block;
-      transition: color 0.18s ease, background-color 0.18s ease;
+      color: #cbd5e1;
+      padding: 6px 0;
+      position: relative;
     }
-    .nav-link:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.06);
+    .nav-link:hover { color: #ffffff; }
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
     .nav-cta-btn {
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      background-color: var(--primary);
       color: #ffffff;
-      padding: 8px 18px;
+      padding: 9px 18px;
       border-radius: 6px;
-      font-size: 0.84rem;
+      font-size: 0.86rem;
       font-weight: 600;
-      letter-spacing: 0.01em;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      white-space: nowrap;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-      transition: all 0.2s ease;
-      flex-shrink: 0;
+      gap: 6px;
+      transition: background-color 0.2s ease, transform 0.2s ease;
     }
-    .nav-cta-btn:hover {
-      background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
-      border-color: #38bdf8;
-      box-shadow: 0 0 18px rgba(2, 132, 199, 0.45);
-      transform: translateY(-1px);
-      color: #ffffff;
-    }
-    .nav-cta-btn svg {
-      transition: transform 0.2s ease;
-    }
-    .nav-cta-btn:hover svg {
-      transform: translate(2px, -2px);
-    }
+    .nav-cta-btn:hover { background-color: var(--primary-dark); transform: translateY(-1px); }
 
     /* Buttons */
     .btn {
@@ -197,11 +179,11 @@
       text-align: center;
     }
     .btn-primary { background-color: var(--primary); color: #ffffff; }
-    .btn-primary:hover { background-color: var(--primary-dark); transform: translateY(-1px); }
+    .btn-primary:hover { background-color: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35); }
     .btn-secondary { background-color: #ffffff; color: var(--navy); border-color: var(--border-dark); }
-    .btn-secondary:hover { background-color: var(--bg-slate); border-color: #94a3b8; }
-    .btn-dark { background-color: var(--navy); color: #ffffff; }
-    .btn-dark:hover { background-color: #1e293b; }
+    .btn-secondary:hover { background-color: var(--bg-slate); border-color: #94a3b8; transform: translateY(-1px); }
+    .btn-dark { background-color: var(--navy); color: #ffffff; border: 1px solid rgba(255,255,255,0.2); }
+    .btn-dark:hover { background-color: #1e293b; border-color: #38bdf8; color: #38bdf8; }
 
     /* Container & Layout */
     .container {
@@ -213,9 +195,13 @@
       padding: 88px 0;
       border-bottom: 1px solid var(--border-light);
     }
-    .section-slate { background-color: var(--bg-slate); }
-    .section-dark { background-color: #0b1120; color: #f1f5f9; }
-
+    .section-slate {
+      background-color: var(--bg-slate);
+    }
+    .section-dark {
+      background-color: #0b1120;
+      color: #f1f5f9;
+    }
     .section-header {
       text-align: center;
       max-width: 820px;
@@ -224,15 +210,19 @@
     .section-eyebrow {
       display: inline-block;
       font-family: var(--font-mono);
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--primary);
+      margin-bottom: 12px;
       background-color: var(--primary-light);
       padding: 4px 12px;
       border-radius: 4px;
-      margin-bottom: 12px;
+    }
+    .section-eyebrow-dark {
+      background-color: rgba(2, 132, 199, 0.2);
+      color: #38bdf8;
     }
     .section-title {
       font-size: 2.3rem;
@@ -240,9 +230,11 @@
       line-height: 1.25;
       color: var(--text-heading);
       margin-bottom: 16px;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.025em;
     }
-    .section-title-dark { color: #ffffff; }
+    .section-title-dark {
+      color: #ffffff;
+    }
     .section-desc {
       font-size: 1.1rem;
       color: var(--text-muted);
@@ -251,16 +243,29 @@
 
     /* Hero Section */
     .hero {
-      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+      background: linear-gradient(180deg, #090d16 0%, #0f172a 100%);
       color: #ffffff;
       padding: 80px 0 100px 0;
       position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: 
+        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
     }
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 56px;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
     .hero-badge {
       display: inline-flex;
@@ -276,7 +281,7 @@
       margin-bottom: 22px;
     }
     .hero-title {
-      font-size: 3.1rem;
+      font-size: 3.2rem;
       font-weight: 800;
       line-height: 1.15;
       letter-spacing: -0.03em;
@@ -298,150 +303,316 @@
     }
     .hero-specs-bar {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
       border-top: 1px solid rgba(255, 255, 255, 0.12);
-      padding-top: 24px;
+      padding-top: 28px;
     }
     .spec-num {
-      font-size: 1.35rem;
-      font-weight: 700;
+      font-size: 1.4rem;
+      font-weight: 800;
       color: #38bdf8;
       font-family: var(--font-mono);
+      line-height: 1.2;
     }
     .spec-label {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: #94a3b8;
       margin-top: 4px;
+      line-height: 1.35;
     }
 
-    /* Architecture Stack Card */
+    /* Architecture Stack Infographic Card */
     .arch-card {
-      background-color: #0b1120;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
-      padding: 28px;
-      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.4);
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.5);
     }
-    .arch-card-title {
-      font-size: 1.1rem;
+    .arch-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
+    }
+    .arch-card-header h3 {
+      font-size: 0.95rem;
       font-weight: 700;
       color: #ffffff;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      letter-spacing: 0.02em;
     }
-    .arch-stack {
+    .arch-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .arch-stack-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
-    .arch-layer {
-      background-color: #1e293b;
-      border: 1px solid #334155;
+    .arch-stack-item {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 8px;
-      padding: 12px 16px;
+      padding: 12px 14px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      transition: border-color 0.2s ease, background 0.2s ease;
     }
-    .layer-title {
-      font-size: 0.88rem;
-      font-weight: 600;
+    .arch-stack-item:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+    .stack-meta h4 {
+      font-size: 0.86rem;
+      font-weight: 700;
       color: #ffffff;
     }
-    .layer-badge {
+    .stack-meta p {
+      font-size: 0.74rem;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+    .stack-badge {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
-      padding: 2px 8px;
-      border-radius: 4px;
-      background-color: rgba(2, 132, 199, 0.2);
+      font-size: 0.72rem;
+      font-weight: 600;
       color: #38bdf8;
+      background: rgba(2, 132, 199, 0.15);
+      border: 1px solid rgba(2, 132, 199, 0.3);
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
     }
 
-    /* Hardware Showcase Grid */
+    /* Hardware Cards Grid */
     .hw-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
+      gap: 28px;
     }
     .hw-card {
-      background-color: #ffffff;
+      background: #ffffff;
       border: 1px solid var(--border-light);
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 32px;
+      box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
-      box-shadow: var(--shadow-sm);
       transition: all 0.25s ease;
+      position: relative;
     }
     .hw-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
       box-shadow: var(--shadow-lg);
       border-color: var(--primary);
     }
     .hw-badge {
       display: inline-block;
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       color: var(--primary);
       background-color: var(--primary-light);
-      padding: 3px 8px;
+      padding: 3px 10px;
       border-radius: 4px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       align-self: flex-start;
     }
     .hw-title {
       font-size: 1.45rem;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--text-heading);
       margin-bottom: 12px;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
     }
     .hw-desc {
       font-size: 0.95rem;
       color: var(--text-body);
-      line-height: 1.6;
       margin-bottom: 20px;
+      line-height: 1.6;
     }
     .hw-specs-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      font-size: 0.88rem;
+      gap: 12px;
+      margin-bottom: 28px;
       border-top: 1px solid var(--border-light);
       padding-top: 18px;
-      margin-bottom: 24px;
-      flex-grow: 1;
     }
     .hw-specs-list li {
       display: flex;
       align-items: flex-start;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--text-body);
+      line-height: 1.45;
+    }
+    .hw-specs-list li span.bullet {
+      color: var(--primary);
+      font-weight: bold;
+    }
+    .hw-specs-list li strong {
+      color: var(--text-heading);
+    }
+
+    /* Edge Processing / Architecture Section */
+    .edge-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .pillar-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: border-color 0.2s ease;
+    }
+    .pillar-card:hover {
+      border-color: var(--primary);
+    }
+    .pillar-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+    .pillar-text h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 4px;
+    }
+    .pillar-text p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .pillars-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Architecture Flow Diagram Box */
+    .flow-diagram-box {
+      background: #090d16;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .flow-diagram-title {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
       gap: 8px;
     }
-    .hw-specs-list strong { color: var(--text-heading); }
+    .flow-diagram-title::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00ff88;
+      box-shadow: 0 0 8px #00ff88;
+    }
+    .flow-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+    .flow-node {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .flow-node-content h5 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .flow-node-content p {
+      font-size: 0.74rem;
+      color: #94a3b8;
+      margin-top: 2px;
+      font-family: var(--font-mono);
+    }
+    .flow-badge-metric {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .flow-connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #38bdf8;
+      font-size: 0.9rem;
+      margin: -4px 0;
+    }
 
-    /* Software Ecosystem Grid */
+    /* Software Suite Grid */
     .sw-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+      gap: 22px;
     }
     .sw-card {
-      background-color: #ffffff;
+      background: #ffffff;
       border: 1px solid var(--border-light);
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 24px;
+      box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
-      box-shadow: var(--shadow-sm);
       transition: all 0.25s ease;
     }
     .sw-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
       border-color: var(--primary);
     }
     .sw-tag {
@@ -449,141 +620,178 @@
       font-size: 0.72rem;
       font-weight: 700;
       color: var(--primary);
-      background-color: var(--primary-light);
-      padding: 3px 8px;
-      border-radius: 4px;
-      margin-bottom: 12px;
-      align-self: flex-start;
+      margin-bottom: 10px;
     }
     .sw-title {
       font-size: 1.25rem;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--text-heading);
       margin-bottom: 10px;
     }
     .sw-desc {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--text-body);
+      margin-bottom: 20px;
       line-height: 1.55;
-      margin-bottom: 18px;
       flex-grow: 1;
     }
-    .sw-card a {
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-    .sw-card a:hover { text-decoration: underline; }
-
-    /* Code Snippet Box */
-    .code-box {
-      background-color: #0b1120;
-      color: #e2e8f0;
-      border-radius: 8px;
-      padding: 18px 22px;
-      font-family: var(--font-mono);
+    .sw-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-top: 1px solid var(--border-light);
+      padding-top: 14px;
       font-size: 0.84rem;
+      font-weight: 600;
+    }
+    .sw-links a { color: var(--primary); }
+    .sw-links a:hover { text-decoration: underline; color: var(--primary-dark); }
+
+    /* Operational Sectors Grid */
+    .sector-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+    .sector-card {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 24px;
+      color: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+    }
+    .sector-card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+    .sector-icon {
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+    }
+    .sector-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .sector-card p {
+      font-size: 0.86rem;
+      color: #94a3b8;
+      line-height: 1.55;
+    }
+
+    /* Privacy & Security Mandate Card */
+    .privacy-banner-card {
+      background: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
+      border: 1px solid rgba(5, 150, 105, 0.35);
+      border-radius: 12px;
+      padding: 40px;
+      color: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .privacy-banner-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .privacy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #34d399;
+      background: rgba(5, 150, 105, 0.15);
+      border: 1px solid rgba(5, 150, 105, 0.3);
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    .privacy-features-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .privacy-feature-item {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 12px 14px;
+      border-radius: 6px;
+    }
+    .privacy-feature-item b {
+      display: block;
+      font-size: 0.86rem;
+      color: #ffffff;
+      margin-bottom: 3px;
+    }
+    .privacy-feature-item p {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+
+    /* Portal CTA Banner */
+    .portal-banner {
+      background: linear-gradient(135deg, #0369a1 0%, #0f172a 100%);
+      border-radius: 12px;
+      padding: 48px;
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 32px;
+      box-shadow: var(--shadow-lg);
+    }
+    .portal-banner h3 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .portal-banner p {
+      color: #e0f2fe;
+      font-size: 1.05rem;
+      max-width: 650px;
       line-height: 1.6;
-      overflow-x: auto;
-      border: 1px solid #1e293b;
-      margin: 20px 0;
-    }
-
-    /* Device Mockups */
-    .phone-mockup {
-      background-color: #1e293b;
-      border: 3px solid #334155;
-      border-radius: 22px;
-      box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.35);
-      padding: 6px 6px 10px 6px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 200px;
-      width: 100%;
-      flex-shrink: 0;
-    }
-    .phone-speaker-pill {
-      width: 40px;
-      height: 4px;
-      background-color: #475569;
-      border-radius: 2px;
-      margin: 3px auto 6px auto;
-    }
-    .phone-screen {
-      border-radius: 16px;
-      overflow: hidden;
-      width: 100%;
-      background-color: #000;
-    }
-    .phone-screen img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .watch-bezel-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-    }
-    .watch-bezel {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 6px solid #475569;
-      background-color: #0f172a;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .watch-screen {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      overflow: hidden;
-    }
-    .watch-screen img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
     }
 
     /* Footer */
     .footer {
-      background-color: #0b1120;
-      color: #94a3b8;
-      padding: 72px 0 36px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background-color: var(--navy-dark);
+      color: #cbd5e1;
+      padding: 72px 0 32px 0;
+      border-top: 1px solid var(--border-subtle);
     }
     .footer-grid {
       display: grid;
-      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
       gap: 48px;
       margin-bottom: 56px;
     }
     .footer-logo {
-      height: 38px;
+      height: 48px;
       width: auto;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
     }
     .footer-desc {
       font-size: 0.88rem;
-      line-height: 1.65;
       color: #94a3b8;
-      margin-bottom: 20px;
+      line-height: 1.65;
+      margin-bottom: 18px;
     }
     .footer-title {
-      font-size: 0.86rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: #ffffff;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 18px;
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
     }
     .footer-links {
       list-style: none;
@@ -592,7 +800,10 @@
       gap: 10px;
       font-size: 0.88rem;
     }
-    .footer-links a:hover { color: #38bdf8; }
+    .footer-links a:hover {
+      color: #38bdf8;
+      text-decoration: underline;
+    }
     .footer-bottom {
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       padding-top: 28px;
@@ -603,175 +814,70 @@
       color: #64748b;
     }
 
-    /* ========================================================================= */
-  /* COMPREHENSIVE RESPONSIVE STYLING (PC, MAC, iOS SAFARI, ANDROID CHROME)    */
-  /* ========================================================================= */
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
-  html {
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-    max-width: 100vw;
-  }
-
-  body {
-    overflow-x: hidden;
-    max-width: 100vw;
-    width: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* Tablet & Medium Screens (max-width: 1024px) */
-  @media (max-width: 1024px) {
-    .nav-container { padding: 0 20px; }
-    .hero-grid { grid-template-columns: 1fr; gap: 48px; text-align: center; }
-    .hero-actions { justify-content: center; }
-    .hero-specs-bar { justify-content: center; }
-    .hw-grid { grid-template-columns: 1fr; gap: 24px; }
-    .firmware-grid { grid-template-columns: 1fr; gap: 32px; }
-    .fw-features-grid { grid-template-columns: 1fr; gap: 12px; }
-    .sw-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
-  }
-
-  /* Mobile Handhelds (max-width: 768px) - Android & iPhone */
-  @media (max-width: 768px) {
-    .top-bar {
-      flex-direction: column;
-      gap: 4px;
-      padding: 8px 16px;
-      text-align: center;
-      font-size: 0.74rem;
-    }
-    .navbar { height: auto; }
-    .nav-container {
-      height: 74px;
-      padding: 0 16px;
-    }
-    .brand-logo img {
-      height: 32px;
-      max-width: 140px;
-    }
-    .brand-divider {
-      height: 22px;
-      margin: 0 10px;
-    }
-    .brand-name {
-      font-size: 0.95rem;
-    }
-    .brand-sub {
-      font-size: 0.60rem;
-    }
-    .nav-menu {
-      display: none;
-    }
-    .nav-cta-btn {
-      padding: 7px 12px;
-      font-size: 0.8rem;
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hw-grid { grid-template-columns: 1fr; }
+      .edge-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: repeat(2, 1fr); }
+      .sector-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .portal-banner { flex-direction: column; text-align: center; }
+      .privacy-banner-grid { grid-template-columns: 1fr; }
     }
 
-    .section { padding: 56px 0; }
-    .section-header { margin-bottom: 36px; }
-    .section-title { font-size: 1.85rem; line-height: 1.25; }
-    .section-desc { font-size: 0.98rem; }
-
-    /* Hero section */
-    .hero { padding: 48px 0 64px 0; }
-    .hero-title { font-size: 2.1rem; line-height: 1.22; }
-    .hero-subtitle { font-size: 1rem; line-height: 1.55; margin-bottom: 24px; }
-    .hero-actions {
-      flex-direction: column;
-      width: 100%;
-      gap: 10px;
-      margin-bottom: 32px;
+    @media (max-width: 768px) {
+      .nav-menu { display: none; }
+      .hero-title { font-size: 2.3rem; }
+      .hero-specs-bar { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .sector-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .privacy-features-list { grid-template-columns: 1fr; }
     }
-    .hero-actions .btn {
-      width: 100%;
-      padding: 12px 18px;
-      font-size: 0.92rem;
-    }
-    .hero-specs-bar {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    .spec-num { font-size: 1.15rem; }
-    .spec-label { font-size: 0.72rem; }
-
-    .hw-grid { grid-template-columns: 1fr; gap: 20px; }
-    .hw-card { padding: 24px 18px; }
-    .sw-grid { grid-template-columns: 1fr; gap: 16px; }
-
-    .footer { padding: 56px 0 28px 0; }
-    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-    .footer-bottom {
-      flex-direction: column;
-      gap: 12px;
-      text-align: center;
-    }
-  }
-
-  /* Compact Smartphones (iPhone SE, max-width: 420px) */
-  @media (max-width: 420px) {
-    .hero-title { font-size: 1.75rem; }
-    .hero-specs-bar {
-      grid-template-columns: 1fr;
-      text-align: center;
-      gap: 12px;
-    }
-    .brand-logo img { height: 38px; max-width: 165px; }
-  }
   </style>
 </head>
 <body>
 
   <!-- Top Corporate Identity Bar -->
-  <div class="top-bar">
+  <div class="top-corp-bar">
     <div>
-      <span>RiTym Technologies &bull; Embedded Systems, Hardware & Navigation Software</span>
+      <span>RiTym Technologies &bull; Autonomous Field Telemetry, Edge Computing & Navigation Systems</span>
     </div>
     <div>
-      <span>Flagship Software Division: </span>
+      <span>Flagship Navigation Division: </span>
       <a href="https://exosgps.com" target="_blank" rel="noopener">exosgps.com &rarr;</a>
     </div>
   </div>
 
-  <!-- Primary Sticky Header Navigation -->
+  <!-- Primary Sticky Navigation Bar -->
   <header class="navbar">
     <div class="nav-container">
-      <a href="index.html" class="brand-logo" title="RiTym Technologies &bull; Electronics & Embedded Systems">
-        <img src="assets/exos_logo_dark.png" alt="EXOS Navigation Systems">
-        <div class="brand-divider"></div>
-        <div class="brand-text-wrap">
-          <span class="brand-name">RiTym Technologies</span>
-          <span class="brand-sub">Electronics &amp; Embedded Systems</span>
+      <a href="index.html" class="brand-logo-wrap" title="RiTym Technologies &bull; Edge Systems & Telemetry">
+        <img src="assets/ritym_logo.png" alt="RiTym Technologies Logo" class="brand-logo-img">
+        <div class="brand-text-block">
+          <span class="brand-title">RiTym Technologies</span>
+          <span class="brand-subtitle">Telemetry &bull; Edge Systems &bull; Software</span>
         </div>
       </a>
 
       <nav>
         <ul class="nav-menu">
-          <li><a href="#hardware" class="nav-link">Hardware</a></li>
-          <li><a href="#firmware" class="nav-link">Firmware</a></li>
-          <li><a href="#software" class="nav-link">Software</a></li>
+          <li><a href="#hardware" class="nav-link">Hardware Platforms</a></li>
+          <li><a href="#architecture" class="nav-link">Edge Architecture</a></li>
+          <li><a href="#software" class="nav-link">EXOS Software</a></li>
+          <li><a href="#sectors" class="nav-link">Sectors</a></li>
           <li><a href="products.html" class="nav-link">Products</a></li>
+          <li><a href="pulsestage.html" class="nav-link" style="color: #38bdf8;">PulseStage MIDI</a></li>
           <li><a href="downloads.html" class="nav-link">Documentation</a></li>
-          <li><a href="support.html" class="nav-link">Support</a></li>
+          <li><a href="portal.html" class="nav-link">Portal</a></li>
         </ul>
       </nav>
 
-      <div>
-        <a href="https://exosgps.com" target="_blank" rel="noopener" class="nav-cta-btn">
-          <span>EXOS Portal</span>
+      <div class="nav-actions">
+        <a href="portal.html" class="nav-cta-btn">
+          <span>Customer Portal</span>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -788,76 +894,80 @@
       <div class="hero-grid">
         <div>
           <div class="hero-badge">
-            <span>ELECTRONICS & EMBEDDED SYSTEMS ENGINEERING</span>
+            <span>MISSION-CRITICAL FIELD COMPUTING & TELEMETRY</span>
           </div>
           <h1 class="hero-title">
-            Custom <span>Embedded Electronics</span>, Real-Time Firmware & Field Software
+            Autonomous Navigation Hardware, <span>Edge Telemetry</span> & Mission Software
           </h1>
           <p class="hero-subtitle">
-            At RiTym Technologies, we engineer end-to-end hardware-to-software solutions from silicon to screen. We design custom microcontroller and RF hardware, u-blox GNSS receiver stations, low-power RF instruments, and pair them with high-reliability Android and Wear OS companion applications.
+            RiTym Technologies engineers high-reliability off-grid positioning instruments, tactical cockpit telemetry consoles, and autonomous companion applications. Built for expeditionary teams, marine operators, and defense professionals operating beyond cellular coverage.
           </p>
 
           <div class="hero-actions">
-            <a href="#hardware" class="btn btn-primary">Explore Hardware Systems</a>
+            <a href="#hardware" class="btn btn-primary">Explore Hardware Platforms</a>
             <a href="https://exosgps.com" target="_blank" rel="noopener" class="btn btn-secondary">
-              View EXOS Software Portal &nearr;
+              View EXOS Software Suite &nearr;
             </a>
-            <a href="downloads.html" class="btn btn-dark" style="border: 1px solid rgba(255,255,255,0.2);">
-              Hardware Docs & Pinouts
+            <a href="portal.html" class="btn btn-dark">
+              Customer & Licensing Portal
             </a>
           </div>
 
           <div class="hero-specs-bar">
             <div>
-              <div class="spec-num">Multi-MCU</div>
-              <div class="spec-label">Custom Architectures</div>
-            </div>
-            <div>
-              <div class="spec-num">u-blox M9N</div>
-              <div class="spec-label">Multi-Constellation GNSS</div>
+              <div class="spec-num">Multi-Band</div>
+              <div class="spec-label">GPS &bull; GLONASS &bull; Galileo &bull; BeiDou</div>
             </div>
             <div>
               <div class="spec-num">100% Offline</div>
-              <div class="spec-label">Zero Cloud Telemetry</div>
+              <div class="spec-label">Zero-Cloud Telemetry &bull; Air-Gapped</div>
+            </div>
+            <div>
+              <div class="spec-num">&lt; 1.2m</div>
+              <div class="spec-label">Precision Multi-Frequency Fix</div>
+            </div>
+            <div>
+              <div class="spec-num">-40&deg;C to +85&deg;C</div>
+              <div class="spec-label">Industrial Operating Envelope</div>
             </div>
           </div>
         </div>
 
-        <!-- Full-Stack Engineering Architecture Card -->
+        <!-- Architecture Infographic Card -->
         <div>
           <div class="arch-card">
-            <div class="arch-card-title">
-              <span>Full-Stack Engineering Pipeline</span>
-              <span style="font-family:var(--font-mono); font-size:0.75rem; color:#38bdf8;">v1.4.2 Production</span>
+            <div class="arch-card-header">
+              <h3>Enterprise Systems Architecture</h3>
+              <span class="arch-tag">Air-Gapped Core</span>
             </div>
-            <div class="arch-stack">
-              <div class="arch-layer">
-                <div>
-                  <div class="layer-title">Layer 4: Mobile & Wearable Software</div>
-                  <div style="font-size:0.76rem; color:#94a3b8;">EXOS Transceiver, Wayfinder, ECHO, Watchout Wear OS</div>
+            <div class="arch-stack-list">
+              <div class="arch-stack-item">
+                <div class="stack-meta">
+                  <h4>Layer 4: Field & Mission Software</h4>
+                  <p>EXOS Transceiver, Wayfinder, Echo Radio Mesh, Watchout Wear OS</p>
                 </div>
-                <span class="layer-badge">Android & Wear OS</span>
+                <span class="stack-badge">Native Multi-OS</span>
               </div>
-              <div class="arch-layer">
-                <div>
-                  <div class="layer-title">Layer 3: OS Integration & Serial Bridges</div>
-                  <div style="font-size:0.76rem; color:#94a3b8;">Android Mock Location Provider, Windows Bluetooth COM</div>
+              <div class="arch-stack-item">
+                <div class="stack-meta">
+                  <h4>Layer 3: OS Integration & Serial Bridges</h4>
+                  <p>Android Mock Location Injection, High-Speed NMEA 0183 TCP Sockets</p>
                 </div>
-                <span class="layer-badge">NMEA 0183</span>
+                <span class="stack-badge">Standard NMEA</span>
               </div>
-              <div class="arch-layer">
-                <div>
-                  <div class="layer-title">Layer 2: Real-Time Firmware & Networking</div>
-                  <div style="font-size:0.76rem; color:#94a3b8;">FreeRTOS, PlatformIO, Wi-Fi AP + STA, BLE LE Secure</div>
+              <div class="arch-stack-item">
+                <div class="stack-meta">
+                  <h4>Layer 2: Real-Time Edge Processing</h4>
+                  <p>Dual-Core Ingress Isolation, Zero-Loss Memory Ring Buffers</p>
                 </div>
-                <span class="layer-badge">C++ / FreeRTOS</span>
+                <span class="stack-badge">Deterministic</span>
               </div>
-              <div class="arch-layer">
-                <div>
-                  <div class="layer-title">Layer 1: Microcontroller Silicon & Sensors</div>
-                  <div style="font-size:0.76rem; color:#94a3b8;">ESP32-S3, u-blox NEO-M9N, ST Barometer, Bosch Magnetometer</div>
+              <div class="arch-stack-item">
+                <div class="stack-meta">
+                  <h4>Layer 1: Rugged Field Instruments & RF</h4>
+                  <p>Multi-Band GNSS Engines, Optically Bonded Displays, 9-36V DC Power</p>
                 </div>
-                <span class="layer-badge">Hardware PCB</span>
+                <span class="stack-badge">MIL-Grade PCB</span>
               </div>
             </div>
           </div>
@@ -867,210 +977,222 @@
   </section>
 
   <!-- ========================================================================= -->
-  <!-- 1. HARDWARE SHOWCASE: ESP32 AT THE CORE                                   -->
+  <!-- 1. HARDWARE SHOWCASE: ENTERPRISE FIELD PLATFORMS                          -->
   <!-- ========================================================================= -->
   <section class="section" id="hardware">
     <div class="container">
       <div class="section-header">
-        <span class="section-eyebrow">Embedded Hardware Engineering</span>
-        <h2 class="section-title">ESP32 Silicon at the Core of Our Instruments</h2>
+        <span class="section-eyebrow">Enterprise Hardware Engineering</span>
+        <h2 class="section-title">Engineered for Harsh Operating Environments</h2>
         <p class="section-desc">
-          We design and build ruggedized micro-stations, touchscreen instrument consoles, and low-power telemetry beacons engineered around Espressif ESP32 microcontrollers.
+          We design and manufacture ruggedized micro-stations, touchscreen telemetry consoles, and autonomous field telemetry instruments built to withstand high vibration, wide thermal fluctuations, and continuous mission deployment.
         </p>
       </div>
 
       <div class="hw-grid">
-        <!-- Hardware Item 1: XIAO ESP32-S3 GNSS Station -->
+        <!-- Hardware Platform 1 -->
         <div class="hw-card">
-          <span class="hw-badge">FIRMWARE PHASE 1.4.2</span>
-          <h3 class="hw-title">EXOS-Station ESP32-S3 GNSS Receiver</h3>
+          <span class="hw-badge">DEPLOYED TELEMETRY STATION</span>
+          <h3 class="hw-title">Tactical GNSS Base Station & Edge Gateway</h3>
           <p class="hw-desc">
-            Compact high-precision satellite telemetry receiver pairing the Seeed XIAO ESP32-S3 dual-core microcontroller with the u-blox NEO-M9N GNSS engine. Broadcasts raw NMEA sentences across concurrent Wi-Fi AP and authenticated BLE channels.
+            Compact all-weather satellite receiver station engineered for surveying expeditions, overland vehicle convoys, search & rescue forward bases, and remote field research camps.
           </p>
           <ul class="hw-specs-list">
             <li>
-              <span>&bull;</span>
-              <div><strong>Core Processor:</strong> ESP32-S3 Dual-Core Xtensa LX7 @ 240MHz with hardware cryptographic acceleration.</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>High-Rate Satellite Acquisition:</strong> Multi-constellation GNSS engine concurrently tracking GPS, GLONASS, Galileo, and BeiDou up to 25Hz with active multi-path filtering.</div>
             </li>
             <li>
-              <span>&bull;</span>
-              <div><strong>GNSS Engine:</strong> u-blox NEO-M9N receiving GPS, GLONASS, Galileo, and BeiDou concurrently at 25Hz.</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>Dual Wireless Distribution:</strong> Broadcasts raw NMEA sentences across high-throughput local Wi-Fi and authenticated Bluetooth LE simultaneously.</div>
             </li>
             <li>
-              <span>&bull;</span>
-              <div><strong>Multi-Channel Distribution:</strong> Dedicated Wi-Fi AP (<code>EXOS-GPS-XXXXX-WIFI</code>) and authenticated Bluetooth LE (<code>EXOS-GPS-XXXXX-BT</code>).</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>Zero-Cloud Local API Engine:</strong> Embedded on-device configuration dashboard and real-time JSON telemetry endpoints; raw TCP NMEA stream on dedicated local port 2000.</div>
             </li>
             <li>
-              <span>&bull;</span>
-              <div><strong>Embedded Web Server & Sockets:</strong> On-device configuration portal and real-time JSON API at <code>192.168.4.1</code>; raw TCP NMEA stream on port 2000.</div>
-            </li>
-            <li>
-              <span>&bull;</span>
-              <div><strong>Hardware Security:</strong> BLE LE Secure Connections with MITM protection and dynamic 6-digit pairing PIN.</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>Cryptographic Security:</strong> Authenticated Bluetooth LE connections with MITM protection and dynamic numeric comparison passkeys to prevent unauthorized interception.</div>
             </li>
           </ul>
-          <a href="downloads.html" class="btn btn-secondary" style="margin-top:auto;">View Wiring & PlatformIO Build &rarr;</a>
+          <a href="products.html" class="btn btn-secondary" style="margin-top:auto;">View System Specifications &rarr;</a>
         </div>
 
-        <!-- Hardware Item 2: Elecrow ESP32-S3 7.0" Touch Telemetry Station -->
+        <!-- Hardware Platform 2 -->
         <div class="hw-card">
-          <span class="hw-badge">7-INCH TOUCH CONSOLE</span>
-          <h3 class="hw-title">Elecrow ESP32-S3 7.0" Touch Instrument</h3>
+          <span class="hw-badge">RUGGED COCKPIT TERMINAL</span>
+          <h3 class="hw-title">Command Bridge & Vehicle Navigation Display (7.0" Touch)</h3>
           <p class="hw-desc">
-            Large-format rugged touchscreen telemetry station engineered for vehicle dashboards, marine bridge consoles, and field expedition command desks.
+            Large-format rugged touchscreen telemetry instrument engineered for tactical overland vehicle dashboards, marine bridge consoles, search & rescue command vehicles, and expedition cockpits.
           </p>
           <ul class="hw-specs-list">
             <li>
-              <span>&bull;</span>
-              <div><strong>Display & Touch:</strong> 7.0-inch 800x480 RGB TFT display with 5-point capacitive touch, driven by custom LVGL 8/9 GUI components.</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>High-Visibility Optical Bonding:</strong> 7.0-inch 800x480 high-contrast daylight-readable display with multi-point capacitive touch, optimized for gloved operation and harsh glare.</div>
             </li>
             <li>
-              <span>&bull;</span>
-              <div><strong>Dual Hardware UARTs:</strong> Isolated high-speed serial channels for simultaneous GNSS receiver communication and external vehicle bus telemetry.</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>Dual Isolated High-Speed Serial:</strong> Hardware-isolated serial channels for simultaneous GNSS receiver communication and vehicle bus telemetry integration.</div>
             </li>
             <li>
-              <span>&bull;</span>
-              <div><strong>Local Telemetry Logging:</strong> MicroSD slot with FAT32 file system for high-frequency continuous NMEA 0183 and GPX recording.</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>Solid-State Local Logging:</strong> Integrated non-volatile storage slot supporting high-frequency continuous NMEA 0183 and GPX route recording without host dependencies.</div>
             </li>
             <li>
-              <span>&bull;</span>
-              <div><strong>Power Management:</strong> Wide-input 9-36V DC buck regulator with reverse-polarity protection and transient suppression for field vehicles.</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>Industrial Vehicle Power:</strong> Wide-input 9–36V DC power regulation with reverse-polarity protection, transient voltage suppression, and marine surge immunity.</div>
             </li>
           </ul>
-          <a href="downloads.html" class="btn btn-secondary" style="margin-top:auto;">View Display Schematic & Specs &rarr;</a>
+          <a href="products.html" class="btn btn-secondary" style="margin-top:auto;">View Console Specifications &rarr;</a>
         </div>
 
-        <!-- Hardware Item 3: EXOS-C5 Touch Portable Navigator -->
+        <!-- Hardware Platform 3 -->
         <div class="hw-card">
-          <span class="hw-badge">HANDHELD INSTRUMENT</span>
-          <h3 class="hw-title">EXOS-C5 Portable Touch Navigation Unit</h3>
+          <span class="hw-badge">HANDHELD FIELD INSTRUMENT</span>
+          <h3 class="hw-title">Tactical Handheld Navigator & Dismounted Instrument</h3>
           <p class="hw-desc">
-            Ultra-compact handheld field navigation instrument engineered around low-power ESP32 architecture with integrated environmental and heading sensors.
+            Ultra-compact handheld telemetry terminal and directional waypoint guide for dismounted field operators, alpine expeditions, and search & rescue personnel.
           </p>
           <ul class="hw-specs-list">
             <li>
-              <span>&bull;</span>
-              <div><strong>Ultra-Low Power:</strong> Tailored power budgeting with deep sleep current below 15 &micro;A and rapid wake-on-interrupt.</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>Autonomous Sensor Fusion:</strong> Integrated 3-axis solid-state magnetic compass for tilt-compensated azimuth heading and precision barometric altimeter for altitude tracking.</div>
             </li>
             <li>
-              <span>&bull;</span>
-              <div><strong>Sensor Integration:</strong> Bosch BMM150 3-axis magnetometer for tilt-compensated azimuth and ST LPS22HB barometric altimeter.</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>Ultra-Low Power Budgeting:</strong> Engineered power management delivering multi-day operational endurance with intelligent micro-sleep states below 15 &micro;A.</div>
             </li>
             <li>
-              <span>&bull;</span>
-              <div><strong>Power Subsystem:</strong> Integrated LiPo charge management with I2C fuel gauge for precise battery state-of-charge monitoring.</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>Integrated Energy Subsystem:</strong> Sealed Li-Ion/LiPo battery management with hardware fuel gauge for precise state-of-charge calculation across extreme temperatures.</div>
+            </li>
+            <li>
+              <span class="bullet">&bull;</span>
+              <div><strong>Rugged Ergonomic Form Factor:</strong> Impact-resistant polycarbonate/elastomer chassis engineered to withstand drop impacts and heavy precipitation.</div>
             </li>
           </ul>
-          <a href="downloads.html" class="btn btn-secondary" style="margin-top:auto;">View Handheld Schematics &rarr;</a>
+          <a href="products.html" class="btn btn-secondary" style="margin-top:auto;">View Handheld Specifications &rarr;</a>
         </div>
 
-        <!-- Hardware Item 4: Custom PCB & RF Engineering -->
+        <!-- Hardware Platform 4 -->
         <div class="hw-card">
-          <span class="hw-badge">PCB & RF ENGINEERING</span>
-          <h3 class="hw-title">Custom Circuit Design & RF Matching</h3>
+          <span class="hw-badge">CUSTOM SYSTEMS & ODM</span>
+          <h3 class="hw-title">Custom RF Engineering & Embedded Telemetry Systems</h3>
           <p class="hw-desc">
-            From initial schematic capture and PCB layout to impedance-matched RF transmission lines and environmental validation.
+            End-to-end original design manufacturing (ODM), custom high-density multi-layer PCB layout, and embedded hardware engineering for mission-critical environmental monitoring and fleet operations.
           </p>
           <ul class="hw-specs-list">
             <li>
-              <span>&bull;</span>
-              <div><strong>RF Transmission Design:</strong> 50-ohm microstrip impedance control for 2.4GHz Wi-Fi/Bluetooth and active GNSS patch antennas.</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>Impedance-Matched RF Layout:</strong> 50-ohm microstrip design for high-gain multi-band GNSS patch antennas, active external low-noise amplifiers, and local wireless networks.</div>
             </li>
             <li>
-              <span>&bull;</span>
-              <div><strong>Thermal & Environmental:</strong> Industrial temperature rating (-40&deg;C to +85&deg;C) with conformal coating for marine and high-humidity field use.</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>Thermal & Environmental Hardening:</strong> Industrial temperature validation (-40&deg;C to +85&deg;C) with specialized conformal coating for marine humidity and chemical resistance.</div>
             </li>
             <li>
-              <span>&bull;</span>
-              <div><strong>Regulatory Readiness:</strong> Designed to pass FCC Part 15 and CE RED electromagnetic compliance standards.</div>
+              <span class="bullet">&bull;</span>
+              <div><strong>Regulatory Pre-Compliance:</strong> Engineered to meet international FCC Part 15 and CE RED electromagnetic compatibility and emission standards.</div>
             </li>
           </ul>
-          <a href="support.html" class="btn btn-secondary" style="margin-top:auto;">Inquire for Custom Engineering &rarr;</a>
+          <a href="support.html" class="btn btn-secondary" style="margin-top:auto;">Inquire for Custom Systems &rarr;</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ========================================================================= -->
-  <!-- 2. FIRMWARE & PROTOCOLS ARCHITECTURE                                      -->
+  <!-- 2. FIRMWARE & SYSTEMS ARCHITECTURE (REPLACING CODE SNIPPETS)              -->
   <!-- ========================================================================= -->
-  <section class="section section-slate" id="firmware">
+  <section class="section section-slate" id="architecture">
     <div class="container">
       <div class="section-header">
-        <span class="section-eyebrow">Firmware Engineering</span>
-        <h2 class="section-title">Deterministic FreeRTOS & Network Stacks</h2>
+        <span class="section-eyebrow">Systems Architecture & Reliability</span>
+        <h2 class="section-title">Deterministic Edge Processing & Real-Time Pipeline</h2>
         <p class="section-desc">
-          Our embedded firmware is built in C++ using PlatformIO and ESP-IDF, leveraging FreeRTOS preemptive multitasking to ensure zero dropped satellite sentences.
+          Our embedded firmware architecture guarantees deterministic multi-tasking and sub-millisecond telemetry dispatch under heavy operational loads without dropping a single satellite fix.
         </p>
       </div>
 
-      <div class="firmware-grid">
-        <div>
-          <h3 style="font-size:clamp(1.25rem, 3.5vw, 1.55rem); font-weight:800; color:var(--text-heading); margin-bottom:14px; line-height:1.3; word-break:break-word;">
-            Non-Blocking Architecture & Bounded Queues
-          </h3>
-          <p style="color:var(--text-body); margin-bottom:20px; font-size:0.95rem; line-height:1.65;">
-            The EXOS-Station firmware isolates the high-speed UART GPS ingress task on Core 0 from the Wi-Fi/BLE network distribution task on Core 1. A bounded ring buffer ensures that slow or disconnecting wireless clients cannot cause backpressure or buffer bloat on the raw GNSS stream.
-          </p>
+      <div class="edge-grid">
+        <!-- 4 Architectural Pillars -->
+        <div class="pillars-stack">
+          <div class="pillar-card">
+            <div class="pillar-icon">&#x2699;&#xFE0F;</div>
+            <div class="pillar-text">
+              <h4>Dual-Core Hardware Task Isolation</h4>
+              <p>Hardware-level separation allocates high-frequency satellite and sensor DMA ingestion exclusively to a dedicated processing core, while the secondary core handles authenticated wireless broadcast and network sockets.</p>
+            </div>
+          </div>
 
-          <div class="fw-features-grid">
-            <div class="fw-feature-item">
-              <div class="fw-icon">&#x2699;&#xFE0F;</div>
-              <div>
-                <strong>Dedicated Core Pinning</strong>
-                <p>UART DMA interrupt servicing pinned to Core 0; network sockets pinned to Core 1.</p>
-              </div>
+          <div class="pillar-card">
+            <div class="pillar-icon">&#x1F504;</div>
+            <div class="pillar-text">
+              <h4>Bounded Non-Blocking Buffers</h4>
+              <p>Strictly bounded memory ring buffers prevent slow wireless clients, intermittent connection drops, or sudden Wi-Fi reconnects from creating backpressure on the primary navigation data stream.</p>
             </div>
-            <div class="fw-feature-item">
-              <div class="fw-icon">&#x1F510;</div>
-              <div>
-                <strong>Authenticated BLE Pairing</strong>
-                <p>LE Secure Connections with MITM protection and numeric comparison.</p>
-              </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon">&#x1F4E1;</div>
+            <div class="pillar-text">
+              <h4>Air-Gapped Local Socket Engine</h4>
+              <p>High-throughput onboard NMEA 0183 TCP server and RESTful JSON telemetry engine allow mobile apps and navigation computers to ingest fixes directly over local Wi-Fi or Bluetooth LE with zero cloud reliance.</p>
             </div>
-            <div class="fw-feature-item">
-              <div class="fw-icon">&#x1F4E1;</div>
-              <div>
-                <strong>Local JSON Telemetry API</strong>
-                <p>Real-time constellation metadata exposed over REST at <code>/api/telemetry</code>.</p>
-              </div>
-            </div>
-            <div class="fw-feature-item">
-              <div class="fw-icon">&#x1F504;</div>
-              <div>
-                <strong>Cryptographic OTA Updates</strong>
-                <p>Over-The-Air firmware updates protected by cryptographic authentication.</p>
-              </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon">&#x1F510;</div>
+            <div class="pillar-text">
+              <h4>Cryptographic Firmware Integrity</h4>
+              <p>Cryptographically signed firmware updates, tamper-evident boot verification, and LE Secure Connections with dynamic passkeys protect deployed field units against unauthorized modification.</p>
             </div>
           </div>
         </div>
 
-        <div>
-          <div class="code-terminal">
-            <div class="code-terminal-header">
-              <div class="code-dots">
-                <span class="code-dot dot-red"></span>
-                <span class="code-dot dot-yellow"></span>
-                <span class="code-dot dot-green"></span>
+        <!-- Visual Architecture Flow Diagram -->
+        <div class="flow-diagram-box">
+          <div class="flow-diagram-title">Real-Time Telemetry Pipeline (Zero Backpressure)</div>
+          <div class="flow-steps-list">
+            <div class="flow-node">
+              <div class="flow-node-content">
+                <h5>1. Orbital Constellation Ingress</h5>
+                <p>GPS &bull; GLONASS &bull; Galileo &bull; BeiDou (Active Antenna)</p>
               </div>
-              <span class="code-title">exos_station_main.cpp</span>
-              <span class="code-badge">ESP-IDF &bull; FreeRTOS</span>
+              <span class="flow-badge-metric">25Hz Multi-GNSS</span>
             </div>
-            <pre class="code-terminal-body"><span style="color:#64748b;">// EXOS-Station: ESP32-S3 Hardware Pinout</span>
-<span style="color:#38bdf8;">#define</span> GPS_RX_PIN  <span style="color:#a5f3fc;">GPIO_NUM_44</span>  <span style="color:#64748b;">// u-blox TX</span>
-<span style="color:#38bdf8;">#define</span> GPS_TX_PIN  <span style="color:#a5f3fc;">GPIO_NUM_43</span>  <span style="color:#64748b;">// u-blox RX</span>
-<span style="color:#38bdf8;">#define</span> STATUS_LED  <span style="color:#a5f3fc;">GPIO_NUM_21</span>  <span style="color:#64748b;">// Status LED</span>
-<span style="color:#38bdf8;">#define</span> GPS_BAUD    <span style="color:#fde047;">38400</span>        <span style="color:#64748b;">// High-Speed UART</span>
-
-<span style="color:#64748b;">// FreeRTOS Deterministic Core Pinning</span>
-xTaskCreatePinnedToCore(
-    gpsUartTask, <span style="color:#a5f3fc;">"GPS_UART"</span>, <span style="color:#fde047;">4096</span>,
-    NULL, <span style="color:#fde047;">3</span>, NULL, <span style="color:#fde047;">0</span>  <span style="color:#64748b;">// Core 0: Ingress DMA</span>
-);
-xTaskCreatePinnedToCore(
-    networkTask, <span style="color:#a5f3fc;">"NET_DIST"</span>, <span style="color:#fde047;">8192</span>,
-    NULL, <span style="color:#fde047;">2</span>, NULL, <span style="color:#fde047;">1</span>  <span style="color:#64748b;">// Core 1: Wi-Fi/BLE</span>
-);</pre>
+            <div class="flow-connector">&#x25BC;</div>
+            <div class="flow-node">
+              <div class="flow-node-content">
+                <h5>2. Isolated Ingress DMA Task</h5>
+                <p>Hardware Interrupt Servicing & Sentence Validation</p>
+              </div>
+              <span class="flow-badge-metric">Core 0 (Pinned)</span>
+            </div>
+            <div class="flow-connector">&#x25BC;</div>
+            <div class="flow-node">
+              <div class="flow-node-content">
+                <h5>3. Bounded Zero-Loss Ring Buffer</h5>
+                <p>Lock-Free Queue Pacing & Buffer Bloat Prevention</p>
+              </div>
+              <span class="flow-badge-metric">&lt; 1ms Latency</span>
+            </div>
+            <div class="flow-connector">&#x25BC;</div>
+            <div class="flow-node">
+              <div class="flow-node-content">
+                <h5>4. Secure Multi-Channel Broadcast</h5>
+                <p>Wi-Fi AP Socket (TCP 2000) & Bluetooth LE SPP</p>
+              </div>
+              <span class="flow-badge-metric">Core 1 (Pinned)</span>
+            </div>
+            <div class="flow-connector">&#x25BC;</div>
+            <div class="flow-node">
+              <div class="flow-node-content">
+                <h5>5. Mission Displays & Operator Endpoints</h5>
+                <p>EXOS Transceiver, Wayfinder, Cockpit Terminals, Windows</p>
+              </div>
+              <span class="flow-badge-metric">100% Offline</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1078,7 +1200,7 @@ xTaskCreatePinnedToCore(
   </section>
 
   <!-- ========================================================================= -->
-  <!-- 3. SOFTWARE SHOWCASE: THE EXOS ECOSYSTEM (EXACT 4-PRODUCT ORDER)          -->
+  <!-- 3. SOFTWARE SHOWCASE: THE EXOS ECOSYSTEM                                  -->
   <!-- ========================================================================= -->
   <section class="section" id="software">
     <div class="container">
@@ -1086,7 +1208,7 @@ xTaskCreatePinnedToCore(
         <span class="section-eyebrow">Companion Software Ecosystem</span>
         <h2 class="section-title">The EXOS Navigation Platform</h2>
         <p class="section-desc">
-          To accompany our ESP32 hardware, RiTym Technologies develops four native software applications for Android, Wear OS, and Windows.
+          To accompany our field telemetry hardware, RiTym Technologies develops four native software applications for Android, Wear OS, and Windows Desktop.
         </p>
       </div>
 
@@ -1096,10 +1218,10 @@ xTaskCreatePinnedToCore(
           <span class="sw-tag">PLATFORM 01</span>
           <h3 class="sw-title">EXOS Transceiver</h3>
           <p class="sw-desc">
-            Bluetooth GNSS transmitter, receiver bridge, and telemetry station. Streams raw NMEA sentences over Bluetooth SPP/BLE and injects satellite fixes into Android via Mock Location.
+            Industrial Bluetooth GNSS bridge, satellite signal analyzer, and Android Mock Location provider. Directly streams raw NMEA 0183 data into any mobile GIS or aviation app.
           </p>
-          <div style="display:flex; flex-direction:column; gap:6px; margin-top:auto;">
-            <a href="https://exosgps.com/#transceiver" target="_blank" rel="noopener">EXOS Portal Specs &rarr;</a>
+          <div class="sw-links">
+            <a href="https://exosgps.com/#transceiver" target="_blank" rel="noopener">EXOS Platform Specs &rarr;</a>
             <a href="https://play.google.com/store/apps/details?id=com.ritym.exosgps" target="_blank" rel="noopener" style="color:var(--text-muted);">Google Play Store &nearr;</a>
           </div>
         </div>
@@ -1109,10 +1231,10 @@ xTaskCreatePinnedToCore(
           <span class="sw-tag">PLATFORM 02</span>
           <h3 class="sw-title">EXOS Wayfinder</h3>
           <p class="sw-desc">
-            Standalone backcountry navigation with offline vector topo maps, MGRS/UTM military grid references, trail breadcrumb recording, and reverse backtrack guidance.
+            Standalone backcountry navigation with offline vector topographic maps, MGRS/UTM tactical coordinates, breadcrumb trail recording, and reverse backtrack guidance.
           </p>
-          <div style="display:flex; flex-direction:column; gap:6px; margin-top:auto;">
-            <a href="https://exosgps.com/#wayfinder" target="_blank" rel="noopener">EXOS Portal Specs &rarr;</a>
+          <div class="sw-links">
+            <a href="https://exosgps.com/#wayfinder" target="_blank" rel="noopener">EXOS Platform Specs &rarr;</a>
             <a href="https://play.google.com/store/apps/details?id=com.exos.wayfinder" target="_blank" rel="noopener" style="color:var(--text-muted);">Google Play Store &nearr;</a>
           </div>
         </div>
@@ -1122,11 +1244,11 @@ xTaskCreatePinnedToCore(
           <span class="sw-tag">PLATFORM 03</span>
           <h3 class="sw-title">EXOS ECHO</h3>
           <p class="sw-desc">
-            Off-grid digital walkie-talkie connecting Android devices over Wi-Fi Direct and BLE mesh with low-latency push-to-talk voice, offline text chat, and distress beacons.
+            Off-grid digital walkie-talkie connecting mobile field units over Wi-Fi Direct and BLE radio mesh with push-to-talk voice, offline text messaging, and emergency beacons.
           </p>
-          <div style="display:flex; flex-direction:column; gap:6px; margin-top:auto;">
-            <a href="https://exosgps.com/#echo" target="_blank" rel="noopener">EXOS Portal Specs &rarr;</a>
-            <a href="https://exosgps.com/#getting-started" target="_blank" rel="noopener" style="color:var(--text-muted);">Beta Testing &nearr;</a>
+          <div class="sw-links">
+            <a href="https://exosgps.com/#echo" target="_blank" rel="noopener">EXOS Platform Specs &rarr;</a>
+            <a href="https://exosgps.com/#getting-started" target="_blank" rel="noopener" style="color:var(--text-muted);">Field Deployment Guide &nearr;</a>
           </div>
         </div>
 
@@ -1135,19 +1257,122 @@ xTaskCreatePinnedToCore(
           <span class="sw-tag">PLATFORM 04</span>
           <h3 class="sw-title">Exos Watchout</h3>
           <p class="sw-desc">
-            Precision Wear OS analog chronograph watch face paired with an instant 3D tilt-compensated compass companion, dual color themes (Obsidian Teal & Heritage Orange), and low-power AOD.
+            Precision Wear OS tactical analog chronograph watch face paired with a 3D tilt-compensated magnetic compass companion, dual color themes, and battery-optimized AOD.
           </p>
-          <div style="display:flex; flex-direction:column; gap:6px; margin-top:auto;">
-            <a href="https://exosgps.com/#watchout" target="_blank" rel="noopener">EXOS Portal Specs &rarr;</a>
+          <div class="sw-links">
+            <a href="https://exosgps.com/#watchout" target="_blank" rel="noopener">EXOS Platform Specs &rarr;</a>
             <a href="https://play.google.com/store/apps/details?id=exos.ritym.watchout.watchface" target="_blank" rel="noopener" style="color:var(--text-muted);">Google Play Store &nearr;</a>
           </div>
         </div>
       </div>
 
-      <div style="text-align:center; margin-top:48px;">
+      <div style="text-align:center; margin-top:44px;">
         <a href="https://exosgps.com" target="_blank" rel="noopener" class="btn btn-primary">
-          Visit Dedicated EXOS Navigation Systems Portal &nearr;
+          Explore Complete EXOS Navigation Portal &nearr;
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 4. OPERATIONAL SECTORS & APPLICATIONS                                     -->
+  <!-- ========================================================================= -->
+  <section class="section section-dark" id="sectors">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow section-eyebrow-dark">Operational Sectors</span>
+        <h2 class="section-title section-title-dark">Mission-Critical Field Deployments</h2>
+        <p class="section-desc" style="color:#94a3b8;">
+          RiTym Technologies platforms are engineered to maintain high-precision positioning and situational awareness where commercial telecom networks fail.
+        </p>
+      </div>
+
+      <div class="sector-grid">
+        <div class="sector-card">
+          <div class="sector-icon">&#x1F691;</div>
+          <h3>Search & Rescue (SAR)</h3>
+          <p>Rapidly deployable telemetry beacons and offline mesh comms for wilderness rescue teams operating outside cellular coverage.</p>
+        </div>
+
+        <div class="sector-card">
+          <div class="sector-icon">&#x26F5;</div>
+          <h3>Maritime & Coastal Vessels</h3>
+          <p>Rugged marine bridge consoles, NMEA 0183 heading distribution, and water-sealed GPS receivers for offshore navigation.</p>
+        </div>
+
+        <div class="sector-card">
+          <div class="sector-icon">&#x1F69B;</div>
+          <h3>Expedition & Overland Convoys</h3>
+          <p>Continuous vehicle telemetry, off-grid convoy tracking, and waypoint guidance for trans-continental overland expeditions.</p>
+        </div>
+
+        <div class="sector-card">
+          <div class="sector-icon">&#x1F3D7;&#xFE0F;</div>
+          <h3>Surveying & Critical Infrastructure</h3>
+          <p>High-rate multi-constellation satellite logging for remote pipeline surveying, forestry mapping, and environmental research stations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 5. SECURITY & AIR-GAPPED PRIVACY MANDATE                                  -->
+  <!-- ========================================================================= -->
+  <section class="section">
+    <div class="container">
+      <div class="privacy-banner-card">
+        <div class="privacy-banner-grid">
+          <div>
+            <div class="privacy-badge">&#x1F6E1;&#xFE0F; AIR-GAPPED BY DESIGN</div>
+            <h3 style="font-size:1.85rem; font-weight:800; line-height:1.25; margin-bottom:14px;">
+              Zero Cloud Telemetry. 100% On-Premises Privacy.
+            </h3>
+            <p style="color:#cbd5e1; font-size:0.95rem; line-height:1.65; margin-bottom:20px;">
+              RiTym Technologies hardware and EXOS software do not route your location fixes, coordinates, or telemetry through central servers. Our systems operate entirely locally over direct Wi-Fi and Bluetooth channels, ensuring absolute confidentiality for mission-critical field operations.
+            </p>
+            <a href="security.html" class="btn btn-secondary">Read Full Security Architecture &rarr;</a>
+          </div>
+
+          <div class="privacy-features-list">
+            <div class="privacy-feature-item">
+              <b>No Account Required</b>
+              <p>Hardware and apps function out-of-the-box without sign-ups or profiling.</p>
+            </div>
+            <div class="privacy-feature-item">
+              <b>No Cloud Relay</b>
+              <p>Direct device-to-device local communications without internet routing.</p>
+            </div>
+            <div class="privacy-feature-item">
+              <b>Local Data Ownership</b>
+              <p>All NMEA sentences, GPX tracks, and logs remain on your local storage.</p>
+            </div>
+            <div class="privacy-feature-item">
+              <b>LE Secure Pairing</b>
+              <p>Cryptographic Bluetooth pairing prevents unauthorized local tapping.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 6. CUSTOMER PORTAL & LICENSING BANNER                                     -->
+  <!-- ========================================================================= -->
+  <section class="section section-slate">
+    <div class="container">
+      <div class="portal-banner">
+        <div>
+          <h3>Enterprise Customer & Licensing Portal</h3>
+          <p>
+            Access your RiTym customer account to activate device licenses, download official software builds, manage commercial fleet volume seats, and retrieve tax invoices.
+          </p>
+        </div>
+        <div style="flex-shrink:0;">
+          <a href="portal.html" class="btn btn-secondary" style="font-size:1.02rem; padding:14px 28px;">
+            Open Customer Portal &rarr;
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -1159,23 +1384,24 @@ xTaskCreatePinnedToCore(
     <div class="container">
       <div class="footer-grid">
         <div>
-          <img src="assets/exos_logo_dark.png" alt="RiTym Technologies Logo" class="footer-logo">
+          <img src="assets/ritym_logo.png" alt="RiTym Technologies Logo" class="footer-logo">
           <p class="footer-desc">
-            <strong>RiTym Technologies</strong> is an electronics, embedded systems, and software engineering company. We design and build custom ESP32 hardware, real-time FreeRTOS firmware, and high-reliability offline navigation applications.
+            <strong>RiTym Technologies</strong> is an enterprise electronics, embedded systems, and mission-critical software engineering company. We design autonomous field telemetry instruments, cockpit navigation consoles, and the EXOS positioning ecosystem.
           </p>
-          <div style="font-size: 0.84rem; color: #cbd5e1;">
+          <div style="font-size: 0.84rem; color: #94a3b8;">
             Official Portal: <a href="https://ritym.com" style="color: #38bdf8;">ritym.com</a> &bull; Flagship Division: <a href="https://exosgps.com" target="_blank" rel="noopener" style="color: #38bdf8;">exosgps.com &nearr;</a>
           </div>
         </div>
 
         <div>
-          <h4 class="footer-title">Hardware & Systems</h4>
+          <h4 class="footer-title">Hardware Platforms</h4>
           <ul class="footer-links">
-            <li><a href="#hardware">ESP32-S3 GNSS Station</a></li>
-            <li><a href="#hardware">7.0" Touch Instrument</a></li>
-            <li><a href="#hardware">EXOS-C5 Portable Unit</a></li>
-            <li><a href="#firmware">FreeRTOS Firmware</a></li>
-            <li><a href="downloads.html">Schematics & Pinouts</a></li>
+            <li><a href="#hardware">Tactical GNSS Base Station</a></li>
+            <li><a href="#hardware">Command Bridge Display (7.0")</a></li>
+            <li><a href="#hardware">Handheld Navigator Instrument</a></li>
+            <li><a href="#architecture">Real-Time Edge Architecture</a></li>
+            <li><a href="products.html">Hardware Catalog & Specs</a></li>
+            <li><a href="downloads.html">Technical Documentation</a></li>
           </ul>
         </div>
 
@@ -1186,19 +1412,20 @@ xTaskCreatePinnedToCore(
             <li><a href="https://exosgps.com/#wayfinder" target="_blank">2. EXOS Wayfinder</a></li>
             <li><a href="https://exosgps.com/#echo" target="_blank">3. EXOS ECHO</a></li>
             <li><a href="https://exosgps.com/#watchout" target="_blank">4. Exos Watchout</a></li>
-            <li><a href="https://exosgps.com" target="_blank">EXOS Portal</a></li>
+            <li><a href="portal.html">Customer & License Portal</a></li>
           </ul>
         </div>
 
         <div>
           <h4 class="footer-title">Compliance & Support</h4>
           <ul class="footer-links">
+            <li><a href="portal.html">License Activation & Invoices</a></li>
             <li><a href="privacy.html">Privacy Policy</a></li>
             <li><a href="terms.html">Terms of Service</a></li>
             <li><a href="refund.html">Refund & Cancellation</a></li>
-            <li><a href="support.html">Customer Care & Grievance</a></li>
+            <li><a href="security.html">Security Architecture</a></li>
+            <li><a href="support.html">Customer Care & Support</a></li>
             <li><a href="mailto:assist@ritym.com">assist@ritym.com</a></li>
-            <li><a href="tel:+917996753319">+91 7996753319</a></li>
           </ul>
         </div>
       </div>
@@ -1208,7 +1435,7 @@ xTaskCreatePinnedToCore(
           &copy; 2026 RiTym Technologies. All rights reserved.
         </div>
         <div>
-          ESP32 Electronics &bull; FreeRTOS Embedded Systems &bull; 100% Offline-First Privacy
+          Autonomous Field Telemetry &bull; Real-Time Edge Computing &bull; 100% Offline Privacy
         </div>
       </div>
     </div>
