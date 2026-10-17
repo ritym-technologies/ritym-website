@@ -1,0 +1,32 @@
+{
+  "VideoAndAudioFullDecode": "Passed",
+  "BrandingSourceHashes": [
+    {
+      "SHA256": "785825E6F6451D0D8B616F7B1FE90F6185B8541E050051E335604E2E1391C031",
+      "File": "src/ui/index.html"
+    },
+    {
+      "SHA256": "EF596217259539B81730B193A94382DB0478EEA9BF58B273D8FF94DD554B30A0",
+      "File": "src/ui/css/style.css"
+    },
+    {
+      "SHA256": "6E8BEC5097B40509DB78A0E2765CACE326E3269F0EA61115FDE06767E381FA62",
+      "File": "src/ui/js/app.js"
+    },
+    {
+      "SHA256": "A9EA36DDBAFF55EE582CD47721A8553E121524E4838476E4184D9CCB25F58041",
+      "File": "docs/PULSESTAGE-USER-GUIDE.md"
+    }
+  ],
+  "VideoSeconds": 311.375,
+  "Date": "2026-10-17",
+  "LiveSoftwareChecks": [
+    "CC11 received 20 then 100",
+    "CC64 indicator on then off",
+    "PC24 received as preset025",
+    "120BPM received; clock stopped",
+    "RX note60 on/off observed"
+  ],
+  "VideoSHA256": "8E00B14CED0D1651FCB48FA097CBDBCED90BAC288E0EBEA591509C6E9DCD81E4",
+  "PhysicalHardwareTested": false
+}

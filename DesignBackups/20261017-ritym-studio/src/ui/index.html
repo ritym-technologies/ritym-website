@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseStage MIDI - Professional Stage Control & Practice Lab</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="stage-dark">
+  <!-- Top Global Bar -->
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="12" cy="7" r="1.5" fill="currentColor"/>
+          <circle cx="8" cy="10" r="1.5" fill="currentColor"/>
+          <circle cx="16" cy="10" r="1.5" fill="currentColor"/>
+          <circle cx="7" cy="14" r="1.5" fill="currentColor"/>
+          <circle cx="17" cy="14" r="1.5" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="app-name">PulseStage</span>
+        <span class="app-tag">STAGE-READY MIDI & PRACTICE LAB</span>
+      </div>
+    </div>
+
+    <!-- Prominent Signal Flow HUD (Clarifies Input vs Output & RX vs TX) -->
+    <div class="signal-flow-hud" title="Live Signal Flow: Input Source (RX) ➔ PulseStage Engine ➔ Output Destination (TX)">
+      <div class="hud-flow-node flow-in" id="hud-in-node">
+        <span class="flow-icon">🎹</span>
+        <div class="flow-meta">
+          <span class="flow-label">INPUT SOURCE (IN)</span>
+          <span class="flow-val" id="hud-in-name">Monitoring Inactive</span>
+        </div>
+        <span class="flow-badge badge-rx" id="hud-rx-badge">RX: 0</span>
+      </div>
+
+      <div class="hud-flow-arrow">➔</div>
+
+      <div class="hud-flow-node flow-engine">
+        <span class="flow-icon">🎛️</span>
+        <div class="flow-meta">
+          <span class="flow-label">PULSESTAGE</span>
+          <div class="hud-clock-indicator">
+            <div class="clock-light" id="clock-pulse-light"></div>
+            <span class="flow-val" id="hud-bpm-val">120.0 BPM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hud-flow-arrow">➔</div>
+
+      <div class="hud-flow-node flow-out" id="hud-out-box">
+        <span class="flow-icon">🎸</span>
+        <div class="flow-meta">
+          <span class="flow-label">OUTPUT DESTINATION (TX)</span>
+          <span class="flow-val" id="hud-out-name">No Output Selected</span>
+        </div>
+        <span class="flow-badge badge-tx" id="hud-tx-badge">TX: 0</span>
+      </div>
+    </div>
+
+    <!-- Quick Jump to Monitor & Emergency Controls -->
+    <div class="emergency-bar">
+      <button class="btn btn-outline btn-jump-mon" id="btn-jump-monitor" title="Jump directly to the Diagnostic Monitor view">
+        <span class="btn-icon">📊</span> JUMP TO MONITOR
+      </button>
+      <button class="btn btn-warning" id="btn-emergency-stop" title="Stop clock & halt active macros">
+        <span class="btn-icon">&#9632;</span> STOP ALL
+      </button>
+      <button class="btn btn-panic" id="btn-panic" title="Safe Panic: CC 123 All Notes Off + CC 120 All Sound Off + CC 64 Sustain Off (Esc)">
+        <span class="btn-icon">&#9888;</span> PANIC (ALL OFF)
+      </button>
+    </div>
+  </header>
+
+  <!-- Top Navigation Tabs -->
+  <nav class="app-nav-tabs">
+    <button class="nav-tab active" id="tab-btn-stage" data-target="view-stage">
+      <span class="tab-icon">🎛️</span> Stage Control
+    </button>
+    <button class="nav-tab" id="tab-btn-practice" data-target="view-practice">
+      <span class="tab-icon">🧪</span> Practice & Test Lab
+      <span class="nav-badge-pill">Guided Tests</span>
+    </button>
+    <button class="nav-tab" id="tab-btn-monitor" data-target="view-monitor">
+      <span class="tab-icon">📊</span> Diagnostic Monitor
+      <span class="nav-badge-pill" id="nav-mon-pill">Live Log</span>
+    </button>
+    <button class="nav-tab" id="tab-btn-settings" data-target="view-settings">
+      <span class="tab-icon">⚙️</span> Studio & Musician Settings
+    </button>
+  </nav>
+
+  <!-- Notification Banner -->
+  <div id="notice-banner" class="notice-banner hidden">
+    <span id="notice-icon">&#9432;</span>
+    <span id="notice-text">Notice</span>
+    <button class="notice-close" onclick="dismissNotice()">&times;</button>
+  </div>
+
+  <!-- TAB 1: STAGE CONTROL VIEW -->
+  <main class="main-layout tab-view" id="view-stage">
+    <!-- Left Column: Primary Workflows -->
+    <div class="left-pane">
+      <!-- 1. Connections Card -->
+      <section class="card" id="card-connections">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="step-num">1</span>
+            <h2>Device Connections</h2>
+          </div>
+          <button class="btn-sm btn-ghost" id="btn-refresh-ports" title="Scan for newly connected USB gear">Refresh</button>
+        </div>
+
+        <div class="port-selectors-grid">
+          <div class="form-group">
+            <div class="label-with-hint">
+              <label for="select-output-port">Output Destination (TX - Send To):</label>
+              <span class="hint-tag" title="Where commands generated by PulseStage are sent">Commands Destination</span>
+            </div>
+            <div class="select-wrapper">
+              <select id="select-output-port">
+                <option value="">-- Choose Output Port --</option>
+              </select>
+            </div>
+            <div class="port-status-bar" id="out-port-status">Status: Waiting for selection</div>
+          </div>
+
+          <div class="form-group">
+            <div class="label-with-hint">
+              <label for="select-input-port">Input Source (RX - Listen From):</label>
+              <span class="hint-tag" title="Where incoming MIDI messages arrive (NOT audio mic)">Digital MIDI In</span>
+            </div>
+            <div class="select-wrapper">
+              <select id="select-input-port">
+                <option value="">-- Choose Input Port --</option>
+              </select>
+            </div>
+            <div class="port-status-bar" id="in-port-status">Status: Monitoring inactive</div>
+          </div>
+        </div>
+
+        <!-- Quick Connection Guidance Note -->
+        <div class="connection-tip-banner">
+          <span class="tip-icon">💡</span>
+          <span class="tip-text">
+            <b>Testing with Virtual Keyboard?</b> Set <b>Input Source</b> to <code>PulseStage Keyboard</code>.<br>
+            <b>Testing with Virtual Pedal?</b> Set <b>Output Destination</b> to <code>PulseStage Pedal Test</code>.
+          </span>
+        </div>
+      </section>
+
+      <!-- 2. Message Composer Card -->
+      <section class="card" id="card-send">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="step-num">2</span>
+            <h2>Command Composer</h2>
+          </div>
+          <div class="preset-index-toggle">
+            <span class="toggle-label">Preset Display:</span>
+            <button class="toggle-btn active" id="btn-toggle-zero" data-val="0-127">0–127</button>
+            <button class="toggle-btn" id="btn-toggle-one" data-val="1-128">1–128</button>
+          </div>
+        </div>
+
+        <div class="composer-grid">
+          <!-- Step 2: Channel -->
+          <div class="form-group">
+            <label for="select-channel">MIDI Channel:</label>
+            <select id="select-channel" class="channel-select">
+              <!-- Channels 1 to 16 generated dynamically -->
+            </select>
+          </div>
+
+          <!-- Step 3: Command Type -->
+          <div class="form-group">
+            <label for="select-command-type">Command Type:</label>
+            <select id="select-command-type">
+              <option value="PROGRAM_CHANGE">Change Preset (Program Change)</option>
+              <option value="CONTROL_CHANGE">Control Parameter (Control Change)</option>
+              <option value="BANK_SELECT_PC">Bank Select + Preset (CC 0 + CC 32 + PC)</option>
+            </select>
+          </div>
+
+          <!-- Step 4: Parameter Target (Dynamic) -->
+          <div class="form-group span-2" id="group-program-change">
+            <div class="label-with-hint">
+              <label for="input-program-num">Preset Number:</label>
+              <span class="hint-tag" id="hint-program-wire">Wire payload: 0x00 (0)</span>
+            </div>
+            <div class="number-input-row">
+              <input type="number" id="input-program-num" min="0" max="127" value="0" class="primary-num-input">
+              <div class="quick-preset-chips" id="quick-preset-chips">
+                <!-- Dynamically updated -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Control Change Controls -->
+          <div class="form-group span-2 hidden" id="group-control-change">
+            <div class="cc-header-row">
+              <div class="form-group-sub">
+                <label for="select-cc-num">Controller Number (CC):</label>
+                <select id="select-cc-num">
+                  <option value="11">CC 11: Expression</option>
+                  <option value="1">CC 1: Modulation</option>
+                  <option value="7">CC 7: Volume</option>
+                  <option value="64">CC 64: Sustain / Bypass Switch</option>
+                  <option value="93">CC 93: Tap Tempo</option>
+                  <option value="custom">Custom CC Number...</option>
+                </select>
+                <input type="number" id="input-cc-custom" min="0" max="127" placeholder="CC #" class="hidden mt-1">
+              </div>
+
+              <div class="form-group-sub">
+                <div class="label-with-hint">
+                  <label for="input-cc-val">Value (0-127):</label>
+                  <span class="val-badge" id="cc-val-badge">64</span>
+                </div>
+                <div class="range-row">
+                  <input type="range" id="range-cc-val" min="0" max="127" value="64" class="primary-slider">
+                  <input type="number" id="input-cc-val" min="0" max="127" value="64" class="val-num-input">
+                </div>
+                <div class="quick-cc-btns">
+                  <button type="button" class="btn-xs btn-outline" id="btn-cc-min">Min (0)</button>
+                  <button type="button" class="btn-xs btn-outline" id="btn-cc-mid">Mid (64)</button>
+                  <button type="button" class="btn-xs btn-outline" id="btn-cc-max">Max (127)</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bank Select + Program Change Controls -->
+          <div class="form-group span-2 hidden" id="group-bank-select">
+            <div class="bank-grid">
+              <div class="bank-item">
+                <label for="input-bank-msb">Bank MSB (CC 0):</label>
+                <input type="number" id="input-bank-msb" min="0" max="127" value="0">
+              </div>
+              <div class="bank-item">
+                <label for="input-bank-lsb">Bank LSB (CC 32):</label>
+                <input type="number" id="input-bank-lsb" min="0" max="127" value="0">
+              </div>
+              <div class="bank-item">
+                <label for="input-bank-pc">Preset Number:</label>
+                <input type="number" id="input-bank-pc" min="0" max="127" value="0">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="composer-footer">
+          <div class="feedback-strip">
+            <span class="feedback-status" id="feedback-status">Ready</span>
+            <span class="feedback-desc" id="feedback-desc">Configure command and click Send.</span>
+          </div>
+          <button class="btn btn-primary" id="btn-send-command">
+            <span class="btn-icon">&#10148;</span> Send Command (Enter)
+          </button>
+        </div>
+      </section>
+
+      <!-- 3. MIDI Clock Card -->
+      <section class="card" id="card-clock">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="step-num">3</span>
+            <h2>Stage MIDI Clock (24 PPQN)</h2>
+          </div>
+          <span class="badge" id="clock-status-badge">STOPPED</span>
+        </div>
+
+        <div class="clock-controls-grid">
+          <div class="tempo-dial-box">
+            <label for="input-bpm">Tempo (BPM):</label>
+            <div class="bpm-input-row">
+              <input type="number" id="input-bpm" min="40.0" max="300.0" step="0.5" value="120.0" class="primary-bpm-input">
+              <button class="btn btn-tap" id="btn-tap-tempo" title="Tap repeatedly in rhythm to set tempo">TAP (T)</button>
+            </div>
+            <div class="quick-bpm-chips">
+              <button class="bpm-chip" data-bpm="90">90</button>
+              <button class="bpm-chip" data-bpm="100">100</button>
+              <button class="bpm-chip" data-bpm="120">120</button>
+              <button class="bpm-chip" data-bpm="128">128</button>
+              <button class="bpm-chip" data-bpm="140">140</button>
+            </div>
+          </div>
+
+          <div class="transport-actions-box">
+            <label>Master Transport Control:</label>
+            <div class="transport-btn-row">
+              <button class="btn btn-success" id="btn-clock-start" title="Send Start (0xFA) and initiate 24 PPQN clock ticks">
+                <span class="btn-icon">&#9654;</span> Start
+              </button>
+              <button class="btn btn-outline" id="btn-clock-continue" title="Send Continue (0xFB) and resume clock">
+                <span class="btn-icon">&#9654;&#9654;</span> Continue
+              </button>
+              <button class="btn btn-danger" id="btn-clock-stop" title="Send Stop (0xFC) and halt clock ticks">
+                <span class="btn-icon">&#9632;</span> Stop
+              </button>
+            </div>
+            <span class="transport-hint">Clock broadcasts 24 pulses per quarter note on selected Output.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Saved Performance Actions (Macros) -->
+      <section class="card" id="card-actions">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="step-num">4</span>
+            <h2>Performance Action Pad (Solo / Macros)</h2>
+          </div>
+          <button class="btn-sm btn-outline" id="btn-new-action">+ New Action</button>
+        </div>
+
+        <div class="actions-pad-grid" id="actions-pad-container">
+          <!-- Populated dynamically with text nodes -->
+        </div>
+      </section>
+    </div>
+
+    <!-- Right Column: Diagnostic MIDI Monitor Preview (always accessible) -->
+    <div class="right-pane" id="pane-monitor-preview">
+      <section class="card monitor-card" id="card-monitor">
+        <div class="card-header monitor-header">
+          <div class="card-title">
+            <h2>Diagnostic Monitor</h2>
+            <div class="monitor-counters">
+              <span class="tag tag-tx" id="tag-tx-count" title="TX = Messages sent out by PulseStage">TX: 0</span>
+              <span class="tag tag-rx" id="tag-rx-count" title="RX = Messages received into PulseStage (e.g. keyboard)">RX: 0</span>
+              <span class="tag tag-clock" id="tag-clock-count" title="Ticks = 24 PPQN Realtime Clock pulses">Ticks: 0</span>
+            </div>
+          </div>
+
+          <div class="monitor-actions">
+            <button class="btn-sm btn-ghost" id="btn-pause-monitor" title="Pause display without stopping MIDI">Pause</button>
+            <button class="btn-sm btn-ghost" id="btn-clear-monitor" title="Clear monitor window">Clear</button>
+            <div class="dropdown-export">
+              <button class="btn-sm btn-outline" id="btn-export-menu">Export &#9662;</button>
+              <div class="export-dropdown-content" id="export-dropdown">
+                <a href="#" id="export-json">Export JSON</a>
+                <a href="#" id="export-csv">Export CSV</a>
+                <a href="#" id="export-txt">Export Diagnostic Text</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Bar with all 16 Channels -->
+        <div class="monitor-filter-bar">
+          <div class="filter-item">
+            <label for="filter-channel">Channel:</label>
+            <select id="filter-channel">
+              <option value="">All Ch</option>
+              <option value="1">Ch 1</option>
+              <option value="2">Ch 2</option>
+              <option value="3">Ch 3</option>
+              <option value="4">Ch 4</option>
+              <option value="5">Ch 5</option>
+              <option value="6">Ch 6</option>
+              <option value="7">Ch 7</option>
+              <option value="8">Ch 8</option>
+              <option value="9">Ch 9</option>
+              <option value="10">Ch 10</option>
+              <option value="11">Ch 11</option>
+              <option value="12">Ch 12</option>
+              <option value="13">Ch 13</option>
+              <option value="14">Ch 14</option>
+              <option value="15">Ch 15</option>
+              <option value="16">Ch 16</option>
+            </select>
+          </div>
+
+          <div class="filter-item">
+            <label>
+              <input type="checkbox" id="check-show-raw-clock"> Show Raw Clock (24 PPQN)
+            </label>
+          </div>
+        </div>
+
+        <!-- Live Stream Table -->
+        <div class="monitor-table-wrap" id="monitor-table-wrap">
+          <table class="monitor-table">
+            <thead>
+              <tr>
+                <th class="col-dir">Dir</th>
+                <th class="col-time">Time (ms)</th>
+                <th class="col-port">Port</th>
+                <th class="col-ch">Ch</th>
+                <th class="col-type">Type</th>
+                <th class="col-hex">Bytes</th>
+                <th class="col-desc">Plain-Language Interpretation</th>
+              </tr>
+            </thead>
+            <tbody id="monitor-table-body">
+              <tr class="empty-row">
+                <td colspan="7">No MIDI events captured yet. Connect and send a command above.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Monitor Footer -->
+        <div class="monitor-footer">
+          <span class="footer-hint">Keyboard: <b>Space</b> = Clock | <b>T</b> = Tap Tempo | <b>Enter</b> = Send | <b>Esc</b> = Panic</span>
+          <span class="footer-status" id="ws-status-text">WS: Connecting...</span>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- TAB 2: PRACTICE & TEST LAB (Interactive Guided Beginner Journeys) -->
+  <section class="tab-view hidden" id="view-practice">
+    <div class="practice-lab-container">
+      <div class="lab-header">
+        <div class="lab-title">
+          <h2>🧪 Practice & Test Lab</h2>
+          <p class="lab-subtitle">Step-by-step guided tests with virtual hardware receivers to verify real Windows MIDI delivery without physical gear.</p>
+        </div>
+        <div class="lab-status-badge">
+          <span>Simulation & Native Loopback Verification Active</span>
+        </div>
+      </div>
+
+      <!-- Quick Concept Clarification Card for the Non-Musician Owner -->
+      <div class="concept-explainer-card">
+        <h3>💡 Essential Concepts for Beginners & Operators</h3>
+        <div class="concepts-grid">
+          <div class="concept-item">
+            <span class="concept-icon">🎹</span>
+            <div class="concept-content">
+              <b>Input Source vs Microphone:</b>
+              <p>MIDI Input is digital data instructions (like typing keys on a computer keyboard), NOT recorded audio sound from a mic.</p>
+            </div>
+          </div>
+          <div class="concept-item">
+            <span class="concept-icon">📥</span>
+            <div class="concept-content">
+              <b>RX (Received Messages):</b>
+              <p>Increments when external devices (like the Virtual Keyboard) send notes into PulseStage. Pressing keys increases RX, NOT TX!</p>
+            </div>
+          </div>
+          <div class="concept-item">
+            <span class="concept-icon">📤</span>
+            <div class="concept-content">
+              <b>TX (Transmitted Messages):</b>
+              <p>Increments when PulseStage sends commands (preset changes, parameter sliders, clock ticks) to pedals or synthesizers.</p>
+            </div>
+          </div>
+          <div class="concept-item">
+            <span class="concept-icon">🔇</span>
+            <div class="concept-content">
+              <b>Silent Loopback is Valid:</b>
+              <p>MIDI carries control instructions, not audio waveform sound. A test can completely PASS even if your PC speakers are silent!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 Guided Interactive Test Cards -->
+      <div class="guided-tests-grid">
+        <!-- Journey 1: Keyboard Input -->
+        <div class="guided-test-card" id="test-card-1">
+          <div class="test-card-top">
+            <span class="test-step-badge">TEST 1</span>
+            <h4>Check Keyboard Input (RX)</h4>
+            <span class="test-state-pill pill-pending" id="pill-test-1">PENDING</span>
+          </div>
+          <p class="test-desc">Verifies that notes played on the Virtual Keyboard travel through Windows loopMIDI and reach PulseStage's input monitor.</p>
+          <div class="test-route-diagram">
+            <span>🎹 Virtual Keyboard</span> ➔ <span>loopMIDI: PulseStage Keyboard</span> ➔ <span>📥 PulseStage RX</span>
+          </div>
+          <div class="test-actions-bar">
+            <button class="btn btn-sm btn-outline" id="btn-setup-test-1">1. Auto-Select Input</button>
+            <button class="btn btn-sm btn-primary" id="btn-run-test-1">2. Listen for Note</button>
+          </div>
+          <div class="test-result-box" id="result-test-1">
+            Status: Click 'Listen for Note', then click any key on the Virtual Keyboard.
+          </div>
+          <div class="test-troubleshoot" id="trouble-test-1">
+            <b>Troubleshooting hint:</b> If notes do not arrive, open the Virtual Keyboard and check its 'SEND MIDI TO' dropdown. Make sure it is set to <code>PulseStage Keyboard</code>, NOT <code>Microsoft GS Wavetable Synth</code>.
+          </div>
+        </div>
+
+        <!-- Journey 2: Change Virtual Pedal Preset -->
+        <div class="guided-test-card" id="test-card-2">
+          <div class="test-card-top">
+            <span class="test-step-badge">TEST 2</span>
+            <h4>Change Virtual Pedal Preset (PC 24)</h4>
+            <span class="test-state-pill pill-pending" id="pill-test-2">PENDING</span>
+          </div>
+          <p class="test-desc">Transmits Program Change 24 to the standalone Virtual Effects Pedal (PulseStage Stomp) and verifies screen update.</p>
+          <div class="test-route-diagram">
+            <span>📤 PulseStage TX</span> ➔ <span>PulseStage Pedal Test (Kernel Port)</span> ➔ <span>🎸 Virtual Pedal (Preset 25 / PC 24)</span>
+          </div>
+          <div class="test-actions-bar">
+            <button class="btn btn-sm btn-outline" id="btn-setup-test-2">1. Auto-Select Output</button>
+            <button class="btn btn-sm btn-primary" id="btn-run-test-2">2. Send Preset 24</button>
+          </div>
+          <div class="test-result-box" id="result-test-2">
+            Status: Ensure Virtual Pedal is open, then click 'Send Preset 24'.
+          </div>
+          <div class="test-troubleshoot">
+            <b>Expected on Pedal:</b> The Virtual Pedal LED screen will display <b>PRESET 025</b> (in 1-128 mode) or <b>024</b> (in 0-127 mode) and raw bytes <code>C0 18</code>.
+          </div>
+        </div>
+
+        <!-- Journey 3: Move Virtual Pedal Parameter -->
+        <div class="guided-test-card" id="test-card-3">
+          <div class="test-card-top">
+            <span class="test-step-badge">TEST 3</span>
+            <h4>Move Virtual Pedal Parameter (CC 11)</h4>
+            <span class="test-state-pill pill-pending" id="pill-test-3">PENDING</span>
+          </div>
+          <p class="test-desc">Transmits Control Change 11 (Expression) to rotate the pedal's demonstration parameter knob in real-time.</p>
+          <div class="test-route-diagram">
+            <span>📤 PulseStage CC 11</span> ➔ <span>PulseStage Pedal Test</span> ➔ <span>🎚️ Virtual Pedal Expression Knob</span>
+          </div>
+          <div class="test-actions-bar test-slider-bar">
+            <label for="practice-slider-cc11">Expression Value:</label>
+            <input type="range" id="practice-slider-cc11" min="0" max="127" value="64" class="primary-slider">
+            <span class="val-badge" id="practice-cc11-val">64</span>
+            <button class="btn btn-sm btn-primary" id="btn-send-practice-cc11">Send CC 11</button>
+          </div>
+          <div class="test-result-box" id="result-test-3">
+            Status: Adjust slider or click Send CC 11.
+          </div>
+          <div class="test-troubleshoot">
+            <b>Expected on Pedal:</b> The 'Expression / Time' knob on the Virtual Pedal rotates strictly in response to the received value.
+          </div>
+        </div>
+
+        <!-- Journey 4: Synchronize Virtual Pedal Tempo -->
+        <div class="guided-test-card" id="test-card-4">
+          <div class="test-card-top">
+            <span class="test-step-badge">TEST 4</span>
+            <h4>Synchronize Pedal Tempo (24 PPQN Clock)</h4>
+            <span class="test-state-pill pill-pending" id="pill-test-4">PENDING</span>
+          </div>
+          <p class="test-desc">Starts high-precision MIDI Clock at 120.0 BPM to verify beat pulsing and tempo sync on the receiver.</p>
+          <div class="test-route-diagram">
+            <span>⏱️ 24 PPQN Clock (120 BPM)</span> ➔ <span>PulseStage Pedal Test</span> ➔ <span>💡 Flashing Beat Light & BPM Meter</span>
+          </div>
+          <div class="test-actions-bar">
+            <button class="btn btn-sm btn-success" id="btn-run-test-4-start">Start Clock (120 BPM)</button>
+            <button class="btn btn-sm btn-danger" id="btn-run-test-4-stop">Stop Clock</button>
+          </div>
+          <div class="test-result-box" id="result-test-4">
+            Status: Click 'Start Clock'.
+          </div>
+          <div class="test-troubleshoot">
+            <b>Expected on Pedal:</b> The amber beat LED pulses on every quarter note (every 24 ticks) and measured BPM displays ~120.0 BPM.
+          </div>
+        </div>
+
+        <!-- Journey 5: Test Saved Action Macro -->
+        <div class="guided-test-card" id="test-card-5">
+          <div class="test-card-top">
+            <span class="test-step-badge">TEST 5</span>
+            <h4>Execute Performance Action Macro</h4>
+            <span class="test-state-pill pill-pending" id="pill-test-5">PENDING</span>
+          </div>
+          <p class="test-desc">Executes a multi-step macro (e.g. Preset Change + Volume Boost + Delay Engage) with pacing verification.</p>
+          <div class="test-route-diagram">
+            <span>⚡ Action Engine</span> ➔ <span>Step 1 (PC 24) ➔ Delay (40ms) ➔ Step 2 (CC 7)</span> ➔ <span>Pedal Execution</span>
+          </div>
+          <div class="test-actions-bar">
+            <button class="btn btn-sm btn-primary" id="btn-run-test-5">Run Solo Boost Macro</button>
+          </div>
+          <div class="test-result-box" id="result-test-5">
+            Status: Ready to trigger action.
+          </div>
+          <div class="test-troubleshoot">
+            <b>Verified Behavior:</b> Steps execute in precise sequential order without blocking or dropping packets.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 3: DIAGNOSTIC MONITOR VIEW (Full Width Dedicated View) -->
+  <section class="tab-view hidden" id="view-monitor">
+    <div class="full-monitor-container">
+      <div class="full-monitor-header">
+        <div class="full-monitor-title">
+          <h2>📊 Live Diagnostic MIDI Monitor & Oscilloscope</h2>
+          <p class="monitor-subtitle">Full-resolution bidirectional stream inspection with millisecond timing deltas, wire byte dumps, and channel decoding.</p>
+        </div>
+        <div class="monitor-counters-big">
+          <div class="counter-box box-tx">
+            <span class="c-label">TRANSMITTED (TX)</span>
+            <span class="c-val" id="full-tx-count">0</span>
+          </div>
+          <div class="counter-box box-rx">
+            <span class="c-label">RECEIVED (RX)</span>
+            <span class="c-val" id="full-rx-count">0</span>
+          </div>
+          <div class="counter-box box-clock">
+            <span class="c-label">CLOCK TICKS</span>
+            <span class="c-val" id="full-clock-count">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="full-monitor-body" id="full-monitor-mount">
+        <!-- Card monitor gets moved or synced here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 4: STUDIO & MUSICIAN SETTINGS -->
+  <section class="tab-view hidden" id="view-settings">
+    <div class="settings-container">
+      <div class="settings-header">
+        <h2>⚙️ Professional Studio & Musician Controls</h2>
+        <p class="settings-subtitle">Advanced 14-bit pitch controls, channel pressure (aftertouch), direct SysEx/raw hex terminal, and system preferences.</p>
+      </div>
+
+      <div class="settings-grid">
+        <!-- 1. 14-Bit Pitch Bend Wheel -->
+        <div class="card settings-card">
+          <div class="card-header">
+            <h3>14-Bit Pitch Bend Wheel</h3>
+            <span class="val-badge" id="lbl-pitch-val">0 (Center)</span>
+          </div>
+          <p class="card-hint">High-resolution 14-bit pitch modulation (-8192 to +8191). Standard center value is 8192 (0 shift).</p>
+          <div class="pitch-slider-wrap">
+            <input type="range" id="slider-pitch-bend" min="0" max="16383" value="8192" class="primary-slider pitch-slider">
+            <div class="pitch-ticks">
+              <span>-8192 (Min)</span>
+              <span>0 (Center)</span>
+              <span>+8191 (Max)</span>
+            </div>
+          </div>
+          <div class="settings-actions-row">
+            <button class="btn btn-sm btn-outline" id="btn-pitch-center">Reset to Center</button>
+            <button class="btn btn-sm btn-primary" id="btn-send-pitch">Transmit Pitch Bend</button>
+          </div>
+        </div>
+
+        <!-- 2. Channel Pressure (Aftertouch) -->
+        <div class="card settings-card">
+          <div class="card-header">
+            <h3>Channel Pressure (Aftertouch)</h3>
+            <span class="val-badge" id="lbl-pressure-val">0</span>
+          </div>
+          <p class="card-hint">Transmits monophonic key pressure across all active notes on the selected channel (0–127).</p>
+          <div class="pressure-slider-wrap">
+            <input type="range" id="slider-channel-pressure" min="0" max="127" value="0" class="primary-slider">
+          </div>
+          <div class="settings-actions-row">
+            <button class="btn btn-sm btn-outline" id="btn-pressure-zero">Zero</button>
+            <button class="btn btn-sm btn-primary" id="btn-send-pressure">Transmit Pressure</button>
+          </div>
+        </div>
+
+        <!-- 3. Raw Hex & SysEx Injector Terminal -->
+        <div class="card settings-card span-2">
+          <div class="card-header">
+            <h3>Raw Hex & SysEx Injector Terminal</h3>
+            <span class="badge badge-warning">Musician Diagnostic</span>
+          </div>
+          <p class="card-hint">Inject raw hexadecimal bytes directly into the selected output stream. Useful for testing firmware inquiries (e.g. Identity Request <code>F0 7E 7F 06 01 F7</code>) or custom manufacturer SysEx.</p>
+          <div class="raw-hex-editor">
+            <textarea id="txt-raw-hex" rows="3" placeholder="e.g. F0 7E 7F 06 01 F7 or 90 3C 64" class="code-textarea"></textarea>
+            <div class="hex-actions-row">
+              <span class="hex-byte-count" id="lbl-hex-count">0 bytes</span>
+              <button class="btn btn-sm btn-primary" id="btn-send-raw-hex">Transmit Raw Bytes</button>
+            </div>
+          </div>
+          <div class="hex-presets-row">
+            <span class="presets-label">Quick Payloads:</span>
+            <button class="btn-xs btn-outline btn-hex-chip" data-hex="F0 7E 7F 06 01 F7">Universal Device Inquiry</button>
+            <button class="btn-xs btn-outline btn-hex-chip" data-hex="90 3C 64">Middle C Note On (Ch 1)</button>
+            <button class="btn-xs btn-outline btn-hex-chip" data-hex="80 3C 00">Middle C Note Off (Ch 1)</button>
+            <button class="btn-xs btn-outline btn-hex-chip" data-hex="B0 7B 00">All Notes Off (Ch 1)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Action Builder Modal -->
+  <div id="modal-action-editor" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-editor-title">Create Performance Action</h3>
+        <button class="modal-close-btn" id="btn-close-modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="input-act-name">Action Name:</label>
+          <input type="text" id="input-act-name" placeholder="e.g. Lead Boost & Reverb" maxlength="40">
+        </div>
+
+        <div class="form-group">
+          <label for="input-act-desc">Description:</label>
+          <input type="text" id="input-act-desc" placeholder="e.g. Switch amp channel and engage ambient delay" maxlength="80">
+        </div>
+
+        <div class="form-group">
+          <label>Sequence Steps:</label>
+          <div id="action-steps-container" class="steps-list">
+            <!-- Dynamic step rows -->
+          </div>
+          <button class="btn-xs btn-outline mt-1" id="btn-add-step">+ Add Step</button>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-warning btn-sm" id="btn-cancel-modal">Cancel</button>
+        <button class="btn btn-primary btn-sm" id="btn-save-modal">Save Action</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/midi-client.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

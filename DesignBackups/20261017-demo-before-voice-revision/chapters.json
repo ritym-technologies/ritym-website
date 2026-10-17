@@ -1,0 +1,76 @@
+{
+  "duration_seconds": 188.125,
+  "type": "Narrated walkthrough using verified application still captures, not a continuous recording",
+  "chapters": [
+    {
+      "start": 0,
+      "end": 15.375,
+      "title": "Welcome to the studio",
+      "narration": "Welcome to Ritym PulseStage MIDI Studio. This guided walkthrough uses verified captures of the actual application. You can test the keyboard and reference pedal on this computer, without a physical instrument.",
+      "caption": "A practical tour of keyboard input and pedal control."
+    },
+    {
+      "start": 15.375,
+      "end": 34.75,
+      "title": "Two separate signal paths",
+      "narration": "For this demo, choose PulseStage Keyboard as the input, and PulseStage Pedal Test as the output. The keyboard sends notes into the input monitor. The command station sends settings out to the reference pedal. There is no automatic forwarding between these paths.",
+      "caption": "INPUT: PulseStage Keyboard\nOUTPUT: PulseStage Pedal Test"
+    },
+    {
+      "start": 34.75,
+      "end": 52.95833333333333,
+      "title": "Play the virtual keyboard",
+      "narration": "Click a key on the integrated piano. Pressing sends a note on message. Releasing sends note off. The keyboard has its own channel and velocity settings. This demonstrates MIDI messages; the keyboard itself does not generate audio.",
+      "caption": "Click a piano key. Release it to end the note."
+    },
+    {
+      "start": 52.95833333333333,
+      "end": 71.5,
+      "title": "See what actually arrived",
+      "narration": "Open Event monitor to inspect incoming notes. Look for a received note on and note off pair. RX counts incoming messages, while TX counts commands sent by PulseStage. A sent message alone does not prove that the receiving device acted on it.",
+      "caption": "RX means received. TX means transmitted."
+    },
+    {
+      "start": 71.5,
+      "end": 88.875,
+      "title": "Expression: start low",
+      "narration": "Return to Control room. Choose Control change, then controller eleven, Expression. Enter twenty and click Send command. The reference receiver shows twenty. Changing the editor alone does not send the value.",
+      "caption": "Control change / CC 11 / Value 20 / Send command"
+    },
+    {
+      "start": 88.875,
+      "end": 106.95833333333333,
+      "title": "Expression: turn it up",
+      "narration": "Now enter one hundred and send again. The receiver value and knob position change. Its four knobs show received settings: expression, volume, parameter A, and parameter B. These receiver knobs are read only indicators.",
+      "caption": "CC 11 changes from 20 to 100 at the receiver."
+    },
+    {
+      "start": 106.95833333333333,
+      "end": 126.70833333333333,
+      "title": "The metal footswitch",
+      "narration": "The metal button below the knobs represents a footswitch. It is a read only indicator in this version. Send controller sixty four with value one hundred twenty seven to light its ring, or zero to turn it off. This is a test mapping, not a universal pedal bypass command.",
+      "caption": "CC 64: 127 = on / 0 = off in this test receiver."
+    },
+    {
+      "start": 126.70833333333333,
+      "end": 146.54166666666666,
+      "title": "Choose a preset",
+      "narration": "Select Program change, enter twenty four, and send. The reference display reads preset twenty five because it labels presets from one to one hundred twenty eight. MIDI program values on the wire start at zero. Always check the numbering used by the target device.",
+      "caption": "Wire program 24 appears as preset 025 on the receiver."
+    },
+    {
+      "start": 146.54166666666666,
+      "end": 165.75,
+      "title": "Synchronize the clock",
+      "narration": "Set the master clock to one hundred twenty beats per minute and press Start. The receiver shows Running and measures approximately one hundred twenty B P M from incoming clock ticks. Press Stop when finished. Physical equipment must support external MIDI clock for this to work.",
+      "caption": "120 BPM / Start / received RUNNING and 120.0 BPM"
+    },
+    {
+      "start": 165.75,
+      "end": 188.125,
+      "title": "Repeat the checks confidently",
+      "narration": "You have now tested keyboard input, control changes, a footswitch indicator, preset selection, and clock reception. MIDI OX can serve as a separate message inspector. These software loopback checks do not replace testing the actual musician hardware. Use the included written guide to repeat the demonstration.",
+      "caption": "Notes received. Values received. Clock stopped when finished."
+    }
+  ]
+}

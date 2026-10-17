@@ -1,0 +1,251 @@
+1
+00:00:00,200 --> 00:00:05,627
+Before we touch the controls, here's the challenge. A musician needs
+
+2
+00:00:05,627 --> 00:00:11,548
+the right preset, the right settings, and a steady tempo. But when
+
+3
+00:00:11,548 --> 00:00:16,975
+nothing happens, it's hard to tell where the connection failed. Did
+
+4
+00:00:16,975 --> 00:00:21,908
+the computer send the message? Did the device receive it?
+
+5
+00:00:22,908 --> 00:00:29,503
+PulseStage gives us a way to check those steps. We can send a simple
+
+6
+00:00:29,503 --> 00:00:35,155
+instruction, then watch a test receiver respond. Think of MIDI as a
+
+7
+00:00:35,155 --> 00:00:39,394
+remote control for musical equipment. It carries instructions, rather
+
+8
+00:00:39,394 --> 00:00:44,575
+than the sound itself. Let's try it without any physical instruments.
+
+9
+00:00:45,575 --> 00:00:50,721
+Set the input to PulseStage Keyboard, and the output to PulseStage
+
+10
+00:00:50,721 --> 00:00:55,399
+Pedal Test. These are two separate connections. The keyboard sends
+
+11
+00:00:55,399 --> 00:01:00,545
+notes into our monitor. The command station sends settings to the
+
+12
+00:01:00,545 --> 00:01:04,755
+reference pedal. Keyboard notes are not automatically passed through
+
+13
+00:01:04,755 --> 00:01:06,158
+to the pedal.
+
+14
+00:01:07,158 --> 00:01:12,599
+Click a piano key, then let go. Pressing it sends a note on
+
+15
+00:01:12,599 --> 00:01:17,621
+instruction. Releasing it sends note off. You don't need to know how
+
+16
+00:01:17,621 --> 00:01:22,644
+to play piano for this check. We are testing the messages. This
+
+17
+00:01:22,644 --> 00:01:25,992
+keyboard does not include its own sound generator.
+
+18
+00:01:26,992 --> 00:01:33,227
+Open Event monitor. Here we can see the note arrive, followed by its
+
+19
+00:01:33,227 --> 00:01:39,462
+release. R X means received. T X means sent. This is useful when
+
+20
+00:01:39,462 --> 00:01:43,299
+troubleshooting. A sent counter shows that PulseStage transmitted
+
+21
+00:01:43,299 --> 00:01:48,095
+something. The received event gives us separate evidence that it
+
+22
+00:01:48,095 --> 00:01:48,575
+arrived.
+
+23
+00:01:49,575 --> 00:01:54,992
+Back in Control room, choose Control change, then Expression. Set the
+
+24
+00:01:54,992 --> 00:02:00,901
+value to twenty, and click Send command. Now look at the reference
+
+25
+00:02:00,901 --> 00:02:05,825
+pedal. Its Expression display reads twenty. Simply changing the number
+
+26
+00:02:05,825 --> 00:02:11,242
+in the editor does not send anything. We send it deliberately.
+
+27
+00:02:12,242 --> 00:02:17,672
+Let's change that value to one hundred, and send again. The receiver
+
+28
+00:02:17,672 --> 00:02:22,649
+updates its number and knob position. Those four pedal knobs are
+
+29
+00:02:22,649 --> 00:02:28,079
+indicators of settings it received. They are not controls you can turn
+
+30
+00:02:28,079 --> 00:02:33,057
+here. On real equipment, the meaning of each controller depends on
+
+31
+00:02:33,057 --> 00:02:34,867
+that device's MIDI settings.
+
+32
+00:02:35,867 --> 00:02:40,441
+The metal button below the knobs represents a footswitch, like a
+
+33
+00:02:40,441 --> 00:02:45,016
+button a musician presses with a foot. In this test receiver,
+
+34
+00:02:45,016 --> 00:02:50,007
+controller sixty four turns its ring on or off. Send one hundred
+
+35
+00:02:50,007 --> 00:02:55,829
+twenty seven for on, or zero for off. It is an indicator here, so
+
+36
+00:02:55,829 --> 00:02:57,908
+clicking it won't operate it.
+
+37
+00:02:58,908 --> 00:03:05,118
+Next, choose Program change, enter twenty four, and send. The receiver
+
+38
+00:03:05,118 --> 00:03:10,762
+shows preset twenty five. That difference is just numbering. MIDI
+
+39
+00:03:10,762 --> 00:03:16,972
+starts at zero, while this receiver labels presets starting at one.
+
+40
+00:03:16,972 --> 00:03:22,052
+Always check the numbering convention before choosing a musician's
+
+41
+00:03:22,052 --> 00:03:22,617
+preset.
+
+42
+00:03:23,617 --> 00:03:28,957
+Set the tempo to one hundred twenty beats per minute, then press
+
+43
+00:03:28,957 --> 00:03:33,407
+Start. The reference receiver shows Running, and measures about one
+
+44
+00:03:33,407 --> 00:03:37,857
+hundred twenty beats per minute from the incoming timing messages.
+
+45
+00:03:37,857 --> 00:03:42,752
+When you're finished, press Stop. A real device must support external
+
+46
+00:03:42,752 --> 00:03:45,867
+MIDI clock, and have that option enabled.
+
+47
+00:03:46,867 --> 00:03:52,308
+A compatible physical MIDI device can appear in the connection lists
+
+48
+00:03:52,308 --> 00:03:57,750
+once Windows recognizes it. Connect and power it, click Refresh, then
+
+49
+00:03:57,750 --> 00:04:03,192
+select its port. Some devices need a manufacturer's driver. Older MIDI
+
+50
+00:04:03,192 --> 00:04:09,128
+sockets need a MIDI interface. An ordinary audio cable isn't a MIDI
+
+51
+00:04:09,128 --> 00:04:13,580
+connection. We have not verified physical hardware in this
+
+52
+00:04:13,580 --> 00:04:14,075
+demonstration.
+
+53
+00:04:15,075 --> 00:04:20,379
+The keyboard and reference pedal are already inside PulseStage. You
+
+54
+00:04:20,379 --> 00:04:26,213
+don't need to open their older separate applications. But this virtual
+
+55
+00:04:26,213 --> 00:04:32,577
+test still needs loop MIDI installed and running. MIDI OX is optional.
+
+56
+00:04:32,577 --> 00:04:38,411
+The current developer version also needs Python and its packages. A
+
+57
+00:04:38,411 --> 00:04:42,124
+finished Windows installer should include those application
+
+58
+00:04:42,124 --> 00:04:46,367
+dependencies. That installer has not been built yet.
+
+59
+00:04:47,367 --> 00:04:52,641
+That's the basic workflow. Check the connections. Send one small
+
+60
+00:04:52,641 --> 00:04:57,916
+change. Confirm that it arrived. Then test the actual musician's
+
+61
+00:04:57,916 --> 00:05:03,191
+equipment with its documented settings. The written guide beside this
+
+62
+00:05:03,191 --> 00:05:10,048
+video includes the same steps, so you can repeat them at your own
+
+63
+00:05:10,048 --> 00:05:10,575
+pace.

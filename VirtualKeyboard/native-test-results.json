@@ -1,0 +1,15 @@
+{
+  "port": "PulseStage Keyboard",
+  "expected": [
+    "913c64",
+    "813c00",
+    "b10b40"
+  ],
+  "received_before_cleanup": [
+    "913c64",
+    "813c00",
+    "b10b40"
+  ],
+  "passed": true,
+  "physical_hardware_tested": false
+}

@@ -1,0 +1,18 @@
+# Environments & Virtual Envs
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.pytest_cache/
+
+# PyInstaller Build Artifacts
+build/
+dist/PulseStage/
+
+# Local logs & scratch
+*.log
+scratch/
+test_install/
+.coverage

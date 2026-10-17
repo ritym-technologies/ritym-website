@@ -1,0 +1,151 @@
+1
+00:00:00,300 --> 00:00:04,873
+Welcome to Ritym PulseStage MIDI Studio. This guided walkthrough uses
+
+2
+00:00:04,873 --> 00:00:09,902
+verified captures of the actual application. You can test the keyboard
+
+3
+00:00:09,902 --> 00:00:14,475
+and reference pedal on this computer, without a physical instrument.
+
+4
+00:00:15,675 --> 00:00:20,435
+For this demo, choose PulseStage Keyboard as the input, and PulseStage
+
+5
+00:00:20,435 --> 00:00:26,061
+Pedal Test as the output. The keyboard sends notes into the input monitor.
+
+6
+00:00:26,061 --> 00:00:30,821
+The command station sends settings out to the reference pedal. There
+
+7
+00:00:30,821 --> 00:00:33,850
+is no automatic forwarding between these paths.
+
+8
+00:00:35,050 --> 00:00:41,026
+Click a key on the integrated piano. Pressing sends a note on message.
+
+9
+00:00:41,026 --> 00:00:46,542
+Releasing sends note off. The keyboard has its own channel and velocity
+
+10
+00:00:46,542 --> 00:00:50,679
+settings. This demonstrates MIDI messages; the keyboard itself does
+
+11
+00:00:50,679 --> 00:00:52,058
+not generate audio.
+
+12
+00:00:53,258 --> 00:00:58,213
+Open Event monitor to inspect incoming notes. Look for a received note
+
+13
+00:00:58,213 --> 00:01:03,581
+on and note off pair. RX counts incoming messages, while TX counts commands
+
+14
+00:01:03,581 --> 00:01:08,948
+sent by PulseStage. A sent message alone does not prove that the receiving
+
+15
+00:01:08,948 --> 00:01:10,600
+device acted on it.
+
+16
+00:01:11,800 --> 00:01:17,018
+Return to Control room. Choose Control change, then controller eleven,
+
+17
+00:01:17,018 --> 00:01:22,235
+Expression. Enter twenty and click Send command. The reference receiver
+
+18
+00:01:22,235 --> 00:01:27,975
+shows twenty. Changing the editor alone does not send the value.
+
+19
+00:01:29,175 --> 00:01:35,630
+Now enter one hundred and send again. The receiver value and knob position
+
+20
+00:01:35,630 --> 00:01:40,596
+change. Its four knobs show received settings: expression, volume, parameter
+
+21
+00:01:40,596 --> 00:01:46,058
+A, and parameter B. These receiver knobs are read only indicators.
+
+22
+00:01:47,258 --> 00:01:52,180
+The metal button below the knobs represents a footswitch. It is a read
+
+23
+00:01:52,180 --> 00:01:56,344
+only indicator in this version. Send controller sixty four with value
+
+24
+00:01:56,344 --> 00:02:01,644
+one hundred twenty seven to light its ring, or zero to turn it off.
+
+25
+00:02:01,644 --> 00:02:05,808
+This is a test mapping, not a universal pedal bypass command.
+
+26
+00:02:07,008 --> 00:02:11,667
+Select Program change, enter twenty four, and send. The reference display
+
+27
+00:02:11,667 --> 00:02:17,172
+reads preset twenty five because it labels presets from one to one hundred
+
+28
+00:02:17,172 --> 00:02:22,254
+twenty eight. MIDI program values on the wire start at zero. Always
+
+29
+00:02:22,254 --> 00:02:25,642
+check the numbering used by the target device.
+
+30
+00:02:26,842 --> 00:02:31,931
+Set the master clock to one hundred twenty beats per minute and press
+
+31
+00:02:31,931 --> 00:02:35,846
+Start. The receiver shows Running and measures approximately one hundred
+
+32
+00:02:35,846 --> 00:02:40,935
+twenty B P M from incoming clock ticks. Press Stop when finished. Physical
+
+33
+00:02:40,935 --> 00:02:44,850
+equipment must support external MIDI clock for this to work.
+
+34
+00:02:46,050 --> 00:02:51,114
+You have now tested keyboard input, control changes, a footswitch indicator,
+
+35
+00:02:51,114 --> 00:02:56,638
+preset selection, and clock reception. MIDI OX can serve as a separate
+
+36
+00:02:56,638 --> 00:03:01,241
+message inspector. These software loopback checks do not replace testing
+
+37
+00:03:01,241 --> 00:03:06,304
+the actual musician hardware. Use the included written guide to repeat
+
+38
+00:03:06,304 --> 00:03:07,225
+the demonstration.

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseStage — MIDI Studio Operator Guide</title>
+  <style>
+    :root {
+      --bg: #121417;
+      --card-bg: #1a1e24;
+      --border: #2a303a;
+      --text: #e2e8f0;
+      --text-muted: #8c9ba5;
+      --accent: #f59e0b;
+      --accent-glow: rgba(245, 158, 11, 0.15);
+      --rx: #10b981;
+      --tx: #f59e0b;
+      --code-bg: #0d1014;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0;
+      display: flex;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      background: #0d1014;
+      border-right: 1px solid var(--border);
+      padding: 24px 16px;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand img { width: 32px; height: 32px; border-radius: 6px; }
+    .brand h1 { font-size: 1.1rem; color: #fff; font-weight: 700; letter-spacing: 0.5px; }
+    .brand span { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; font-weight: 600; display: block; }
+    .nav-list { list-style: none; }
+    .nav-item { margin-bottom: 4px; }
+    .nav-link {
+      display: block;
+      padding: 8px 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+    .nav-link.active {
+      background: var(--accent-glow);
+      color: var(--accent);
+      font-weight: 600;
+      border-left: 3px solid var(--accent);
+    }
+    /* Main Content */
+    .content {
+      flex: 1;
+      max-width: 900px;
+      padding: 48px 48px 120px 48px;
+      overflow-y: auto;
+    }
+    h1, h2, h3, h4 { color: #fff; margin-top: 36px; margin-bottom: 16px; }
+    h1 { font-size: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-top: 0; }
+    h2 { font-size: 1.4rem; color: #f1f5f9; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px; }
+    h3 { font-size: 1.1rem; color: var(--accent); }
+    p { margin-bottom: 16px; color: #cbd5e1; }
+    ul, ol { margin-bottom: 16px; padding-left: 24px; color: #cbd5e1; }
+    li { margin-bottom: 6px; }
+    strong { color: #fff; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    /* Callout & Tables */
+    .callout {
+      background: rgba(245, 158, 11, 0.08);
+      border-left: 4px solid var(--accent);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 24px 0;
+    }
+    .callout.info {
+      background: rgba(16, 185, 129, 0.08);
+      border-left-color: var(--rx);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      background: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    th { background: #13171d; color: #fff; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; }
+    tr:last-child td { border-bottom: none; }
+    code {
+      background: var(--code-bg);
+      color: #38bdf8;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      font-size: 0.85em;
+      border: 1px solid #1e2633;
+    }
+    pre code {
+      display: block;
+      padding: 16px;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .badge-rx { background: rgba(16, 185, 129, 0.2); color: var(--rx); }
+    .badge-tx { background: rgba(245, 158, 11, 0.2); color: var(--tx); }
+    .img-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 24px 0;
+    }
+    .img-card img {
+      width: 100%;
+      border-radius: 6px;
+      display: block;
+    }
+    .img-caption {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="brand">
+      <img src="images/overview-poster.jpg" alt="PulseStage Icon" onerror="this.style.display='none'">
+      <div>
+        <h1>PulseStage</h1>
+        <span>MIDI Studio Manual</span>
+      </div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-item"><a class="nav-link" href="#section1">1. Product Scope</a></li>
+      <li class="nav-item"><a class="nav-link" href="#section2">2. Installation & Setup</a></li>
+      <li class="nav-item"><a class="nav-link" href="#section3">3. MIDI Primer</a></li>
+      <li class="nav-item"><a class="nav-link" href="#section4">4. Hardware & Direction</a></li>
+      <li class="nav-item"><a class="nav-link" href="#section5">5. Dual-Mode Practice Lab</a></li>
+      <li class="nav-item"><a class="nav-link" href="#section6">6. Console Tour</a></li>
+      <li class="nav-item"><a class="nav-link" href="#section7">7. Event Monitor</a></li>
+      <li class="nav-item"><a class="nav-link" href="#section8">8. Test Bench</a></li>
+      <li class="nav-item"><a class="nav-link" href="#section9">9. Actions & Utilities</a></li>
+      <li class="nav-item"><a class="nav-link" href="#section10">10. Troubleshooting & FAQ</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <h1>PulseStage — MIDI Studio Operator Guide</h1>
+    <p><em>Version 1.0.0 — Standalone Windows Production Manual</em></p>
+
+    <div class="img-card">
+      <img src="images/control-room-desktop.jpg" alt="PulseStage Dark Console">
+      <div class="img-caption">Figure 1.1: PulseStage Studio Command Station in Dark Console mode</div>
+    </div>
+
+    <h2 id="section1">1. What PulseStage Does (And What It Does Not)</h2>
+    <p><strong>PulseStage</strong> is a dedicated Windows application engineered for stage musicians, keyboardists, guitarists, and studio engineers who need reliable, direct control over their MIDI equipment. It manages preset changes, continuous controllers, master tempo clocks, and custom performance sequences while offering real-time diagnostic monitoring.</p>
+    
+    <h3>What PulseStage Is:</h3>
+    <ul>
+      <li><strong>A MIDI Control Command Station:</strong> Transmits Program Change (PC), Bank Select (MSB CC0 / LSB CC32), and Control Change (CC) messages to hardware synthesizers, digital guitar modelers, vocal processors, and outboard gear.</li>
+      <li><strong>A Master MIDI Clock Source:</strong> Generates stable 24-PPQN (pulses per quarter note) MIDI timing with Start, Continue, and Stop transport commands.</li>
+      <li><strong>An Inspection and Diagnostic Monitor:</strong> Captures, decodes, timestamps, and graphs every incoming and outgoing byte stream across all 16 MIDI channels.</li>
+      <li><strong>A Macro Action Engine:</strong> Executes custom multi-step preset and parameter chains with deterministic millisecond delays.</li>
+      <li><strong>An Integrated Practice Lab:</strong> Features an on-screen velocity-sensitive keybed and a reference receiving pedal for driver-free testing.</li>
+    </ul>
+
+    <div class="callout">
+      <strong>What PulseStage Is NOT:</strong>
+      <ul>
+        <li><strong>NOT a Digital Audio Workstation (DAW):</strong> PulseStage does not record, mix, or edit multi-track audio.</li>
+        <li><strong>NOT an Audio Synthesizer:</strong> PulseStage processes digital control data (MIDI bytes), not sound waves. A successful transmission does not produce sound unless routed to an active hardware synthesizer or software instrument.</li>
+        <li><strong>A Silent Test Is Valid:</strong> Because MIDI is pure control information, successful parameter changes and preset selections are completely silent unless an external sound generator is connected.</li>
+      </ul>
+    </div>
+
+    <h2 id="section2">2. Installation and First Launch</h2>
+    <p>PulseStage is distributed as a self-contained Windows setup executable: <code>PulseStage-Setup-1.0.0-x64.exe</code>.</p>
+    <ul>
+      <li><strong>Zero Prerequisites:</strong> You do <strong>not</strong> need Python, pip, C++ compilers, or developer tools installed. The complete runtime, dependencies, and UI assets are bundled.</li>
+      <li><strong>Installation Path:</strong> Installs cleanly to <code>C:\Program Files\PulseStage</code> (or per-user Programs directory).</li>
+      <li><strong>AppData Persistence:</strong> User preferences, custom actions, and logs reside in <code>%APPDATA%\PulseStage\</code>, keeping your presets completely safe across application updates.</li>
+      <li><strong>Dedicated Desktop App:</strong> Runs as an isolated desktop window without distracting terminal popups, binding securely to local loopback <code>127.0.0.1</code>.</li>
+    </ul>
+
+    <div class="img-card">
+      <img src="images/installed-light-console.jpg" alt="PulseStage Light Console">
+      <div class="img-caption">Figure 2.1: PulseStage Light Console mode for high-ambient daylight environments</div>
+    </div>
+
+    <h2 id="section3">3. Non-Musician MIDI Primer</h2>
+    <table>
+      <thead>
+        <tr><th>Concept</th><th>What It Does</th><th>Real-World Analogy</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Note On / Off</strong></td><td>Triggers and releases a musical pitch with velocity.</td><td>Pressing and releasing a key on a piano.</td></tr>
+        <tr><td><strong>Program Change (PC)</strong></td><td>Switches the active sound patch or preset.</td><td>Selecting "Preset 24: Overdrive Lead" on a pedal.</td></tr>
+        <tr><td><strong>Bank Select (CC0/CC32)</strong></td><td>Expands presets into multiple banks of 128.</td><td>Flipping to a new folder of presets.</td></tr>
+        <tr><td><strong>Control Change (CC)</strong></td><td>Continuous controller values (0–127).</td><td>Adjusting an expression pedal or volume knob.</td></tr>
+        <tr><td><strong>MIDI Clock</strong></td><td>24 PPQN pulses synchronizing tempo.</td><td>A digital conductor's metronome.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="section4">4. Hardware Discovery & Signal Direction</h2>
+    <p>Connect your USB-MIDI keyboard or USB-MIDI DIN interface to Windows. In PulseStage's top connection bar, click <strong>Refresh MIDI ports</strong> and select your device.</p>
+    <div class="callout info">
+      <strong>Signal Direction:</strong>
+      <br><span class="badge badge-rx">RX (Receive)</span>: Listens to incoming data from hardware controllers.
+      <br><span class="badge badge-tx">TX (Transmit)</span>: Sends commands and clock pulses to your equipment.
+      <br><strong>No Automatic Thru:</strong> Incoming notes are not automatically echoed to the output to prevent stage feedback loops.
+    </div>
+
+    <h2 id="section5">5. Dual-Mode Practice Lab</h2>
+    <p>PulseStage provides two distinct practice and testing modes:</p>
+    <ul>
+      <li><strong>Mode A: Driver-Free Internal Practice Lab (Default):</strong> Works immediately out of the box with zero third-party drivers. Keybed notes dispatch directly to the input monitor, and commands dispatch to the Reference Pedal display.</li>
+      <li><strong>Mode B: Windows loopMIDI Loopback:</strong> Used for testing with external diagnostic tools like MIDI-OX. Requires the free loopMIDI driver with ports <code>PulseStage Keyboard</code> and <code>PulseStage Pedal Test</code>.</li>
+    </ul>
+
+    <h2 id="section6">6. Console Tour & Controls</h2>
+    <p>The Studio interface includes:</p>
+    <ul>
+      <li><strong>Command Station:</strong> Edit PC, CC, and Bank commands with explicit <strong>Send Command</strong> transmission.</li>
+      <li><strong>Master Clock:</strong> Set BPM (40–300), Start, Continue, Stop, and Tap Tempo.</li>
+      <li><strong>Integrated Keybed:</strong> Play notes with mouse or keyboard (A–;). Velocity, octave, and auto-release watchdog.</li>
+      <li><strong>Reference Pedal:</strong> Live incoming status display (Program, Expression CC11, Volume CC7, Params CC12/13, Footswitch CC64, and measured BPM).</li>
+    </ul>
+
+    <div class="img-card">
+      <img src="images/test-bench.jpg" alt="PulseStage Test Bench">
+      <div class="img-caption">Figure 6.1: Test Bench showing receiver-verified pass badges</div>
+    </div>
+
+    <h2 id="section7">7. Event Monitor & Diagnostics</h2>
+    <p>The Event Monitor records, timestamps, and decodes every MIDI packet. Includes real-time controller graphs, clock interval timing traces, and export options (JSON, CSV, formatted text).</p>
+
+    <h2 id="section8">8. Test Bench: Receiver-Verified Diagnostics</h2>
+    <p>Four automated tests verify: Note On/Off, Preset Change, Parameter Control, and 120 BPM Clock tracking. Tests only PASS when confirmed receipt bytes arrive at the receiver.</p>
+
+    <h2 id="section9">9. Performance Actions & Utilities</h2>
+    <p>Create and execute multi-step macros with deterministic millisecond delays. Pitch bend (14-bit bipolar), Channel Pressure, and raw SysEx tools are built-in.</p>
+
+    <h2 id="section10">10. Troubleshooting & FAQ</h2>
+    <p>Consult the guide for port conflict resolution, driver restarts, and single-instance handling.</p>
+  </div>
+</body>
+</html>

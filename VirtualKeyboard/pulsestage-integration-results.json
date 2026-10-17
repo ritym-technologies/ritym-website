@@ -1,0 +1,27 @@
+{
+  "selected_input": "PulseStage Keyboard",
+  "mouse_c4_and_typing_s_d4": [
+    [
+      144,
+      60,
+      100
+    ],
+    [
+      128,
+      60,
+      0
+    ],
+    [
+      144,
+      62,
+      100
+    ],
+    [
+      128,
+      62,
+      0
+    ]
+  ],
+  "passed": true,
+  "physical_hardware_tested": false
+}

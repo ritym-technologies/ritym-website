@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "last_saved_at": 1792241344.3917813,
+  "preferences": {
+    "selected_output_name": "Virtual Amp Modeler [Out]",
+    "selected_input_name": "PulseStage Keyboard",
+    "default_channel": 1,
+    "preset_convention": "0-127",
+    "clock_bpm": 120.0,
+    "show_raw_clock_in_monitor": false,
+    "enable_dark_stage_mode": true
+  },
+  "actions": [
+    {
+      "id": "act_solo_boost",
+      "name": "Solo Lead Boost",
+      "description": "Switch amp modeler to Lead Channel and engage delay",
+      "color": "#00F0FF",
+      "hotkey": "1",
+      "steps": [
+        {
+          "id": "s1",
+          "target_port_name": "",
+          "channel": 1,
+          "command_type": "PROGRAM_CHANGE",
+          "data1": 15,
+          "data2": 0,
+          "delay_ms": 25
+        },
+        {
+          "id": "s2",
+          "target_port_name": "",
+          "channel": 1,
+          "command_type": "CONTROL_CHANGE",
+          "data1": 64,
+          "data2": 127,
+          "delay_ms": 0
+        }
+      ]
+    },
+    {
+      "id": "act_clean_ambient",
+      "name": "Clean Ambient Wash",
+      "description": "Switch to clean chime preset with high reverb mix",
+      "color": "#00FFA3",
+      "hotkey": "2",
+      "steps": [
+        {
+          "id": "s1",
+          "target_port_name": "",
+          "channel": 1,
+          "command_type": "PROGRAM_CHANGE",
+          "data1": 2,
+          "data2": 0,
+          "delay_ms": 20
+        },
+        {
+          "id": "s2",
+          "target_port_name": "",
+          "channel": 1,
+          "command_type": "CONTROL_CHANGE",
+          "data1": 11,
+          "data2": 100,
+          "delay_ms": 0
+        }
+      ]
+    }
+  ],
+  "custom_profiles": []
+}
